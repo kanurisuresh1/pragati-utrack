@@ -1,0 +1,217 @@
+<div class="row" [formGroup]="AnalysisForm">
+    <div class="auto-width" style="margin-top: 2px;margin-left: 7px;">
+        <label>&nbsp;</label><br>
+        <button class="btn btn-primary btnsize" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-3" style="margin-left: -10px;">
+        <label>{{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.SELECT_VEHICLE_TITLE'| translate}}</label>
+        <mat-select class="form-control" mySelect.value="deviceLinkId" formControlName="vechicleName" multiple>
+            <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">Select All</mat-option>
+            <mat-option *ngFor='let row of vehicles' [value]="row.device_link_id">
+                {{row.vehicle_number}}</mat-option>
+        </mat-select>
+    </div>
+    <div class="auto-width" style="margin-left: -10px;">
+        <label>{{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.SELECT_START_DATE'| translate}}</label><br>
+        <mat-form-field class="no-line">
+            <input matInput class="form-control datepicker" [matDatepicker]="startDate" formControlName="startDate" (dateChange)="onDateChange($event)" [max]="todayDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="auto-width" style="margin-left: -10px;">
+        <label>{{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.SELECT_END_DATE'| translate}}</label><br>
+        <mat-form-field class="no-line">
+            <input matInput class="form-control datepicker" [(ngModel)]="endDate" [matDatepicker]="endDatePicker" formControlName="endDate" [max]="endMaxDate" [min]="changedStartDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="auto-width" style="margin-top: -2px;margin-left: -21px;">
+        <label>&nbsp;</label>
+        <button class="btn btn-primary sub" mat-button (click)="viewReport()">{{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.VIEW_REPORT'| translate}}</button>
+    </div>
+</div>
+
+<div style="margin-bottom: 10px;margin-top: -40px;" class="row">
+    <div style="margin-left: 15px;">
+        <label>&nbsp;</label><br>
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+    </div>
+    <div>
+        <label>&nbsp;</label><br>
+        <button class="btn btn-primary pull-left mr15 btn-sm" (click)="downloadPDF()" mat-button><i
+                class="fa fa-file-pdf"></i>
+            &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+    </div>
+    <div>
+        <label>&nbsp;</label><br>
+        <button class="btn btn-success pull-left mr1 btn-sm" style="margin-right: 10px;" nbTooltip="Refresh" (click)="refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+        <button class="btn btn-warning mr1 btngrouptable" style="margin-left: 5px;" nbTooltip="Filter Columns" nbTooltipStatus="warning" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" type="button" [matMenuTriggerFor]="menu">
+            <mat-icon style="margin-top: 5px;font-size: 20px;">filter_list</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+            <mat-checkbox style="    margin-left: 5px;margin-right: 5px;" *ngFor="let element of displayedColumnsObj" [checked]="element.show" (change)="toggle(element.value)">
+                {{element.value.toUpperCase()}}</mat-checkbox>
+        </mat-menu>
+    </div>
+</div>
+
+<div>
+    <p><b><span
+                style="color: red !important;">*</span>{{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.UTILIZATION_CALCULATED'|
+            translate}}
+            <br>
+            <span style="color: red !important;">*</span>
+            {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.NIGTH_TIME'| translate}}</b></p>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 350px;overflow: auto !important;">
+            <table matTableExporter #exporter="matTableExporter" class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicle number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.VEHICLE_NUMBER'| translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"><a (click)="openDetails(element)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="report date">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.DATE'| translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.report_date}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="weekDayName">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.WEEKDAY'| translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.report_day}}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="total distance">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.KMS'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.total_distance}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total day distance">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.DAY_KMS'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.total_day_distance}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total night distance">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.NIGHT_KMS'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.total_night_distance}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="free wheeling distance">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.Free Wheeling (KMS)'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.free_wheeling_distance}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="driver name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.DRIVER_NAME'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.driver_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="driver number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.DRIVER_NUMBER'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.driver_number}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total travelled time">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.TOTAL_TRAVEL_TIME'| translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.total_travelled_time}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total stopped time">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.STOPPED_TIME'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.total_stopped_time}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="free wheeling time">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.Free Wheeling Time'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.free_wheeling_time}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="max speed">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.MAX_SPEED'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.max_speed}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="avg speed">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.AVG_SPEED'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.avg_speed}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sudden accerlation">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.SUDDEN_ACCELERATE'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.sudden_accerlation}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sudden deceleration">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.SUDDEN_DECELERATE'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.sudden_deceleration}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="utilization">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.UTILIZATION'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element">{{element.utilization}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            <div class="col-md-12" *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

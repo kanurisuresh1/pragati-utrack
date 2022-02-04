@@ -1,0 +1,190 @@
+.height-80vh {
+    height: 500px;
+    overflow: hidden;
+}
+
+.height-80vh {
+    height: 80vh;
+    overflow: hidden;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    padding: 15px 0px;
+}
+
+h5 {
+    padding: 6px 0px;
+    font-size: 19px;
+    color: #fff;
+}
+
+.no-pad {
+    padding: 0px 0px;
+}
+
+.no-pading {
+    padding: 5px 5px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.table-nw {
+    margin-bottom: 0 !important;
+}
+
+.date-time {
+    color: #0b46ae;
+}
+
+.date-time i {
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.date-time span {
+    margin-right: 10px;
+}
+
+.bg-gray {
+    background: #d2d0d0;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+}
+::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+}
+
+::ng-deep .mat-tab-body-content {
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.mat-tab-body-content {
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.example-tab-icon {
+    margin-right: 8px !important;
+}
+
+// table row hover effect
+
+tr:hover {
+    background-color: #b3f0ff;
+}
+
+.datanotfound {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+}
+
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+.example-container table {
+    // overflow-x: scroll !important;
+}
+
+.mr15 {
+    margin-right: 15px !important;
+}
+.mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+}
+
+.mt50 {
+    margin-top: 76px;
+}
+.my-custom-scrollbar {
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 6px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+}
+.ml-20 {
+    margin-left: -20px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.example-tab-icon {
+    margin-right: 8px !important;
+}

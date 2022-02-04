@@ -1,0 +1,165 @@
+<div class="row clearfix">
+    <div class="col-md-8 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Company">
+        </label>
+
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="exportexcle()"><i
+                class="fa fa-file-excel"></i>  &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                class="fa fa-file-pdf"></i>  &nbsp;
+             {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+    </div>
+    <div class="col-md-4 ml-auto text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="add()"><b>+ {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.ADD_COMPANY' | translate}} </b></button>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+            <table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[14]" class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="user_id">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="company_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.COMPANY_NAME' | translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element">
+                        <a (click)="editCompany(element.company_id)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.company_name}}</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="company_logo">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.COMPANY_LOGO' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"><img src="{{element.company_logo_formatted}}" class="img-circle"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="company_url ">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.COMPANY_URL' | translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element">{{element.company_website}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="state">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.STATE' | translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.company_state}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="district">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.DISTRICT' | translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.company_district_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="address1">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.ADDRESS_1' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_address1}} </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="address2">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.ADDRESS_2' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_address2}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="landmark">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.LANDMARK' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_landmark}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pincode">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.PINCODE' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_pincode}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="google_address">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.GOOGLE_ADDRESS' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_google_address}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="company_email">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.COMPANY_EMAIL' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="company_phone">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.COMPANY_PHONE' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company_mobile}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.STATUS' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.COMPANY_MANAGEMENT_COMPONENT.ACTIONS' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <a><i class="fa fa-eye text-blue " (click)="editCompany(element.company_id)"
+                                style="cursor: pointer;color: black;"></i></a><b>
+                            |
+                        </b>
+                        <a><i class="fa fa-edit text-blue " (click)="edit(element.company_id)"
+                                style="cursor: pointer;color: blue;"></i></a>
+                        <!-- <b> |
+                        </b> <a><i class="fa fa-trash-alt" (click)="delete(element.company_id,element.company_name)"
+                                style="cursor: pointer;color: red;"></i></a> -->
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <div class="col-md-12" *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>

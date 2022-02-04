@@ -1,0 +1,50 @@
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.privacy {
+    margin: 15px 0px;
+}
+
+.privacy p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.privacy h4 {
+    margin-bottom: 20px;
+}
+
+.privacy ul {
+    padding: 0;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.privacy li {
+    font-size: 15px;
+}
+
+.no-pad {
+    padding: 0px 0px;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+p,b,h3,h4,h5,h6,label,ul,li{
+    color:black !important;
+  }

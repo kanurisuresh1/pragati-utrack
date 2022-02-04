@@ -1,0 +1,175 @@
+<div class="row clearfix">
+    <div class="col-md-11 text-left">
+        <h4 *ngIf="isAddService"><b> {{alert_type | translate}} 
+                :</b></h4>
+        <h4 *ngIf="!isAddService"><b> {{alert_type | translate}} 
+                :</b> </h4>
+    </div>
+    <div class="col-md-1">
+        <button mat-dialog-close="true" style="padding: 3px 8px 2px;margin-left: 13px;
+    line-height: 17px;
+    min-width: auto;" class="btn btn-sm btn-info">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<div class="col-md-12  mt10 " [formGroup]="createFuelForm">
+    <div class="row mt15">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Select Vehicle' | translate}}
+                    <span class="required">*</span></label>
+                <mat-select class="form-control" [formControl]="bankMultiCtrl" [(ngModel)]="selectedVehicles" placeholder="Select Vehicle" [multiple]="true" #multiSelect>
+                    <mat-option>
+                        <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" placeholderLabel="Search Vehicle..." noEntriesFoundLabel="'no matching Vehicle found'"></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank.device_link_id">
+                        {{bank.vehicle_number}}
+                    </mat-option>
+                </mat-select>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Select From Date Time' | translate}}
+
+                    <span class="required">*</span></label>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [(ngModel)]="StartDateTime" [matDatetimepicker]="stateDatepicker" formControlName="startdate">
+                    <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #stateDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                    <div *ngIf="createFuelForm.controls['startdate'].errors && createFuelForm.controls['startdate'].touched">
+                        <span *ngIf="createFuelForm.controls['startdate'].errors.required" style="color: red;">
+                            {{'ADD_Less_Kilometer_Travel_Alerts.Select From Date Time' | translate}}
+                        </span>
+                    </div>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                   
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Select TO Date Time' | translate}}
+
+                    <span class="required">*</span></label>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [(ngModel)]="endDate" [matDatetimepicker]="endDatepicker" formControlName="enddate">
+                    <mat-datetimepicker-toggle matSuffix [for]="endDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #endDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                    <!-- #enddocregion toggle -->
+                    <div *ngIf="createFuelForm.controls['enddate'].errors && createFuelForm.controls['enddate'].touched">
+                        <span *ngIf="createFuelForm.controls['enddate'].errors.required" style="color: red;">
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Select TO Date Time' | translate}}
+
+                        </span>
+                    </div>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Trip Name' | translate}}
+
+                </label>
+                <input type="text" [(ngModel)]="tripName" formControlName="tripName" class="form-control" maxlength="20" placeholder="Enter Trip Name">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">
+                   
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Driver Name' | translate}}
+
+                </label>
+                <input type="text" [(ngModel)]="driveName" formControlName="driverName" class="form-control" maxlength="20" placeholder="Enter Driver Name">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">
+               
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Driver Number' | translate}}
+
+                </label>
+                <input type="text" [(ngModel)]="driveNumber" formControlName="driverNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" maxlength="10" placeholder="Enter Driver Number">
+            </div>
+        </div>
+
+        <div class="col-md-4" [formGroup]="emailChipForm">
+            <div class="form-group">
+                <label for="exampleInputEmail1">
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Email ID' | translate}}
+
+                </label>
+
+                <tag-input [(ngModel)]='email_ids' placeholder="Enter New Email" secondaryPlaceholder="Enter Email ID" [maxItems]='4' formControlName="chipEmail">
+                </tag-input>
+            </div>
+        </div>
+
+        <div class="col-md-4" [formGroup]="chipForm">
+            <div class="form-group">
+                <label>
+             
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Mobile Numbers' | translate}}
+
+                </label>
+
+                <tag-input [(ngModel)]='items' placeholder="Enter new mobile number" secondaryPlaceholder="Enter Mobile Number" formControlName="mobile_num" [maxItems]='4'>
+                </tag-input>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Select Status' | translate}}
+
+                    <span class="required">*</span></label>
+                <mat-select class="form-control" formControlName="tempstatus" placeholder="Select Status" [(ngModel)]="status">
+                    <mat-option value="Active">Active</mat-option>
+                    <mat-option value="Inactive">Inactive</mat-option>
+                </mat-select>
+                <mat-error *ngIf="createFuelForm.controls['tempstatus'].errors && createFuelForm.controls['tempstatus'].touched">
+                    <span *ngIf="createFuelForm.controls['tempstatus'].errors.required" style="color: red;">
+                    {{'ADD_Less_Kilometer_Travel_Alerts.Please Select Status' | translate}}
+
+                    </span>
+                </mat-error>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-md-12 text-center mt30">
+    <div class="form-group">
+        <button type="submit" *ngIf="this.isAddService" class="btn btn-primary mrleftright" (click)="submit()" [disabled]="createFuelForm.invalid">
+            {{'DASH_BOARD.ADD_TEMPERATUR_ALERT_COMPONENT.SUBMIT' | translate}}
+        </button> &nbsp; &nbsp;
+        <button type="submit" *ngIf="!this.isAddService" class="btn btn-primary mrleftright" (click)="submit()" [Enable]="createFuelForm.invalid">
+            {{'DASH_BOARD.ADD_TEMPERATUR_ALERT_COMPONENT.UPDATE' | translate}}
+        </button> &nbsp; &nbsp;
+        <button type="submit" mat-dialog-close="false" class="btn btn-warning mrleftright">
+            {{'DASH_BOARD.ADD_TEMPERATUR_ALERT_COMPONENT.CANCEL' | translate}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,184 @@
+<div [formGroup]="editGroupForm">
+    <div class="row">
+        <div class="col-md-10 text-left">
+
+            <button class="btn btn-primary mr15 btn-sm" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+
+        </div>
+        <div class="col-md-2 ml-auto text-right">
+            <div class="form-group">
+                <button class="btn btn-warning btn-sm" (click)="submit()"><b>
+                    {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.SAVE' | translate}}
+                </b></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mb20 white-bg clearfix no-pad">
+        <div class="col-md-4 mt10">
+            <div class="form-group text-blue">
+                <label>
+                    {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.EDIT_GROUP_NAME' | translate}}
+                </label>
+                <input type="text" [(ngModel)]="GroupName" formControlName="editGroupName" placeholder="Edit Group Name"
+                    class="form-control" maxlength="10" required />
+                <div
+                    *ngIf="editGroupForm.controls['editGroupName'].errors && editGroupForm.controls['editGroupName'].touched">
+                    <span *ngIf="editGroupForm.controls['editGroupName'].errors.required" style="color:red;"> 
+                        {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.ENTER_GROUP_NAME' | translate}}  
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" id="GroupImageName">
+            <div class="row mb20">
+                <div class="col-md-6 mb10 text-blue"><label>
+                    {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.EDIT_GROUP_IMAGE' | translate}}  
+                </label></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-1 classname " id="ic_group_boy" (click)="create_image('ic_group_boy')">
+                    <img src="assets/images/groups-icons_updated/ic_group_boy.png" alt="school Boy"
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="School Boy!"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname " (click)="create_image('ic_group_cab')" id="ic_group_cab">
+                    <img src="assets/images/groups-icons_updated/ic_group_cab.png" alt=""
+                        class="img-responsive  img-thumbnail" data-toggle="tooltip" title="Cab"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_delivery')" id="ic_group_delivery">
+                    <img src="assets/images/groups-icons_updated/ic_group_delivery.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Delivery"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_family')" id="ic_group_family">
+                    <img src="assets/images/groups-icons_updated/ic_group_family.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Family"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_girl')" id="ic_group_girl">
+                    <img src="assets/images/groups-icons_updated/ic_group_girl.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Girl"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_home')" id="ic_group_home">
+                    <img src="assets/images/groups-icons_updated/ic_group_home.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Home"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_school')" id="ic_group_school">
+                    <img src="assets/images/groups-icons_updated/ic_group_school.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="School"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_self')" id="ic_group_self">
+                    <img src="assets/images/groups-icons_updated/ic_group_self.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Self"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_teacher')" id="ic_group_teacher">
+                    <img src="assets/images/groups-icons_updated/ic_group_teacher.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Teacher"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_traveller')" id="ic_group_traveller">
+                    <img src="assets/images/groups-icons_updated/ic_group_traveller.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Traveller"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_truck')" id="ic_group_truck">
+                    <img src="assets/images/groups-icons_updated/ic_group_truck.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Truck"
+                        data-placement="bottom" />
+                </div>
+
+                <div class="col-md-1 classname" (click)="create_image('ic_group_other')" id="ic_group_other">
+                    <img src="assets/images/groups-icons_updated/ic_group_other.png" alt=""
+                        class="img-responsive img-thumbnail" data-toggle="tooltip" title="Other"
+                        data-placement="bottom" />
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12 mb10">
+            <div class="row">
+                <div class="col-md-6 mb10 mt20">
+                    <p class="text-blue">
+                        {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.SELECT_VEHICLE_LIST' | translate}}  
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb10 mt20 text-right">
+                    <h4 class="pull-right">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" (change)="selectAllcheckBox($event)">
+                                {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.SELECT_ALL' | translate}}
+                            </label>
+                        </div>
+                    </h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb20" *ngFor='let vehiclesListData of vehicles'>
+                        <div class="buy-plans clearfix">
+
+                            <div class="col-md-12 bg-gray">
+                                <h6>{{vehiclesListData.vehicle_number}}
+                                    <div class="boxes">
+                                        <input type="checkbox" [checked]="checks" [(ngModel)]="DeviceLinkListId"
+                                            name="getcheckboxvalues" value="{{vehiclesListData.device_link_id}}">
+                                    </div>
+                                </h6>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5 mt20">
+                                    <div class="group-data-imgbox">
+                                        <img src={{vehiclesListData.getvehicle_image}} alt="" class="responsive img" />
+                                    </div>
+                                </div>
+                                <div class="col-md-7 no-pad clearfix">
+                                    <div class="plans-data">
+                                        <p>
+                                            {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                                        </p>
+                                        <h4><b>{{vehiclesListData.vehicle_number}}</b></h4>
+                                    </div>
+                                    <div class="plans-data mb10">
+                                        <p>
+                                            {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.PRODUCT_NUMBER' | translate}}
+                                        </p>
+                                        <h4><b>651654</b></h4>
+                                    </div>
+                                    <div class="plans-data mb10">
+                                        <p>
+                                            {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.PRODUCT_TYPE' | translate}}
+                                        </p>
+                                        <h4><b>Fuel</b></h4>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

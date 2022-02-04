@@ -1,0 +1,42 @@
+.btn-yellow-outline {
+    border-radius: 50px !important;
+    padding: 5px 15px !important;
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: solid 2px #febe40;
+}
+
+.btn-yellow-outline:hover {
+    border: solid 2px #febe40;
+    background: #0b46ae;
+    color: #fff !important
+}
+
+.geofence-map {
+    height: 77vh;
+    overflow: hidden
+}
+
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd
+}
+
+.mt15{
+    margin-top: 15px;
+}
+
+.mt10{
+    margin-top: 10px;
+}
+
+label{
+    color:black !important;
+  }

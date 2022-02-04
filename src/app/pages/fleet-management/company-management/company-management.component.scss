@@ -1,0 +1,87 @@
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+.example-container table {
+    overflow-x: scroll !important;
+}
+
+.mr15 {
+    margin-right: 10px !important;
+}
+.mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+}
+
+.mt50 {
+    margin-top: 76px;
+}
+.my-custom-scrollbar {
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 6px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+}
+.ml-20 {
+    margin-left: -20px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.img-circle {
+    border-radius: 50% !important;
+    overflow: hidden;
+    width: 65px;
+    height: 65px;
+    border: 2px solid #1654c0;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+// table row hover effect 
+
+tr:hover {
+    background-color: #b3f0ff;
+  }
+
+  .datanotfound{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+  }

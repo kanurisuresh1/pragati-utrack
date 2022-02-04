@@ -1,0 +1,162 @@
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+  }
+  
+  .example-container table td {
+    padding: 10px !important;
+  }
+  .example-container table {
+    overflow-x: scroll !important;
+  }
+  
+  .mr15 {
+    margin: 10px !important;
+  }
+  .mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+  }
+  
+  .mt20 {
+    margin-top: 20px;
+  }
+  .mt30{
+    margin-top: 30px;
+  }
+  .mb20 {
+    margin-bottom: 20px;
+  }
+  .my-custom-scrollbar {
+    overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+    display: block;
+  }
+  
+  .mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+  }
+  
+  .mat-input-element {
+    line-height: auto;
+    padding: 6px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+  }
+  .ml-20 {
+    margin-left: -20px !important;
+  }
+  
+  
+  .btn-sm,
+  .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+  }
+  
+  
+  button.btn.btn-primary.sub {
+    margin-top: 30px;
+    font-size: 13px;
+    padding-left: 10px;
+    /* margin: auto; */
+    padding: 5px;
+    margin-left: 10px;
+  }
+  
+  label.selectlb {
+    font-size: 12px;
+    color: #989595a3;
+  }
+  ::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+  }
+  ::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+  }
+  
+  input#mat-input-1 {
+    // margin-top: -18px !important;
+    height: 36px;
+    background-color: #fff !important;
+    border: 1px solid #ced4da;
+  }
+  
+  input#mat-input-2 {
+    // margin-top: -18px;
+    height: 36px;
+    border: 1px solid #ced4da;
+    background-color: #fff !important;
+  }
+  .mat-label {
+    font-weight: 5px;
+  }
+  
+  ::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+  
+  }
+  
+  ::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+  }
+  ::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+  }
+  
+  .example-tab-icon {
+    margin-right: 8px !important;
+  }
+  
+  ::ng-deep .mat-form-field {
+    width: 100% !important;
+  }
+  
+  ::ng-deep .mat-form-field .form-control {
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 13px;
+  }
+  
+  .example-tab-icon {
+    margin-right: 8px !important;
+  }
+  
+
+  .sample-div{
+      width:auto;
+      padding: 5px;
+      float: left !important;
+      clear: both;
+  }
+
+  // table row hover effect 
+
+tr:hover {
+  background-color: #b3f0ff;
+}
+
+.datanotfound{
+  font-size: 25px;
+  text-align: center;
+  margin-top: 180px;
+  margin-bottom: 180px;
+  font-weight: bold;
+}

@@ -1,0 +1,27 @@
+.image-gallery{
+    height: 400px;
+   width: 575px;
+ }
+ i{
+     // margin-left: 880px;
+     // margin-bottom: 0px; 
+     // padding-left: 8px;
+     font-size: 20px;
+     position: absolute;
+     top: 15px;
+     right: 30%;
+ }
+ ::ng-deep .mat-dialog-container{
+     display: block;
+     padding: 10px;
+     border-radius: 4px;
+     box-sizing: border-box;
+     overflow: scroll !important;
+     outline: 0;
+     width: 100%;
+     max-width: 600px;
+     height: 100% !important;
+     max-height: 600px;
+     overflow-x: hidden;
+    
+ }

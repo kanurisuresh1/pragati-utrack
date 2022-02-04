@@ -1,0 +1,107 @@
+<div class="col-md-12">
+    <div class="clearfix">
+        <h4 *ngIf="isCreateRoute" style="color: blue;">Create Route</h4>
+        <h4 *ngIf="!isCreateRoute" style="color: blue;">Edit Route</h4>
+        <hr>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card-body">
+            <div class="col-md-12" [formGroup]="busRouteForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Route Name
+                                <span class="required">*</span></label>
+                            <input type="text" style="text-transform: capitalize;" [(ngModel)]="routeName"
+                                formControlName="route_name" onkeypress="return /[a-zA-Z0-9 _-]+/i.test(event.key)"
+                                maxlength="30" class="form-control" placeholder="Enter Route Name">
+                            <mat-error
+                                *ngIf="busRouteForm.controls['route_name'].errors && busRouteForm.controls['route_name'].touched">
+                                <span *ngIf="busRouteForm.controls['route_name'].errors.required">
+                                    Enter Organisation Name
+                                </span>
+                                <span *ngIf="busRouteForm.controls['route_name'].errors.minlength">
+                                    Enter Minimum 3 Letters
+                                </span>
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>From Geofence
+                                <span class="required">*</span></label>
+                            <mat-select class="form-control" [(ngModel)]="from_geofence_id"
+                                formControlName="from_geofence_id" placeholder="Select From Geofence">
+                                <mat-option *ngFor='let row of geofence_list' [value]="row.geofence_id"
+                                    (click)="fromChangeGeofence(row)">
+                                    {{row.geofence_name}}</mat-option>
+                            </mat-select>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                To Geofence
+                                <span class="required">*</span></label>
+                            <mat-select class="form-control" [(ngModel)]="to_geofence_id"
+                                formControlName="to_geofence_id" placeholder="Select To Geofence">
+                                <mat-option *ngFor='let row of geofence_list' [value]="row.geofence_id"
+                                    (click)="toChangeGeofence(row)">
+                                    {{row.geofence_name}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Bus Organisation
+                                <span class="required">*</span></label>
+                            <mat-select class="form-control" [(ngModel)]="org_name"
+                                formControlName="bus_organisation_id" placeholder="Select Organisation">
+                                <mat-option *ngFor='let row of organisation_list' [value]="row.bus_organisation_id"
+                                    (click)="changeOrg(row)">
+                                    {{row.org_name}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bus Organisation Branch
+                                <span class="required">*</span></label>
+                            <mat-select class="form-control" [(ngModel)]="branch_org_name"
+                                formControlName="bus_organisation_branch_id" placeholder="Select Organisation Branch">
+                                <mat-option *ngFor='let row of branch_organisation_list'
+                                    [value]="row.bus_organisation_branch_id" (click)="changeBranchOrg(row)">
+                                    {{row.branch_name}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <button class="btn btn-warning btn-sm mrl5" mat-dialog-close="false">Cancel</button>
+                        <button *ngIf="isCreateRoute" class="btn btn-primary btn-sm mrl5" (click)="createRoute()">Create
+                            Route</button>
+                        <button *ngIf="!isCreateRoute" (click)="createRoute()"
+                            class="btn btn-primary btn-sm mrl5">Update
+                            Route</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

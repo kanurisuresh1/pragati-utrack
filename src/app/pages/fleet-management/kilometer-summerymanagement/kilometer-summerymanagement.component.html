@@ -1,0 +1,611 @@
+<div class="row clearfix mb10">
+    <div class="auto-width text-left" style="margin-left: 10px;">
+        <button class="btn btn-primary mr15 btnsize" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+        aria-hidden="true"></i>
+    </button>
+    </div>
+</div>
+
+<mat-tab-group animationDuration="1000ms">
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">today </mat-icon>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.TODAY' | translate }}
+        </ng-template>
+        <div class="row clearfix mt10">
+            <div class="col-md-12 text-left">
+                <label>
+          <input type="search" matInput id="search_element_today" style="padding: 7px;" (keyup)="todayFillterList($event)"
+            class="form-control search-field pull-left" placeholder="Search Vehicle">
+        </label>
+                <button class="btn btn-primary pull-left ml-20 mr15" style="padding: 5px;" (click)="search_todaylist()"><i
+            class="fa fa-search" style="font-size:15px;"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="Todayexportexcle()">
+          <i class="fa fa-file-excel"></i> &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_EXCEL' | translate }}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadTodayKMPdf()"><i
+            class="fa fa-file-pdf"></i>
+          &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_PDF' | translate }}</button>
+                <button class="btn btn-success pull-left mr1" style="padding: 4px;" nbTooltip="Refresh" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshTodayList()"><i
+            class="fa fa-sync" style="font-size:15px"></i></button>
+
+                <button class="btn btn-warning pull-left   btn-sm" mat-button (click)="todayVehicleGraphView()" style="margin-left:20px ;">
+                    {{'KILOMETER_SUMMARY_MANAGEMENT.View Graph' | translate }} 
+                     </button>
+            </div>
+        </div>
+
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table matTableExporter #exporter="matTableExporter" mat-table matSort #TableOneSort="matSort" [dataSource]="todaydataSource" class="table-bordered table">
+
+                        <ng-container matColumnDef="device_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_NUMBER' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                <a style="text-decoration: underline;color:blue;cursor: pointer;" (click)="trackHistory(element.device_link_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_TYPE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                {{element.vehicle_type}} <img src="{{element.Todaylistimage}}" class="dataimg2">
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="today_kms">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TODAY_DISTANCE' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.today.total_distance}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="today_travel_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TODAY_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.today.total_travelled_time}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="this_week_kms">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.THIS_WEEK_DISTANCE' | translate }}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                {{element.this_week.total_distance}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="this_week_travel_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.THIS_WEEK_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                {{element.this_week.total_travelled_time}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="this_month_kms">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.THIS_MONTH_DISTANCE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.this_month.total_distance}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="this_month_travel_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.THIS_MONTH_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.this_month.total_travelled_time}}</td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TodayTableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">calendar_today </mat-icon>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.DATE' | translate }}
+        </ng-template>
+        <div class="row clearfix mb0">
+            <div class="col-md-2" [formGroup]="SelectDateKilometerMmanagement">
+                <label>{{'KILOMETER_SUMMARY_MANAGEMENT.SELECT_DATE' | translate }} : </label>
+                <mat-form-field class="no-line">
+                    <input type="text" class="form-control datepicker" matInput style="width: 73%;" [matDatepicker]="selectDate" [max]="yesterDay" formControlName="selectDate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="selectDate" class="monthpickerset"></mat-datepicker-toggle>
+                    <mat-datepicker #selectDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="auto-width" style="margin-left: -20px;">
+                <button class="btn btn-primary  btn-sm mt30" (click)="getSelectDate()"> &nbsp;
+                {{'KILOMETER_SUMMARY_MANAGEMENT.VIEW_REPORT' | translate }} &nbsp;</button>
+            </div>
+            <div class="auto-width">
+                <label>
+                <input type="search" matInput id="search_element_selectDate" style="width: 70%; padding: 7px;margin-left:10px;margin-top: 27px;" (keyup)="selectDateFillterList($event)" class="form-control search-field  mt30" placeholder="Search Vehicle">
+                </label>
+                <button class="btn btn-primary" style="margin-left:-41px;padding:5px" (click)="search_selectDate()"><i class="fa fa-search" style="font-size:15px"></i></button>
+            </div>
+            <div class="auto-width">
+                <button class="btn btn-danger pull-left btn-sm mt30" mat-button (click)="SelectedDateExportexcle()">
+            <i class="fa fa-file-excel"></i> &nbsp;{{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_EXCEL' | translate }}</button>
+            </div>
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-primary pull-left btn-sm mt30" mat-button (click)="selectedDatePDF()"><i class="fa fa-file-pdf"></i>
+            &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_PDF' | translate }}</button>
+            </div>
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-success pull-left mt30" nbTooltip="Refresh" nbTooltipStatus="success" style="padding: 4px;" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshSelectDateList()">
+                    <i class="fa fa-sync" style="font-size:15px"></i></button>
+            </div>
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-warning pull-left mt30 btn-sm" mat-button (click)="selectDateVehicleGraphView()"> 
+                {{'KILOMETER_SUMMARY_MANAGEMENT.View Graph' | translate }}     
+                </button>
+            </div>
+        </div>
+
+        <div class="tdata">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableTwoSort="matSort" matTableExporter #dateExporter="matTableExporter" [dataSource]="SelectDatedataSource" class="table-bordered table">
+
+                        <ng-container matColumnDef="vehicle_id">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_NUMBER' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                <a style="text-decoration: underline;color:blue;cursor: pointer;" (click)="trackHistory(element.device_link_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_TYPE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                {{element.vehicle_type}} <img src="{{element.SelectDatelistimage}}">
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_DISTANCE' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.today.total_distance}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_travelled_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.today.total_travelled_time}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="max_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.MAX_SPEED' | translate }}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element;"> {{element.today.max_speed}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="avg_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.AVG_SPEED' | translate }}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element;"> {{element.today.avg_speed}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="SelectDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: SelectDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="SelectDateTableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">date_range </mat-icon>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.CUSTOME_DATE' | translate }}
+        </ng-template>
+
+        <div class="clearfix row mt10 mb0" [formGroup]="CustomDatesDataKilometerMmanagement">
+            <div class="col-md-2">
+                <label>{{'KILOMETER_SUMMARY_MANAGEMENT.SELECT_START_DATE' | translate }}</label>
+                <mat-form-field class="no-line">
+                    <!-- <mat-label>Select Start Date</mat-label> -->
+                    <input class="form-control datepicker" matInput [matDatepicker]="StartDate" formControlName="StartDate" [max]="yesterDay" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="StartDate" class="customdatapickerset"></mat-datepicker-toggle>
+                    <mat-datepicker #StartDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2" style="margin-left: -20px;">
+                <label>{{'KILOMETER_SUMMARY_MANAGEMENT.SELECT_END_DATE' | translate }}</label>
+                <mat-form-field class="no-line">
+                    <!-- <mat-label>Select End Date</mat-label> -->
+                    <input class="form-control datepicker" matInput [matDatepicker]="EndDate" formControlName="EndDate" [max]="todayDate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="EndDate" class="customdatapickerset"></mat-datepicker-toggle>
+                    <mat-datepicker #EndDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="auto-width" style="margin-left:-15px;">
+                <button type="submit" (click)="viewReport()" class="btn btn-primary btn-sm mt30">
+          {{'KILOMETER_SUMMARY_MANAGEMENT.VIEW_REPORT' | translate }}
+        </button>
+            </div>
+
+            <div class="auto-width" style="margin-left: 4px;">
+                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" class="mt30" style="margin-left:4px;" #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
+                    <mat-button-toggle (click)="Cumulative_View()" value="option1">
+                        {{'KILOMETER_SUMMARY_MANAGEMENT.CUMULATIVE_VIEW' | translate }}
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="Detail_View()" value="option2">
+                        {{'KILOMETER_SUMMARY_MANAGEMENT.DETAIL_VIEW' | translate }}
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-warning pull-left mt30 btn-sm" *ngIf="cumulative" (click)="cumulativeVehicleGraphView()"> 
+                {{'KILOMETER_SUMMARY_MANAGEMENT.View Graph' | translate }}     
+                </button>
+                <button class="btn btn-warning pull-left mt30 btn-sm" *ngIf="detailed" (click)="detailVehicleGraphView()"> 
+                {{'KILOMETER_SUMMARY_MANAGEMENT.View Graph' | translate }}     
+                </button>
+            </div>
+        </div>
+
+        <div class="clearfix row mb0">
+            <div class="auto-width" style="margin-left:10px;">
+                <button class="btn btn-danger pull-left  btn-sm" *ngIf="cumulative" mat-button (click)="CustomDates_cumulativeExportexcle()">
+          <i class="fa fa-file-excel"></i> &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_EXCEL' | translate }}</button>
+
+                <button class="btn btn-danger pull-left  btn-sm" *ngIf="detailed" mat-button (click)="CustomDates_DetailedExportexcle()">
+          <i class="fa fa-file-excel"></i> &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_EXCEL' | translate }}</button>
+            </div>
+            <div class="auto-width" style="margin-left:10px;">
+                <button class="btn btn-primary pull-left  btn-sm" *ngIf="cumulative" mat-button (click)="customDates_cumulativePdf()"><i class="fa fa-file-pdf"></i>
+          &nbsp;{{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_PDF' | translate }}</button>
+
+                <button class="btn btn-primary pull-left  btn-sm" *ngIf="detailed" mat-button (click)="customDates_DetailedPdf()"><i class="fa fa-file-pdf"></i>
+          &nbsp;{{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_PDF' | translate }}</button>
+            </div>
+            <div class="auto-width" style="margin-left:10px;">
+                <button class="btn btn-success pull-left " style="padding: 4px;" nbTooltip="Refresh" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="customDatesRefresh()"><i
+            class="fa fa-sync" style="font-size:15px"></i></button>
+            </div>
+        </div>
+
+        <!-- cumulative -->
+
+        <div class="tdata mt25" *ngIf="cumulative">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table matTableExporter #customDatesexporter="matTableExporter" mat-table matSort #TableThreeSort="matSort" [dataSource]="CustomeDate_cumulative_dataSource" class="table-bordered table">
+
+                        <ng-container matColumnDef="vehicle_id">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_NUMBER' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                <a style="text-decoration: underline;color:blue;cursor: pointer;" (click)="OpenCustomDetails(element)">
+                  {{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_TYPE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                {{element.vehicle_type}} <img src="{{element.CustomeDatelistimage}}" class="dataimg2">
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_DISTANCE' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.total_distance}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_travelled_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.total_travelled_time}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="max_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.MAX_SPEED' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.max_speed}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="avg_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.AVG_SPEED' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.avg_speed}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="CustomeDate_cumulative_data_DisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: CustomeDate_cumulative_data_DisplayedColumn;"></tr>
+
+                    </table>
+                    <div class="col-md-12" *ngIf="cumulativeTableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- detailed -->
+
+        <div class="tdata mt25" *ngIf="detailed">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table matTableExporter #customDatesexporter="matTableExporter" mat-table matSort #TableThreeSort1="matSort" [dataSource]="Custome_Detail_View_data_Source" class="table-bordered table">
+
+                        <ng-container matColumnDef="vehicle_id">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_NUMBER' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                {{element.vehicle_number}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_TYPE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                {{element.vehicle_type}} <img src="{{element.CustomeDatelistimage}}" class="dataimg2">
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="date">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.DATE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                <a style="text-decoration: underline;color:blue;cursor: pointer;" (click)="New_trackHistory(element.device_link_id,element.report_date)"> {{element.report_date}} </a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_DISTANCE' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.total_distance}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_travelled_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.total_travelled_time}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="max_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.MAX_SPEED' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.max_speed}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="avg_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.AVG_SPEED' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.avg_speed}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Cummulative_distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.CUMULATIVE_DISTANCE' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.cumulative_distance}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="CustomeDate_detaileD_DisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: CustomeDate_detaileD_DisplayedColumn;"></tr>
+
+                    </table>
+                    <div class="col-md-12" *ngIf="CustomeDetailsTableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">calendar_view_day </mat-icon>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.MONTH' | translate }}
+        </ng-template>
+
+        <div class="clearfix row  mb0">
+            <div class="col-md-2">
+                <label>{{'KILOMETER_SUMMARY_MANAGEMENT.SELECT_MONTH' | translate }}</label>
+
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput style="width: 73%;" [matDatepicker]="Month" [formControl]="date" [max]="todayDate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="Month" class="monthpickerset"></mat-datepicker-toggle>
+                    <mat-datepicker #Month startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, Month)"></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="auto-width" style="margin-left: -20px;">
+                <button type="submit" class="btn btn-primary mt30 btn-sm" (click)="getMonthList()">
+          {{'KILOMETER_SUMMARY_MANAGEMENT.VIEW_REPORT' | translate }}
+        </button>
+            </div>
+
+            <div class="col-md-2">
+                <label>
+          <input type="search" matInput id="search_element_month" style="width: 75%;padding: 7px;margin-top: 25px;"
+            (keyup)="monthListFillterList($event)" class="form-control search-field pull-left mt30"
+            placeholder="Search Vehicle">
+        </label>
+                <button class="btn btn-primary pull-left" style="margin-left:-42px;padding:5px;" (click)="search_monthList()"><i class="fa fa-search" style="font-size:15px"></i></button>
+            </div>
+            <div class="auto-width" style="margin-left: -25px;">
+                <button class="btn btn-danger pull-left mt30 btn-sm" mat-button (click)="MonthExportexcle()">
+          <i class="fa fa-file-excel"></i> &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_EXCEL' | translate }}</button>
+            </div>
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-primary pull-left mt30 btn-sm" mat-button (click)="monthKMReportPdf()"><i
+            class="fa fa-file-pdf"></i>
+          &nbsp; {{'KILOMETER_SUMMARY_MANAGEMENT.DOWNLOAD_PDF' | translate }}</button>
+            </div>
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-success pull-left mt30" style="padding: 4px;" nbTooltip="Refresh" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshMonthList()"><i
+            class="fa fa-sync" style="font-size:15px"></i></button>
+            </div>
+            <div class="auto-width" style="margin-left: 10px;">
+                <button class="btn btn-warning pull-left mt30 btn-sm" mat-button (click)="selectMonthVehicleGraphView()"> 
+                {{'KILOMETER_SUMMARY_MANAGEMENT.View Graph' | translate }}     
+                </button>
+            </div>
+        </div>
+
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table matTableExporter #selectedMonthexporter="matTableExporter" mat-table matSort #TableFourSort="matSort" [dataSource]="MonthDetailsdataSource" class="table-bordered table">
+
+                        <ng-container matColumnDef="vehicle_id">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_NUMBER' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                <a style="text-decoration: underline;color:blue;cursor: pointer;" (click)="OpenVehicleDetails(element)">
+                  {{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.VEHICLE_TYPE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element;">
+                                {{element.vehicle_type}} <img src="{{element.MonthDatelistimage}}" class="dataimg2">
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_MONTH_DISTANCE' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.this_month.total_distance}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total_travelled_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.TOTAL_MONTH_TRAVEL_TIME' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.this_month.total_travelled_time}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="max_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.MAX_SPEED' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.this_month.max_speed}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="avg_speed">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'KILOMETER_SUMMARY_MANAGEMENT.AVG_SPEED' | translate }}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element;">
+                                {{element.this_month.avg_speed}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="MonthDetailsDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: MonthDetailsDisplayedColumn;"></tr>
+
+                    </table>
+                    <div class="col-md-12" *ngIf="MonthDatelisTableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

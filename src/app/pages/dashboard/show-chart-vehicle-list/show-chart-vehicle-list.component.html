@@ -1,0 +1,142 @@
+
+
+<div class="row">
+  <div class="col-md-11">
+    <h5 style="color: blue;">{{vehicle_motion_status_name}}</h5>
+  </div>
+<div class="col-md-1">
+  <button mat-dialog-close="true" style="padding: 3px 8px 2px;
+  line-height: 17px;
+  min-width: auto;" class="btn btn-sm btn-info">
+          <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+</div>
+</div>
+<div class="col-md-12 text-left">
+
+  <label>
+    <input type="search" matInput id="asset_list_search" (keyup)="applyFilter($event)"
+      class="form-control search-field pull-left" placeholder="Search Vehicle">
+  </label>
+
+  <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i class="fa fa-search"></i></button>
+
+
+  <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="exportexcleDashBoard()"><i
+      class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+
+  <button class="btn btn-primary pull-left mr15 btn-sm" (click)="downloadPDF()" mat-button><i
+      class="fa fa-file-pdf"></i>
+    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+
+</div>
+
+<div>
+  <div class="example-container mat-elevation-z8" id="content" #content>
+    <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+      <table matTableExporter #exporter="matTableExporter" class="table-bordered table" mat-table
+        [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+          <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicle_number">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.VEHICLE_NUMBER' | translate}} </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"><a
+              style="text-decoration: underline;color:blue;cursor:  pointer;"
+              (click)="openDetails(element)">{{element.vehicle_number}}</a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicle_type">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.VEHICLE_TYPE' | translate}} </th>
+          <td class="cellSpace" mat-cell [ngStyle]="{'color': element.vehicle_motion_status_color}"
+            *matCellDef="let element">
+            {{element.vehicle_type}}<img src="{{element.vehicle_motion_status_image}}">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="speed">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.SPEED' | translate}}<br>(KMPH)</th>
+          <td mat-cell *matCellDef="let element"> {{element.speed_formatted}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_location">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.LOCATION' | translate}}
+          </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element">{{element.location_formatted}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_state">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.STATE' | translate}}
+          </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element">{{element.last_state}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_district">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.DISTRICT' | translate}}
+          </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element">{{element.last_district}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fixtime">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.LAST_RECORD' | translate}}
+          </th>
+          <td mat-cell class="cellSpace" *matCellDef="let element">
+            {{element.fixtime | date:'dd MMM yyyy hh:mm:ss a'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="driver_name">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.DRIVER_NAME' | translate}}
+          </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.driver_name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="driver_number">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.DRIVER_NUMBER' | translate}}
+          </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.driver_mobile}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_running_time">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.STOPPED_DURATION' | translate}}
+          </th>
+          <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.stopped_time_formatted}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fuel_point">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header><i
+              class="fa fa-gas-pump">&nbsp;&nbsp;
+              {{'DASH_BOARD.SHOWCHARTVEHICLELIST_COMPONENT.LTRS' | translate}}
+            </i></th>
+          <td mat-cell *matCellDef="let element"> {{element.fuel_point}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="temp1">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header><i
+              class="fa fa-temperature-high">&nbsp;<sup>o</sup>C</i></th>
+          <td mat-cell *matCellDef="let element"> {{element.temp1}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+    </div>
+  </div>
+</div>

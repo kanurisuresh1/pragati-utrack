@@ -1,0 +1,86 @@
+
+<div class="row">
+    <div class="col-md-11">
+        <h4 *ngIf="isAddFastTag"><b>{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.ADD_FAST_TAG' | translate}} : </b></h4>
+        <h4 *ngIf="!isAddFastTag"><b>{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.EDIT_FAST_TAG' | translate}} :</b> </h4>
+    </div>
+    <div class="col-md-1">
+        <button mat-dialog-close="true" style="padding: 3px 8px 2px;
+        line-height: 17px;
+        min-width: auto;" class="btn btn-sm btn-info">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+    </div>
+</div>
+<mat-dialog-actions [formGroup]="fastTagDetailsForm">
+
+    <div style="border-radius:10px">
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.BANK_ID' | translate}}</label>
+
+                                <mat-select class="form-control" [(ngModel)]="bank_id" formControlName="bank_id">
+                                    <mat-option *ngFor='let row of banks' [value]="row.fasttag_bank_id">
+                                        {{row.bank_name}}</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.FAST_TAG_API_KEY' | translate}}</label>
+                                <input type="text" [(ngModel)]="api_key" formControlName="api_key" class="form-control"
+                                    placeholder="Enter Fast Tag API Key">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.FAST_TAG_API_CLIENT_ID' | translate}}</label>
+                                <input type="text" [(ngModel)]="api_client_id" formControlName="api_client_id"
+                                    class="form-control" placeholder="Enter Fast Tag API Client ID">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.SELECT_STATUS' | translate}}</label>
+                                <mat-select class="form-control" formControlName="status" placeholder="Select Status"
+                                    [(ngModel)]="status">
+                                    <mat-option value="Active">Active</mat-option>
+                                    <mat-option value="Inactive">Inactive</mat-option>
+                                </mat-select>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <button type="submit" *ngIf="isAddFastTag" class="btn btn-primary mrleftright"
+                                    (click)="submit()">{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.SUBMIT' | translate}}</button>
+                                <button type="submit" *ngIf="!isAddFastTag" class="btn btn-primary mrleftright"
+                                    (click)="submit()">{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.UPDATE' | translate}}</button>
+                                <button type="submit" mat-dialog-close="false"
+                                    class="btn btn-warning mrleftright">{{'MY_ACCOUNT.ADD_FAST_TAG_COMPONANT.CANCEL' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+</mat-dialog-actions>

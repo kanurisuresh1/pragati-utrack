@@ -1,0 +1,264 @@
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+  }
+  
+  .example-container table td {
+    padding: 10px !important;
+  }
+  .example-container table {
+    overflow-x: scroll !important;
+  }
+  
+  .mr15 {
+    margin-right: 15px !important;
+  }
+  
+  .mb15 {
+    margin-bottom: 15px;
+  }
+  .mb10 {
+    margin-bottom: 10px;
+  }
+  .mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+  }
+  
+  .mt50 {
+    margin-top: 76px;
+  }
+  
+  .mt15 {
+    margin-top: 15px;
+  }
+  .mt10 {
+    margin-top: 10px;
+  }
+  
+  .my-custom-scrollbar {
+    overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+    display: block;
+  }
+  
+  .mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+  }
+  
+  .mat-input-element {
+    line-height: auto;
+    padding: 10px;
+    height: auto;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    background: white !important;
+    width: 93%;
+  }
+  .ml-20 {
+    margin-left: -20px !important;
+  }
+  
+  .btn-sm,
+  .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+  }
+  
+  .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  }
+  .required {
+    color: red;
+  }
+  label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .btn.btn-md {
+    padding: 0.7rem 1.6rem;
+    font-size: 0.7rem;
+  }
+  input#mat-input-1 {
+    border: 0px solid red;
+    background-color: #a22c2c05;
+  }
+  input#mat-input-2 {
+    border: 0px solid red;
+    background-color: #a22c2c05;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px 4px 0 0;
+    padding: 0px !important;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #ffffff14 !important;
+  }
+  
+  button.btn.btn-primary.sub {
+    margin-top: 27px;
+    font-size: 15px;
+    padding-left: 10px;
+    /* margin: auto; */
+    padding: 6px;
+    margin-left: 10px;
+  }
+  
+  ::ng-deep .mat-form-field-suffix .mat-icon-button {
+    height: 32px;
+    width: 30px;
+    margin-bottom: 1px;
+  
+  }
+  
+  .btnsize{
+    margin-top: 1px;
+    padding: 5px 9px 5px 9px;
+  }
+  
+  ::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+  }
+  ::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+  }
+  
+  .mat-label {
+    font-weight: 5px;
+  }
+  
+  ::ng-deep .mat-form-field {
+    color: #464646 !important;
+  }
+  
+  ::ng-deep .mat-datetimepicker-content {
+    background-color: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    overflow: hidden !important;
+  }
+  
+  ::ng-deep .mat-datetimepicker-calendar[mode="auto"] ::ng-deep .mat-datetimepicker-calendar-header {
+    background-color: #4d5ec1;
+  }
+  
+  ::ng-deep .mat-datetimepicker-calendar-body-cell-content.mat-datetimepicker-calendar-body-selected {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  ::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+  }
+  
+  ::ng-deep .mat-datetimepicker-clock-hand {
+    background-color: #3f51b5;
+  }
+  
+  ::ng-deep .mat-datetimepicker-clock[_ngcontent-c8] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+  }
+  
+  ::ng-deep .mat-datetimepicker-clock-center {
+    background-color: #4d5ec1;
+  }
+  
+  ::ng-deep .mat-datetimepicker-clock-cell.mat-datetimepicker-clock-cell-selected {
+    background-color: #4d5ec1;
+  }
+  
+  ::ng-deep .mat-form-field-prefix,
+  ::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 1px 2px 2px 0px;
+    color: #fff;
+    font-size: 20px;
+    margin-left: -30px;
+  }
+  
+  ::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+  }
+  
+  ::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+  }
+  ::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+  }
+  
+  .example-tab-icon {
+    margin-right: 8px !important;
+  }
+  
+  .auto-width {
+    margin: 0;
+    padding: 0px 0px 0px 16px;
+    float: left;
+  }
+  
+  .widthifix {
+    min-width: 138%;
+  }
+  
+  .form-group {
+    margin-bottom: 0px;
+  }
+  
+  .mt25 {
+    margin-top: 25px;
+  }
+  ::ng-deep .mat-form-field-infix {
+    width: 175px !important;
+  }
+  
+  ::ng-deep .mat-tab-group {
+    margin-top: -10px !important;
+  }
+  
+  // table row hover effect 
+  
+  tr:hover {
+    background-color: #b3f0ff;
+  }
+  
+  .datanotfound{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+  }

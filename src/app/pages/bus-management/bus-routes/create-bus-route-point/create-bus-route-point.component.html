@@ -1,0 +1,104 @@
+<div class="col-md-12">
+    <div class="clearfix">
+        <h4 *ngIf="isCreateRoute" style="color: blue;">Create Route Point</h4>
+        <h4 *ngIf="!isCreateRoute" style="color: blue;">Edit Route Point</h4>
+        <hr>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card-body">
+            <div class="col-md-12" [formGroup]="busRoutePointForm">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Select Geofence
+                                <span class="required">*</span></label>
+                            <mat-select class="form-control" [(ngModel)]="geofence_id" formControlName="geofence_id"
+                                placeholder="Select To Geofence">
+                                <mat-option *ngFor='let row of geofence_list' [value]="row.geofence_id"
+                                    (click)="toChangeGeofence(row)">
+                                    {{row.geofence_name}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Point Type
+                                <span class="required">*</span></label>
+                            <mat-select class="form-control" [(ngModel)]="point_type" formControlName="point_type"
+                                placeholder="Select Point Type">
+                                <mat-option value="Pickup">Pickup</mat-option>
+                                <mat-option value="Drop">Drop</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Location Duration In Mins
+                                <span class="required">*</span></label>
+                            <input type="text" style="text-transform: capitalize;"
+                                [(ngModel)]="previous_location_duration_mins"
+                                formControlName="previous_location_duration_mins" maxlength="30" class="form-control"
+                                placeholder="Enter Location Duration Time">
+                            <mat-error
+                                *ngIf="busRoutePointForm.controls['previous_location_duration_mins'].errors && busRoutePointForm.controls['previous_location_duration_mins'].touched">
+                                <span
+                                    *ngIf="busRoutePointForm.controls['previous_location_duration_mins'].errors.required">
+                                    Enter Location Duration In Time
+                                </span>
+                                <span
+                                    *ngIf="busRoutePointForm.controls['previous_location_duration_mins'].errors.minlength">
+                                    Enter Minimum 3 Letters
+                                </span>
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Sequence
+                                <span class="required">*</span></label>
+                            <input type="text" style="text-transform: capitalize;" [(ngModel)]="sequence"
+                                formControlName="sequence" maxlength="30" class="form-control"
+                                placeholder="Enter Sequence">
+                            <mat-error
+                                *ngIf="busRoutePointForm.controls['sequence'].errors && busRoutePointForm.controls['sequence'].touched">
+                                <span *ngIf="busRoutePointForm.controls['sequence'].errors.required">
+                                    Enter Sequence
+                                </span>
+                                <span *ngIf="busRoutePointForm.controls['sequence'].errors.minlength">
+                                    Enter Minimum 3 Letters
+                                </span>
+                            </mat-error>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <button class="btn btn-warning btn-sm mrl5" mat-dialog-close="false">Cancel</button>
+                        <button *ngIf="isCreateRoute" class="btn btn-primary btn-sm mrl5" (click)="createRoute()">Create
+                            Route Point</button>
+                        <button *ngIf="!isCreateRoute" (click)="createRoute()"
+                            class="btn btn-primary btn-sm mrl5">Update
+                            Route Point</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

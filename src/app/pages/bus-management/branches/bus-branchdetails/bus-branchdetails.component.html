@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-2 ml-auto mb5 text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="editBranch()"><b>Edit</b></button>
+        </div>
+    </div>
+</div>
+
+<div style="margin-bottom: 10px;" class="container">
+    <!--     <div class="row pt-5 m-auto">
+        <div class="col-md-6 col-lg-4 pb-3"> -->
+    <div class="">
+        <div class="">
+            <div class="card card-custom bg-white border-white border-0">
+
+                <div class="card-body" style="overflow-y: auto">
+                    <h4 class="card-title">Organisation Name :<b>{{org_name}}</b></h4>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <p>
+                                    Branch Name<br><b>{{branch_name}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Branch Location<br><b>{{branch_location}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Google Location<br><b class="traveltimeleft">{{google_location}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>LatLangs<br><b>{{latitude}},{{longitude}}</b></p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Added Date & Time : <br><b>{{added_date_time | date: 'dd MMM yyyy hh:mm:ss a'}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Status<br><b>{{status}}</b>
+                                </p>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

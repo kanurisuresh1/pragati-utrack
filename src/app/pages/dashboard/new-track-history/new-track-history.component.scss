@@ -1,0 +1,303 @@
+agm-map {
+    height: 500px;
+}
+
+.controls {
+    position: absolute;
+    z-index: 999;
+    top: 110px;
+    left: 20px;
+    width: auto;
+}
+
+button {
+    font-size: 12px;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.active {
+    background: #776d8a;
+}
+
+.hidden {
+    display: none;
+}
+
+span {
+    color: red;
+    background: #ff5;
+    padding: 7px;
+    border-radius: 10px;
+    position: absolute;
+    top: 0px;
+    left: 297px;
+    display: block;
+    width: 20% !important;
+}
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px 4px 0 0;
+    padding: 0px !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #ffffff14 !important;
+}
+
+button.btn.btn-primary.sub {
+    margin-top: 30px;
+    font-size: 13px;
+    padding-left: 10px;
+    /* margin: auto; */
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.btnsize {
+    margin-top: 1px;
+    padding: 9px;
+    border-radius: 5px;
+}
+
+.viewBtn {
+    margin-top: 26px;
+    font-size: 16px;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+label.selectlb {
+    font-size: 12px;
+    color: #989595a3;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+}
+
+.mat-label {
+    font-weight: 5px;
+}
+
+::ng-deep .mat-datetimepicker-content {
+    background-color: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    overflow: hidden !important;
+}
+
+::ng-deep .mat-datetimepicker-calendar[mode="auto"] ::ng-deep .mat-datetimepicker-calendar-header {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-datetimepicker-calendar-body-cell-content.mat-datetimepicker-calendar-body-selected {
+    background-color: #3f51b5;
+    color: white;
+}
+
+::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+}
+
+::ng-deep .mat-datetimepicker-clock-hand {
+    background-color: #3f51b5;
+}
+
+::ng-deep .mat-datetimepicker-clock[_ngcontent-c8] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+}
+
+::ng-deep .mat-datetimepicker-clock-center {
+    background-color: #3f51b5;
+}
+
+::ng-deep .mat-datetimepicker-clock-cell.mat-datetimepicker-clock-cell-selected {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 3px 2px 4px 3px;
+    color: #fff;
+    font-size: 20px;
+    margin-left: -30px;
+}
+
+::ng-deep .mat-form-field .form-control {
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 11px;
+}
+
+//MAT DATE TIME PICKER CSS END
+.auto-width {
+    margin: 0;
+    padding: 0px 10px;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.live_data {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 20px;
+    right: 5px;
+    top: 100px;
+    width: 250px;
+}
+
+.liveDataCard {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.vehicle-types-model {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 100px;
+    padding-bottom: 0px;
+    right: 10px;
+}
+
+.speed_model_card {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 10px;
+    padding-bottom: 0px;
+    right: 10px;
+    top: 199px;
+    width: 97px;
+}
+
+.distance_model {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 325px;
+    padding-bottom: 0px;
+    right: 10px;
+}
+
+.text-move {
+    color: #26b206;
+}
+
+.text-stop {
+    color: #eb272f;
+}
+
+.text-ignitionoff {
+    color: #464e60;
+}
+
+.text-ignitionon {
+    color: #4874e5;
+}
+
+.text-signalhigh {
+    color: #800080;
+}
+
+.speed50 {
+    color: #26b206;
+}
+
+.speed65 {
+    color: #ff8c00;
+}
+
+.speed65More {
+    color: #a20a0a;
+}
+
+p {
+    font-size: 12.5px;
+}
+
+.mat-card {
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* display: block; */
+    position: absolute;
+    padding: 10px;
+    border-radius: 04px;
+    margin-top: 3px;
+    width: 210px;
+    height: 334px;
+}
+
+.labels {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    opacity: 1;
+    pointer-events: none;
+    text-align: center;
+    width: 60px;
+    white-space: nowrap;
+    top: 500px;
+}
+
+.time_interval {
+    display: block;
+    /* float: right; */
+    position: absolute;
+    right: -124px;
+    top: 0;
+    width: 120px;
+}
+
+p,
+b {
+    color: #464646 !important;
+}

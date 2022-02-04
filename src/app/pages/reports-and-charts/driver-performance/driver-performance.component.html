@@ -1,0 +1,212 @@
+<div class="row" [formGroup]="myDriverPerformanceForm">
+
+    <div class="col-md-xs-1" style="margin-left: 15px;">
+        <label>&nbsp;</label><br>
+        <button class="btn btn-primary btnsize" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="col-md-3">
+        <label> {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.SELECT_DRIVER' | translate}} </label>
+        <mat-select class="form-control" formControlName="driverName" [(ngModel)]="driverId" placeholder="Select Driver" #singleSelect>
+            <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholder="Search Vehicle">
+            </ngx-mat-select-search>
+            <mat-option *ngFor="let row of filteredVehicleNumber | async" (click)="updateSelectedValue(row)" [value]="row.user_id">
+                {{row.first_name +' '+ row.last_name +'('+row.mobile+')'}}
+            </mat-option>
+        </mat-select>
+    </div>
+
+    <div class="auto-width">
+        <label>{{'REPORTS_CHARTS.DRIVER_PERFORMANCE.SELECT_START_DATE' | translate}}</label><br>
+        <mat-form-field class="no-line">
+            <input class="form-control datepicker" matInput [matDatepicker]="stateDatepicker" [max]="currentDate" formControlName="startDate" (dateChange)="onDateChange($event)" readonly>
+            <mat-datepicker-toggle matSuffix [for]="stateDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #stateDatepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="auto-width">
+        <label>{{'REPORTS_CHARTS.DRIVER_PERFORMANCE.SELECT_END_DATE' | translate}}</label><br>
+        <mat-form-field class="no-line">
+            <input class="form-control datepicker" matInput [matDatepicker]="endDatepicker" [max]="endMaxDate" [min]="changedStartDate" [(ngModel)]="endDate" formControlName="endDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="auto-width" style="margin-top: -28px;margin-left: -10px;">
+        <label>&nbsp;</label><br>
+        <button type="submit" (click)="viewReport()" class="btn btn-primary sub">{{'REPORTS_CHARTS.DRIVER_PERFORMANCE.VIEW_REPORT' | translate}}</button>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <div class="col-md-10 text-left" style="margin-top: -10px;">
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Vehicle">
+        </label>
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+        <!-- <button class="btn btn-success pull-left mr15 btn-sm"><i class="fa fa-filter"
+                aria-hidden="true"></i>{{'REPORTS_CHARTS.FILTTER' | translate }}</button> -->
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPdf()"><i
+                class="fa fa-file-pdf"></i>
+            &nbsp;{{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+        <button class="btn btn-success pull-left mr1 btn-sm" style="margin-right: 5px;" nbTooltip="Refresh" (click)="refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+        <button class="btn btn-warning mr1 btngrouptable" style="margin-left: 5px;" nbTooltip="Filter Columns" nbTooltipStatus="warning" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" type="button" [matMenuTriggerFor]="menu">
+            <mat-icon style="margin-top: 5px;font-size: 20px;">filter_list</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+            <mat-checkbox *ngFor="let element of displayedColumnsObj" [checked]="element.show" (change)="toggle(element.value)">
+                {{element.value.toUpperCase()}}</mat-checkbox>
+        </mat-menu>
+
+    </div>
+    <!-- <div class=" col-md-4" style="margin-top: -10px;">
+        <mat-select class="form-control" multiple>
+            <mat-option *ngFor="let row of displayedColumnsObj" [value]="row.show" (click)="toggle(row.value)">
+                {{row.value.toUpperCase()}}
+            </mat-option>
+        </mat-select>
+    </div> -->
+</div>
+
+<div>
+    <p><b><span style="color: red !important;">*</span>{{'REPORTS_CHARTS.DRIVER_PERFORMANCE.UTILIZATION_CALCULATED' |
+            translate}}
+            <br>
+            <span style="color: red !important;">*</span>
+            {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.NIGTH_TIME' | translate}}</b></p>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 350px;overflow: auto !important;">
+            <table matTableExporter #exporter="matTableExporter" class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="driverId">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicle Number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.VEHICLE_NUMBER' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"><a (click)="openDetails(element)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.DATE' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.report_date}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="weekDayName">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.WEEKDAY' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.report_day}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="kms">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.KMS' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.total_distance}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="dayKMS">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.DAY_KMS' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.total_day_distance}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="nightKMS">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.NIGHT_KMS' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.total_night_distance}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="free wheeling distance">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.Free Wheeling (KMS)'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.free_wheeling_distance}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="travelTime">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.TOTAL_TRAVEL_TIME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.total_travelled_time}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalStoppedTime">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.STOPPED_TIME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.total_stopped_time}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="free wheeling time">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.24_HOURS_ANALYSIS_REPORT.Free Wheeling Time'| translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.free_wheeling_time}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="maxspeed">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.MAX_SPEED' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.max_speed}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="avgSpeed">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.AVG_SPEED' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.avg_speed}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="suddenAccerlation">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.SUDDEN_ACCELERATE' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.sudden_accerlation}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="suddenDeccelater">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.SUDDEN_DECELERATE' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.sudden_deceleration}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="utilization">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.DRIVER_PERFORMANCE.UTILIZATION' | translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element">{{element.utilization}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div class="col-md-12" *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

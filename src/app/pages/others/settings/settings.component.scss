@@ -1,0 +1,243 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+def,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+
+a {
+    text-decoration: none;
+    color: #242424
+}
+
+a:hover {
+    text-decoration: none;
+    color: #242424
+}
+
+
+.buy-plans {
+    margin: 0px 10px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s
+}
+
+.buy-plans h3 {
+    background: #e2e2e2;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px
+}
+
+.buy-plan {
+    margin: 0px 0px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s
+}
+
+.buy-plan h4 {
+    background: #e2e2e2;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px
+}
+
+
+
+.buy-plans:hover,
+.list-item:hover {
+    box-shadow: 0px 0px 10px #7c7c7c;
+}
+
+
+.mb5 {
+    margin-bottom: 5px
+}
+
+.mb10 {
+    margin-bottom: 10px
+}
+
+.mb15 {
+    margin-bottom: 15px
+}
+
+.mb20 {
+    margin-bottom: 20px
+}
+
+.mb30 {
+    margin-bottom: 30px
+}
+
+.mb40 {
+    margin-bottom: 40px
+}
+
+.mb50 {
+    margin-bottom: 50px
+}
+
+.mt5 {
+    margin-top: 5px
+}
+
+.mt10 {
+    margin-top: 10px
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mt20 {
+    margin-top: 20px
+}
+
+.mt25 {
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.mt30 {
+    margin-top: 30px
+}
+
+.mt35 {
+    margin-top: 35px
+}
+
+.mt40 {
+    margin-top: 40px
+}
+
+.mt50 {
+    margin-top: 50px
+}
+
+
+.buy-plans:hover .img {
+    cursor: pointer;
+    animation-name: bounce;
+    -moz-animation-name: bounce;
+}
+
+.buy-plans .img {
+    left: 0%;
+    line-height: 180px;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    color: white;
+}
+
+@keyframes bounce {
+
+    0%,
+    100%,
+    20%,
+    50%,
+    80% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0)
+    }
+
+    40% {
+        -webkit-transform: translateY(-30px);
+        -ms-transform: translateY(-30px);
+        transform: translateY(-30px)
+    }
+
+    60% {
+        -webkit-transform: translateY(-15px);
+        -ms-transform: translateY(-15px);
+        transform: translateY(-15px)
+    }
+}
+
+
+.imagebox{
+height: 100px;
+width: 100px;
+margin: auto;
+}
+
+.imagebox img{
+    width: 100%;
+}
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  a{
+      cursor: pointer;
+  }
+  
+
+  h5,h6{
+    color: black;
+  }

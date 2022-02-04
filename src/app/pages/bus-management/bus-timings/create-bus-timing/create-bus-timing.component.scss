@@ -1,0 +1,153 @@
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.required {
+    color: red;
+}
+label {
+    font-weight: bold;
+}
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mrl5 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+::ng-deep .mat-dialog-container {
+    display: block;
+    padding: 24px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+}
+::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+}
+
+input#mat-input-1 {
+    // margin-top: -18px !important;
+    height: 36px;
+    background-color: #fff !important;
+    border: 1px solid #ced4da;
+}
+
+input#mat-input-2 {
+    // margin-top: -18px;
+    height: 36px;
+    border: 1px solid #ced4da;
+    background-color: #fff !important;
+}
+.mat-label {
+    font-weight: 5px;
+}
+
+::ng-deep .mat-form-field {
+    width: 100% !important;
+    color: #464646 !important;
+}
+
+::ng-deep .mat-form-field .form-control {
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 13px;
+}
+
+.required {
+    color: red;
+}
+
+label {
+    font-weight: bold;
+}
+
+label {
+    color: #464646 !important;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 0px 2px 2px 0px;
+    color: #fff;
+    font-size: 20px;
+}
+
+::ng-deep .mat-form-field {
+    color: #464646 !important;
+}
+
+::ng-deep .mat-datetimepicker-content {
+    background-color: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    overflow: hidden !important;
+}
+
+::ng-deep .mat-datetimepicker-calendar[mode="auto"] ::ng-deep .mat-datetimepicker-calendar-header {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-datetimepicker-calendar-body-cell-content.mat-datetimepicker-calendar-body-selected {
+    background-color: #3f51b5;
+    color: white;
+}
+
+::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+}
+
+::ng-deep .mat-datetimepicker-clock-hand {
+    background-color: #3f51b5;
+}
+
+::ng-deep .mat-datetimepicker-clock[_ngcontent-c8] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+}
+
+::ng-deep .mat-datetimepicker-clock-center {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-datetimepicker-clock-cell.mat-datetimepicker-clock-cell-selected {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 0px 2px 2px 0px;
+    color: #fff;
+    font-size: 20px;
+}

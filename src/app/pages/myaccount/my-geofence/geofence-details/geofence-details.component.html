@@ -1,0 +1,88 @@
+<div class="row clearfix">
+    <div class="col-md-7">
+        <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-5 ml-auto text-right">
+        <div class="form-group">
+            <!-- <button class="btn btn-warning btn-sm" (click)="editGeofence()"><b>{{'MY_ACCOUNT.MY_GEOFENCE_DETAILS_COMPONANT.EDIT_GEOFENCE' | translate}}</b></button> -->
+        </div>
+    </div>
+</div>
+<div class="col-md-12 mt10">
+<div class="row white-bg">
+    <div class="col-md-6 mb20 mt10">
+        <div class="buy-plans mb30 clearfix">
+            <h5 class="text-left"><b> {{geofence_name}} </b></h5>
+            <div class="row">
+            <div class="col-md-12 no-pad">
+                <div class="plans-data">
+                    <p>{{'MY_ACCOUNT.MY_GEOFENCE_DETAILS_COMPONANT.LOCATION' | translate}} :</p>
+                    <h6><b> {{location_name}} </b></h6>
+                </div>
+            </div>
+        </div>
+            <div class="clearfix bdr-btm1"></div>
+            <div class="row">
+                <div class="col-md-4 no-pad">
+                    <div class="plans-data">
+                        <p>{{'MY_ACCOUNT.MY_GEOFENCE_DETAILS_COMPONANT.RADIUS' | translate}} :</p>
+                     <h6><b> {{radius}} </b></h6>
+                    </div>
+                </div>
+                <div class="col-md-4 no-pad">
+                    <div class="plans-data">
+                        <p>{{'MY_ACCOUNT.MY_GEOFENCE_DETAILS_COMPONANT.LATITUDE' | translate}} :</p>
+                        <h6><b> {{lat}} </b></h6>
+                    </div>
+                </div>
+                <div class="col-md-4 no-pad">
+                    <div class="plans-data">
+                        <p>{{'MY_ACCOUNT.MY_GEOFENCE_DETAILS_COMPONANT.LONGTITUD' | translate}} :</p>
+                        <h6><b> {{long}} </b></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt10">
+            <div class="col-md-3">
+                <div class="bdr-box">
+                    <img src="assets/images/dash_board/total.png" alt="" class="responsive mb10" />
+                    <p>Total</p>
+                    <h5 style="margin-bottom:-10px ;"><b>{{totalVehicle}}</b></h5><br>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bdr-box">
+                    <img src="assets/images/dash_board/in-side-geo.png" alt="" class="responsive mb10" />
+                    <p>Inside</p>
+                    <h5 style="margin-bottom:-10px ;"><b>{{insideVehicle}}</b></h5><br>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bdr-box" >
+                    <img src="assets/images/dash_board/out-side-geo.png" alt="" class="responsive mb10" />
+                    <p>Outside</p>
+                    <h5 style="margin-bottom:-10px ;"><b>{{outsideVehicle}}</b></h5><br>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bdr-box">
+                    <img src="assets/images/dash_board/data-not-found.png" alt="" class="responsive mb10" />
+                    <p class="dataNotFound_font_custome" style="font-size: 14px;margin-left: -16px;">Data Not Found</p>
+                    <h5 style="margin-bottom:10px ;"><b>{{dataNotFoundVehicle}}</b></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 mb20 mt10">
+        <div class="home-map  white-bg " id="map">
+        </div>
+    </div>
+</div>
+</div>

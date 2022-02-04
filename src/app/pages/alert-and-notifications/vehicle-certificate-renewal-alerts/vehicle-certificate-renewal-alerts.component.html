@@ -1,0 +1,242 @@
+<div style="margin-bottom: 5px;" class="row clearfix">
+    <div class="col-md-9 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+
+</div>
+
+<div style="margin-top: 15px !important;">
+    <mat-tab-group (selectedTabChange)="mapTab($event)" animationDuration="1000ms">
+        <div class="height-80vh">
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">notification_important</mat-icon>
+                    {{'Vehicle_Certificate_COMPONENT.Alerts' | translate}}
+                </ng-template>
+                <div class="row clearfix" style="margin-top: 5px;">
+                    <div class="col-md-8 text-left">
+
+                        <label>
+                            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                                class="form-control search-field pull-left" placeholder="Search Vehicle">
+                        </label>
+
+                        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                                class="fa fa-search"></i></button>
+
+                        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                                class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' |
+                            translate}}</button>
+                        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                                class="fa fa-file-pdf"></i>
+                            &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                                class="fa fa-sync"></i></button>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-sm" (click)="add()"><b>+ 
+                                {{'Vehicle_Certificate_COMPONENT.Add Certificate Renewal Alert' | translate}}
+                               </b></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="example-container mat-elevation-z8" id="content" #content>
+                        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                            <table class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                                <ng-container matColumnDef="id">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        ID
+                                    </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="vehicle_number">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Vehicle Number' | translate}}
+                                    </th>
+                                    <td class="cellSpace" mat-cell *matCellDef="let element"><a (click)="edit(element)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                                    </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="added_date">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Added Date Time' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element">{{element.added_date | date: 'dd MMM yyyy hh:mm:ss a'}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="start_date_time">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Start Date Time' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.start_date_time | date: 'dd MMM yyyy hh:mm:ss a'}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="end_date_time">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.End Date Time' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.end_date_time | date: 'dd MMM yyyy hh:mm:ss a'}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="tripName">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Trip Name' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.trip_name}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="driverName">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Driver Name' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.driver_name}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="driverNumber">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Driver Number' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.driver_number}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="email">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Email' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.email}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="mobileNum">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Mobile Number' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.mobile_number}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="active">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Status' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element" [ngStyle]="{'color':element.status_type_button_color}">
+                                        {{element.status}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            </table>
+
+                            <div class="col-md-12" *ngIf="TableDataNotshow">
+                                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">notifications_active</mat-icon>
+                    {{'Vehicle_Certificate_COMPONENT.Notifications' | translate}}
+                </ng-template>
+                <div class="row clearfix" style="margin-top: 5px;">
+                    <div class="col-md-9 text-left">
+
+                        <label>
+                            <input type="search" matInput id="hist_alert_search_element"
+                                (keyup)="hist_applyFilter($event)" class="form-control search-field pull-left"
+                                placeholder="Search Vehicle">
+                        </label>
+
+                        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="hist_search()"><i
+                                class="fa fa-search"></i></button>
+
+                        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="hist_epxportexcle()"><i
+                                class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' |
+                            translate}}</button>
+                        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="hist_downloadPDF()"><i
+                                class="fa fa-file-pdf"></i>
+                            &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="hist_refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i class="fa fa-sync"></i></button>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="example-container mat-elevation-z8" id="content" #content>
+                        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                            <table class="table-bordered table" mat-table [dataSource]="alertDataSource" matSort>
+
+                                <ng-container matColumnDef="id">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        ID
+                                    </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="vehicle_number">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Vehicle Number' | translate}}
+                                    </th>
+                                    <td class="cellSpace" mat-cell *matCellDef="let element">
+                                        <a (click)="editVehicleNumber(element.device_link_id,element.vehicle_number)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="certificate">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Certificate' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.certificate}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="expire_date">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Expire Date' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element">{{element.expire_date | date: 'dd MMM yyyy'}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="status">
+                                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'Vehicle_Certificate_COMPONENT.Status' | translate}}
+                                    </th>
+                                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.status}}
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="alertDisplayCols;sticky:true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: alertDisplayCols;"></tr>
+
+                            </table>
+
+                            <div class="col-md-12" *ngIf="alertTableDataNotshow">
+                                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+        </div>
+    </mat-tab-group>
+</div>

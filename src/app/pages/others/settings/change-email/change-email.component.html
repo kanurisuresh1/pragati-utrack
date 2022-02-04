@@ -1,0 +1,86 @@
+<ng-template #resetcode let-modal>
+    <div class="modal-header">
+        <h5>{{'CHANGE_EMAIL.CHANGE_EMAIL_OTP' | translate}} :</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div>
+
+                <div class="col-md-12">
+                    <p>{{email_id}}</p>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <!-- <label><b>OTP Code :</b><span style="color: red;">&nbsp; *</span></label>
+                        <input type="text" name="reset_code" maxlength="6" formControlName="otp_code"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            class="form-control" placeholder="Enter OTP "> -->
+                        <label><b>{{'CHANGE_EMAIL.ENTER_VERIFICATION_CODE' | translate}} :</b><span style="color: red;">&nbsp; *</span></label>
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config">
+                        </ng-otp-input>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 text-center" style="margin-bottom: 30px;">
+        <button type="button" aria-label="Close" (click)="modal.dismiss('Cross click')"
+            class="btn btn-warning mrleftright">{{'CHANGE_EMAIL.CHANGE' | translate}}</button>
+        <button type="button" class="btn btn-primary mrleftright" (click)="changeEmailAddress()">{{'CHANGE_EMAIL.CANCEL' | translate}}</button>
+    </div>
+</ng-template>
+
+<div *ngIf="!changeEmailId">
+    <div class="col-md-12">
+        <p>{{email_id}}</p>
+    </div>
+    <label><b>{{'CHANGE_EMAIL.ENTER_VERIFICATION_CODE' | translate}} :</b><span style="color: red;">&nbsp; *</span></label>
+    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config">
+    </ng-otp-input>
+    <div style="margin-top: 10px;margin-left: 100px;">
+        <button type="button" class="btn btn-primary mrleftright" (click)="changephoneNumber()">
+            {{'CHANGE_EMAIL.CHANGE' | translate}}
+        </button>
+        <button type="submit" mat-dialog-close="false" class="btn btn-warning mrleftright">
+            {{'CHANGE_EMAIL.CANCEL' | translate}}
+        </button>
+    </div>
+</div>
+
+<div [formGroup]="changeEmail" *ngIf="changeEmailId">
+    <div class="row">
+        <div class="col-md-12 text-left">
+            <h6> {{'CHANGE_EMAIL.CHANGE_EMAIL_ADDRESS' | translate}} : </h6>
+        </div>
+        <hr>
+        <div class="col-md-12">
+            <div class="example-full-width">
+                <label><b>{{'CHANGE_EMAIL.ENTER_EMAIL_ID' | translate}}  :</b><span style="color: red;">&nbsp; *</span></label>
+                <input type="text" maxlength="45" class="form-control" formControlName="email"
+                    placeholder="Enter Email Address">
+                <mat-error *ngIf="changeEmail.controls['email'].errors && changeEmail.controls['email'].touched">
+                    <span *ngIf="changeEmail.controls['email'].errors.required">{{'CHANGE_EMAIL.ENTER_EMAIL_ID' | translate}} </span>
+                    <mat-error *ngIf="changeEmail.controls['email'].errors.email">
+                        {{'CHANGE_EMAIL.VAILD_EMAIL_ID' | translate}} 
+                    </mat-error>
+                </mat-error>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <div class="form-group mt20">
+                <button type="submit" class="btn btn-primary mrleftright" (click)="submit()"
+                    [disabled]="changeEmail.invalid">{{'CHANGE_EMAIL.CHANGE' | translate}} </button>
+                &nbsp;&nbsp;
+                <button type="submit" mat-dialog-close="false" class="btn btn-warning mrleftright">{{'CHANGE_EMAIL.CANCEL' | translate}} </button>
+            </div>
+        </div>
+    </div>
+</div>

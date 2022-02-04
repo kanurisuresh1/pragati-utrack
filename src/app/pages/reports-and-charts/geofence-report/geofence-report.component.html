@@ -1,0 +1,142 @@
+<div [formGroup]="geofenceSearchForm" class="widthifix">
+    <div class="row clearfix">
+        <div class="auto-width" style="margin-left:5px;">
+            <label>&nbsp;</label><br>
+            <button class="btn btn-primary btnsize" nbTooltip="Back" nbTooltipStatus="primary"
+                [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.GEOFENCE_REPORT.SELECT_VEHICLE_TITLE' | translate}}</label>
+                <mat-select class="form-control" formControlName="vechicleName" style="width: 90%;" multiple
+                    placeholder="Select Vehicle">
+                    <mat-option #allSelected (click)="selectAllVehicles()" [value]="0">Select All</mat-option>
+                    <mat-option *ngFor='let row of vehicles' [value]="row.device_id">
+                        {{row.vehicle_number}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group" style="margin-left:-40px;">
+                <label>{{'REPORTS_CHARTS.GEOFENCE_REPORT.SELECT_GEOFENCE' | translate}}</label>
+                <mat-select class="form-control" formControlName="geofenceName" style="width: 80%;" multiple
+                    placeholder="Select Geofence">
+                    <mat-option #GeofenceSelected (click)="selectAllGeofences()" [value]="0">Select All</mat-option>
+                    <mat-option *ngFor='let row of geofenceList' [value]="row.geofence_id">
+                        {{row.geofence_name}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <div class="auto-width" style="margin-left:-60px;">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.GEOFENCE_REPORT.SELECT_START_DATE' | translate}}</label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [max]="todayDate" [min]="minStartDate"
+                        [matDatetimepicker]="stateDatepicker" formControlName="startDate" readonly>
+                    <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #stateDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="auto-width">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.GEOFENCE_REPORT.SELECT_END_DATE' | translate}}</label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [max]="todayDate"
+                        [matDatetimepicker]="endDatepicker" formControlName="endDate" readonly>
+                    <mat-datetimepicker-toggle matSuffix [for]="endDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #endDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="auto-width">
+            <button type="submit" style="margin-left: 5px;" (click)="viewReport()"
+                class="btn btn-primary sub">{{'REPORTS_CHARTS.GEOFENCE_REPORT.VIEW_REPORT' | translate}}</button>
+        </div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-10 text-left mb5" style="margin-top: -15px;">
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Vehicle">
+        </label>
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" (click)="downloadPDF()" mat-button><i
+                class="fa fa-file-pdf"></i>
+            &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()"
+            nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+    </div>
+</div>
+
+<div>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+            <table class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="geofenceName">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.GEOFENCE_REPORT.GEOFENCE_NAME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.geofence_name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicleNumber">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.GEOFENCE_REPORT.VEHICLE_NUMBER' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"><a (click)="openDetails(element)"
+                            style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="enterTime">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.GEOFENCE_REPORT.ENTER_TIME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.enter_time}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="exitTime">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.GEOFENCE_REPORT.EXIT_TIME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.exit_time}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="duration">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.GEOFENCE_REPORT.DURATION' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.duration}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            <div class="col-md-12" *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

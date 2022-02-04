@@ -1,0 +1,122 @@
+@import "../../styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .menu-sidebar ::ng-deep .scrollable {
+    padding-top: nb-theme(layout-padding-top);
+  }
+}
+.mr {
+  padding: 15px !important;
+}
+.logo {
+  width: 140px;
+  // margin-bottom: 10px;
+  // margin-left: 30px;
+  margin: 0 auto !important;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+.mt50 {
+  margin-top: 30px;
+  font-size: 12px;
+}
+.scrollable {
+  padding-top: 0px;
+}
+
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+ul.social-network li {
+  display: inline;
+  margin-right: 6px;
+}
+
+a.socialIcon:hover,
+.socialHoverClass {
+  color: #44bcdd;
+}
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+  background-color: #d3d3d3;
+}
+
+.social-circle li i {
+  margin: 0;
+  line-height: 38px;
+  text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.social-circle i {
+  color: #fff;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+.social-network a.icoRss {
+  background: #f09433;
+  background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+}
+
+.social-network a.icoFacebook {
+  background-color: #3b5998 !important;
+  color: #fff;
+}
+
+.social-network a.icoTwitter {
+  background-color: #33ccff !important;
+}
+
+.social-network a.icoGoogle {
+  background-color: #bd3518 !important;
+}
+
+.social-network a.icoVimeo {
+  background-color: #0590b8 !important;
+}
+
+.social-network a.icoLinkedin {
+  background-color: #007bb7 !important;
+}

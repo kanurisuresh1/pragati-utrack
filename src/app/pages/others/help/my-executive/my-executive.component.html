@@ -1,0 +1,96 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mb10 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+    </div>
+</div>
+<div class="col-md-12 white-bg mb20">
+    <div class="row" [formGroup]="myProfileForm">
+        <div class="card-body" style="padding: 25px;">
+            <div class="col-md-12 col-md-offset-2 mb20">
+                <div class="circle mt20 mb20">
+
+                    <img src={{previewUrl}}>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.FIRST_NAME' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="fname" class="form-control" formControlName="firstname"
+                                label placeholder="First Name" readonly>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.LAST_NAME' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="lname" class="form-control" formControlName="lastname" label
+                                placeholder="Last Name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.EMAIL' | translate}} :</b></label><br>
+                            <input type="email" [(ngModel)]="email" class="form-control" formControlName="email" label
+                                placeholder="Email" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.MOBILE_NUMBER' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="mobile" class="form-control" formControlName="mobile" label
+                                placeholder="Mobile Number" maxlength="10" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.STATE' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="state" class="form-control" formControlName="state" label
+                                placeholder="State" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.DRISTRICT' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="district" class="form-control" formControlName="district"
+                                label placeholder="District" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.CITY' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="city" class="form-control" formControlName="city" label
+                                placeholder="City" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.PINCODE' | translate}} :</b></label><br>
+                            <input type="text" [(ngModel)]="zipcode" class="form-control" formControlName="zipcode"
+                                label placeholder="Pincode" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="example-full-width">
+                            <label><b>{{'MY_EXECUTIVE_DETAILS_COMPONANT.ADDRESS' | translate}} :</b></label><br>
+                            <textarea type="text" [(ngModel)]="Address" class="form-control" formControlName="Address"
+                                label placeholder="Address" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

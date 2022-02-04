@@ -1,0 +1,154 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <div class="sample-div">
+            <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+                [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 white-bg mt10 " [formGroup]="createtrip">
+    <div class="row mt15">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.SELECT_VEHICLE' | translate}}
+                    <span class="required">*</span></label>
+                <mat-select class="form-control" [(ngModel)]="deviceLinkId" formControlName="selectvehicle">
+                    <mat-option *ngFor='let row of vehicles' [value]="row.device_link_id">
+                        {{ row.vehicle_number }}-{{row.vehicle_type}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="createtrip.controls['selectvehicle'].errors && createtrip.controls['selectvehicle'].touched">
+                    <span *ngIf="createtrip.controls['selectvehicle'].errors.required" style="color: red;">
+                        {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.PLEASE_SELECT_VEHICLE' | translate}}
+                    </span>
+                </mat-error>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.SELECT_DRIVER' | translate}}
+                    <span class="required">*</span></label>
+                <mat-select class="form-control" [(ngModel)]="UserId" formControlName="selectdriver">
+                    <mat-option *ngFor='let row of MyUserList' [value]="row.user_id">
+                        {{ row.nick_name }}-{{row.mobile}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="createtrip.controls['selectdriver'].errors && createtrip.controls['selectdriver'].touched">
+                    <span *ngIf="createtrip.controls['routename'].errors.required" style="color: red;">
+                        {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.PLEASE_SELECT_DRIVER' | translate}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.TRIP_NAME' | translate}}    
+                <span class="required">*</span></label>
+                <input type="text" class="form-control" formControlName="tripname">
+                <div *ngIf="createtrip.controls['tripname'].errors && createtrip.controls['tripname'].touched">
+                    <span *ngIf="createtrip.controls['tripname'].errors.required" style="color: red;">
+                        {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.ENTER_TRIP_NAME' | translate}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.TRIP_NOTE' | translate}}    
+                <span class="required">*</span></label>
+                <input type="text" class="form-control" formControlName="tripnotes">
+                <div *ngIf="createtrip.controls['tripnotes'].errors && createtrip.controls['tripnotes'].touched">
+                    <span *ngIf="createtrip.controls['tripnotes'].errors.required" style="color: red;">
+                        {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.ENTER_TRIP_NOTE' | translate}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.TRIP_START_DATE' | translate}}    
+                <span class="required">*</span></label>
+                <mat-form-field class="no-line">
+                    <input style="margin-top:-17px;" matInput class="form-control datepicker" [matDatepicker]="picker" [max]="todayDate"
+                        formControlName="startdate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <div *ngIf="createtrip.controls['startdate'].errors && createtrip.controls['startdate'].touched">
+                        <span *ngIf="createtrip.controls['startdate'].errors.required" style="color: red;">
+                            {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.ENTER_TRIP_START_DATE' | translate}}
+                        </span>
+                    </div>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.TRIP_End_DATE' | translate}}    
+                <span class="required">*</span></label>
+                <mat-form-field class="no-line">
+                    <input  style="margin-top:-17px;" matInput class="form-control datepicker" [matDatepicker]="enddate" [max]="todayDate"
+                        formControlName="enddate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                    <mat-datepicker #enddate></mat-datepicker>
+                    <div *ngIf="createtrip.controls['enddate'].errors && createtrip.controls['enddate'].touched">
+                        <span *ngIf="createtrip.controls['enddate'].errors.required" style="color: red;"> 
+                            {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.ENTER_TRIP_END_DATE' | translate}}
+                        </span>
+                    </div>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.SELECT_ROUTE' | translate}}    
+                <span class="required">*</span></label>
+                <mat-select class="form-control" formControlName="routename"
+                    (ngModelChange)="updateSelectedValue($event)">
+                    <mat-option *ngFor='let row of RouteListData' [value]="row | json">
+                        {{ row.route_name }}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="createtrip.controls['routename'].errors && createtrip.controls['routename'].touched">
+                    <span *ngIf="createtrip.controls['routename'].errors.required" style="color: red;">
+                        {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.PLEASE_SELECT_ROUTE' | translate}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb20">
+        <div class="col-md-4 col-md-offset-3">
+        </div>
+        <div class="col-md-4 col-md-offset-3">
+            <button class="btn btn-primary mrleftright" [disabled]="createtrip.invalid" style="margin-left: 123px;"
+                (click)="submit()">
+                {{'MY_ACCOUNT.CREATE_TRIP_COMPONANT.SAVE' | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 col-md-offset-3">
+        </div>
+    </div>
+
+</div>

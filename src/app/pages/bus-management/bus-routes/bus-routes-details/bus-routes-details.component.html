@@ -1,0 +1,324 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+
+<div style="margin-bottom: 10px;margin-top: 8px;" class="container">
+    <!--     <div class="row pt-5 m-auto">
+        <div class="col-md-6 col-lg-4 pb-3"> -->
+    <div class="">
+        <div class="">
+            <div class="card card-custom bg-white border-white border-0">
+
+                <div class="card-body" style="overflow-y: auto">
+                    <h4 class="card-title">Route Name : <b>{{route_name | titlecase}}</b></h4>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <p>
+                                    Branch Name<br><b>{{branch_name}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Organisation Name<br><b class="traveltimeleft">{{org_name}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    From Geofence Name<br><b class="traveltimeleft">{{from_geofence_name}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    To Geofence Name<br><b class="traveltimeleft">{{to_geofence_name}}</b>
+                                </p>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <p>
+                                    Added Date & Time<br><b class="traveltimeleft">{{added_date_time | date: 'dd MMM
+                                        yyyy hh:mm:ss a'}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Status<br><b class="traveltimeleft">{{status}}</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <ng-template #OpenDeleteModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="row">
+                <div class="col-md-12">
+                    <h6 style="margin-top: 20px;margin-left: 40px;margin-bottom: 10px;">
+                        Are you sure want to delete?</h6>
+                </div>
+
+                <div class="col-md-12 text-center" style="margin-bottom: 15px;">
+                    <button type="button" class="btn btn-danger btn-sm"
+                        (click)="modal.dismiss('Cross click')">Cancel</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="delete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">arrow_drop_up</mat-icon>
+            Pickup Point List
+        </ng-template>
+        <div class="row clearfix" style="margin-top: 8px;">
+            <div class="col-md-8 text-left">
+
+                <label>
+                    <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                        class="form-control search-field pull-left" placeholder="Search Route">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)=" Exportexcle()"><i
+                        class="fa fa-file-excel"></i> &nbsp;
+                    Export to Excel
+                </button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp;
+                    Export to PDF
+                </button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refresh()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+            <div class="col-md-4 ml-auto text-right">
+                <div class="form-group">
+                    <button class="btn btn-warning btn-sm" (click)="busRoute()"><b>+
+                            Create Route Point</b></button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="point_geofence_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Point Geofence Name </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element"><a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;">
+                                    {{element.point_geofence_name}}</a></td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="point_location_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Point Location Name </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.point_location_name}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="previous_location_duration_mins">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Previous Location Duration In Mins</th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                {{element.previous_location_duration_mins}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="point_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Point Type</th>
+                            <td mat-cell *matCellDef="let element"> {{element.point_type}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="added_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Added Date & Time</th>
+                            <td mat-cell *matCellDef="let element"> {{element.added_date_time | date: 'dd MMM yyyy
+                                hh:mm:ss a'}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Status
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.status}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="edit">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Actions </th>
+                            <td mat-cell *matCellDef="let element">
+                                <a><i class="fa fa-edit text-blue " (click)="edit(element)"
+                                        style="cursor: pointer;color: blue;"></i></a><b> |
+                                </b><a><i class="fa fa-trash-alt"
+                                        (click)="deleteModel(OpenDeleteModal,element.bus_point_id)"
+                                        style="cursor: pointer;color: red;"></i></a>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" style="margin-top: -110px;" *ngIf="TableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">arrow_drop_down</mat-icon>
+            Drop Point List
+        </ng-template>
+        <div class="row clearfix" style="margin-top: 8px;">
+            <div class="col-md-8 text-left">
+
+                <label>
+                    <input type="search" matInput id="drop_search_element" (keyup)="dropapplyFilter($event)"
+                        class="form-control search-field pull-left" placeholder="Search Route">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="dropsearch()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)=" DopExportexcle()"><i
+                        class="fa fa-file-excel"></i> &nbsp;
+                    Export to Excel
+                </button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="dropdownloadPDF()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp;
+                    Export to PDF
+                </button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refresh()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+            <div class="col-md-4 ml-auto text-right">
+                <div class="form-group">
+                    <button class="btn btn-warning btn-sm" (click)="busRoute()"><b>+
+                            Create Route Point</b></button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table class="table-bordered table" mat-table [dataSource]="dropdataSource" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="point_geofence_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Point Geofence Name </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element"><a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;">
+                                    {{element.point_geofence_name}}</a></td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="point_location_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Point Location Name </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.point_location_name}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="previous_location_duration_mins">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Previous Location Duration In Mins</th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                {{element.previous_location_duration_mins}} </td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="point_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Point Type</th>
+                            <td mat-cell *matCellDef="let element"> {{element.point_type}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="added_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Added Date & Time</th>
+                            <td mat-cell *matCellDef="let element"> {{element.added_date_time | date: 'dd MMM yyyy
+                                hh:mm:ss a'}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Status
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.status}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="edit">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Actions </th>
+                            <td mat-cell *matCellDef="let element">
+                                <a><i class="fa fa-edit text-blue " (click)="edit(element)"
+                                        style="cursor: pointer;color: blue;"></i></a><b> |
+                                </b><a><i class="fa fa-trash-alt"
+                                        (click)="deleteModel(OpenDeleteModal,element.bus_point_id)"
+                                        style="cursor: pointer;color: red;"></i></a>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="dropdisplayedColumns;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: dropdisplayedColumns;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" style="margin-top: -110px;" *ngIf="dropTableDataNotshow">
+                        <p class="datanotfound">Data Not Found</p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+</mat-tab-group>

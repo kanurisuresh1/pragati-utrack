@@ -1,0 +1,110 @@
+<div class="clearfix row">
+
+    <div class="col-md-4 mb20 clearfix">
+        <a (click)="ChangePassword()">
+            <div class="buy-plans clearfix">
+                <div class="imagebox">
+                    <img src="assets/images/setting-icons/4.png" alt="" class="  img mt20 img-responsive" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'SETTINGS.CHANGE_PASSWORD' | translate}}</b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 mb20 clearfix">
+        <a (click)="ChangeNumber(OpenChangeNumModal)">
+            <div class="buy-plans clearfix">
+                <div class="imagebox">
+                    <img src="assets/images/setting-icons/1.png" alt="" class="  img mt20 img-responsive" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'SETTINGS.CHANGE_NUMBER' | translate}}</b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    <div class="col-md-4 mb20 clearfix">
+        <a (click)="ChangeEmail(OpenChangeEmailModal)">
+            <div class="buy-plans clearfix">
+                <div class="imagebox">
+                    <img src="assets/images/setting-icons/2.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'SETTINGS.CHANGE_EMAIL' | translate}}</b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 mb20 clearfix">
+        <a (click)="ChangeLang()">
+            <div class="buy-plans clearfix">
+                <div class="imagebox">
+                    <img src="assets/images/setting-icons/change_lang.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'SETTINGS.CHANGE_LANGUAGE' | translate}}</b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 mb20 clearfix">
+        <div class="buy-plans clearfix" style="height:160px;" [formGroup]="dashboardViewForm">
+            <div class="row">
+                <label style="margin-top:40px;margin-left:24px"><b>{{'SETTINGS.LANDING_PAGE' | translate}} :</b></label>
+                <mat-select [(ngModel)]="selectedTabName" (selectionChange)="dashBoardDropDown()" class="form-control"
+                    formControlName="dashboardName" placeholder="Select DashBoard Tab "
+                    style="margin-top:12px;margin-left:24px; padding:7px 10px;width: 270px;">
+                    <mat-option disabled value="0">Select Landing Page</mat-option>
+                    <mat-option *ngFor="let subProperty of subProperties" [value]="subProperty.value">
+                        {{ subProperty.value }}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <ng-template #OpenChangeNumModal let-modal>
+        <div class="modal-content model-resize">
+
+            <div class="row">
+                <h6 style="margin-top: 27px;margin-left:22px;margin-bottom: 18px;"> {{'CHANGE_NUMBER.CHANGE_NUMBER_ALERT' | translate}} ?</h6>
+            </div>
+
+            <div class="row" style="margin-left: 300px;margin-bottom: 15px;">
+                <button type="button" class="btn btn-danger btn-sm"
+                    (click)="modal.dismiss('Cross click')">{{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.CENCEL' | translate}}</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" (click)="ChangeNumberOpenPopUp()">
+                    {{'SETTINGS.CHANGE_NUMBER' | translate}}
+                </button>
+            </div>
+
+        </div>
+    </ng-template>
+
+    <ng-template #OpenChangeEmailModal let-modal>
+        <div class="modal-content model-resize">
+
+            <div class="row">
+                <h6 style="margin-top: 27px;margin-left:22px;margin-bottom: 18px;">{{'CHANGE_NUMBER.CHANGE_NUMBER_ALERT' | translate}}?</h6>
+            </div>
+
+            <div class="row" style="margin-left: 300px;margin-bottom: 15px;">
+                <button type="button" class="btn btn-danger btn-sm"
+                    (click)="modal.dismiss('Cross click')">{{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.CENCEL' | translate}}</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" (click)="ChangeEmailOpenPopUp()">
+                    {{'SETTINGS.CHANGE_EMAIL' | translate}}
+                </button>
+            </div>
+
+        </div>
+    </ng-template>
+</div>

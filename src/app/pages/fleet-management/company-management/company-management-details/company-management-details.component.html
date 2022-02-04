@@ -1,0 +1,256 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-2 ml-auto mb5 text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="editCompany()"><b>Edit</b></button>
+        </div>
+    </div>
+</div>
+
+<div style="margin-bottom: 10px;" class="container">
+    <!--     <div class="row pt-5 m-auto">
+        <div class="col-md-6 col-lg-4 pb-3"> -->
+    <div class="">
+        <div class="">
+            <div class="card card-custom bg-white border-white border-0">
+                <div class="card-custom-img"
+                    style="background-image: url(https://images.pexels.com/photos/2340254/pexels-photo-2340254.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg);">
+                </div>
+                <div class="card-custom-avatar">
+                    <img class="img-fluid" src="{{company_image}}" alt="Avatar" />
+                </div>
+                <div class="card-body" style="overflow-y: auto">
+                    <h4 class="card-title">{{companyName}}</h4>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <p>
+                                    Company State<br><b>{{companyState}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>
+                                    Company District<br><b class="traveltimeleft">{{companyDistrict}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>Status<br><b>{{companyPincode}}</b></p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>
+                                    Address : <br><b>{{companyAddress1}}, {{companyAddress2}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>
+                                    Status<br><b>{{status}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>
+                                    Email<br><b>{{companyEmail}}</b>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <mat-tab-group animationDuration="1000ms">
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">remove_red_eye</mat-icon>
+                Employees List
+            </ng-template>
+            <table>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr>
+                    <td>Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td>Austria</td>
+                </tr>
+                <tr>
+                    <td>Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td>UK</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+            </table>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                Drivers List
+            </ng-template>
+            <table>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr>
+                    <td>Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td>Austria</td>
+                </tr>
+                <tr>
+                    <td>Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td>UK</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+            </table>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                Routes
+            </ng-template>
+            <table>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr>
+                    <td>Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td>Austria</td>
+                </tr>
+                <tr>
+                    <td>Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td>UK</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+            </table>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                Trips
+            </ng-template>
+            <table>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr>
+                    <td>Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td>Austria</td>
+                </tr>
+                <tr>
+                    <td>Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td>UK</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+            </table>
+        </mat-tab>
+
+    </mat-tab-group>
+</div>

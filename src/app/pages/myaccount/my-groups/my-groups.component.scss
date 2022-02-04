@@ -1,0 +1,131 @@
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.buy-plans:hover .img {
+    cursor: pointer;
+    animation-name: bounce;
+    -moz-animation-name: bounce;
+}
+
+.mrl{
+    margin-left: 15px;
+}
+
+.white-bg{
+    background-color: #fff;
+}
+
+.buy-plans .img {
+    left: 0%;
+    line-height: 180px;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    color: white;
+}
+
+@keyframes bounce {
+    0%,
+    100%,
+    20%,
+    50%,
+    80% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -webkit-transform: translateY(-30px);
+        -ms-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+
+    60% {
+        -webkit-transform: translateY(-15px);
+        -ms-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+}
+
+.buy-plans {
+    margin: 0px 5px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.buy-plans h3 {
+    background: #e2e2e2;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.buy-plans:hover,
+.list-item:hover {
+    box-shadow: 0px 0px 10px #7c7c7c;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 7px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+}
+.ml-20 {
+    margin-left: -17px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.img-sample-box {
+    width: 100px;
+    margin: auto;
+}
+
+p,b,h5,h6{
+    color:black !important;
+  }
+
+  .datanotfound{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 190px;
+    margin-bottom: 190px;
+    font-weight: bold;
+  }

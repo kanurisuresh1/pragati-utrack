@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-7 text-left">
+
+        <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+        <label>
+            <input type="search" matInput class="form-control search-field pull-left mrl" placeholder="Search Vehicle">
+        </label>
+
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm"><i class="fa fa-search"></i></button>
+
+    </div>
+    <div class="col-md-5 ml-auto text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="createGroup()"><b> {{'MY_ACCOUNT.MY_GROUPS_COMPONANT.CREATE_GROUP' | translate}}</b></button>
+        </div>
+    </div>
+</div>
+<div class="white-bg">
+    <div class="row">
+        <!-- (click)="editGroupList(MyGroup.group_id)" Use this method later -->
+        <div class="col-md-2 col-xs-6 clearfix mb10 mt10 text-center" *ngFor='let MyGroup of MyGroupList'>
+            <div class="buy-plans clearfix"
+                (click)="editGroupList(MyGroup.group_id,MyGroup.group_name,MyGroup.group_icon_name,MyGroup.device_link_id_list)">
+                <div class="img-sample-box">
+                    <img src={{MyGroup.groupImagePath}} alt="" class="responsive img mt10">
+                </div>
+
+                <div class="col-md-12 text-center mt10 mb10 no-pad">
+                    <p>{{MyGroup.group_name}}</p>
+                    <h6><b>({{MyGroup.groupTotaldeviceListId}})</b></h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" *ngIf="GroupDataNotshow">
+            <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+        </div>
+    </div>
+</div>

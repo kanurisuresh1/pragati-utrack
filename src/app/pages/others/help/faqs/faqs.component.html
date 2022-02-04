@@ -1,0 +1,40 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mb10 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" (click)="back()"><i
+                class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+
+    </div>
+</div>
+
+<!-- <mat-accordion>
+    <mat-expansion-panel style="margin-top: 10px;" *ngFor='let row of FaqData'>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <b>{{row.question}}</b>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <hr>
+        <mat-panel-body>
+            <p> {{row.answer}} </p>
+        </mat-panel-body>
+    </mat-expansion-panel>
+
+</mat-accordion> -->
+
+<div *ngFor='let row of FaqData'>
+    <mat-accordion>
+        <mat-expansion-panel style="margin-top: 10px;">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <b>{{row.question}}</b>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <hr>
+            <mat-panel-body>
+                <p> {{row.answer}} </p>
+            </mat-panel-body>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>

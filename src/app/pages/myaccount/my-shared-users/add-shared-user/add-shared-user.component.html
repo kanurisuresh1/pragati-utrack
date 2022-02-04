@@ -1,0 +1,179 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-12 no-pad">
+
+        <div [formGroup]="AddSharedUserRegistrationForm">
+
+            <!-- <div class="col-sm-12 col-md-offset-6">
+                <div class="circle">
+                    <div class="image-preview mb-3 ng-star-inserted"><img src="" height="76" width="74" src=""></div>
+                </div>
+                <div class="p-image"><i type="button" class="fa fa-camera upload-button"></i><input hidden=""
+                        type="file" formControlName="fctrl_image" id="file" ng-reflect-name="image"
+                        class="ng-untouched ng-pristine ng-valid"></div>
+            </div> -->
+
+            <div class="col-sm-12 col-md-offset-6">
+                <div class="circle">
+                    <div class="image-preview mb-3 ng-star-inserted"><img height="76" width="74"
+                            src="{{shared_user_image}}">
+                    </div>
+                </div>
+                <div class="p-image"><i type="button" (click)="fileInput.click()"
+                        class="fa fa-camera upload-button"></i><input accept="image/*" hidden=""
+                        (change)="handleSharedImage($event,cropperModal)" type="file" #fileInput
+                        formControlName="fctrl_image" id="file" ng-reflect-name="image"
+                        class="ng-untouched ng-pristine ng-valid"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.NICK_NAME' | translate}}
+                            <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_nickname" [(ngModel)]="nickName"
+                            placeholder="Enter Nick Name" style="text-transform: capitalize;"
+                            onkeypress="return /[a-z]/i.test(event.key)" class="form-control">
+                        <mat-error
+                            *ngIf="AddSharedUserRegistrationForm.controls['fctrl_nickname'].errors && AddSharedUserRegistrationForm.controls['fctrl_nickname'].touched">
+                            <span *ngIf="AddSharedUserRegistrationForm.controls['fctrl_nickname'].errors.required">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_NICK_NAME' | translate}}
+                            </span>
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_nickname'].errors.minlength">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.FIRST_NAME' | translate}}    
+                        <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_first_name" [(ngModel)]="firstName"
+                            placeholder="Enter First Name" style="text-transform: capitalize;"
+                            onkeypress="return /[a-z]/i.test(event.key)" name="First_Name" class="form-control">
+                        <mat-error
+                            *ngIf="AddSharedUserRegistrationForm.controls['fctrl_first_name'].errors && AddSharedUserRegistrationForm.controls['fctrl_first_name'].touched">
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_first_name'].errors.required">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_FRIST_NAME' | translate}}
+                            </span>
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_first_name'].errors.minlength">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.LAST_NAME' | translate}}    
+                        <span class="required">&nbsp;*</span></label>
+                        <input type="text" name="Last_Name" [(ngModel)]="lastName" placeholder="Enter Last Name"
+                            onkeypress="return /[a-z]/i.test(event.key)" style="text-transform: capitalize;"
+                            formControlName="fctrl_last_name" class="form-control" required>
+                        <mat-error
+                            *ngIf="AddSharedUserRegistrationForm.controls['fctrl_last_name'].errors && AddSharedUserRegistrationForm.controls['fctrl_last_name'].touched">
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_last_name'].errors.required">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_LAST_NAME' | translate}}
+                            </span>
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_last_name'].errors.minlength">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.MOBILE_NUMBER' | translate}}    
+                        <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_mobile_number" [(ngModel)]="mobileNumber"
+                            placeholder="Enter Mobile Number" pattern="^[6-9]\d{9}$"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10" name="Mobile_Number" class="form-control">
+                        <mat-error
+                            *ngIf="AddSharedUserRegistrationForm.controls['fctrl_mobile_number'].errors && AddSharedUserRegistrationForm.controls['fctrl_mobile_number'].touched">
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_mobile_number'].errors.required">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_MOBILE_NUMBER' | translate}}
+                            </span>
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_mobile_number'].errors.minlength">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ENTER_MINIMUM_10_LETTERS' | translate}}
+                            </span>
+                            <span
+                                *ngIf="AddSharedUserRegistrationForm.controls['fctrl_mobile_number'].errors.pattern">
+                                {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.MOBILE_NUMBE_SHOULD_START_WITH' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" *ngIf="this.isSubmit" [disabled]="AddSharedUserRegistrationForm.invalid"
+                        class="btn btn-warning" (click)="addSharedUser()">
+                        {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.ADD_USER' | translate}}
+                    </button>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" *ngIf="!this.isSubmit" [disabled]="AddSharedUserRegistrationForm.invalid"
+                        class="btn btn-warning" (click)="addSharedUser()">
+                        {{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.EDIT_USER' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ng-template #cropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header" >
+                <p style="font-size: 24px;"><b>{{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.CROP_IMAGE' | translate}}</b> </p>
+                <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-body">
+                <div class="row" >
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b>{{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="sharedImageChangedEvent"
+                                [maintainAspectRatio]="true" [aspectRatio]="4 / 4" format="png"
+                                (imageCropped)="SharedImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>{{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;"  height="180" width="200" [src]="croppedSharedImage" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">{{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.UPDATE' | translate}}</button>
+                <button type="button" class="btn btn-primary" (click)="UploadSharedCroperImage()">{{'MY_ACCOUNT.ADD_SHARED_USER_COMPONANT.CANCEL' | translate}}</button>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,127 @@
+<div class="row clearfix">
+    <div class="col-md-8 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Hub or Hub Location">
+        </label>
+
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button
+            (click)="Exportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                class="fa fa-file-pdf"></i>  &nbsp;
+             {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()"
+            nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+    </div>
+    <div class="col-md-4 ml-auto text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="add()"><b>+ {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.CREATE_HUB' | translate}}</b></button>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+            <table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[9]" class="table-bordered table"
+                mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="hub_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.HUB_NAME' | translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"><a (click)="viewHubDetails(element.hub_id)"
+                            style="cursor: pointer;text-decoration: underline;color: blue;">{{element.hub_name}}</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="added_date">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.ADDED_DATE' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.added_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="hub_location">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.HUB_LOCATION' | translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element">{{element.hub_location}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="state">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.STATE' | translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.state}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="district_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>District
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.DISTRICT' | translate}}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.district_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="manager_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.MANAGER_NAME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.manager_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="manager_number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.MANAGER_NUMBER' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.manager_number}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicles_count">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.VEHICLES_COUNT' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.vehicle_list.length}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'FLEET_MANAGEMENT.HUB_MANAGEMENT_COMPONENT.ACTIONS' | translate}} 
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <!-- <a><i class="fa fa-eye text-blue " (click)="viewHubDetails(element.hub_id)"
+                                style="cursor: pointer;color: black;"></i></a><b> | </b>--><a><i
+                                class="fa fa-edit text-blue" (click)="edit(element.hub_id)"
+                                style="cursor: pointer;color: blue;"></i></a><b> | </b><a><i class="fa fa-trash-alt"
+                                (click)="deleteModel(element.hub_id,element.hub_name)"
+                                style="cursor: pointer;color: red;"></i></a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+            </table>
+            <div class="col-md-12" *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+
+.example-container table {
+    overflow-x: scroll !important;
+}
+
+.mr15 {
+    margin-right: 15px !important;
+}
+
+.mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt25 {
+    margin-top: 25px;
+}
+
+.mt30 {
+    margin-top: 28px;
+}
+
+.mb0 {
+    margin-bottom: -15px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.my-custom-scrollbar {
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 5.5px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+}
+
+.ml-20 {
+    margin-left: -20px !important;
+}
+
+.no-pad {
+    padding: 0px 0px;
+}
+
+.auto-width {
+    margin: -3px;
+    padding: 2px 0px 0px 7px;
+    float: left;
+}
+
+.widthifix {
+    min-width: 138%;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    // padding: 6px 8px;
+    padding: 4px 4px 4px 4px;
+    font-size: 15px;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+button.btn.btn-primary.sub {
+    margin-top: 30px;
+    font-size: 11px;
+    /* margin: auto; */
+    padding: 5px;
+    margin-left: 10px;
+}
+
+label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+}
+
+input#mat-input-1 {
+    // margin-top: -18px !important;
+    height: 36px;
+    background-color: #fff !important;
+    border: 1px solid #ced4da;
+}
+
+input#mat-input-2 {
+    // margin-top: -18px;
+    height: 36px;
+    border: 1px solid #ced4da;
+    background-color: #fff !important;
+}
+
+.mat-label {
+    font-weight: 5px;
+}
+
+::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+}
+
+::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+}
+
+::ng-deep .mat-button-toggle {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+    color: black;
+}
+
+::ng-deep .mat-button-toggle-checked {
+    background-color: #7300e6 !important;
+    color: white;
+}
+
+// ::ng-deep .mat-button-toggle:hover {
+//   background-color:#08F7DA !important;
+// }
+.example-tab-icon {
+    margin-right: 8px !important;
+}
+
+::ng-deep .mat-form-field {
+    width: 100% !important;
+    color: #464646 !important;
+}
+
+::ng-deep .mat-form-field .form-control {
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 10px;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-icon-button {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    color: #fff;
+    font-size: 20px;
+    font: caption;
+    vertical-align: revert;
+}
+
+::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+}
+
+.datapickerset {
+    background: #007bff !important;
+    margin-left: -47px;
+    padding: 7px 6px 10px 6px;
+}
+
+.customdatapickerset {
+    background: #007bff !important;
+    margin-left: -36px;
+    padding: 7px 6px 10px 6px;
+}
+
+.monthpickerset {
+    background: #007bff !important;
+    margin-left: -47px;
+    padding: 7px 6px 10px 6px;
+}
+
+.btnsize {
+    padding: 5px 9px 5px 9px;
+}
+
+// table row hover effect
+tr:hover {
+    background-color: #b3f0ff;
+}
+
+.datanotfound {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+}

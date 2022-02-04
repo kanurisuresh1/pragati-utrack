@@ -1,0 +1,114 @@
+<mat-dialog-actions [formGroup]="otherExpensesReportForm">
+    <h4> {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.ADD_EXPENSES' | translate}} : </h4>
+
+    <div style="border-radius:10px">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.EXPENSES_DATE' | translate}}    
+                                <span class="required">*</span></label>
+                                <mat-form-field class="no-line">
+                                    <input matInput class="form-control datepicker" [matDatepicker]="picker"
+                                         formControlName="expensesDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error
+                                        *ngIf="otherExpensesReportForm.controls['expensesDate'].errors && otherExpensesReportForm.controls['expensesDate'].touched">
+                                        <span *ngIf="otherExpensesReportForm.controls['expensesDate'].errors.required">Enter
+                                            {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.ENTER_EXPENSES_DATE' | translate}} </span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.EXPENSE_TYPE' | translate}} <span class="required">*</span></label>
+                                <mat-select class="form-control" formControlName="expensesType">
+                                    <mat-option  value="toll_gate">Toll Gate </mat-option>
+                                    <mat-option  value="food"> Food </mat-option>
+                                    <mat-option  value="hotel"> Hotel </mat-option>
+                                    <mat-option  value="others"> Others </mat-option>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="otherExpensesReportForm.controls['expensesType'].errors && otherExpensesReportForm.controls['expensesType'].touched">
+                                    <span *ngIf="otherExpensesReportForm.controls['expensesType'].errors.required" style="color: red;">
+                                        {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.SELECT_EXPENSE_TYPE' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.AMOUNT' | translate}}    
+                                <span class="required">*</span></label>
+                                <input type="text"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    formControlName="expensesAmount" class="form-control" 
+                                    placeholder="Enter Amount">
+                                <mat-error
+                                    *ngIf="otherExpensesReportForm.controls['expensesAmount'].errors && otherExpensesReportForm.controls['expensesAmount'].touched">
+                                    <span *ngIf="otherExpensesReportForm.controls['expensesAmount'].errors.required">
+                                        {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.ENTER_AMOUNT' | translate}}
+                                         </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.NOTES' | translate}}
+                                <span class="required">*</span></label>
+                                <textarea type="text"  formControlName="expensesnotes" class="form-control" 
+                                    placeholder="Enter Notes"></textarea>
+                                <mat-error
+                                    *ngIf="otherExpensesReportForm.controls['expensesnotes'].errors && otherExpensesReportForm.controls['expensesnotes'].touched">
+                                    <span *ngIf="otherExpensesReportForm.controls['expensesnotes'].errors.required">
+                                        {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.ENTER_NOTE' | translate}}    
+                                    </span>
+                                
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <mat-card-actions>
+                                    <label for="myfile">
+                                        {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.UPLOAD_A_SERVICE_RECEIPT_IMAGE' | translate}}:</label>
+                                    <input class="btn" formControlName="fileData" accept="image/*"
+                                        (change)="uploadServiceImage($event.target.files)" type="file" id="myfile"
+                                        name="myfile">
+                                </mat-card-actions>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <button type="submit"  class="btn btn-primary mrleftright"
+                                    (click)="submit()" [disabled]="otherExpensesReportForm.invalid"
+                                    mat-dialog-close="true">
+                                    {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.SUBMIT' | translate}}
+                                </button>
+                                <button type="submit" mat-dialog-close="false"
+                                    class="btn btn-warning mrleftright">
+                                    {{'MY_ACCOUNT.ADD_EXPENSES_COMPONANT.CANCEL' | translate}}
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</mat-dialog-actions>

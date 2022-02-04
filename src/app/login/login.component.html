@@ -1,0 +1,766 @@
+<div class="container">
+  <div class="modal" id="signUpDialog">
+    <div class="modal-dialog modal-lg model-resize-outviwe-signup">
+      <div class="modal-content model-resize-signup">
+        <div class="modal-header">
+          <p style="font-size: 23px;"><b>Sign Up</b> </p>
+          <button type="button" class="close" x data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <form [formGroup]="signUpForm">
+              <div class="container">
+                <div class="content-header">
+                  <div class="container-fluid">
+                    <div class="row mb-2 img-row">
+                      <div class="col-sm-12">
+                        <div class="circle">
+                          <div class="image-preview mb-3">
+                            <img height="76" width="74" class="profile-pic" [src]="Profile_image" />
+                          </div>
+                        </div>
+                        <div class="p-image">
+                          <i type="button" class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
+                          <input hidden type="file" formControlName="sign_image"
+                            (change)="fileChangeEvent($event,cropperModal)" #fileInput type="file" id="file" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <section class="content">
+                  <div class="container-fluid">
+                    <div class="card-body">
+                      <div class="row">
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">First Name <span class="required">*</span></label>
+                            <input type="text" name="sign_first_name" style="text-transform: capitalize;"
+                              onkeypress="return /[a-z]/i.test(event.key)" formControlName="sign_first_name"
+                              maxlength="30" class="form-control" placeholder="Enter First Name">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_first_name'].errors && signUpForm.controls['sign_first_name'].touched">
+                              <span *ngIf="signUpForm.controls['sign_first_name'].errors.required">Enter First
+                                Name</span>
+                              <span *ngIf="signUpForm.controls['sign_first_name'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Latter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name <span class="required">*</span></label>
+                            <input type="text" name="sign_last_name" style="text-transform: capitalize;"
+                              onkeypress="return /[a-z]/i.test(event.key)" formControlName="sign_last_name"
+                              maxlength="30" class="form-control" placeholder="Enter Last Name">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_last_name'].errors && signUpForm.controls['sign_last_name'].touched">
+                              <span *ngIf="signUpForm.controls['sign_last_name'].errors.required">Enter Last
+                                Name</span>
+                              <span *ngIf="signUpForm.controls['sign_last_name'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Latter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Email ID<span class="required">*</span></label>
+                            <input type="text" formControlName="email" class="form-control" maxlength="40"
+                              placeholder="Enter Email ID">
+                            <mat-error
+                              *ngIf="signUpForm.controls['email'].errors && signUpForm.controls['email'].touched">
+                              <span *ngIf="signUpForm.controls['email'].errors.required">Enter Email
+                                ID</span>
+                              <mat-error *ngIf="signUpForm.controls['email'].errors.email">Email ID must
+                                be a
+                                valid
+                              </mat-error>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Number <span class="required">*</span></label>
+                            <input type="text" pattern="^[6-9]\d{9}$" formControlName="sign_mobilenumber" maxlength="10"
+                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                              class="form-control" placeholder="Enter Mobile Number">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_mobilenumber'].errors && signUpForm.controls['sign_mobilenumber'].touched">
+                              <span *ngIf="signUpForm.controls['sign_mobilenumber'].errors.required">Enter
+                                Mobile
+                                Number</span>
+                              <span *ngIf="signUpForm.controls['sign_mobilenumber'].errors.minlength">Mobile
+                                number
+                                must
+                                10
+                                digits</span>
+                              <span *ngIf="signUpForm.controls['sign_mobilenumber'].errors.pattern">Mobile
+                                Number
+                                Should
+                                start with 6
+                                ,7,8,9</span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Password <span class="required">*</span></label>
+                            <input type="password" name="sign_password" formControlName="sign_password" maxlength="30"
+                              class="form-control" placeholder="Enter Password">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_password'].errors && signUpForm.controls['sign_password'].touched">
+                              <span *ngIf="signUpForm.controls['sign_password'].errors.required">Enter
+                                Password</span>
+                              <span *ngIf="signUpForm.controls['sign_password'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Letter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Confirm Password <span class="required">*</span></label>
+                            <input type="password" name="sign_cnfm_password" formControlName="sign_cnfm_password"
+                              maxlength="30" class="form-control" placeholder="Enter Confirm Password">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_cnfm_password'].errors && signUpForm.controls['sign_cnfm_password'].touched">
+                              <span *ngIf="signUpForm.controls['sign_cnfm_password'].errors.required">Enter
+                                Confirm
+                                Password</span>
+                              <span *ngIf="signUpForm.controls['sign_cnfm_password'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Letter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 signhight">
+                          <div>
+                            <label>State<span class="required">&nbsp;*</span></label>
+                            <!-- <mat-select class="form-control" placeholder="Select State" formControlName="sign_state"
+                              (selectionChange)="onStateChange($event)">
+                              <mat-option *ngFor='let row of states' [value]="row.state_id">
+                                {{row.state}}</mat-option>
+                            </mat-select> -->
+
+                            <select name='people' class="form-control" (change)="statesChange($event)"
+                              formControlName="sign_state">
+                              <option value="" disabled>Select State</option>
+                              <option *ngFor="let item of states" [value]="item.state_id">
+                                {{item.state}}
+                              </option>
+                            </select>
+
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_state'].errors && signUpForm.controls['sign_state'].touched">
+                              <span *ngIf="signUpForm.controls['sign_state'].errors.required">Select
+                                State</span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 signhight">
+                          <div>
+                            <label>District<span class="required">&nbsp;*</span></label>
+                            <!-- <mat-select class="form-control" placeholder="Select District"
+                              formControlName="sign_district">
+                              <mat-option *ngFor='let row of districts' [value]="row.district_id">
+                                {{row.district}}</mat-option>
+                            </mat-select> -->
+
+                            <select name='people' class="form-control" formControlName="sign_district">
+                              <option value="" disabled>Select District</option>
+                              <option *ngFor="let item of districts" [value]="item.district_id">
+                                {{item.district}}
+                              </option>
+                            </select>
+
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_district'].errors && signUpForm.controls['sign_district'].touched">
+                              <span *ngIf="signUpForm.controls['sign_district'].errors.required">Select
+                                District</span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="inputMDEx">Area Name</label>
+                            <input type="text" formControlName="sign_area" placeholder="Enter Area Name" name="Area"
+                              class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-4 signhight">
+                          <div class="form-group">
+                            <label for="inputMDEx">Pincode</label>
+                            <input type="text" formControlName="sign_pincode"
+                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                              placeholder="Enter Pincode Number" maxlength="6" name="Pincode" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-8 signhight">
+                          <div class="form-group">
+                            <label for="inputMDEx">Address</label>
+                            <textarea type="text" formControlName="sign_address" placeholder="Enter Address"
+                              name="address" class="form-control"></textarea>
+                          </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-4">
+                          <div class="form-group">
+                            <div class="md-form">
+                              <label for="inputMDEx">Referal Code</label>
+                              <input type="text" id="referralCode" formControlName="sign_referalcode"
+                                name="referralCode" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-4 no-pad"><a id="btnVerifyReferralCode"
+                              class="btn btn-primary mt10">Verify</a>
+                          </div>
+                        </div> -->
+
+                        <div class="col-md-12 CheckBoxform signhight">
+                          <input type="checkbox" style="margin-top: 15px;" formControlName="sign_terms_condition"
+                            id="termsChkbx" /> &nbsp;&nbsp;
+                          <span class="checkmark" id="termsChkbx"></span>
+                          <p style="margin-top: 14px;"><label>I Accept <a
+                                href="http://www.pragatiutrack.com/termsandconditions.html" target="_blank"
+                                style="text-decoration: underline;color:#007bff;cursor: pointer;">Terms
+                                & Conditions </a> and <a href="http://www.pragatiutrack.com/privacypolicy.html"
+                                target="_blank"
+                                style="text-decoration: underline;color:#007bff;cursor: pointer;">Privacy Policy</a>
+                            </label></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer" style="margin-top: -27px;">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" #closeBtn (click)="customer_signup()">Sign Up</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <ng-template #cropperModal let-modal>
+
+    <div class="modal-content model-resize">
+      <div class="modal-header">
+        <p style="font-size: 23px;"><b> Crop Image</b> </p>
+        <a type="button" class="close" x (click)="modal.dismiss('Cross click')">&times;</a>
+      </div>
+      <div class="modal-body ">
+        <div class="row">
+          <div class="text-center col-md-8">
+            <h4 style="margin-left:-44px;"><b>Crop Image</b></h4>
+            <div style="height:236px;width: 466px;">
+              <image-cropper class="imgcrop" [imageChangedEvent]="ProfileImageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
+                 format="png" (imageCropped)="ProfileImageCropped($event)">
+              </image-cropper>
+            </div>
+          </div>
+          <div class="text-center col-md-4">
+            <h4 style="margin-left:-50px;"><b>Preview</b></h4>
+            <img style="margin-left:-44px;"  height="180" width="200" [src]="croppedProfileImage" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">CANCEL</button>
+        <button type="button" class="btn btn-primary" (click)="UploadCroperProfileImage()">Upload</button>
+      </div>
+    </div>
+
+  </ng-template>
+
+</div>
+
+<div class="container-fluid" style="padding:0;">
+  <div class="leftpannel pull-left"></div>
+  <div class="rightpannel pull-left clearfix">
+    <div class="login-section clearfix">
+      <div class="col-md-10">
+        <div class="main-logo">
+          <img src="assets/images/logo.svg" alt="Utrack Web Application" class="mb20 img-responsive">
+        </div>
+
+        <h2 class="text-center mb20">LOGIN</h2>
+
+
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="user">
+          <div class="form-group">
+            <input type="text" maxlength="11" formControlName="number" #input
+              (input)="input.value=$event.target.value.toUpperCase()" class="form-control form-control-user"
+              oninput="this.value = this.value.replace(/[^0-9.],[^A-Z]/g, '').replace(/(\..*)\./g, '$1');" name="number"
+              placeholder="Enter Mobile Number or Username" [(ngModel)]="loginNumber">
+            <div *ngIf="loginForm.controls['number'].errors && loginForm.controls['number'].touched">
+              <span *ngIf="loginForm.controls['number'].errors.required" style="color:red;"> Mobile Number or Username
+                is
+                Must</span>
+              <span *ngIf="loginForm.controls['number'].errors.minlength" style="color:red;">Mobile Number or Username
+                atleast 10
+                digits</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" formControlName="password" class="form-control form-control-user" name="password"
+              placeholder="Enter Password" [(ngModel)]="loginPassword">
+            <div *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].touched">
+              <span *ngIf="loginForm.controls['password'].errors.required" style="color:red;"> password is Must</span>
+              <span *ngIf="loginForm.controls['password'].errors.minlength" style="color:red;">password Above 6
+                number</span>
+            </div>
+          </div>
+          <div class="clearfix mb20"></div>
+          <button class="btn btn-primary btn-user btn-block" [disabled]="loginForm.invalid">
+            Login
+          </button>
+
+          <button class="btn btn-warning btn-user btn-block" (click)="continueAsGuest()"> Continue as Guest </button>
+          <div class="clearfix mb20"></div>
+          <div class="form-group">
+
+            <input formControlName="rememberMe" [(ngModel)]="isRemember" (change)="checked($event)" type="checkbox"
+              id="remember" />&nbsp;&nbsp;
+            <label>Remember Me</label>
+
+          </div>
+
+        </form>
+        <div class="clearfix mb20"></div>
+
+        <!-- <a class="pull-left" style="text-decoration: underline;color:#007bff;cursor: pointer;"
+          [routerLink]="['/signup']">Sign Up</a> data-toggle="modal" data-target="#sample"-->
+
+        <!-- <a class="pull-left" style="text-decoration: underline;color:#007bff;cursor: pointer;"
+          (click)="signUp(signUpModal)">Sign Up</a> -->
+
+        <a class="pull-left" style="text-decoration: underline;color:#007bff;cursor: pointer;" data-toggle="modal"
+          data-target="#signUpDialog">Sign Up</a>
+
+
+        <a class="pull-right" style="text-decoration: underline;color:#007bff;cursor: pointer;"
+          (click)="open(content)">Forgot
+          Password?</a>
+        <div class="clearfix mb40"></div>
+        <p class="text-center">Powred by</p>
+        <div class="foot-logo">
+          <img src="assets/images/ramkiLogo.png" alt="">
+        </div>
+
+        <p class="text-center">Ramki Technologies Pvt. Ltd</p>
+        <div class="clearfix"></div>
+        <small>© 2018 <b>Ramki Technologies Pvt.Ltd.</b> All Rights Reserved</small>
+
+        <!-- Forgot Password Dialog Starts -->
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"><b>Forgot Password</b></h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="forgotPasswordForm">
+              <div class="form-group">
+                <label for="mobile_number"><b>Mobile Number :</b><span>&nbsp; *</span></label>
+                <div class="input-group">
+                  <input type="text" maxlength="10" id="mobile_number" [(ngModel)]="forgot_mobile_number"
+                    pattern="^[6-9]\d{9}$" maxlength="10"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    placeholder="Enter Mobile Number" formControlName="forgotPassword" class="form-control">
+
+                </div>
+                <div style="margin-top: 10px;margin-left: 10px;">
+                  <mat-error
+                    *ngIf="forgotPasswordForm.controls['forgotPassword'].errors && forgotPasswordForm.controls['forgotPassword'].touched">
+                    <span *ngIf="forgotPasswordForm.controls['forgotPassword'].errors.required">Enter
+                      Mobile
+                      Number</span>
+                    <span *ngIf="forgotPasswordForm.controls['forgotPassword'].errors.minlength">Mobile
+                      number
+                      must
+                      10
+                      digits</span>
+                    <span *ngIf="forgotPasswordForm.controls['forgotPassword'].errors.pattern">Mobile
+                      Number
+                      Should
+                      start with 6
+                      ,7,8,9</span>
+                  </mat-error>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"
+              class="btn btn-primary">Cancel</button>
+            <button type="button" [disabled]="forgotPasswordForm.invalid" class="btn btn-primary"
+              (click)="forgot_password()">Ok</button>
+          </div>
+        </ng-template>
+
+        <!-- Forgot Password Dialog Ends -->
+
+        <ng-template #reset let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="test"><b>Reset Password</b></h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="resetPasswordForm">
+              <div class="form-group">
+
+                <div class="col-md-12">
+
+                  <p>Hello <b>{{forgot_user_name}}</b></p><br>
+                  We have sent reset code to your mobile number. Please use that reset code to reset password.
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label><b>Enter verification code :</b><span>&nbsp; *</span></label>
+                    <!-- <input type="text" name="reset_code" formControlName="reset_code" class="form-control"
+                                          placeholder="Enter Reset Code"> -->
+                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config">
+                    </ng-otp-input>
+
+                  </div>
+                </div>
+
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">New Password <span class="required">*</span></label>
+                    <input type="password" name="reset_new_password" formControlName="reset_new_password" maxlength="30"
+                      class="form-control" placeholder="Enter New Password">
+                  </div>
+                </div>
+
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Confirm Password <span class="required">*</span></label>
+                    <input type="password" name="reset_cnfm_password" formControlName="reset_cnfm_password"
+                      maxlength="30" class="form-control" placeholder="Enter Confirm Password">
+                  </div>
+                </div>
+
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"
+              class="btn btn-primary">Cancel</button>
+            <button type="button" [disabled]="resetPasswordForm.invalid" class="btn btn-primary"
+              (click)="reset_password()">Reset Password</button>
+          </div>
+        </ng-template>
+
+        <!-- Sign UP -->
+        <!-- <ng-template #signUpModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="sign-up-modal"><b>Sign Up</b></h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form [formGroup]="signUpForm">
+              <div class="container">
+                <div class="content-header">
+                  <div class="container-fluid">
+                    <div class="row mb-2 img-row">
+                    
+
+                      <div class="col-sm-12 col-md-offset-6">
+
+                        <div class="circle">
+                          <div class="image-preview mb-3">
+                            <img height="76" width="74" class="profile-pic" src="{{customer_image}}" />
+                          </div>
+                        </div>
+
+                        <div class="p-image">
+                          <i type="button" class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
+                          <input hidden type="file" formControlName="sign_image"
+                            (change)="handleProfileImage($event.target.files)" #fileInput type="file" id="file" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <section class="content">
+                  <div class="container-fluid">
+                    <div class="card-body">
+                      <div class="row">
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">First Name <span class="required">*</span></label>
+                            <input type="text" name="sign_first_name" style="text-transform: capitalize;"
+                              onkeypress="return /[a-z]/i.test(event.key)" formControlName="sign_first_name"
+                              maxlength="30" class="form-control" placeholder="Enter First Name">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_first_name'].errors && signUpForm.controls['sign_first_name'].touched">
+                              <span *ngIf="signUpForm.controls['sign_first_name'].errors.required">Enter First
+                                Name</span>
+                              <span *ngIf="signUpForm.controls['sign_first_name'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Latter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name <span class="required">*</span></label>
+                            <input type="text" name="sign_last_name" style="text-transform: capitalize;"
+                              onkeypress="return /[a-z]/i.test(event.key)" formControlName="sign_last_name"
+                              maxlength="30" class="form-control" placeholder="Enter Last Name">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_last_name'].errors && signUpForm.controls['sign_last_name'].touched">
+                              <span *ngIf="signUpForm.controls['sign_last_name'].errors.required">Enter Last
+                                Name</span>
+                              <span *ngIf="signUpForm.controls['sign_last_name'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Latter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Email ID<span class="required">*</span></label>
+                            <input type="text" name="email" formControlName="email" class="form-control" maxlength="40"
+                              placeholder="Enter Email ID">
+                            <mat-error
+                              *ngIf="signUpForm.controls['email'].errors && signUpForm.controls['email'].touched">
+                              <span *ngIf="signUpForm.controls['email'].errors.required">Enter Email
+                                ID</span>
+                              <mat-error *ngIf="signUpForm.controls['email'].errors.email">Email ID must
+                                be a
+                                valid
+                              </mat-error>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Number <span class="required">*</span></label>
+                            <input type="text" name="sign_mobilenumber" pattern="^[6-9]\d{9}$"
+                              formControlName="sign_mobilenumber" maxlength="10"
+                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                              class="form-control" placeholder="Enter Mobile Number">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_mobilenumber'].errors && signUpForm.controls['sign_mobilenumber'].touched">
+                              <span *ngIf="signUpForm.controls['sign_mobilenumber'].errors.required">Enter
+                                Mobile
+                                Number</span>
+                              <span *ngIf="signUpForm.controls['sign_mobilenumber'].errors.minlength">Mobile
+                                number
+                                must
+                                10
+                                digits</span>
+                              <span *ngIf="signUpForm.controls['sign_mobilenumber'].errors.pattern">Mobile
+                                Number
+                                Should
+                                start with 6
+                                ,7,8,9</span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Password <span class="required">*</span></label>
+                            <input type="password" name="sign_password" formControlName="sign_password" maxlength="30"
+                              class="form-control" placeholder="Enter Password">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_password'].errors && signUpForm.controls['sign_password'].touched">
+                              <span *ngIf="signUpForm.controls['sign_password'].errors.required">Enter
+                                Password</span>
+                              <span *ngIf="signUpForm.controls['sign_password'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Letter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Confirm Password <span class="required">*</span></label>
+                            <input type="password" name="sign_cnfm_password" formControlName="sign_cnfm_password"
+                              maxlength="30" class="form-control" placeholder="Enter Confirm Password">
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_cnfm_password'].errors && signUpForm.controls['sign_cnfm_password'].touched">
+                              <span *ngIf="signUpForm.controls['sign_cnfm_password'].errors.required">Enter
+                                Confirm
+                                Password</span>
+                              <span *ngIf="signUpForm.controls['sign_cnfm_password'].errors.minlength">Enter
+                                Minimum
+                                3
+                                Letter
+                              </span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div>
+                            <label>State<span class="required">&nbsp;*</span></label>
+                          
+
+                            <select name='people' class="form-control" (change)="statesChange($event)"
+                              formControlName="sign_state">
+                              <option value="" disabled>Select State</option>
+                              <option *ngFor="let item of states" [value]="item.state_id">
+                                {{item.state}}
+                              </option>
+                            </select>
+
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_state'].errors && signUpForm.controls['sign_state'].touched">
+                              <span *ngIf="signUpForm.controls['sign_state'].errors.required">Select
+                                State</span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div>
+                            <label>District<span class="required">&nbsp;*</span></label>
+                            
+
+                            <select name='people' class="form-control" formControlName="sign_district">
+                              <option value="" disabled>Select District</option>
+                              <option *ngFor="let item of districts" [value]="item.district_id">
+                                {{item.district}}
+                              </option>
+                            </select>
+
+                            <mat-error
+                              *ngIf="signUpForm.controls['sign_district'].errors && signUpForm.controls['sign_district'].touched">
+                              <span *ngIf="signUpForm.controls['sign_district'].errors.required">Select
+                                District</span>
+                            </mat-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="inputMDEx">Address</label>
+                            <textarea type="text" formControlName="sign_address" placeholder="Enter Address"
+                              name="address" class="form-control"></textarea>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputMDEx">Area Name</label>
+                            <input type="text" formControlName="sign_area" placeholder="Enter Area Name" name="Area"
+                              class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="inputMDEx">Pincode</label>
+                            <input type="text" formControlName="sign_pincode"
+                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                              placeholder="Enter Pincode Number" maxlength="6" name="Pincode" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <div class="md-form">
+                              <label for="inputMDEx">Referal Code</label>
+                              <input type="text" id="referralCode" formControlName="sign_referalcode"
+                                name="referralCode" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-6 no-pad"><a id="btnVerifyReferralCode"
+                              class="btn btn-primary mt10">Verify</a>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <input type="checkbox" formControlName="sign_terms_condition" id="termsChkbx">
+                          <span class="checkmark" id="termsChkbx"></span>
+                          <label class="container"><small>I Accept <a
+                                href="http://www.pragatiutrack.com/termsandconditions.html" target="_blank">Terms &
+                                Conditions </a>and <a href="http://www.pragatiutrack.com/privacypolicy.html"
+                                target="_blank">Privacy Policy</a></small>
+
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </section>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"
+              class="btn btn-primary">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="customer_signup()">Sign Up</button>
+          </div>
+        </ng-template> -->
+
+      </div>
+    </div>
+  </div>
+
+</div>

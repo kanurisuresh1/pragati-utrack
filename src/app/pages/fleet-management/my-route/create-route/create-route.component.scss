@@ -1,0 +1,75 @@
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.btn-yellow-outline {
+    border-radius: 50px !important;
+    padding: 5px 15px !important;
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    border: solid 2px #febe40;
+}
+
+.btn-yellow-outline:hover {
+    border: solid 2px #febe40;
+    background: #0b46ae;
+    color: #fff !important;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.home-map {
+    height: 80vh;
+    overflow: hidden;
+}
+
+.required {
+    color: red;
+}
+
+label {
+    font-weight: bold;
+    color: black;
+}
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+.example-container table {
+    overflow-x: scroll !important;
+}
+
+tr:hover {
+    background-color: #b3f0ff;
+}

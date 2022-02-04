@@ -1,0 +1,235 @@
+<div class="col-md-10 text-left">
+    <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+            aria-hidden="true"></i>
+    </button>
+</div>
+
+
+<div style="border-radius:10px" [formGroup]="createCompanyForm">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2 img-row">
+                <div class="col-sm-12 col-md-offset-6">
+
+                    <div class="circle">
+                        <div class="image-preview mb-3">
+                            <img height="76" width="74" src="{{company_image}}" />
+                        </div>
+                    </div>
+
+                    <div class="p-image">
+                        <i type="button" class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
+                        <input hidden type="file" formControlName="image" (change)="handleCompanyImage($event,cropperModal)" #fileInput type="file" id="file" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.COMPANY_NAME' | translate}}
+                                <span class="required">*</span></label>
+                            <input type="text" name="companyName" style="text-transform: capitalize;" [(ngModel)]="companyName" onkeypress="return /[a-z]/i.test(event.key)" formControlName="companyName" maxlength="30" class="form-control" placeholder="Enter Company Name">
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.COMPANY_URL' | translate}}
+                            </label>
+                            <input type="text" name="company_url" [(ngModel)]="comapnayUrl" formControlName="company_url" class="form-control" placeholder="Enter Company URL">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div>
+                            <label>
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.STATE' | translate}}
+                                <span class="required">&nbsp;*</span></label>
+                            <mat-select class="form-control" placeholder="Select State" [(ngModel)]="companyState" formControlName="state" (selectionChange)="onStateChange($event)">
+                                <mat-option *ngFor='let row of states' [value]="row.state_id">
+                                    {{row.state}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div>
+                            <label>
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.DISTRICT' | translate}}
+                                <span class="required">&nbsp;*</span></label>
+                            <mat-select class="form-control" placeholder="Select District" [(ngModel)]="companyDistrict" formControlName="district">
+                                <mat-option *ngFor='let row of districts' [value]="row.district_id">
+                                    {{row.district}}</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.ADDRESS_1' | translate}}
+                            </label>
+                            <input type="text" style="text-transform: capitalize;" [(ngModel)]="companyAddress1" onkeypress="return /[a-z]/i.test(event.key)" formControlName="Address1" maxlength="30" class="form-control" placeholder="Enter Address">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.ADDRESS_2' | translate}}
+                            </label>
+                            <input type="text" style="text-transform: capitalize;" [(ngModel)]="companyAddress2" onkeypress="return /[a-z]/i.test(event.key)" formControlName="Address2" maxlength="30" class="form-control" placeholder="Enter Address">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.LANDMARK' | translate}}
+                            </label>
+                            <input type="text" name="address2" style="text-transform: capitalize;" [(ngModel)]="companyLandmark" onkeypress="return /[a-z]/i.test(event.key)" formControlName="landmark" maxlength="30" class="form-control" placeholder="Enter Landmark">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.PINCODE' | translate}}
+                                <span class="required">*</span></label>
+                            <input type="text" maxlength="6" formControlName="pincode" [(ngModel)]="companyPincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Enter Pincode">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.GOOGLE_ADDRESS' | translate}}
+                            </label>
+                            <input type="text" id="map_on_search" formControlName="google_address" [(ngModel)]="googleAddress" class="form-control" placeholder="Enter Google Address">
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Latitude</label>
+                            <input type="text" name="latitude" formControlName="latitude" [(ngModel)]="companyLatitude"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                maxlength="30" class="form-control" placeholder="Enter Latitude">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Longitude</label>
+                            <input type="text" name="longitude" formControlName="longitude"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                [(ngModel)]="companyLongitude" maxlength="30" class="form-control"
+                                placeholder="Enter Longitude">
+                        </div>
+                    </div> -->
+
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.COMPANY_EMAIL' | translate}}
+                            </label>
+                            <input type="text" name="email" [(ngModel)]="companyEmail" formControlName="email" class="form-control" maxlength="40" placeholder="Enter Email ID">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.COMPANY_PHONE' | translate}}
+                            </label>
+                            <input type="text" maxlength="10" formControlName="company_mobile" [(ngModel)]="comapanyPhoneNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Enter Mobile Number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div>
+                            <label>
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.STATUS' | translate}}
+                            </label>
+                            <mat-select class="form-control" placeholder="Select Status" [(ngModel)]="status" formControlName="status">
+                                <mat-option value="Active">Active</mat-option>
+                                <mat-option value="Inactive">Inactive</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <button type="submit" *ngIf="this.isSubmit" class="btn btn-primary mrleftright" (click)="submit()" [disabled]="createCompanyForm.invalid">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.ADD_COMPANY' | translate}}
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" *ngIf="!this.isSubmit" class="btn btn-primary mrleftright" (click)="submit()" [disabled]="createCompanyForm.invalid">
+                                {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.EDIT_COMPANY' | translate}}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<div class="container">
+    <ng-template #cropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size: 24px;"><b> 
+                    {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.CROP_IMAGE' | translate}}
+                </b> </p>
+                <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b>
+                            {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.CROP_IMAGE' | translate}}
+                        </b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="CompanyImageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4" format="png" (imageCropped)="CompanyImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>
+                            {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.PREVIEW' | translate}}
+                        </b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="croppedCompanyImage" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="UploadCompanyCroperImage()">
+                    {{'FLEET_MANAGEMENT.ADD_COMPANY_MANAGEMENT_COMPONENT.UPDATE' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>

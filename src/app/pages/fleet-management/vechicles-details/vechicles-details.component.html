@@ -1,0 +1,340 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Vehicle">
+        </label>
+
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                class="fa fa-file-pdf"></i>
+            &nbsp;{{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()"
+            nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+        <button class="btn btn-warning mr1 btnsize" style="margin-left:8px;" nbTooltip="Filter Columns"
+            nbTooltipStatus="warning" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" type="button"
+            [matMenuTriggerFor]="menu">
+            <mat-icon style="margin-top: 5px;font-size: 20px;">filter_list</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+            <mat-checkbox style="margin-left: 5px;margin-right: 5px;" *ngFor="let element of displayedColumnsObj"
+                [checked]="element.show" (change)="toggle(element.value)">
+                {{element.value.toUpperCase()}}</mat-checkbox>
+        </mat-menu>
+    </div>
+</div>
+
+<div>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 480px;overflow: auto !important;">
+            <table class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicle number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.VEHICLE_NUMBER' | translate }}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"><a
+                            (click)="editVehicleNumber(element.device_link_id,element.vehicle_number)"
+                            style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="vehicle_type">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Vehicle Type
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.vehicle_type}} </td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="engine number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.ENGINE_NUMBER' | translate }}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.engine_number}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="chassis number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.CHASSIS_NUMBER' | translate }}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.chassis_number}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="make">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.MAKE' | translate }}
+                    </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.make}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="model">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.MODEL' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="min temp">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.MIN_TEMP' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.min_temp}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="max temp">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.MAX_TEMP' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.max_temp}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fuel type">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.FUEL_TYPE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fuel_type}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fuel tank size">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.TANK_CAPACITY' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fuel_tank_size}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="over speed">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.OVER_SPEED' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.over_speed * 2}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="mileage per litre">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.AVG_MILAGE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.mileage_per_litre}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="buy date">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.BUY_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.buy_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="hub name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.HUB_NAME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.hub_name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="driver name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.DRIVER_NAME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.driver_name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="driver mobile">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.DRIVER_MOBILE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.driver_mobile}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="VehicleRegistrationDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.VEHICLE_REGISTRATION_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.vehicle_registration_date | date: 'dd MMM yyyy'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="RegisteredOwnerName">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.REGISTERED_OWNER_NAME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.registered_owner_name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="InsuranceVendorName">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.INSURANCE_VENDOR_NAME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.insurance_vender_name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="InsuranceDetails">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.INSURANCE_DETAILS' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.insurance_number}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="InsuranceCost">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.INSURANCE_COST' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.insurance_cost}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="InsuranceDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.INSURANCE_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.insurance_buy_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="InsuranceRenewalDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.INSURANCE_RENEWAL_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.insurance_renewal_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="PollutionCost">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.POLLUTION_COST' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.pollution_check_cost}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="PollutionCheckDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.POLLUTION_CHECK_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.pollution_check_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="PollutionRenewalDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.POLLUTION_RENEWAL_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.pollution_check_renewal_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="NationalPermitId">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.NATIONAL_PERMIT_ID' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.national_permit_id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="NationalPermitIssueDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.NATIONAL_PERMIT_ISSUE_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.national_permit_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="NationalPermitRenewalDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.NATIONAL_PERMIT_RENEWAL_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.national_permit_renewal_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="StateName">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.STATE_NAME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.state_permit_name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="StatePermitId">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.STATE_PERMIT_ID' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.state_permit_id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="StatePermitIssueDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.STATE_PERMIT_ISSUE_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.state_permit_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="StatePermitRenewalDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.STATE_PERMIT_RENEWAL_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.state_permit_renewal_date | date: 'dd MMM yyyy'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="FitnessCertificateID">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.FITNESS_CERTIFICATE_ID' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.fitness_certificate_id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="FItnessDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.FITNESS_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.fitness_certificate_date | date: 'dd MMM yyyy'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="FitnessRenewalDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.FITNESS_RENEWAL_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.fitness_certificate_renewal_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="TaxID">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.TAX_ID' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.tax_invoice_id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="TaxDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.TAX_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.tax_invoice_date | date: 'dd MMM yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="TaxRenewalDate">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'REPORTS_CHARTS.FULL_VEHICLE_DETAILS.TAX_RENEWAL_DATE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.tax_invoice_renewal_date | date: 'dd MMM yyyy'}}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            <div class="col-md-12" *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

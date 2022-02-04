@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<div class="col-sm-12 white-bg mt10">
+    <div class="row">
+        <div class="col-md-6 mt10 mb10" *ngFor='let row of PurchasedPlanHistorysData'>
+            <div class="buy-plans clearfix">
+                <h5 class="text-center"> {{row.plan_name}}</h5>
+                <div class="row">
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <p>Purchase Date</p>
+                            <h6><b> {{row.payment_date}} </b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <p>Cost</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i> {{row.plan_cost}}  </b> <small>(₹h)</small></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1 mb10"></div>
+                <div class="row">
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <p>Plan Validity</p>
+                            <h6><b> {{row.plan_validity}} Days</b><small>(3 Years)</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <p>Total Cost</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i> {{row.total_amount}} </b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1 mb10"></div>
+
+                <div class="col-md-12 mb20">
+                    <p>Plan Discription</p>
+                    <p><b> {{row.short_description}} </b></p>
+                </div>
+                <div class="clearfix bdr-btm1 mb10"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10">
+                        <div class="plans-data">
+                            <p>No. of Vehicles</p>
+                            <h6><b> {{row.total_device}} </b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <a class="btn btn-theme-yellow btn-lg"><b>Buy Again</b></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1 mb10"></div>
+
+                <div class="col-md-12 mb20 ">
+                    <div class="plans-data" *ngFor='let innerRow of row.device_info;let i = index'>
+                        <p > {{ i + 1 }}.{{innerRow.vehicle_number}} - {{innerRow.imei}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

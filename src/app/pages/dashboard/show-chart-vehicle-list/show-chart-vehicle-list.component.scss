@@ -1,0 +1,63 @@
+.example-container table th {
+  color: #fff !important;
+  vertical-align: middle !important;
+  padding: 10px !important;
+}
+
+::ng-deep td.mat-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border: 1px solid #e1e1e1 !important;
+  border-bottom-style: none !important;
+}
+td {
+  border: 1px solid #e1e1e1 !important;
+}
+
+th {
+  border: 1px solid #e1e1e1 !important;
+}
+.example-container table td {
+  padding: 10px !important;
+}
+.example-container table {
+  overflow-x: scroll !important;
+}
+
+.mat-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border-radius: 0.2rem;
+}
+
+.mat-input-element {
+  line-height: auto;
+  padding: 6px;
+  height: auto;
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #0779e4;
+  background: white;
+}
+.ml-20 {
+  margin-left: -20px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border-radius: 0.2rem;
+}
+
+.mr15 {
+  margin-right: 15px !important;
+}
+
+// table row hover effect 
+
+tr:hover {
+  background-color: #b3f0ff;
+}

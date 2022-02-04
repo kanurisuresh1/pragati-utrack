@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-9 text-left">
+        <button class="btn btn-primary mr15 btn-sm"  (click)="back()"><i class="fa fa-arrow-left"
+            aria-hidden="true"></i>
+        </button>
+      </div>
+    <div class="col-md-3 ml-auto mb5 text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="PurchasedPlansHistory()"><b>Purchased Plans History</b></button>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 white-bg">
+    <div class="row">
+        <div class="col-md-4  mt10 mb10" *ngFor='let row of BuyPlanesData'>
+            <div class="buy-plans clearfix">
+            <h5 class="text-center"> {{row.plan_name}} </h5>
+                <div class="col-md-12 mb10 no-pad">
+                    <div class="plans-data">
+                        <p>Plan Validity</p>
+                        <h6><b> {{row.plan_validity}} Days (6 Months)</b></h6>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm mb10"></div>
+                <div class="col-md-12 mb10 no-pad">
+                    <div class="plans-data">
+                        <p>Plan Discription</p>
+                        <p><b> {{row.plan_description}} Days</b></p>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm mb10"></div>
+                <div class="col-md-12 mb10 no-pad">
+                    <div class="plans-data">
+                        <p>Plan Cost</p>
+                        <h6><b><i class="fa fa-rupee-sign"></i> {{row.plan_cost}}  </b></h6>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm"></div>
+                <div class="col-md-12 text-center mb15">
+                    <a class="btn btn-theme-yellow btn-lg" (click)="plansDetails()"><b>BUY NOW</b> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

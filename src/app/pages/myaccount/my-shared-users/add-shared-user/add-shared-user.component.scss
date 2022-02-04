@@ -1,0 +1,119 @@
+.required {
+    color: red;
+}
+
+label {
+    font-weight: bold;
+    display: flex;
+}
+.mat-form-field-flex {
+    background-color: white !important;
+}
+
+.circle {
+    border-radius: 50% !important;
+    overflow: hidden;
+    width: 78px;
+    height: 78px;
+    border: 2px solid #1654c0;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.p-image {
+    position: relative;
+    left: 48.5%;
+    top: -40px;
+    font-size: 16px;
+    text-align: center;
+    color: #242424;
+    background: #febe40;
+    border-radius: 50%;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    transition: all 0.3s;
+}
+.mb20 {
+    margin-bottom: 20px;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px 4px 0 0;
+    padding: 0.75em 0.75em 0 0.75em;
+    background-color: white;
+}
+
+.img-gallery {
+    padding: 0px;
+    float: left !important;
+    height: 120px;
+    width: 120px;
+    overflow: hidden;
+    background-color: #ddd;
+}
+.img-gallery li {
+    list-style: none;
+    position: relative;
+}
+
+.img-gallery img {
+    width: 100%;
+    display: flex !important;
+    height: 120px;
+    padding: 6px;
+}
+
+.img-delete {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: #2d61a9;
+    padding: 3px 5px;
+    color: #fff !important;
+}
+.gallery-box {
+    width: 100%;
+    overflow: scroll;
+    overflow-y: hidden;
+    margin-top: 20px;
+}
+.no-image {
+    color: green;
+    margin-top: 5px;
+}
+
+img,
+i {
+    cursor: pointer;
+}
+
+button.btn.btn-primary.sub {
+    margin-top: 30px;
+    font-size: 13px;
+    padding-left: 10px;
+    /* margin: auto; */
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.imgcrop {
+    display: flex;
+    position: relative;
+    width: 80%;
+    max-width: 108%;
+    max-height: 138%;
+    overflow: hidden;
+    padding: 0px;
+    text-align: center;
+}
+
+.model-resize-outviwe {
+    margin-top: 70px;
+    max-width: 650px;
+}
+
+.model-resize {
+    height: 450px;
+    width: 650px;
+    margin-left: -110px;
+}

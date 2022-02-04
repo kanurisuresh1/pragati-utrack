@@ -1,0 +1,258 @@
+<div class="row">
+    <div class="col-md-10">
+        <h4 *ngIf="isAddUser"> {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ADD_CUSTOMER' | translate}} : </h4>
+        <h4 *ngIf="!isAddUser"> {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.EDIT_CUSTOMER' | translate}} : </h4>
+    </div>
+    <div class="col-md-2">
+        <button mat-dialog-close="true" style="padding: 3px 8px 2px;margin-left: 100px;
+    line-height: 17px;
+    min-width: auto;" class="btn btn-sm btn-info">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<mat-dialog-actions>
+
+
+    <div style="border-radius:10px" [formGroup]="createCustomerForm">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2 img-row">
+                    <div class="col-sm-12 col-md-offset-6">
+
+                        <div class="circle">
+                            <div class="image-preview mb-3">
+                                <img height="76" width="74" src="{{shared_user_image}}" />
+                            </div>
+                        </div>
+
+                        <div class="p-image">
+                            <i type="button" class="fa fa-camera upload-button" (click)="fileInput.click()"></i>
+                            <input hidden type="file" [(ngModel)]="image" formControlName="image"
+                            (change)="handleSharedImage($event,cropperModal)" #fileInput type="file" id="file" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.FULL_NAME' | translate}}        
+                             <span class="required">*</span></label>
+                                <input type="text" name="fullname" style="text-transform: capitalize;"
+                                    [(ngModel)]="full_name" onkeypress="return /[a-z]/i.test(event.key)"
+                                    formControlName="fullname" maxlength="30" class="form-control"
+                                    placeholder="Enter Full Name">
+                                <mat-error
+                                    *ngIf="createCustomerForm.controls['fullname'].errors && createCustomerForm.controls['fullname'].touched">
+                                    <span *ngIf="createCustomerForm.controls['fullname'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_FULL_NAME' | translate}}
+                                    </span>
+                                    <span *ngIf="createCustomerForm.controls['fullname'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.MOBILE_NUMBER' | translate}}
+                                    <span class="required">*</span></label>
+                                <input type="text" name="mobilenumber" [readonly]="isDisabled"
+                                    style="text-transform: capitalize;" [(ngModel)]="mobile_number"
+                                    pattern="^[6-9]\d{9}$" formControlName="mobilenumber" maxlength="10"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    class="form-control" placeholder="Enter Mobile Number">
+                                <mat-error
+                                    *ngIf="createCustomerForm.controls['mobilenumber'].errors && createCustomerForm.controls['mobilenumber'].touched">
+                                    <span *ngIf="createCustomerForm.controls['mobilenumber'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_MOBILE_NUMBER' | translate}}
+                                    </span>
+                                    <span *ngIf="createCustomerForm.controls['mobilenumber'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                    <span *ngIf="createCustomerForm.controls['mobilenumber'].errors.pattern">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.MOBILE_NUMBE_SHOULD_START_WITH' | translate}}
+                                      </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.EMAIL' | translate}}    
+                                <span class="required">*</span></label>
+                                <input type="text" name="email" [(ngModel)]="email_id" formControlName="email"
+                                    class="form-control" maxlength="40" placeholder="Enter Email ID">
+                                <mat-error
+                                    *ngIf="createCustomerForm.controls['email'].errors && createCustomerForm.controls['email'].touched">
+                                    <span *ngIf="createCustomerForm.controls['email'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_EMAIL_ID' | translate}}
+                                    </span>
+                                    <mat-error *ngIf="createCustomerForm.controls['email'].errors.email">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_EMAIL_VAILD' | translate}}
+                                    </mat-error>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.COMPANY_NAME' | translate}}
+                                </label>
+                                <input type="text" name="companyName" style="text-transform: capitalize;"
+                                    [(ngModel)]="company_name" formControlName="companyName" class="form-control"
+                                    maxlength="40" placeholder="Enter Company Name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.STATE' | translate}}
+                                    <span class="required">*</span></label>
+                                <select class="form-control" [(ngModel)]="stateId" formControlName="state">
+                                    <option value="" enabled>
+                                         {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.SELECT_STATE' | translate}}
+                                    </option>
+                                    <option *ngFor='let row of states' [ngValue]="row.state_id">{{ row.state }}</option>
+
+                                </select>
+                                <div
+                                    *ngIf="createCustomerForm.controls['state'].errors && createCustomerForm.controls['state'].touched">
+                                    <span *ngIf="createCustomerForm.controls['state'].errors.required"
+                                        style="color:red">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.SELECT_STATE' | translate}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ADDRESS_1' | translate}}
+                                </label>
+                                <input type="text" style="text-transform: capitalize;" name="address1"
+                                    [(ngModel)]="address_1" onkeypress="return /[a-z]/i.test(event.key)"
+                                    formControlName="address1" maxlength="30" class="form-control"
+                                    placeholder="Enter Address 1">
+                                <mat-error
+                                    *ngIf="createCustomerForm.controls['address1'].errors && createCustomerForm.controls['address1'].touched">
+                                    <span *ngIf="createCustomerForm.controls['address1'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_ADDRESS_1' | translate}}
+                                    </span>
+                                    <span *ngIf="createCustomerForm.controls['address1'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ADDRESS_2' | translate}}
+                                </label>
+                                <input type="text" name="address2" style="text-transform: capitalize;"
+                                    [(ngModel)]="address_2" onkeypress="return /[a-z]/i.test(event.key)"
+                                    formControlName="address2" maxlength="30" class="form-control"
+                                    placeholder="Enter Address 2">
+                                <mat-error
+                                    *ngIf="createCustomerForm.controls['address2'].errors && createCustomerForm.controls['address2'].touched">
+                                    <span *ngIf="createCustomerForm.controls['address2'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_ADDRESS_2' | translate}}  
+                                    </span>
+                                    <span *ngIf="createCustomerForm.controls['address2'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.GST_NO' | translate}}  
+                                    <span class="required">*</span></label>
+                                <input type="text" #input (input)="input.value=$event.target.value.toUpperCase()"
+                                    [(ngModel)]="gst_num" formControlName="gstNum" maxlength="15"
+                                    oninput="this.value = this.value.replace(/[^0-9.],[^A-Z]/g, '').replace(/(\..*)\./g, '$1');"
+                                    class="form-control" placeholder="Enter GST Number">
+                                <mat-error
+                                    *ngIf="createCustomerForm.controls['gstNum'].errors && createCustomerForm.controls['gstNum'].touched">
+                                    <span *ngIf="createCustomerForm.controls['gstNum'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_GST_NO' | translate}}      
+                                    </span>
+                                    <span *ngIf="createCustomerForm.controls['gstNum'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.ENTER_GST_NO_15' | translate}}     
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <button type="submit" *ngIf="this.isAddUser" class="btn btn-primary mrleftright"
+                                    (click)="submit()" [disabled]="createCustomerForm.invalid"
+                                    mat-dialog-close="isAddUser">  {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.SUBMIT' | translate}} </button>
+                                <button type="submit" *ngIf="!this.isAddUser" class="btn btn-primary mrleftright"
+                                    (click)="submit()" mat-dialog-close="!isAddUser">  {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.UPDATE' | translate}} </button>
+                                <button type="submit" mat-dialog-close="false"
+                                    class="btn btn-warning mrleftright">  {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.CANCEL' | translate}} </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <ng-template #cropperModal let-modal>
+            <div class="modal-content model-resize">
+                <div class="modal-header" >
+                    <p style="font-size: 24px;"><b>  {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.CROP_IMAGE' | translate}}</b> </p>
+                    <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+                </div>
+                <!-- <div style=" border: 1px solid black;"></div> -->
+                <div class="modal-body">
+                    <div class="row" >
+                        <div class="text-center col-md-8">
+                            <h4 style="margin-left:-44px;"><b> {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.CROP_IMAGE' | translate}}</b></h4>
+                            <div style="height:236px;width: 466px;">
+                                <image-cropper class="imgcrop" [imageChangedEvent]="sharedImageChangedEvent"
+                                    [maintainAspectRatio]="true" [aspectRatio]="4 / 4"  format="png"
+                                    (imageCropped)="SharedImageCropped($event)">
+                                </image-cropper>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4">
+                            <h4 style="margin-left:-50px;"><b> {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.PREVIEW' | translate}}</b></h4>
+                            <img style="margin-left:-44px;"  height="180" width="200" [src]="croppedSharedImage" />
+                        </div>
+                    </div>
+                </div>
+                <!-- <div style=" border: 1px solid black;"></div> -->
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')"> {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.CANCEL' | translate}}</button>
+                    <button type="button" class="btn btn-primary" (click)="UploadSharedCroperImage()"> {{'FLEET_MANAGEMENT.ADD_CUSTOMER_COMPONENT.UPDATE' | translate}}</button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</mat-dialog-actions>

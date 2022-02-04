@@ -1,0 +1,372 @@
+<div class="row" id="btn_hide_registered_id">
+    <div class="col-md-5">
+        <!-- <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button> -->
+    </div>
+    <div class="col-md-7 ml-auto mb5 text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="addMyExecutive()"><b>
+                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.MY_EXECUTIVE' | translate}}
+            </b></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12 white-bg mb20">
+
+    <div style="border-radius:20px">
+        <div class="container-fluid">
+            <div class="card-body">
+                <div class="row" [formGroup]="myProfileForm">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row mb-2 img-row mt20 mb10">
+                                <div class="col-sm-12 col-md-offset-6">
+                                    <div class="circle">
+                                        <div class="image-preview mb-3 ng-star-inserted"><img height="90" width="94"
+                                                [src]="UserpreviewUrlImage"></div>
+                                    </div>
+                                    <div class="p-image">
+                                        <i type="button" class="fa fa-camera upload-button"
+                                            (click)="fileInput.click()"></i>
+                                        <input hidden type="file" formControlName="profileimage"
+                                            (change)="fileChangeEvent($event,cropperModal)" #fileInput type="file"
+                                            id="file" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt10">
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.FIRST_NAME' | translate}}<span class="required">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="fname"
+                                            formControlName="firstname" onkeypress="return /[a-z]/i.test(event.key)"
+                                            maxlength="30" placeholder="Enter First Name">
+                                        <mat-error
+                                            *ngIf="myProfileForm.controls['firstname'].errors && myProfileForm.controls['firstname'].touched">
+                                            <span *ngIf="myProfileForm.controls['firstname'].errors.required">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_FIRST_NAME' | translate}}
+                                            </span>
+                                            <span *ngIf="myProfileForm.controls['firstname'].errors.minlength">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                            </span>
+                                        </mat-error>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.LAST_NAME' | translate}}<span class="required">*</span></label>
+                                        <input type="text" [(ngModel)]="lname" class="form-control"
+                                            onkeypress="return /[a-z]/i.test(event.key)" formControlName="lastname"
+                                            maxlength="30" placeholder="Enter Last Name">
+                                        <mat-error
+                                            *ngIf="myProfileForm.controls['lastname'].errors && myProfileForm.controls['lastname'].touched">
+                                            <span *ngIf="myProfileForm.controls['lastname'].errors.required">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_LAST_NAME' | translate}}
+                                            </span>
+                                            <span *ngIf="myProfileForm.controls['lastname'].errors.minlength">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                            </span>
+                                        </mat-error>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <mat-label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.EMAIL' | translate}}<span class="required">*</span></mat-label>
+                                        <input type="text" class="form-control" [(ngModel)]="email"
+                                            formControlName="email" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.MOBILE_NUMBER' | translate}}<span class="required">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="mnumber"
+                                            formControlName="mnumber" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.STATE' | translate}} <span class="required">*</span></label>
+                                        <mat-select class="form-control" [(ngModel)]="state_id" formControlName="state"
+                                            (ngModelChange)="statesChange($event)">
+                                            <!-- <option value="" disabled>Select State</option> -->
+                                            <mat-option *ngFor='let row of states' [value]="row.state_id">
+                                                {{ row.state }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div
+                                            *ngIf="myProfileForm.controls['state'].errors && myProfileForm.controls['state'].touched">
+                                            <span *ngIf="myProfileForm.controls['state'].errors.required"
+                                                style="color:red">S {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.SELECT_STATE' | translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.DISTRICT' | translate}} <span class="required">*</span></label>
+                                        <mat-select class="form-control" [(ngModel)]="district_id"
+                                            formControlName="district">
+                                            <!-- <option value="" disabled>Select District</option> -->
+                                            <mat-option *ngFor='let row of districts' [value]="row.district_id">
+                                                {{ row.district }}</mat-option>
+                                        </mat-select>
+                                        <div
+                                            *ngIf="myProfileForm.controls['district'].errors && myProfileForm.controls['district'].touched">
+                                            <span *ngIf="myProfileForm.controls['district'].errors.required"
+                                                style="color:red">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.SELECT_DISTRICT' | translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <mat-label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.AREA_NAME' | translate}} <span class="required">*</span></mat-label>
+                                        <input type="text" class="form-control" [(ngModel)]="AreaName"
+                                            onkeypress="return /[a-z]/i.test(event.key)" formControlName="AreaName"
+                                            maxlength="30" placeholder="Enter Area Name">
+                                        <mat-error
+                                            *ngIf="myProfileForm.controls['AreaName'].errors && myProfileForm.controls['AreaName'].touched">
+                                            <span *ngIf="myProfileForm.controls['AreaName'].errors.required">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_AREA_NAME' | translate}}
+                                            </span>
+                                            <span *ngIf="myProfileForm.controls['AreaName'].errors.minlength">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}    
+                                            </span>
+                                        </mat-error>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group md-form">
+                                        <mat-label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.PINCODE' | translate}} <span class="required">*</span></mat-label>
+                                        <input type="text" [(ngModel)]="pincode" class="form-control"
+                                            formControlName="pincode" maxlength="6"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                            placeholder="Enter Pin Code">
+                                        <mat-error
+                                            *ngIf="myProfileForm.controls['pincode'].errors && myProfileForm.controls['pincode'].touched">
+                                            <span *ngIf="myProfileForm.controls['pincode'].errors.required">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_PINCODE' | translate}}
+                                            </span>
+                                            <span *ngIf="myProfileForm.controls['pincode'].errors.minlength">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_MINIMUM_6_DIGITS' | translate}}
+                                            </span>
+                                        </mat-error>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mt5">
+                                    <div class="form-group md-form">
+                                        <mat-label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ADDRESS' | translate}} <span class="required">*</span></mat-label>
+                                        <input type="text" class="form-control" [(ngModel)]="Address"
+                                            onkeypress="return /[a-z]/i.test(event.key)" formControlName="Address"
+                                            maxlength="50" placeholder="Enter Address">
+                                        <mat-error
+                                            *ngIf="myProfileForm.controls['Address'].errors && myProfileForm.controls['Address'].touched">
+                                            <span *ngIf="myProfileForm.controls['Address'].errors.required">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_ADDRESS' | translate}}
+                                            </span>
+                                            <span *ngIf="myProfileForm.controls['Address'].errors.minlength">
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                            </span>
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row mt10">
+                                <h4 class="mt5"> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.DRIVING_LICENCE_DETAILS' | translate}} : </h4><br>
+                                <div class="col-md-12">
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <label> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.DRIVING_LICENCE_ID' | translate}}</label>
+                                            <input type="text" [(ngModel)]="DrivingLinceneID" class="form-control"
+                                                formControlName="DrivingLinceneID"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                placeholder="Enter Driving Licence ID">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label style="margin-left: 60px;margin-bottom: 5px;"><b>
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.DRIVING_LICENCE_FRONT_IMAGE' | translate}}
+                                            </b></label>
+
+                                            <div *ngIf="isFrontImageShowDiv" class="licence_front_image">
+                                                <div class="image-preview mb-3 ng-star-inserted"><img height="155"
+                                                        width="240" src="{{licence_front_image}}">
+                                                    <div class="img-delete">
+                                                        <i type="button" (click)="frontLicenceDeleteImg()"
+                                                            class="fa fa-trash-alt"></i>
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="isFrontImagesButton" class="licence_image_box"><i type="button"
+                                                    (click)="fInput.click()"
+                                                    class="fa fa-plus-circle licence_add"></i><input hidden
+                                                    (change)="lincenceFrontFileProgress($event,cropperModalLincenceFront)"
+                                                    type="file" #fInput formControlName="lincenceFrontImage" id="file">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label style="margin-left: 60px;margin-bottom: 5px;"><b>
+                                                {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.DRIVING_LICENCE_BACK_IMAGE' | translate}}
+                                            </b></label>
+
+                                            <div *ngIf="isBackImageShowDiv" class="licence_front_image">
+                                                <div class="image-preview mb-3 ng-star-inserted"><img height="155"
+                                                        width="240" src="{{licence_Back_image}}">
+                                                    <div class="img-delete">
+                                                        <i type="button" (click)="backLicenceDeleteImg()"
+                                                            class="fa fa-trash-alt"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="isBackImagesButton" class="licence_image_box"><i type="button"
+                                                    (click)="bInput.click()"
+                                                    class="fa fa-plus-circle licence_add"></i><input hidden
+                                                    (change)="lincenceBackFileProgress($event,cropperModalLincenceBack)"
+                                                    type="file" #bInput formControlName="lincenceBackImage" id="file">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-md-offset-4" style="margin-top: -1px;">
+                        <button class="btn btn-round" (click)="editMyProfile()"> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.UPDATE' | translate}}</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ng-template #cropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size:23px;margin-top:10px;margin-left:10px;margin-bottom:10px;"><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CROP_IMAGE' | translate}}</b> </p>
+                <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;margin: 7px 7px 0px 0px;
+                min-width: auto;" class="btn btn-sm btn-info">
+                        X
+                    </button>
+            </div>
+            <div style=" border: 1px solid rgb(201, 189, 189);"></div>
+            <div class="modal-body" style="margin-top: 10px;">
+                <div class="row" style="margin-left:15px;">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px; margin-top:10px ;"><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="ProfileImageChangedEvent"
+                                [maintainAspectRatio]="true" [aspectRatio]="4 / 4"  format="png"
+                                (imageCropped)="ProfileImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;margin-top:10px "><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;"  height="180" width="200" [src]="croppedProfileImage" />
+                    </div>
+                </div>
+            </div>
+            <div style=" border: 1px solid rgb(201, 189, 189);"></div>
+            <div class="modal-footer" style="margin-top:10px;margin-bottom: 10px;">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CANCEL' | translate}}</button>
+                <button type="button" class="btn btn-primary" (click)="UploadProfileCroppedImage()">{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.UPDATE' | translate}}</button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #cropperModalLincenceFront let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size:23px;margin-top:10px;margin-left:10px;margin-bottom:10px;"><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CROP_IMAGE' | translate}}</b> </p>
+                <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;margin: 7px 7px 0px 0px;
+                min-width: auto;" class="btn btn-sm btn-info">
+                      X
+                    </button>
+            </div>
+            <div style=" border: 1px solid rgb(201, 189, 189);"></div>
+            <div class="modal-body" style="margin-top: 10px;">
+                <div class="row" style="margin-left:15px;">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px; margin-top:10px ;"><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="lincenceFrontImageChangedEvent"
+                                [maintainAspectRatio]="false" [aspectRatio]="4 / 4"  format="png"
+                                (imageCropped)="lincenceFrontImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;margin-top:10px "><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;"  height="180" width="200" [src]="lincencefrontcroppedImage" />
+                    </div>
+                </div>
+            </div>
+            <div style=" border: 1px solid rgb(201, 189, 189);"></div>
+            <div class="modal-footer" style="margin-top:10px;margin-bottom: 10px;">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CANCEL' | translate}}</button>
+                <button type="button" class="btn btn-primary" (click)="lincenceFrontCroperimage()">{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.UPDATE' | translate}}</button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #cropperModalLincenceBack let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size:23px;margin-top:10px;margin-left:10px;margin-bottom:10px;"><b> {{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CROP_IMAGE' | translate}}</b> </p>
+                <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;margin: 7px 7px 0px 0px;
+                min-width: auto;" class="btn btn-sm btn-info">
+                        X
+                    </button>
+            </div>
+            <div style=" border: 1px solid rgb(201, 189, 189);"></div>
+            <div class="modal-body" style="margin-top: 10px;">
+                <div class="row" style="margin-left:15px;">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px; margin-top:10px ;"><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="lincenceBackImageChangedEvent"
+                                [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png"
+                                (imageCropped)="lincenceBackImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;margin-top:10px "><b>{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;"  height="180" width="200" [src]="lincenceBackCroppedImage" />
+                    </div>
+                </div>
+            </div>
+            <div style=" border: 1px solid rgb(201, 189, 189);"></div>
+            <div class="modal-footer" style="margin-top:10px;margin-bottom: 10px;">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.CANCEL' | translate}}</button>
+                <button type="button" class="btn btn-primary" (click)="lincenceBackCroperImage()">{{'MY_ACCOUNT.MY_PROFILE_COMPONANT.UPDATE' | translate}}</button>
+            </div>
+        </div>
+    </ng-template>
+</div>

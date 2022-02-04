@@ -1,0 +1,46 @@
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.circle {
+    border-radius: 50% !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 2px solid #0b46ae;
+    margin: 0 auto;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+// .marleft{
+//     padding-left: 150px;
+// }
+
+// .mrgleft{
+//     padding-left: 50px;
+// }
+
+.example-full-width {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+
+label {
+    color:#464646 !important
+  }

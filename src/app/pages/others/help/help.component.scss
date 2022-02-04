@@ -1,0 +1,119 @@
+a {
+    text-decoration: none;
+    color: #242424;
+}
+
+.bg-success {
+    background-color:#4f8a8b !important;
+}
+.pt20 {
+    padding-top: 20px;
+}
+.pb20 {
+    padding-bottom: 20px;
+}
+.mb10{
+    margin-bottom: 15px;
+}
+.help-pannelOne a,
+.help-pannelTwo a,
+.help-pannelThree a,
+.help-pannelFour a,
+.help-pannelFive a,
+.help-pannelSix a,
+.help-pannelSeven a,
+.help-pannelEight a {
+    transition: 0.5s;
+}
+
+.help-pannelOne a i,
+.help-pannelTwo a i,
+.help-pannelThree a i,
+.help-pannelFour a i,
+.help-pannelFive a i,
+.help-pannelSix a i,
+.help-pannelSeven a i,
+.help-pannelEight a i {
+    font-size: 30px;
+    margin: 0px;
+    padding: 10px;
+    line-height: 34px;
+}
+
+.help h5 {
+    font-size: 14px;
+}
+
+.help a i {
+    -webkit-transition: 0.6s ease-out;
+    -moz-transition: 0.6s ease-out;
+    transition: 0.6s ease-out;
+}
+
+.help a:hover i {
+    transform: rotate(360deg);
+}
+
+
+.help-pannelOne:hover {
+    background: #278630 !important;
+    transition: 0.5s
+}
+
+.help-pannelTwo:hover {
+    background: #3ebea7 !important;
+    transition: 0.5s
+}
+
+.help-pannelThree:hover {
+    background: #dc8014 !important;
+    transition: 0.5s
+}
+
+.help-pannelFour:hover {
+    background: #3873d4 !important;
+    transition: 0.5s
+}
+
+.help-pannelFive:hover {
+    background: #8645a1 !important;
+    transition: 0.5s
+}
+
+.help-pannelSix:hover {
+    background: #8bb810 !important;
+    transition: 0.5s
+}
+
+.help-pannelSeven:hover {
+    background: #706deb !important;
+    transition: 0.5s
+}
+
+.help-pannelEight:hover {
+    background: #b83c3c !important;
+    transition: 0.5s
+}
+
+
+.help-pannelOne:hover a,
+.help-pannelTwo:hover a,
+.help-pannelThree:hover a,
+.help-pannelFour:hover a,
+.help-pannelFive:hover a,
+.help-pannelSix:hover a,
+.help-pannelSeven:hover a,
+.help-pannelEight:hover a {
+    color : white !important
+}
+
+.help-pannelOne:hover a h5,
+.help-pannelTwo:hover a h5,
+.help-pannelThree:hover a h5,
+.help-pannelFour:hover a h5,
+.help-pannelFive:hover a h5,
+.help-pannelSix:hover a h5,
+.help-pannelSeven:hover a h5,
+.help-pannelEight:hover a h5{
+    color : white !important
+}

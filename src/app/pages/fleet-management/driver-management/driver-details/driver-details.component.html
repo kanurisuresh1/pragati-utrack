@@ -1,0 +1,229 @@
+<div class="row clearfix">
+    <div class="col-md-6 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="col-md-6 pull-right text-right">
+        <p> {{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.RATING' | translate}} : <i class="fa fa-star"></i></p>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div class="row">
+
+        <div class="col-md-4 col-xs-6 mb15">
+            <div class="buy-plans clearfix" style="padding: 7px 0px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="assets/images/dash_board/total.png" alt="" class="img-responsive img">
+                    </div>
+                    <div class="col-md-7 col-md-offset-1 text-left  ">
+                        <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.TRIPS' | translate}}</p>
+                        <h5><b>4</b></h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xs-6 mb15 ">
+            <div class="buy-plans clearfix" style="padding: 7px 0px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="assets/images/dash_board/moving.png" alt="" class="img-responsive img">
+                    </div>
+                    <div class="col-md-7 col-md-offset-1 text-left  ">
+                        <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.VEHICLE' | translate}}</p>
+                        <h5><b>1</b></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6 mb15 ">
+            <div class="buy-plans clearfix" style="padding: 7px 0px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="assets/images/dash_board/stopped.png" alt="" class="img-responsive img">
+                    </div>
+                    <div class="col-md-7 col-md-offset-1 text-left  ">
+                        <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.SHARED' | translate}}</p>
+                        <h5><b>2</b></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12" style="margin-top: 20px;margin-bottom: 20px;">
+    <div class="row buy-plans">
+
+        <div class="col-md-12 text-center">
+            <div class="id-header">
+                <h4><img src="{{driverImage}}" class="img-responsive img-thumbnail" />{{firstName}} &nbsp; {{lastName}}
+                </h4>
+            </div>
+        </div>
+
+        <div class="col-md-3 bdr-btm mb10 text-left">
+            <div class="plans-data ">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.NICK_NAME' | translate}}</p>
+                <!-- <h5><b id="customer_name">{{customerDetails.full_name}}</b></h5> -->
+                <h6>{{nickName}}</h6>
+            </div>
+
+        </div>
+        <div class="col-md-3 bdr-btm mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.MOBILE_NUMBER' | translate}}</p>
+                <!-- <h5><b id="customer_mobile">{{customerDetails.mobile}}</b></h5> -->
+                <h6>{{mobileNumber}}</h6>
+
+            </div>
+        </div>
+        <div class="col-md-3 bdr-btm mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DATE_OF_BIRTH' | translate}}</p>
+                <h6>{{dateOfBirth | date: 'dd MMM yyyy'}}</h6>
+                <!-- <h5><b id="customer_email">{{customerDetails.email}}</b></h5> -->
+            </div>
+        </div>
+        <div class="col-md-3 bdr-btm mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DATE_OF_JOINING' | translate}}</p>
+                <h6>{{dateOfJoin | date: 'dd MMM yyyy'}}</h6>
+                <!-- <h5><b id="company_name">{{customerDetails.company_name}}</b></h5> -->
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.BLOOD_GROUP' | translate}}</p>
+                <h6>{{bloodGroup}}</h6>
+                <!-- <h5><b id="customer_gst_number">{{customerDetails.gst_number}}</b></h5> -->
+            </div>
+        </div>
+
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.GENDER' | translate}}</p>
+                <h6>{{gender}}</h6>
+
+                <!-- <h5><b id="customer_rigister_date">{{customerDetails.added_date | date: 'dd/MMM/yyyy'}}</b></h5> -->
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DRIVING_LICENCE_NUMBER' | translate}} </p>
+                <h6>{{drivingLicenceId}}</h6>
+
+                <!-- <h5><b id="customer_state">{{customerDetails.state}}</b></h5> -->
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.PAN_NUMBER' | translate}}</p>
+                <h6>{{panId}}</h6>
+                <!-- <h5><b id="customer_address">{{customerDetails.address1}}</b></h5> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Card Example -->
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <nb-card status="success" accent="danger">
+                <nb-card-header>{{firstName}} {{lastName}}</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DRIVER_NUMBER' | translate}}</label>
+                            <h6>{{mobileNumber}}</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DATE_OF_BIRTH' | translate}}</label>
+                            <h6>{{dateOfBirth | date: 'dd MMM yyyy'}}</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DATE_OF_JOINING' | translate}}</label>
+                            <h6>{{dateOfJoin | date: 'dd MMM yyyy'}}</h6>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.BLOOD_GROUP' | translate}}</label>
+                            <h6>{{bloodGroup}}</h6>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.GENDER' | translate}}</label>
+                            <h6>{{gender}}</h6>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.DRIVING_LICENCE_NUMBER' | translate}}</label>
+                            <h6>{{drivingLicenceId}}</h6>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>{{'FLEET_MANAGEMENT.DRIVER_DETAILS_COMPONENT.PAN_NUMBER' | translate}}</label>
+                            <h6>{{panId}}</h6>
+                        </div>
+                    </div>
+
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+</div>
+
+<!-- Material Card -->
+
+<div class="col-md-6">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{firstName}} {{lastName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Driver Number</label>
+                    <h6>{{mobileNumber}}</h6>
+                </div>
+                <div class="col-md-6">
+                    <label>Date of Birth</label>
+                    <h6>{{dateOfBirth | date: 'dd MMM yyyy'}}</h6>
+                </div>
+                <div class="col-md-6">
+                    <label>Date of Joining</label>
+                    <h6>{{dateOfJoin | date: 'dd MMM yyyy'}}</h6>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Blood Group</label>
+                    <h6>{{bloodGroup}}</h6>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Gender</label>
+                    <h6>{{gender}}</h6>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Driving Licence Number</label>
+                    <h6>{{drivingLicenceId}}</h6>
+                </div>
+
+                <div class="col-md-6">
+                    <label>PAN Card Number</label>
+                    <h6>{{panId}}</h6>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,118 @@
+<div class="row clearfix">
+    <div class="col-md-8 text-left">
+
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Route">
+        </label>
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)=" Exportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp;
+            Export to Excel
+        </button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                class="fa fa-file-pdf"></i>
+            &nbsp;
+            Export to PDF
+        </button>
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+            [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refresh()"><i
+                class="fa fa-sync"></i></button>
+    </div>
+    <div class="col-md-4 ml-auto text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" (click)="busRoute()"><b>+
+                    Create Route</b></button>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+            <table class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="route_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Route Name </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"><a
+                            style="cursor: pointer;text-decoration: underline;color: blue;"
+                            (click)="route_details(element)">
+                            {{element.route_name}}</a></td>
+                </ng-container>
+
+                <ng-container matColumnDef="from_geofence_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        From Geofence Name </th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.from_geofence_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="from_location_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        To Geofence Name</th>
+                    <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.to_location_name}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="org_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Organisation Name</th>
+                    <td mat-cell *matCellDef="let element"> {{element.org_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="branch_name">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Branch Name</th>
+                    <td mat-cell *matCellDef="let element"> {{element.branch_name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="added_date_time">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Added Date & Time</th>
+                    <td mat-cell *matCellDef="let element"> {{element.added_date_time | date: 'dd MMM yyyy hh:mm:ss a'}}
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="stops_count">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Stops Count
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.stops_count }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Status
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.status}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="edit">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Edit </th>
+                    <td mat-cell *matCellDef="let element"><a><i class="fa fa-edit text-blue " (click)="edit(element)"
+                                style="cursor: pointer;color: blue;"></i></a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <div class="col-md-12" style="margin-top: 180px;" *ngIf="TableDataNotshow">
+                <p class="datanotfound">Data Not Found</p>
+            </div>
+
+        </div>
+    </div>
+</div>

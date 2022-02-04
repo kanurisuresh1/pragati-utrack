@@ -1,0 +1,143 @@
+<div fxLayout="column" fxFlexFill ngxSplit="column">
+
+
+    <div fxFlex="20%" ngxSplitArea class="row clearfix" [formGroup]="trackHistoryReportForm">
+        <div class="auto-width" style="margin-left: 5px;">
+            <label>&nbsp;</label><br>
+            <button class="btn btn-primary btnsize" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-3" style="margin-left:-10px;">
+            <div class="form-group">
+
+                <label> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SELECT_VEHICLE' | translate}} :</label>
+                <mat-select class="form-control" (selectionChange)="updateSelectedValue($event.value)" [(ngModel)]="deviceLinkId" placeholder="Select Vehicle" #singleSelect formControlName="vechicleName">
+                    <mat-option>
+                        <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholderLabel="Search Vehicle..." noEntriesFoundLabel="'no matching vehicle found'" placeholder="Search Vehicle">
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let row of filteredVehicleNumber | async" [value]="row.device_link_id">
+                        {{row.vehicle_number}} ({{row.vehicle_type}})
+                    </mat-option>
+                </mat-select>
+            </div>
+
+        </div>
+        <div class="auto-width" style="margin-left:-10px;">
+            <div class="form-group">
+                <label>{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SELECT_START_DATE' | translate}} :</label><br>
+
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [matDatetimepicker]="stateDatepicker" [(ngModel)]="startDate" [max]="currentDate" [min]="minStartDate" formControlName="startDate">
+                    <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #stateDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="auto-width" style="margin-left:-8px;">
+            <div class="form-group">
+                <label>{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SELECT_END_DATE' | translate}} :</label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [(ngModel)]="endDate" [matDatetimepicker]="endDatepicker" [max]="currentDate" formControlName="endDate">
+                    <mat-datetimepicker-toggle matSuffix [for]="endDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #endDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="auto-width" style="margin-left:-8px;">
+            <button type="submit" style="margin-left: 0px;" (click)="viewReport()" class="btn btn-primary viewBtn">
+                {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.VIEW_REPORT' | translate}}</button>
+        </div>
+    </div>
+
+
+    <div #fullScreen fxFlex="80%" ngxSplitArea style="margin-top: -12px;">
+        <agm-map style="height: 500px;" id="agmMap" [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapReady)="onMapReady($event)">
+        </agm-map>
+
+        <div class="controls">
+
+            <button style="width: 60px;" *ngIf="isPlayPauseBtn" class="btn btn-primary mr5" (click)="play()">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.PLAY' | translate}}</button>
+
+            <button style="width: 60px;" *ngIf="!isPlayPauseBtn" class="btn btn-warning mr5" (click)="pause()">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.PAUSE' | translate}}</button>
+
+            <button class="btn btn-success mr5" (click)="reset()">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.RESET' | translate}}</button>
+
+            <button class="btn btn-info mr5" (click)="next()">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.NEXT' | translate}}</button>
+
+            <button class="btn btn-danger mr5" (click)="prev()">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.PERVIOUS' | translate}}</button>
+
+            <button class="btn btn-primary mr5" (click)="fast()">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.FAST' | translate}}</button>
+
+            <button id="speed" style="width: 100px; background-color: #ffba93;" class="mr5 btn">
+                {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SPEED' | translate}}:
+                {{ speedMultiplier }}x</button>
+
+            <button class="btn btn-warning mr5" (click)="slow()">
+                {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SLOW' | translate}}
+            </button>
+
+            <button class="btn btn-info mr5" id="open" style="display: block;float: right;" (click)="openFullscreen()">
+                {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.FULL_SCREEN' | translate}}
+            </button>
+            <button class="btn btn-info mr5" id="close" style="display: none;float: right;" (click)="closeFullscreen()">
+                {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.EXIT_FULL_SCREEN' | translate}}
+            </button>
+
+            <mat-card *ngIf="isShowCumulativeDistance">
+                <p style="margin-top: -5px;">
+                    {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.CUMULATIVE_DISTANCE' | translate}} : <br><b>{{cumulative_distance}}</b></p>
+                <p style="margin-top: -5px;">Speed :<br>
+                    <google-chart [type]="chart.type" [data]="chart.data" [options]="chart.options">
+                    </google-chart>
+                </p>
+                <p style="margin-top: -5px;">{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.TIME' | translate}} :<br><b>{{cumulative_time}}</b> </p>
+                <p style="margin-top: -5px;" style="margin-top: -5px;">
+                    {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.ADDRESS' | translate}} :
+                    <br><b>{{cumulative_distance_address}}</b></p>
+            </mat-card>
+            <div id="time_interval" class="time_interval">
+                <mat-select class="form-control" [(ngModel)]="select_time_interval" (selectionChange)="onSelectTimeInterval($event.value)">
+                    <mat-option disabled value="0">
+                        {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SELECT_TIME_INTERVAL' | translate}}
+                    </mat-option>
+                    <mat-option [value]="59">1 Minute</mat-option>
+                    <mat-option [value]="119">2 Minutes</mat-option>
+                    <mat-option [value]="299">5 Minutes</mat-option>
+                    <mat-option [value]="599">10 Minutes</mat-option>
+                    <mat-option [value]="899">15 Minute</mat-option>
+                    <mat-option [value]="1799">30 Minutes</mat-option>
+                    <mat-option [value]="2699">45 Minutes</mat-option>
+                    <mat-option [value]="3599">1 Hour</mat-option>
+                    <mat-option [value]="7199">2 Hours</mat-option>
+                    <mat-option [value]="14399">4 Hours</mat-option>
+                    <mat-option [value]="21599">6 Hours</mat-option>
+                    <mat-option [value]="43199">12 Hours</mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <div class="vehicle-types-model">
+            <p style="margin-top: -5px;"><i class="fa fa-square-full text-move"></i> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.START' | translate}}</p>
+            <p style="margin-top: -5px;"><i class="fa fa-square-full text-stop"></i> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.END' | translate}}</p>
+            <p style="margin-top: -5px;"><i class="fa fa-square-full text-signalhigh"></i> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.STOP_TIME' | translate}}</p>
+        </div>
+
+        <div class="speed_model_card">
+            <p style="margin-top: -5px;"><b>{{'DASH_BOARD.TRACK_HISTORY_COMPONENT.SPEED' | translate}} </b></p>
+            <p style="margin-top: -5px;"><i class="fa fa-square-full speed50"></i> 0-50</p>
+            <p style="margin-top: -5px;"><i class="fa fa-square-full speed65"></i> 50-65</p>
+            <p style="margin-top: -5px;"><i class="fa fa-square-full speed65More"></i> > 65</p>
+        </div>
+
+        <div class="distance_model">
+            <p style="margin-top: -5px;"> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.TOTAL_DISTANCE' | translate}} : <br><b>{{map_total_distance}}</b></p>
+            <p style="margin-top: -5px;"> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.TRAVEL_TIME' | translate}} : <br><b>{{map_total_time}}</b></p>
+            <p style="margin-top: -5px;"> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.MAX_SPEED' | translate}} :<br><b>{{map_max_speed}}</b> </p>
+            <p style="margin-top: -5px;"> {{'DASH_BOARD.TRACK_HISTORY_COMPONENT.AVG_SPEED' | translate}} :<br><b>{{map_avg_speed}}</b> </p>
+        </div>
+    </div>
+</div>

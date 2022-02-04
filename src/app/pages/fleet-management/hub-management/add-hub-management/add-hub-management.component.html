@@ -1,0 +1,170 @@
+<div class="row clearfix">
+    <div class="col-md-10 mb20 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="col-md-12 no-pad">
+
+        <div [formGroup]="AddHubRegistrationForm">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.HUB_NAME' | translate}}
+                            <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_hubname" [(ngModel)]="hubName"
+                            placeholder="Enter Hub Name" style="text-transform: capitalize;"
+                            onkeypress="return /[a-z]/i.test(event.key)" class="form-control">
+                        <mat-error
+                            *ngIf="AddHubRegistrationForm.controls['fctrl_hubname'].errors && AddHubRegistrationForm.controls['fctrl_hubname'].touched">
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_hubname'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.ENTER_HUB_NAME' | translate}}
+                            </span>
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_hubname'].errors.minlength">
+                                {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.HUB_LOCATION' | translate}}
+                            <span class="required">&nbsp;*</span></label>
+                        <input type="text" id="map_on_search" 
+                            formControlName="fctrl_hub_location" [(ngModel)]="hubLocation"
+                            placeholder="Enter Hub Location" style="text-transform: capitalize;"
+                            onkeypress="return /[a-z]/i.test(event.key)" name="First_Name" class="form-control">
+
+                        <mat-error
+                            *ngIf="AddHubRegistrationForm.controls['fctrl_hub_location'].errors && AddHubRegistrationForm.controls['fctrl_hub_location'].touched">
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_hub_location'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.ENTER_HUB_LOCATION' | translate}} 
+                            </span>
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_hub_location'].errors.minlength">Enter
+                                {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.MANAGER_NAME' | translate}}
+                        </label>
+                        <input type="text" formControlName="fctrl_hub_manager" [(ngModel)]="hubManager"
+                            placeholder="Enter Manager Name" style="text-transform: capitalize;"
+                            onkeypress="return /[a-z]/i.test(event.key)" name="First_Name" class="form-control">
+                        <!-- <mat-error
+                            *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager'].errors && AddHubRegistrationForm.controls['fctrl_hub_manager'].touched">
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager'].errors.required">Enter
+                                Hub Manager Name</span>
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager'].errors.minlength">Enter
+                                Minimum 3 Letters </span>
+                        </mat-error> -->
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.MANAGER_NUMBER' | translate}}
+                        </label>
+                        <input type="text" formControlName="fctrl_hub_manager_number" [(ngModel)]="hubManagerNum"
+                            placeholder="Enter Mobile Number" pattern="^[6-9]\d{9}$" maxlength="10"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            name="First_Name" class="form-control">
+                        <!-- <mat-error
+                            *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager_number'].errors && AddHubRegistrationForm.controls['fctrl_hub_manager_number'].touched">
+                            <span
+                                *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager_number'].errors.required">Enter
+                                Mobile Number</span>
+                            <span
+                                *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager_number'].errors.minlength">Enter
+                                Minimum 10 Letters </span>
+                            <span
+                                *ngIf="AddHubRegistrationForm.controls['fctrl_hub_manager_number'].errors.pattern">Mobile
+                                Number
+                                Should
+                                start with 6
+                                ,7,8,9</span>
+                        </mat-error> -->
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <label>
+                            {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.STATE' | translate}}
+                            <span class="required">&nbsp;*</span></label>
+                        <mat-select class="form-control" placeholder="Select State" [(ngModel)]="hubState"
+                            formControlName="fctrl_state" (selectionChange)="onStateChange($event)">
+                            <mat-option *ngFor='let row of states' [value]="row.state_id">
+                                {{row.state}}</mat-option>
+                        </mat-select>
+
+                        <mat-error
+                            *ngIf="AddHubRegistrationForm.controls['fctrl_state'].errors && AddHubRegistrationForm.controls['fctrl_state'].touched">
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_state'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.SELECT_STATE' | translate}}
+                            </span>
+
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <label>
+                            {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.DISTRICT' | translate}}
+                            <span class="required">&nbsp;*</span></label>
+                        <mat-select class="form-control" placeholder="Select District" [(ngModel)]="hubDistrict"
+                            formControlName="fctrl_district">
+                            <mat-option *ngFor='let row of districts' [value]="row.district_id">
+                                {{row.district}}</mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="AddHubRegistrationForm.controls['fctrl_district'].errors && AddHubRegistrationForm.controls['fctrl_district'].touched">
+                            <span *ngIf="AddHubRegistrationForm.controls['fctrl_district'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.SELECT_DISTRICT' | translate}}    
+                            </span>
+
+                        </mat-error>
+
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-4">
+                    <div>
+                        <label>CITY</label>
+                        <mat-select class="form-control" placeholder="Select CITY" [(ngModel)]="cityId"
+                            formControlName="fctrl_city">
+                            <mat-option *ngFor='let row of cities' [value]="row.city_id">
+                                {{row.city}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div> -->
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" *ngIf="this.isSubmit" [disabled]="AddHubRegistrationForm.invalid"
+                        class="btn btn-warning" (click)="addHub()"> {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.ADD_HUB' | translate}}</button>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" *ngIf="!this.isSubmit" [disabled]="AddHubRegistrationForm.invalid"
+                        class="btn btn-warning" (click)="addHub()"> {{'FLEET_MANAGEMENT.ADD_HUB_COMPONENT.EDIT_HUB' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

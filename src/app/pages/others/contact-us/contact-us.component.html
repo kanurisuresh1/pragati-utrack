@@ -1,0 +1,116 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mb10 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+    </div>
+</div>
+
+<div class="card-body white-bg">
+    <div class="row" [formGroup]="contactUsForm">
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <div class="example-full-width">
+                    <label style="color: black;"><b>
+                            {{'CONTACT_US_COMPONANT.NAME' | translate}}
+                        </b></label><br>
+                    <input readonly type="text" class="form-control" formControlName="name" [(ngModel)]="name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="example-full-width">
+                    <label style="color: black;"><b>
+                            {{'CONTACT_US_COMPONANT.MOBILE_NUMBER' | translate}}
+                        </b></label><br>
+                    <input readonly type="text" class="form-control" formControlName="mobile" [(ngModel)]="mobile_num">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="example-full-width">
+                    <label style="color: black;"><b>
+                            {{'CONTACT_US_COMPONANT.EMAIL' | translate}}
+                        </b></label><br>
+                    <input readonly type="text" class="form-control" formControlName="email" [(ngModel)]="email_id">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="example-full-width">
+                    <label>
+                        {{'CONTACT_US_COMPONANT.SUBJECT' | translate}}
+                    </label><br>
+                    <input type="text" [(ngModel)]="subject" class="form-control" formControlName="subject">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="example-full-width">
+                    <label>
+                        {{'CONTACT_US_COMPONANT.DISCRIPTION' | translate}}
+                    </label><br>
+                    <textarea type="text" [(ngModel)]="description" class="form-control"
+                        formControlName="description"></textarea>
+                </div>
+            </div>
+            <div class="clearfix mb20"></div>
+            <button (click)="contactUs()" [disabled]="contactUsForm.invalid" class="btn btn-round">
+                {{'CONTACT_US_COMPONANT.SUBMIT' | translate}}
+            </button>
+        </div>
+
+        <div class="col-md-4">
+            <h6 class="mb20"><b>
+                    {{'CONTACT_US_COMPONANT.RAMKI_TECHNOLOGIES' | translate}}
+                </b></h6>
+            <div class="col-md-12 mb20 no-pad">
+                <h6 class="mb10"><b>
+                        {{'CONTACT_US_COMPONANT.CORPORATE_OFFICE' | translate}}
+                    </b></h6>
+                <p> {{'CONTACT_US_COMPONANT.RAMKI_TECHNOLOGIES' | translate}}<br>
+                    {{'CONTACT_US_COMPONANT.BULIDING_ADDRESS' | translate}}, <br>
+                    {{'CONTACT_US_COMPONANT.PINCODE' | translate}}.<br>
+                    {{'CONTACT_US_COMPONANT.EMAIL' | translate}}: <a
+                        href="mailto:info@ramkigroup.com">info@ramkigroup.com</a><br>
+                    {{'CONTACT_US_COMPONANT.MOBILE_NUMBER' | translate}}: <a href="tel:+91  9959045474">+91
+                        9154153335</a></p>
+                <div class="clearfix mt20 mb20">
+                    <h6><b> {{'CONTACT_US_COMPONANT.CALL_SUPPORT_TIME' | translate}}</b></h6>
+                    <p> {{'CONTACT_US_COMPONANT.SUPPORT' | translate}}</p>
+                </div>
+
+                <div class="clearfix mb30 hidden-xs"></div>
+                <div class="clearfix mt20 mb20">
+                    <h6><b> {{'CONTACT_US_COMPONANT.FOLLOW_US' | translate}}</b></h6>
+                    <div>
+                        <ul class="social-network social-circle">
+                            <li><a href="https://www.instagram.com/pragatiutrack" target="_blank" class="icoRss"><i
+                                        class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://www.facebook.com/pragatiutrackbyramkitechnologies" target="_blank"
+                                    class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li><a href="https://twitter.com/PragatiUtrack" target="_blank" class="icoTwitter"><i
+                                        class="fab fa-twitter"></i></a></li>
+                            <li><a href=" https://in.pinterest.com/pragatiutrackbyramki/" target="_blank"
+                                    class="icoGoogle"><i class="fab fa-pinterest"></i></a></li>
+                            <li><a href=" https://www.linkedin.com/company/pragati-u-track/" target="_blank"
+                                    class="icoLinkedin" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h6 class="mb10"><b> {{'CONTACT_US_COMPONANT.OUR_LOCATION' | translate}}</b></h6>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15225.347953387913!2d78.4736324!3d17.4435777!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xafd3d2da40787286!2sRamki%20Technologies%20Pvt.Ltd!5e0!3m2!1sen!2sin!4v1582181616049!5m2!1sen!2sin"
+                width="100%" height="380" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+    </div>
+</div>

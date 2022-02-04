@@ -1,0 +1,604 @@
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+.example-container table {
+    overflow-x: scroll !important;
+}
+
+.mr15 {
+    margin-right: 15px !important;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+.mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+}
+
+.mt50 {
+    margin-top: 76px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.my-custom-scrollbar {
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 10px;
+    height: auto;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    background: white;
+}
+.ml-20 {
+    margin-left: -20px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.circle {
+    border-radius: 50% !important;
+    overflow: hidden;
+    width: 78px;
+    height: 78px;
+    border: 2px solid #0b46ae;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+.required {
+    color: red;
+}
+label {
+    font-weight: bold;
+}
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.btn.btn-md {
+    padding: 0.7rem 1.6rem;
+    font-size: 0.7rem;
+}
+
+// MAT TAB CSS START
+
+::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+}
+::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+}
+
+.example-tab-icon {
+    margin-right: 8px !important;
+}
+
+// MAT TAB CSS END
+
+// MAT DATE TIME PICKER CSS START
+
+// input#mat-input-1 {
+//     border: 0px solid red;
+//     background-color: #a22c2c05;
+// }
+// input#mat-input-2 {
+//     border: 0px solid red;
+//     background-color: #a22c2c05;
+// }
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px 4px 0 0;
+    padding: 0px !important;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #ffffff14 !important;
+}
+
+// input#mat-input-1 {
+//   margin-top: 11px;
+//   height: 36px;
+//   border: 1px solid #ced4da;
+// }
+
+// input#mat-input-2{
+// margin-top: 11px;
+// height: 36px;
+// border: 1px solid #ced4da;
+// }
+
+button.btn.btn-primary.sub {
+    margin-top: 30px;
+    font-size: 13px;
+    padding-left: 10px;
+    /* margin: auto; */
+    padding: 5px;
+    margin-left: 10px;
+}
+
+label.selectlb {
+    font-size: 12px;
+    color: #989595a3;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+}
+::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+}
+
+.mat-label {
+    font-weight: 5px;
+}
+
+::ng-deep .mat-datetimepicker-content {
+    background-color: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    overflow: hidden !important;
+}
+
+::ng-deep .mat-datetimepicker-calendar[mode="auto"] ::ng-deep .mat-datetimepicker-calendar-header {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-datetimepicker-calendar-body-cell-content.mat-datetimepicker-calendar-body-selected {
+    background-color: #3f51b5;
+    color: white;
+}
+
+::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+}
+
+::ng-deep .mat-datetimepicker-clock-hand {
+    background-color: #3f51b5;
+}
+
+::ng-deep .mat-datetimepicker-clock[_ngcontent-c8] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+}
+
+::ng-deep .mat-datetimepicker-clock-center {
+    background-color: #3f51b5;
+}
+
+::ng-deep .mat-datetimepicker-clock-cell.mat-datetimepicker-clock-cell-selected {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 2px 0px 3px 0px;
+    color: #fff;
+    font-size: 20px;
+    margin-left: -17px;
+}
+//MAT DATE TIME PICKER CSS END
+
+.mat-input-element {
+    line-height: auto;
+    padding: 10px;
+    height: auto;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    background: white;
+}
+
+button.btn.btn-primary.sub {
+    margin-top: 27px;
+    font-size: 15px;
+    padding-left: 10px;
+    /* margin: auto; */
+    padding: 6px;
+    margin-left: 10px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt25 {
+    margin-top: 25px;
+}
+.example-card {
+    margin: 15px 0px;
+    /* padding: 0px; */
+    border: solid 0px #e2e2e2;
+    border-radius: 16px;
+    // transition: 0.5s;
+    padding-top: 0px;
+}
+
+// MAT CARDS CSS
+
+.mat-card-header .mat-card-title {
+    font-size: 20px !important;
+    margin-left: 52px !important;
+    margin-top: 10px;
+}
+
+.mat-card-header {
+    flex-direction: unset;
+    margin: 8px -16px 25px;
+    display: flex;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.card_date_today {
+    margin-right: 13px;
+    margin-left: 9px;
+    color: white;
+}
+
+.card_date_week {
+    margin-right: 13px;
+    margin-left: -43px;
+    color: white;
+}
+
+.dateresponce {
+    width: 198px;
+}
+
+.card_date_month {
+    margin-right: 13px;
+    margin-left: 17px;
+    color: white;
+}
+
+.traveltitlewidth {
+    width: 190px;
+}
+.traveltimeleft {
+    margin-left: -5px;
+}
+
+.card_date_last7 {
+    margin-right: 13px;
+    margin-left: -43px;
+    color: white;
+}
+
+.card_date_custome {
+    margin-right: -105px;
+    margin-left: -91px;
+    color: white;
+    font-size: 15px;
+}
+
+.bg-blue {
+    background-color: #2f68af;
+    color: #fff;
+}
+
+.bg-wilete {
+    background-color: #73109f;
+    color: #fff;
+}
+
+.bg-pink {
+    background-color: #21aee6;
+    color: #fff;
+}
+
+.bg-red {
+    background-color: #dd3333;
+    color: #fff;
+}
+.bg-purple {
+    background-color: #d54062;
+    color: #fff;
+}
+.bg-green {
+    background-color: #68b437;
+    color: #fff;
+}
+
+.auto-width {
+    margin: 0;
+    padding: 0px 10px;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+// Track History TAB CSS
+
+.vehicle-types-model {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0;
+    padding-bottom: 0px;
+}
+
+.distance_model {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 148px;
+    padding-bottom: 0px;
+}
+
+.mapselectoption-nw {
+    position: absolute;
+    margin: 10px;
+    right: 80px;
+    top: 0;
+    width: auto;
+}
+
+.mapselectoption-nw1 {
+    position: absolute;
+    margin: 10px;
+    right: 260px;
+    top: 0;
+    width: auto;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+.map-box {
+    width: 100%;
+    height: 100%;
+    max-height: 450px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.home-dashboard {
+    height: 1000px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.live_data {
+    position: absolute;
+    padding: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 20px;
+    right: 5px;
+    top: 100px;
+    width: 250px;
+}
+
+.liveDataCard {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.Btn_Zoom_All {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 90px;
+}
+
+.Btn_Zoom {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 320px;
+}
+
+.Btn_Zoom_in {
+    padding: 5px 12px !important;
+    border-radius: 30px;
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.Btn_Zoom_in:hover {
+    background: #0b46ae;
+    color: #fff !important;
+}
+.Btn_Play {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 357px;
+}
+
+.Btn_Pause {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 357px;
+}
+
+.Btn_Resume {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 360px;
+}
+
+.Btn_Stop {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 400px;
+}
+.Btn_Go_Back {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 435px;
+}
+.dropdown_btn {
+    position: absolute;
+    padding: 0px;
+    margin: 10px;
+    top: 470px;
+}
+
+.text-move {
+    color: #26b206;
+}
+
+.text-stop {
+    color: #eb272f;
+}
+.text-ignitionoff {
+    color: #464e60;
+}
+
+.text-ignitionon {
+    color: #4874e5;
+}
+.text-signalhigh {
+    color: #872abd;
+}
+
+.matWidth {
+    display: inline-block;
+    width: 170px;
+    outline: none;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+::ng-deep .mat-form-field-infix {
+    width: 175px !important;
+}
+
+::ng-deep .mat-tab-group {
+    margin-top: -10px !important;
+}
+
+::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+}
+
+agm-map {
+    height: 500px;
+}
+
+::ng-deep .mat-form-field {
+    color: #464646 !important;
+}
+
+p,
+b {
+    color: #464646 !important;
+}
+
+// table row hover effect 
+
+tr:hover {
+    background-color: #b3f0ff;
+  }
+
+  .datanotfound{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+ 
+  }
+
+  .Graphdatanotfound{
+    font-size: 25px;
+    text-align: center;
+    margin-top: -170px;
+    margin-bottom: 240px;
+    font-weight: bold;
+  }
+
+  .white-bg{
+      color: blanchedalmond;
+  }
+
+  ::ng-deep .mat-form-field-suffix .mat-icon-button {
+    height: 31px;
+    width: 30px;
+    margin-bottom: 1px;
+  }

@@ -1,0 +1,23 @@
+{
+    "HOME": {
+        "Title": "Übersetzung demo",
+        "WelcomeMessage": "Willkommen zur multilanguage Demo App",
+        "ID": "ID",
+        "VehicleName": "Nom du véhicule",
+        "vehicle_type": "un camion"
+    },
+    "PAGES_MENU": {
+        "HOME_NAME": "Zuhause",
+        "HOME_MENU": {
+            "DASHBOARD": "Instrumententafel",
+            "LIVETRACK": "Leben Spur",
+            "TRACKHISTORY": "Spur Geschichte",
+            "SUMMARYREPORT": "Zusammenfassung Bericht"
+        },
+        "MY_ACCOUNT": "Meine Konto",
+        "MY_ACCOUNT_MENU": {
+            "MYPROFILE": "Meine Profil",
+            "MYWALLET": "Meine Brieftasche"
+        }
+    }
+}

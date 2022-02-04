@@ -1,0 +1,42 @@
+<nb-layout windowMode>
+  <nb-layout-header fixed>
+    <ngx-header></ngx-header>
+  </nb-layout-header>
+
+  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
+    <div class="logo mb20">
+      <!-- <img src="assets/images/logo-new.png" (click)="home()"> -->
+      <img src="assets/images/logo.svg" (click)="home()" version="1.1" />
+
+
+    </div>
+    <ng-content select="nb-menu"></ng-content>
+    <div class="clearfix"></div>
+    <p class="mt50">© 2018 <b>Ramki Technologies Pvt.Ltd.</b> All Rights Reserved</p>
+    <p><b>Follow Us : </b></p>
+
+    <ul class="social-network social-circle">
+      <li><a href="https://www.instagram.com/pragatiutrack" target="_blank" class="icoRss"><i
+            class="fab fa-instagram"></i></a></li>
+      <li><a href="https://www.facebook.com/pragatiutrackbyramkitechnologies" class="icoFacebook" target="_blank"
+          title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      </li>
+      <li><a href="https://twitter.com/PragatiUtrack" target="_blank" class="icoTwitter"><i
+            class="fab fa-twitter"></i></a></li>
+      <li><a href=" https://in.pinterest.com/pragatiutrackbyramki/" target="_blank" class="icoGoogle"><i
+            class="fab fa-pinterest"></i></a></li>
+      <li><a href=" https://www.linkedin.com/company/pragati-u-track/" target="_blank" class="icoLinkedin"
+          title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+    </ul>
+
+  </nb-sidebar>
+
+
+  <nb-layout-column class="col-md-12 mr">
+    <ng-content select="router-outlet"></ng-content>
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+      <ngx-footer></ngx-footer>
+    </nb-layout-footer> -->
+</nb-layout>

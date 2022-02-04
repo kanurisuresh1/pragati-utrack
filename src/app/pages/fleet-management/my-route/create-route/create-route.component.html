@@ -1,0 +1,304 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <div class="sample-div">
+            <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 white-bg mt10 ">
+    <div class="row mt15">
+        <div class="col-md-6" [formGroup]="createRoute">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>
+                            {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ROUTE_NAME' | translate }}
+                            <span class="required">*</span></label>
+                        <input type="text" formControlName="routtename" style="text-transform: capitalize;" maxlength="15" class="form-control">
+                        <div *ngIf="createRoute.controls['routtename'].errors && createRoute.controls['routtename'].touched">
+                            <span *ngIf="createRoute.controls['routtename'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ENTER_ROUTE_NAME' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>
+                            {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.SELECT_TRIP_TYPE' | translate }}
+                            <span class="required">*</span></label>
+                        <mat-select class="form-control" formControlName="selecttriptype">
+                            <mat-option value="0">{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ONE_WAY' | translate }}
+                            </mat-option>
+                            <mat-option value="1"> {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ROUND_TRIP' | translate }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="createRoute.controls['selecttriptype'].errors && createRoute.controls['selecttriptype'].touched">
+                            <span *ngIf="createRoute.controls['selecttriptype'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.PLEASE_SELECT_TRIP_TYPE' | translate }} </span>
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.SELECT_ROUTE_TYPE' | translate }} <span
+                                class="required">*</span></label>
+                        <mat-select class="form-control" formControlName="selectroutetype">
+                            <mat-option value="RoadWay"> {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ROAD_WAY' | translate }} </mat-option>
+                            <mat-option value="TrainWay"> {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.TRAIN_WAY' | translate }} </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="createRoute.controls['selectroutetype'].errors && createRoute.controls['selectroutetype'].touched">
+                            <span *ngIf="createRoute.controls['selectroutetype'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.PLEASE_SELECT_ROUTE_TYPE' | translate }}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.START_LOCATION' | translate }} <span
+                                class="required">*</span></label>
+                        <input type="text" formControlName="startlocation" id="source_location" class="form-control">
+                        <div *ngIf="createRoute.controls['startlocation'].errors && createRoute.controls['startlocation'].touched">
+                            <span *ngIf="createRoute.controls['startlocation'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.Enter_START_LOCATION' | translate }} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.END_LOCATION' | translate }} <span
+                                class="required">*</span></label>
+                        <input type="text" formControlName="endlocation" id="destination_location" class="form-control">
+                        <div *ngIf="createRoute.controls['endlocation'].errors && createRoute.controls['endlocation'].touched">
+                            <span *ngIf="createRoute.controls['endlocation'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.Enter_END_LOCATION' | translate }} </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h6 style="color: blue;"> {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.INTERMEDIATE_STOPS' | translate }} :</h6>
+                        <button *ngIf="isInsterStopAdd" style="margin-top:-37px" (click)="addIntermediate()" class="pull-right btn btn-yellow-outline">
+                            {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ADD'| translate }} </button>
+
+                    </div>
+                    <div [hidden]="show" class="form-group">
+                        <label>Search Intermediate Stop Location <span class="required">*</span></label>
+                        <input type="text" [(ngModel)]="inter_stop_input_data" formControlName="testlocation" id="test_location" class="form-control">
+
+                        <div style="margin-top: 10px;" class="col-md-12 text-center">
+                            <button (click)="addInterStopLocation()" class="btn btn-primary btn-sm" style="margin-left: 20px;">
+                                Submit
+                            </button>
+
+                            <button (click)="cancelInterStop()" class="btn btn-warning btn-sm" style="margin-left: 20px;">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="example-container mat-elevation-z8" id="content" #content>
+                                <div class="table-responsive" style="height: 250px; overflow: auto !important;">
+                                    <table class="table-bordered table" mat-table [dataSource]="interStopsDataSource" matSort #TableOneSort="matSort">
+
+                                        <ng-container matColumnDef="id">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                                            </th>
+                                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stop_location">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Location
+                                            </th>
+                                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                                {{element.stop_location}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stop_lat">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Latitude
+                                            </th>
+                                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                                {{element.stop_lat}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stop_lon">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Longitude
+                                            </th>
+                                            <td mat-cell *matCellDef="let element">{{element.stop_lon}}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="action">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Action
+                                            </th>
+                                            <td mat-cell *matCellDef="let element;let i = index;"><a><i
+                                                        class="fa fa-trash-alt" (click)="delete(i)"
+                                                        style="cursor: pointer;color: red;"></i></a></td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumn;sticky:true"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h6 style="color: blue;"> {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.RETURN_INTERMEDIATE_STOPS' | translate }} :</h6>
+                        <button *ngIf="isreturnStopAdd" style="margin-top:-37px" (click)="addreturnStop()" class="pull-right btn btn-yellow-outline">{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ADD' |
+                            translate }}</button>
+
+                    </div>
+                    <div [hidden]="showReturn" class="form-group">
+                        <label>Search Return Stop Location <span class="required">*</span></label>
+                        <input type="text" [(ngModel)]="return_stop_input_data" formControlName="returnStoplocation" id="return_stop_location" class="form-control">
+
+                        <div style="margin-top: 10px;" class="col-md-12 text-center">
+                            <button (click)="addreturnStopLocation()" class="btn btn-primary btn-sm" style="margin-left: 20px;">
+                                Submit
+                            </button>
+
+                            <button (click)="cancelReturnStop()" class="btn btn-warning btn-sm" style="margin-left: 20px;">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="example-container mat-elevation-z8" id="content" #content>
+                                <div class="table-responsive" style="height: 250px; overflow: auto !important;">
+                                    <table class="table-bordered table" mat-table [dataSource]="returnStopsDataSource" matSort #TableOneSort="matSort">
+
+                                        <ng-container matColumnDef="id">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                                            </th>
+                                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stop_location">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Location
+                                            </th>
+                                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                                {{element.stop_location}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stop_lat">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Latitude
+                                            </th>
+                                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                                {{element.stop_lat}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="stop_lon">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Longitude
+                                            </th>
+                                            <td mat-cell *matCellDef="let element">{{element.stop_lon}}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="action">
+                                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                Action
+                                            </th>
+                                            <td mat-cell *matCellDef="let element;let i = index;"><a><i
+                                                        class="fa fa-trash-alt" (click)="returndelete(i)"
+                                                        style="cursor: pointer;color: red;"></i></a></td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedReturnColumn;sticky:true"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedReturnColumn;"></tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ROUTE_NOTES' | translate }} <span
+                                class="required">*</span></label>
+                        <input type="text" formControlName="routenote" class="form-control">
+                        <div *ngIf="createRoute.controls['routenote'].errors && createRoute.controls['routenote'].touched">
+                            <span *ngIf="createRoute.controls['routenote'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.PLEASE_ROUTE_NOTE' | translate }} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.SELECT_ROUTE_STATUS' | translate }} <span
+                                class="required">*</span></label>
+                        <mat-select class="form-control" formControlName="routestatus">
+                            <mat-option value="Active">{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.ACTIVE' | translate }}
+                            </mat-option>
+                            <mat-option value="Inactive">{{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.INACTIVE' | translate }} </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="createRoute.controls['routestatus'].errors && createRoute.controls['routestatus'].touched">
+                            <span *ngIf="createRoute.controls['routestatus'].errors.required" style="color: red;">
+                                {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.PLEASE_SELECT_ROUTE' | translate }} </span>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb20">
+                <div class="col-md-4 col-md-offset-3">
+                </div>
+                <div class="col-md-4 col-md-offset-3">
+                    <button class="btn btn-primary mrleftright" [disabled]="createRoute.invalid" (click)="submit()" style="margin-left: 50px;">
+                        {{'REPORTS_CHARTS.CREATE_ROUTE_COMPONENT.SAVE' | translate }}
+                    </button>
+                </div>
+                <div class="col-md-4 col-md-offset-3">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="home-map  white-bg " id="map">
+            </div>
+            <div id="source_infowindowContent">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+            <div id="destination_infowindowContent">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

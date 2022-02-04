@@ -1,0 +1,52 @@
+<h1><label>{{'SELECT' | translate}}</label></h1>
+<div [formGroup]="selectLanguageForm">
+    <mat-select class="form-control" [(ngModel)]="language_code" (selectionChange)="dashBoardDropDown()"
+        placeholder="choose Language" formControlName="selectoptionLanguage">
+        <mat-option value="en">English</mat-option>
+        <mat-option value="bn">Bengali</mat-option>
+        <mat-option value="gu">Gujarat</mat-option>
+        <mat-option value="hi">Hindi</mat-option>
+        <mat-option value="kn">Kannada</mat-option>
+        <mat-option value="ml">Malayalam</mat-option>
+        <mat-option value="mr">Marathi</mat-option>
+        <mat-option value="or">odisha</mat-option>
+        <mat-option value="ta">Tamil</mat-option>
+        <mat-option value="te">Telugu</mat-option>
+    </mat-select>
+</div>
+
+<!-- <mat-card>
+    <mat-card-content>
+        <h2 class="example-h2">{{'SELECT' | translate}}</h2>
+
+        <section class="example-section">
+            <mat-radio-button class="example-margin" [checked]="isEnglish" (change)="showEnglish()">English
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isBengali" (change)="showBengali()"> Bengali
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isGujarat" (change)="showGujarat()"> Gujarat
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isHindi" (change)="showHindi()"> Hindi
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isKannada" (change)="showKannada()"> Kannada
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isMalayalam" (change)="showMalayalam()"> Malayalam
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isMarathi" (change)="showMarathi()"> Marathi
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isOdissi" (change)="showOdissi()"> Odissi
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isTamil" (change)="showTamil()"> Tamil
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isTelugu" (change)="showTelugu()">Telugu
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="isUrdu" (change)="showUrdu()"> Urdu
+            </mat-radio-button>
+     
+        </section>
+        <div class="text-center">
+            <button class="btn btn-warning btn-sm" (click)="saveLang()">Save</button>
+        </div>
+
+    </mat-card-content>
+</mat-card> -->

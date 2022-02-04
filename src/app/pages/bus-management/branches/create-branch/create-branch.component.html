@@ -1,0 +1,116 @@
+<div class="col-md-10 text-left">
+    <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+        [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+            aria-hidden="true"></i>
+    </button>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6" [formGroup]="branchForm">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bus Organisation
+                                        <span class="required">*</span></label>
+                                    <!-- <mat-select class="form-control" formControlName="bus_organisation_id">
+                                <mat-option value="1">1</mat-option>
+                                <mat-option value="2">2</mat-option>
+                            </mat-select> -->
+                                    <mat-select class="form-control" [(ngModel)]="org_name"
+                                        formControlName="bus_organisation_id" placeholder="Select Organisation">
+                                        <mat-option *ngFor='let row of organisation_list'
+                                            [value]="row.bus_organisation_id" (click)="changeOrg(row)">
+                                            {{row.org_name}}</mat-option>
+                                    </mat-select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Branch Name
+                                        <span class="required">*</span></label>
+                                    <input [(ngModel)]="branch_name" type="text" style="text-transform: capitalize;"
+                                        formControlName="branch_name" onkeypress="return /[a-z]/i.test(event.key)"
+                                        maxlength="30" class="form-control" placeholder="Enter Branch Name">
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Branch Location
+                                        <span class="required">*</span></label>
+                                    <input [(ngModel)]="branchLocation" type="text" style="text-transform: capitalize;"
+                                        formControlName="branch_location" onkeypress="return /[a-z]/i.test(event.key)"
+                                        maxlength="30" class="form-control" placeholder="Enter Branch Location">
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Google Location
+                                        <span class="required">*</span></label>
+                                    <input type="text" id="map_on_search" [(ngModel)]="searchname"
+                                        formControlName="google_location" class="form-control"
+                                        placeholder="Enter Google Address">
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Status
+                                        <span class="required">*</span></label>
+                                    <mat-select class="form-control" [(ngModel)]="statusType" formControlName="status">
+                                        <mat-option value="Active">Active</mat-option>
+                                        <mat-option value="Inactive">Inactive</mat-option>
+                                    </mat-select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <button *ngIf="isCreateBranchOrganisation" class="btn btn-primary btn-sm mrl5"
+                                    (click)="createOrg()">Create
+                                    Branch</button>
+                                <button *ngIf="!isCreateBranchOrganisation" class="btn btn-primary btn-sm mrl5"
+                                    (click)="createOrg()">Update
+                                    Branch</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false">
+
+                            <agm-marker *ngFor="let m of markers; let i = index"
+                                (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
+                                [label]="m.label">
+
+                                <agm-info-window>
+                                    <strong>{{m.label}}</strong>
+                                </agm-info-window>
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>

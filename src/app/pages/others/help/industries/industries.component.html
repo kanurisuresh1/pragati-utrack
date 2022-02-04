@@ -1,0 +1,777 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mb10 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" (click)="back()"><i
+                class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+
+    </div>
+</div>
+<div class="white-bg col-md-12">
+    <div class="row">
+        <div class="col-md-6  mt10">
+            <div class="widgetList">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a class="selected" data-name="LogisticsLink"
+                            (click)="showSelectedDiv('LogisticsDiv','LogisticsLink')" href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-truck"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Logistics Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="ConstructionLink" (click)="showSelectedDiv('ConstructionDiv','ConstructionLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fas fa-city"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Construction Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="RetailLink" (click)="showSelectedDiv('RetailDiv','RetailLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-boxes"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Retail and Wholesale Industries</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="ServiceLink" (click)="showSelectedDiv('ServiceDiv','ServiceLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-user-shield"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Service and Utility Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="GovernmentLink" (click)="showSelectedDiv('GovernmentDiv','GovernmentLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-university"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Government Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="FoodLink" (click)="showSelectedDiv('FoodDiv','FoodLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fas fa-hamburger"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Food and Beverage Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="CourierLink" (click)="showSelectedDiv('CourierDiv','CourierLink')"
+                            href="javascript:void(0)">
+                            <div class="industries">
+                                <div><i class="fa fa-shipping-fast"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Courier Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="WasteLink" (click)="showSelectedDiv('WasteDiv','WasteLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-recycle"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Waste and Sanitation Industries</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="EngineeringLink" (click)="showSelectedDiv('EngineeringDiv','EngineeringLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-ruler-combined"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Engineering Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-3 mb10 clearfix">
+                        <a data-name="SecurityLink" (click)="showSelectedDiv('SecurityDiv','SecurityLink')"
+                            href="javascript:void(0)">
+                            <div class="industries divfix">
+                                <div><i class="fa fa-unlock"></i></div>
+                                <div class="hidden-xs">
+                                    <h6><b>Security Industry</b></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="industriesdata">
+
+                <div class="section" data-page="Logistics" data-name="LogisticsDiv">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the Logistics Industry</h5>
+                        <p>For a logistics company to realise a competitive advantage, fleet performance and efficiency
+                            are paramount. Effectively coordinating and managing a large number of vehicles requires
+                            instant access to relevant information, detailed reporting tools and a pro-active alerting
+                            system. With Pragati UTrack, a logistics provider is given the tools they need to ensure
+                            that their business is moving forward at full speed.</p>
+                        <p>Pragati UTrack-Tracking for the Logistics Industry</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalating overtime claims</td>
+                                    <td>Pragati UTrack provides a breakdown of all vehicle/driver activity, including
+                                        full details of all trips (including start/stop times and locations, total
+                                        distance, total time).</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrackprovides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                                <tr>
+                                    <td>Inefficient driving and excessive idling</td>
+                                    <td>Pragati UTrack provides real-time warnings of any dangerous driving or excessive
+                                        idling/stopping, while Pragati UTrack can generate a detailed list of all
+                                        instances of dangerous driving or excessive idling/stopping (including vehicle
+                                        and driver information, as well as time and location of the incident)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="section" data-page="Construction" data-name="ConstructionDiv" style="display: none">
+
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the Construction Industry</h5>
+                        <p>Heavy-duty vehicles and equipment represents a significant investment for construction
+                            companies, while fuel costs are constantly on the increase. It is vital to operate vehicles
+                            and equipment as efficiently as possible, while also ensuring that materials are delivered
+                            on time to reduce idle times on-site. With Pragati UTrack, construction companies can remain
+                            in complete control of their fleet, their crews and their projects.</p>
+                        <p>Industry-focused challenges and solutions</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalating overtime claims</td>
+                                    <td>Pragati UTrack provides a breakdown of all vehicle/driver activity, including
+                                        full details of all trips (including start/stop times and locations, total
+                                        distance, total time).</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrackprovides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                                <tr>
+                                    <td>Inefficient driving and excessive idling</td>
+                                    <td>Pragati UTrack provides real-time warnings of any dangerous driving or excessive
+                                        idling/stopping, while Pragati UTrack can generate a detailed list of all
+                                        instances of dangerous driving or excessive idling/stopping (including vehicle
+                                        and driver information, as well as time and location of the incident)</td>
+                                </tr>
+                                <tr>
+                                    <td>Ensuring security of assets</td>
+                                    <td>Pragati UTrack provides real-time warnings if an asset is moved out of its
+                                        allowed area if there is any activity on an asset outside of working hours.</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance with legislation, safety and health standards</td>
+                                    <td>Pragati UTrack provides real-time information on the status of
+                                        vehicles/drivers/remote workers, while Pragati UTrack sends real-time warnings
+                                        in case of any significant activity, such as a panic situation, speeding or
+                                        temperature change.</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Retail" data-name="RetailDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the retail and wholesale industries</h5>
+                        <p>When dealing with high volumes, valuable cargo, and repeated daily/weekly/monthly deliveries,
+                            fleet and route efficiency is the difference between success or failure. By ensuring that
+                            resources are utilised as effectively as possible, Pragati UTrack solutions for retail allow
+                            you to run an economical and focused fleet.</p>
+                        <p>Industry-focused challenges and solutions</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Lack of real-time information regarding status of work orders and deliveries
+                                    </td>
+                                    <td>Pragati UTrack provides real-time information regarding the progress of a
+                                        vehicle/driver throughout the day, including the status of all tasks assigned to
+                                        that vehicle/driver.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrack provides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Service" data-name="ServiceDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the service and utility industries</h5>
+                        <p>When our industry is driven by customers' demands for uninterrupted, reliable service - you
+                            need a vehicle management system that provides maximum efficiency. Pragati UTrack can help
+                            your business shorten the time your customers have to wait for a call-out; schedule vehicles
+                            for routine trips; and help technicians get to where they need to be in less time –
+                            minimising disruptions to service and keeping your customers satisfied.</p>
+                        <p>Industry-focused challenges and solutions</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalating overtime claims</td>
+                                    <td>Pragati UTrack provides a breakdown of all vehicle/driver activity, including
+                                        full details of all trips (including start/stop times and locations, total
+                                        distance, total time).</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>Lack of real-time information regarding status of work orders and deliveries
+                                    </td>
+                                    <td>Pragati UTrack provides real-time information regarding the progress of a
+                                        vehicle/driver throughout the day, including the status of all tasks assigned to
+                                        that vehicle/driver</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of mobile workers</td>
+                                    <td>Pragati UTrack highlights all remote worker activity over a given period, while
+                                        Pragati UTrack allows a map-based view of all remote-worker movements.</td>
+                                </tr>
+                                <tr>
+                                    <td>Safety of mobile workers</td>
+                                    <td>Pragati UTrack provides real-time warnings should any driver/remote worker press
+                                        an installed panic button. Where personal trackers are used, this allows a user
+                                        to call the remote worker and communicate with them if necessary.</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance with legislation, safety and health standards</td>
+                                    <td>Pragati UTrack provides real-time information on the status of
+                                        vehicles/drivers/remote workers, while Pragati UTrack sends real-time warnings
+                                        in case of any significant activity, such as a panic situation, speeding or
+                                        temperature change.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Government" data-name="GovernmentDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for government</h5>
+                        <p>Accountability and efficiency is paramount for government service providers. Pragati UTrack
+                            allows you to track the utilisation of resources every step of the way shows where they are
+                            being put to proper use and also areas that need work - leading to constantly improved
+                            service delivery.</p>
+                        <p>Industry-focused challenges and solutions</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalating overtime claims</td>
+                                    <td>Pragati UTrack provides a breakdown of all vehicle/driver activity, including
+                                        full details of all trips (including start/stop times and locations, total
+                                        distance, total time).</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>Lack of real-time information regarding status of work orders and deliveries
+                                    </td>
+                                    <td>Pragati UTrack provides real-time information regarding the progress of a
+                                        vehicle/driver throughout the day, including the status of all tasks assigned to
+                                        that vehicle/driver</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrackprovides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                                <tr>
+                                    <td>Inefficient driving and excessive idling</td>
+                                    <td>Pragati UTrack provides real-time warnings of any dangerous driving or excessive
+                                        idling/stopping, while Pragati UTrack can generate a detailed list of all
+                                        instances of dangerous driving or excessive idling/stopping (including vehicle
+                                        and driver information, as well as time and location of the incident)</td>
+                                </tr>
+                                <tr>
+                                    <td>Safety of mobile workers</td>
+                                    <td>Pragati UTrack provides real-time warnings should any driver/remote worker press
+                                        an installed panic button. Where personal trackers are used, this allows a user
+                                        to call the remote worker and communicate with them if necessary.</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance with legislation, safety and health standards</td>
+                                    <td>Pragati UTrack provides real-time information on the status of
+                                        vehicles/drivers/remote workers, while Pragati UTrack sends real-time warnings
+                                        in case of any significant activity, such as a panic situation, speeding or
+                                        temperature change.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of mobile workers</td>
+                                    <td>Pragati UTrack highlights all remote worker activity over a given period, while
+                                        Pragati UTrack allows a map-based view of all remote-worker movements.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Food" data-name="FoodDiv" style="display: none">
+
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the food and beverage industry</h5>
+                        <p>When moving perishable cargo, special care must be taken to ensure vehicles run on time and
+                            without disruption, while the load itself should be monitored to ensure that it arrives in
+                            good condition. Pragati UTrack has a number of integrated temperature controls and monitors
+                            for cargo areas and vehicle doors allow users in the office to ensure that customers receive
+                            fresh deliveries without delay.</p>
+                        <p>Industry-focused challenges and solutions</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Lack of information regarding temperature of cargo</td>
+                                    <td>Pragati UTrack provides real-time and historic temperature levels, as well as
+                                        alerts to warn if temperatures move outside the allowed range.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrackprovides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance with legislation, safety and health standards</td>
+                                    <td>Pragati UTrack provides real-time information on the status of
+                                        vehicles/drivers/remote workers, while Pragati UTrack sends real-time warnings
+                                        in case of any significant activity, such as a panic situation, speeding or
+                                        temperature change.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Courier" data-name="CourierDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the courier industry</h5>
+                        <p>For a courier company, profitability is absolutely dependent on the ability to run a fleet
+                            economically and effectively. Pragati UTrack helps courier companies increase utilisation
+                            and resource allocation, allowing for the management of high volumes of deliveries in the
+                            most efficient way possible.</p>
+                        <p>Industry-focused challenges and solutions </p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Lack of information regarding temperature of cargo</td>
+                                    <td>Pragati UTrack provides real-time and historic temperature levels, as well as
+                                        alerts to warn if temperatures move outside the allowed range.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrackprovides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                                <tr>
+                                    <td>Inefficient driving and excessive idling</td>
+                                    <td>Pragati UTrack provides real-time warnings of any dangerous driving or excessive
+                                        idling/stopping, while Pragati UTrack can generate a detailed list of all
+                                        instances of dangerous driving or excessive idling/stopping (including vehicle
+                                        and driver information, as well as time and location of the incident)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Waste" data-name="WasteDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the waste and sanitation industry </h5>
+                        <p>With Pragati UTrack, waste and sanitation providers have access to a highly detailed audit
+                            trail, providing details of the timing and location of all work carried out. This
+                            information is vital in the accurate calculation of working hours, as well as evidence of
+                            work completed. When combined with the real-time location and status information for each
+                            vehicle, Pragati UTrack allows waste and sanitation companies to efficiently allocate and
+                            manage resources while minimising costs.</p>
+                        <p>Industry-focused challenges and solutions </p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance with legislation, safety and health standards</td>
+                                    <td>Pragati UTrack provides real-time information on the status of
+                                        vehicles/drivers/remote workers, while Pragati UTrack sends real-time warnings
+                                        in case of any significant activity, such as a panic situation, speeding or
+                                        temperature change.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>High fuel and maintenance costs</td>
+                                    <td>Pragati UTrack provides instant warnings in case of dangerous driving, excessive
+                                        speeding or out-of-hours use of vehicles, while Pragati UTrackprovides fuel
+                                        usage information to help identify excessive fuel consumption.</td>
+                                </tr>
+                                <tr>
+                                    <td>Inefficient driving and excessive idling</td>
+                                    <td>Pragati UTrack provides real-time warnings of any dangerous driving or excessive
+                                        idling/stopping, while Pragati UTrack can generate a detailed list of all
+                                        instances of dangerous driving or excessive idling/stopping (including vehicle
+                                        and driver information, as well as time and location of the incident)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Engineering" data-name="EngineeringDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the engineering industry </h5>
+                        <p>Heavy-duty vehicles and equipment represents a significant investment for engineering
+                            companies, while fuel costs are on the increase. It is vital to operate vehicles and
+                            equipment as efficiently as possible, while also ensuring that materials are delivered on
+                            time to reduce idle times on-site. With Pragati UTrack, engineering companies can remain in
+                            complete control of their fleet, their crews and their projects.</p>
+                        <p>Industry-focused challenges and solutions </p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalating overtime claims</td>
+                                    <td>Pragati UTrack provides a breakdown of all vehicle/driver activity, including
+                                        full details of all trips (including start/stop times and locations, total
+                                        distance, total time).</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of remote workers</td>
+                                    <td>Pragati UTrack highlights all remote worker activity over a given period, while
+                                        Pragati UTrack allows a map-based view of all remote worker movements</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance with legislation, safety and health standards</td>
+                                    <td>Pragati UTrack provides real-time information on the status of
+                                        vehicles/drivers/remote workers, while Pragati UTrack sends real-time warnings
+                                        in case of any significant activity, such as a panic situation, speeding or
+                                        temperature change.</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" data-page="Security" data-name="SecurityDiv" style="display: none">
+                    <div class="data">
+                        <h5>Pragati UTrack-Tracking for the security industry </h5>
+                        <p>Control and traceability are critical to success in the security market. Pragati UTrack
+                            offers security providers a complete audit trail of all movement and events, allowing 24/7
+                            visibility and accountability. This allows protected assets to be effectively monitored, as
+                            well as ensuring that resources are correctly allocated, costs minimised and staff safety
+                            maintained.</p>
+                        <p>Industry-focused challenges and solutions </p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr bgcolor="#e2e2e2">
+                                    <th scope="col">Challenges</th>
+                                    <th scope="col">Solutions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="25%">Identifying the location of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack provides real-time information regarding the status and location
+                                        of all vehicles/drivers, while Pragati UTrack can be used to review any prior
+                                        activity.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual monitoring and checking of timesheets</td>
+                                    <td>Pragati UTrack allows a quick assessment of the working hours of all
+                                        vehicles/drivers, which can then be used to verify timesheets and overtime
+                                        claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalating overtime claims</td>
+                                    <td>Pragati UTrack provides a breakdown of all vehicle/driver activity, including
+                                        full details of all trips (including start/stop times and locations, total
+                                        distance, total time).</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of vehicles and/or drivers</td>
+                                    <td>Pragati UTrack highlights all vehicle/driver activity over a given period, as
+                                        well as highlighting unused or under-utilised vehicles/drivers.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ensuring security of assets</td>
+                                    <td>Pragati UTrack provides real-time warnings if an asset is moved out of its
+                                        allowed area-if there is any activity on an asset outside of working hours.
+                                        Under-Utilisation of remote workers Pragati UTrack highlights all remote worker
+                                        activity over a given period, while Pragati UTrack allows a map-based view of
+                                        all remote worker movements. Safety of mobile workers Pragati UTrack provides
+                                        real-time warnings should any driver/remote worker press an installed panic
+                                        button. Where personal trackers are used, this allows a user to call the remote
+                                        worker and communicate with them if necessary.</td>
+                                </tr>
+                                <tr>
+                                    <td>Under-Utilisation of remote workers</td>
+                                    <td>Pragati UTrack highlights all remote worker activity over a given period, while
+                                        Pragati UTrack allows a map-based view of all remote worker movements.</td>
+                                </tr>
+                                <tr>
+                                    <td>Safety of mobile workers</td>
+                                    <td>Pragati UTrack provides real-time warnings should any driver/remote worker press
+                                        an installed panic button. Where personal trackers are used, this allows a user
+                                        to call the remote worker and communicate with them if necessary.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

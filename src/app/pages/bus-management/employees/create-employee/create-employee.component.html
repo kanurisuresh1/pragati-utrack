@@ -1,0 +1,192 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-12 no-pad" [formGroup]="employeeForm">
+
+        <div class="col-sm-12 col-md-offset-6">
+            <div class="circle">
+                <div class="image-preview mb-3 ng-star-inserted"><img height="76" width="74" src="{{employee_image}}">
+                </div>
+            </div>
+            <div class="p-image"><i type="button" (click)="fileInput.click()"
+                    class="fa fa-camera upload-button"></i><input formControlName="fileData" accept="image/*" hidden=""
+                    (change)="handleProfileImage($event,cropperModal)" type="file" #fileInput id="file"
+                    ng-reflect-name="image" class="ng-untouched ng-pristine ng-valid"></div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputMDEx" class="active">
+                        First Name
+                    </label>
+                    <input type="text" class="form-control" type="text" formControlName="first_name"
+                        style="text-transform: capitalize;" onkeypress="return /[a-z]/i.test(event.key)" maxlength="30"
+                        placeholder="Enter First Name">
+                    <mat-error
+                        *ngIf="employeeForm.controls['first_name'].errors && employeeForm.controls['first_name'].touched">
+                        <span *ngIf="employeeForm.controls['first_name'].errors.required">
+                            Enter First Name
+                        </span>
+                        <span *ngIf="employeeForm.controls['first_name'].errors.minlength">
+                            Enter Minimum 3 Letters
+                        </span>
+                    </mat-error>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputMDEx" class="active">
+                        Last Name
+                    </label>
+                    <input type="text" class="form-control" type="text" formControlName="last_name"
+                        style="text-transform: capitalize;" onkeypress="return /[a-z]/i.test(event.key)" maxlength="30"
+                        placeholder="Enter Last Name">
+                    <mat-error
+                        *ngIf="employeeForm.controls['last_name'].errors && employeeForm.controls['last_name'].touched">
+                        <span *ngIf="employeeForm.controls['last_name'].errors.required">
+                            Enter Last Name
+                        </span>
+                        <span *ngIf="employeeForm.controls['last_name'].errors.minlength">
+                            Enter Minimum 3 Letters
+                        </span>
+                    </mat-error>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputMDEx" class="active">
+                        Mobile Number
+                    </label>
+                    <input type="text" pattern="^[6-9]\d{9}$" maxlength="10" formControlName="mobile"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        class="form-control" placeholder="Enter Mobile Number">
+                    <mat-error
+                        *ngIf="employeeForm.controls['mobile'].errors && employeeForm.controls['mobile'].touched">
+                        <span *ngIf="employeeForm.controls['mobile'].errors.required">Enter
+                            Mobile
+                            Number</span>
+                        <span *ngIf="employeeForm.controls['mobile'].errors.minlength">Mobile
+                            number
+                            must
+                            10
+                            digits</span>
+                        <span *ngIf="employeeForm.controls['mobile'].errors.pattern">Mobile
+                            Number
+                            Should
+                            start with 6
+                            ,7,8,9</span>
+                    </mat-error>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputMDEx" class="active">
+                        Organisation Role
+                    </label>
+                    <mat-select class="form-control" formControlName="bus_organisation_role" [(ngModel)]="org_role"
+                        placeholder="Select Organisation Role">
+                        <mat-option value="OrganisationHead">Organisation Head</mat-option>
+                        <mat-option value="BranchManager">Branch Manager</mat-option>
+                        <mat-option value="RegionManager">Region Manager</mat-option>
+                        <mat-option value="Driver">Driver</mat-option>
+                        <mat-option value="Helper">Helper</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputMDEx" class="active">
+                        Bus Organisation
+                    </label>
+                    <mat-select class="form-control" formControlName="bus_organisation_id" [(ngModel)]="org_name"
+                        placeholder="Select Organisation">
+                        <mat-option *ngFor='let row of organisation_list' [value]="row.bus_organisation_id"
+                            (click)="changeOrg(row)">
+                            {{row.org_name}}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputMDEx" class="active">
+                        Bus Organisation Branch
+                    </label>
+                    <mat-select class="form-control" formControlName="bus_organisation_branch_id"
+                        [(ngModel)]="branch_org_name" placeholder="Select Organisation Branch">
+                        <mat-option *ngFor='let row of branch_organisation_list'
+                            [value]="row.bus_organisation_branch_id" (click)="changeBranchOrg(row)">
+                            {{row.branch_name}}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <div class="form-group">
+                    <button class="btn btn-primary btn-sm mrl5" (click)="createEmployee()">Create
+                        Employee</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <ng-template #cropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size: 24px;"><b>
+                        Crop Image
+                    </b> </p>
+                <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b>
+                                Crop Image
+                            </b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="ProfileImageChangedEvent"
+                                [maintainAspectRatio]="true" [aspectRatio]="4 / 4" format="png"
+                                (imageCropped)="ProfileImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>
+                                Preview
+                            </b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="croppedProfileImage" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" (click)="UploadProfileCroperImage()">
+                    Upload
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>

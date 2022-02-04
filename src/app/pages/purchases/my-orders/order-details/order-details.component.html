@@ -1,0 +1,222 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<div class="col-md-12 card-body white-bg mt5">
+    <div class="row">
+        <div class="col-md-6 no-pad mb20">
+
+            <div class="col-md-12 no-pad mb10">
+                <h5>Order Summery</h5>
+            </div>
+            <div class="clearfix"></div>
+            <div class="buy-plans clearfix">
+                <h5 class="text-center"> {{order_code}} </h5>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Products Count</p>
+                            <h6><b>4</b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Total Amount</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i><label> {{total_amount}} </label> </b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1 mb10"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Order Status</p>
+                            <h6><b><label> {{order_status}} </label></b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Order Date</p>
+                            <h6><b><label> {{order_date}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1 mb10"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Payment Status</p>
+                            <h6><b><label> {{payment_status}} </label></b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 no-pad">
+                        <div class="plans-data">
+                            <p>Payment Date</p>
+                            <h6><b><label> {{payment_date}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+
+                <h5 style="border-radius:0px" class="text-center">Payment Details</h5>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Products Price</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i> 20000.00 </b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Shipping Price</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i><label> {{shipping_amount}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>GST</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i>300.00</b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Final Price</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i>25552.00</b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Online Amount Paid</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i> <label> {{online_amount}} </label></b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Wallet Amount Paid</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i><label> {{wallet_amount}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+
+
+                <h5 style="border-radius:0px" class="text-center">Address</h5>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Name</p>
+                            <h6><b><label> {{address_name}} </label></b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Mobile Number</p>
+                            <h6><b><label> {{mobile}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Email ID</p>
+                            <h6><b>d.anichandravarma@gmail.com</b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Landmark</p>
+                            <h6><b><label> {{address_landmark}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>City</p>
+                            <h6><b><label> {{city_id}} </label></b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>District</p>
+                            <h6><b><label> {{district_id}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>State</p>
+                            <h6><b><label> {{state_id}} </label></b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb10 no-pad">
+                        <div class="plans-data">
+                            <p>Pincode</p>
+                            <h6><b><label> {{pincode}} </label></b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+
+                <div class="col-md-12 mb10 no-pad">
+                    <div class="plans-data">
+                        <p>Full Address</p>
+                        <h6><b><label> {{address}} </label></b></h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 no-pad mb30">
+
+            <div class="col-md-12  mb10">
+                <h5>Products List</h5>
+            </div>
+
+            <div class="col-md-12">
+     
+                <div class="buy-plans mb10 clearfix"  *ngFor='let row of products'>
+                    <h5 class="text-center"> {{row.product_name}}  </h5>
+                        <div class="col-md-12 mb10 no-pad">
+                            <div class="plans-data">
+                                <p>Product Model</p>
+                                <h6><b> row.model </b></h6>
+                            </div>
+                        </div>
+                        <div class="clearfix bdr-btm1 mb10"></div>
+                        <div class="col-md-12 mb10 no-pad">
+                            <div class="plans-data">
+                                <p>Product Cost</p>
+                                <h6><b><i class="fa fa-rupee-sign"></i> {{row.price}}</b></h6>
+                            </div>
+                        </div>
+                        <div class="clearfix bdr-btm1 mb10"></div>
+
+                        <div class="col-md-12 mb10 no-pad">
+                            <div class="plans-data">
+                                <p>Quantity</p>
+                                <h6><b>2</b></h6>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,198 @@
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.btn-round {
+    border-radius: 50px !important;
+    padding: 15px !important;
+    background: #0b46ae;
+    width: 100%;
+    color: #fff !important;
+    font-size: 14px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.btn-round:hover {
+    background: #febe40;
+    color: #242424 !important;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mt30 {
+    margin-top: 40px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+    display: none;
+}
+::ng-deep .no-line1 .mat-form-field-underline {
+    display: none;
+}
+
+input#mat-input-1 {
+    // margin-top: -18px !important;
+    height: 36px;
+    background-color: #fff !important;
+    border: 1px solid #ced4da;
+}
+
+input#mat-input-2 {
+    // margin-top: -18px;
+    height: 36px;
+    border: 1px solid #ced4da;
+    background-color: #fff !important;
+}
+.mat-label {
+    font-weight: 5px;
+}
+
+::ng-deep .mat-form-field {
+    width: 100% !important;
+    color: #464646 !important;
+}
+
+::ng-deep .mat-form-field .form-control {
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 13px;
+}
+
+.required {
+    color: red;
+}
+
+label {
+    font-weight: bold;
+}
+
+label {
+    color: #464646 !important;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 0px 2px 2px 0px;
+    color: #fff;
+    font-size: 20px;
+}
+
+::ng-deep .mat-form-field {
+    color: #464646 !important;
+}
+
+::ng-deep .mat-datetimepicker-content {
+    background-color: white !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    overflow: hidden !important;
+}
+
+::ng-deep .mat-datetimepicker-calendar[mode="auto"] ::ng-deep .mat-datetimepicker-calendar-header {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-datetimepicker-calendar-body-cell-content.mat-datetimepicker-calendar-body-selected {
+    background-color: #3f51b5;
+    color: white;
+}
+
+::ng-deep .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-top: -19px;
+}
+
+::ng-deep .mat-datetimepicker-clock-hand {
+    background-color: #3f51b5;
+}
+
+::ng-deep .mat-datetimepicker-clock[_ngcontent-c8] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+}
+
+::ng-deep .mat-datetimepicker-clock-center {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-datetimepicker-clock-cell.mat-datetimepicker-clock-cell-selected {
+    background-color: #4d5ec1;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+    white-space: nowrap;
+    flex: none;
+    position: relative;
+    background: #007bff !important;
+    padding: 0px 2px 2px 0px;
+    color: #fff;
+    font-size: 20px;
+}
+
+::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+}
+::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+}
+
+.example-tab-icon {
+    margin-right: 8px !important;
+}
+
+.auto-width {
+    margin: 0;
+    padding: 0px 10px;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.mt25 {
+    margin-top: 25px;
+}
+::ng-deep .mat-form-field-infix {
+    width: 175px !important;
+}
+
+::ng-deep .mat-tab-group {
+    margin-top: -10px !important;
+}

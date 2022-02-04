@@ -1,0 +1,479 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-12 no-pad">
+
+        <div [formGroup]="AddDriverRegistrationForm">
+
+            <div class="col-sm-12 col-md-offset-6">
+                <div class="circle">
+                    <div class="image-preview mb-3 ng-star-inserted"><img height="76" width="74" src="{{driver_image}}">
+                    </div>
+                </div>
+                <div class="p-image"><i type="button" (click)="fileInput.click()" class="fa fa-camera upload-button"></i><input accept="image/*" hidden="" (change)="handleProfileImage($event,cropperModal)" type="file" #fileInput formControlName="fctrl_image" id="file" ng-reflect-name="image"
+                        class="ng-untouched ng-pristine ng-valid"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.NICK_NAME' | translate}}
+                            <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_nickname" [(ngModel)]="nickName" placeholder="Enter Nick Name" style="text-transform: capitalize;" onkeypress="return /[a-z]/i.test(event.key)" class="form-control">
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_nickname'].errors && AddDriverRegistrationForm.controls['fctrl_nickname'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_nickname'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_NICK_NAME' | translate}}
+                            </span>
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_nickname'].errors.minlength">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}    
+                            </span>
+                        </mat-error>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.FIRST_NAME' | translate}}    
+                        <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_first_name" [(ngModel)]="firstName" placeholder="Enter First Name" style="text-transform: capitalize;" onkeypress="return /[a-z]/i.test(event.key)" name="First_Name" class="form-control">
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_first_name'].errors && AddDriverRegistrationForm.controls['fctrl_first_name'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_first_name'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_FIRST_NAME' | translate}}
+                            </span>
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_first_name'].errors.minlength">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.LAST_NAME' | translate}}    
+                        <span class="required">&nbsp;*</span></label>
+                        <input type="text" name="Last_Name" [(ngModel)]="lastName" placeholder="Enter Last Name" onkeypress="return /[a-z]/i.test(event.key)" style="text-transform: capitalize;" formControlName="fctrl_last_name" class="form-control" required>
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_last_name'].errors && AddDriverRegistrationForm.controls['fctrl_last_name'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_last_name'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_LAST_NAME' | translate}}
+                            </span>
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_last_name'].errors.minlength">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.MOBILE_NUMBER' | translate}} 
+                        <span class="required">&nbsp;*</span></label>
+                        <input type="text" formControlName="fctrl_mobile_number" [(ngModel)]="mobileNumber" placeholder="Enter Mobile Number" pattern="^[6-9]\d{9}$" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" name="Mobile_Number"
+                            class="form-control">
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_mobile_number'].errors && AddDriverRegistrationForm.controls['fctrl_mobile_number'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_mobile_number'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_MOBILE_NUMBER' | translate}}
+                            </span>
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_mobile_number'].errors.minlength">Enter
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ENTER_MINIMUM_10_LETTERS' | translate}}
+                            </span>
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_mobile_number'].errors.pattern">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.MOBILE_NUMBE_SHOULD_START_WITH' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.DATE_OF_BIRTH' | translate}}    
+                        <span class="required">*</span></label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Date Of Birth</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input style="margin-top: -17px;" matInput class="form-control datepicker" [max]="todayDate" [matDatepicker]="dobPicker" [(ngModel)]="dateOfBirth" formControlName="fctrl_dob" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dobPicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                            <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_dob'].errors && AddDriverRegistrationForm.controls['fctrl_dob'].touched">
+                                <span *ngIf="AddDriverRegistrationForm.controls['fctrl_dob'].errors.required">
+                                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_DATE_OF_BIRTH' | translate}}
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.DATE_OF_JOINING' | translate}}  
+                        <span class="required">*</span></label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Date pf Joining</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input style="margin-top: -17px;" matInput class="form-control datepicker" [(ngModel)]="dateOfJoin" [max]="todayDate" [matDatepicker]="dojPicker" formControlName="fctrl_doj" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="dojPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dojPicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                            <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_doj'].errors && AddDriverRegistrationForm.controls['fctrl_doj'].touched">
+                                <span *ngIf="AddDriverRegistrationForm.controls['fctrl_doj'].errors.required">
+                                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_DATE_OF_JOINING' | translate}}
+                                </span>
+
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.BLOOD_GROUP' | translate}}    
+                       <span class="required">*</span></label>
+                        <mat-select class="form-control" placeholder="Select Blood Group" [(ngModel)]="bloodGroup" formControlName="fctrl_blood_group">
+                            <mat-option value="A+"> A+</mat-option>
+                            <mat-option value="A-"> A-</mat-option>
+                            <mat-option value="B+"> B+</mat-option>
+                            <mat-option value="B-"> B-</mat-option>
+                            <mat-option value="AB+"> AB+</mat-option>
+                            <mat-option value="AB-"> AB-</mat-option>
+                            <mat-option value="O+"> O+</mat-option>
+                            <mat-option value="O-"> O-</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_blood_group'].errors && AddDriverRegistrationForm.controls['fctrl_blood_group'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_blood_group'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_BLOOD_GROUP' | translate}}
+                            </span>
+
+                        </mat-error>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.GENDER' | translate}}    
+                        <span class="required">*</span></label>
+                        <mat-select class="form-control" placeholder="Select Gender" [(ngModel)]="gender" formControlName="fctrl_gender">
+                            <mat-option value="Male"> Male</mat-option>
+                            <mat-option value="Female"> Female</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_gender'].errors && AddDriverRegistrationForm.controls['fctrl_gender'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_gender'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_GENDER' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 text-primary">
+                    <h4> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_GENDER' | translate}} : </h4>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_GENDER' | translate}}
+                            <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter Driving Licence ID Number" #input (input)="input.value=$event.target.value.toUpperCase()" [(ngModel)]="drivingLicenceId" oninput="this.value = this.value.replace(/[^0-9.],[^A-Z]/g, '').replace(/(\..*)\./g, '$1');"
+                            formControlName="fctrl_driving_licece_id" maxlength="16" name="Driving_Licence_Id" class="form-control">
+                        <mat-error *ngIf="AddDriverRegistrationForm.controls['fctrl_driving_licece_id'].errors && AddDriverRegistrationForm.controls['fctrl_driving_licece_id'].touched">
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_driving_licece_id'].errors.required">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_GENDER' | translate}}
+                            </span>
+                            <span *ngIf="AddDriverRegistrationForm.controls['fctrl_driving_licece_id'].errors.minlength">
+                                {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.SELECT_GENDER' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label style="margin-left: 60px;margin-bottom: 5px;"><b>
+                     {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.DRIVING_LICENCE_FRONT_IMAGE' | translate}}
+                    </b></label>
+
+                    <div *ngIf="isFrontImageShowDiv" class="licence_front_image">
+                        <div class="image-preview mb-3 ng-star-inserted"><img height="155" width="240" src="{{licence_front_image}}">
+                            <div class="img-delete">
+                                <i type="button" (click)="lincenceFrontImageDelete()" class="fa fa-trash-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="isFrontImagesButton" class="licence_image_box"><i type="button" (click)="fInput.click()" class="fa fa-plus-circle licence_add"></i><input hidden (change)="lincenceFrontFileProgress($event,cropperModalLincenceFront)" type="file" #fInput formControlName="lincenceFrontImage" id="file">
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <label style="margin-left: 60px;margin-bottom: 5px;"><b>
+                        {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.DRIVING_LICENCE_BACK_IMAGE' | translate}}
+                    </b></label>
+
+                    <div *ngIf="isBackImageShowDiv" class="licence_front_image">
+                        <div class="image-preview mb-3 ng-star-inserted"><img height="155" width="240" src="{{licence_Back_image}}">
+                            <div class="img-delete">
+                                <i type="button" (click)="lincenceBackImageDelete()" class="fa fa-trash-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="isBackImagesButton" class="licence_image_box"><i type="button" (click)="bInput.click()" class="fa fa-plus-circle licence_add"></i><input hidden (change)="lincenceBackFileProgress($event,cropperModalLincenceBack)" type="file" #bInput formControlName="lincenceBackImage" id="file">
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 text-primary">
+                    <h4> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PAN_DETAILS' | translate}} : </h4>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PAN_ID' | translate}}
+                        </label>
+                        <input type="text" placeholder="Enter PAN ID" [(ngModel)]="panId" formControlName="fctrl_pan_id" #paninput (input)="paninput.value=$event.target.value.toUpperCase()" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.],[^A-Z]/g, '').replace(/(\..*)\./g, '$1');"
+                            name="Pan_Id" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label style="margin-left: 60px;margin-bottom: 5px;"><b>
+                        {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PAN_CARD_FRONT_IMAGE' | translate}}
+                    </b></label>
+
+                    <div *ngIf="isPanCardFrontImageShowDiv" class="licence_front_image">
+                        <div class="image-preview mb-3 ng-star-inserted"><img height="155" width="240" src="{{PanCard_front_image}}">
+                            <div class="img-delete">
+                                <i type="button" (click)="PanCardFrontImageDelete()" class="fa fa-trash-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="isPanCardFrontImagesButton" class="licence_image_box"><i type="button" (click)="pInput.click()" class="fa fa-plus-circle licence_add"></i><input hidden (change)="PanCardFrontFileProgress($event,cropperModalPanCardFront)" type="file" #pInput formControlName="PanCardFrontImage" id="file">
+                    </div>
+
+                </div>
+                <div class="col-md-12 text-primary">
+                    <h4>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ADDRESS_DETAILS' | translate}} : </h4>
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <label>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.STATE' | translate}}</label>
+                        <mat-select class="form-control" placeholder="Select State" [(ngModel)]="stateId" formControlName="fctrl_state" (selectionChange)="onStateChange($event)">
+                            <mat-option *ngFor='let row of states' [value]="row.state_id">
+                                {{row.state}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <label>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.DISTRICT' | translate}}</label>
+                        <mat-select class="form-control" placeholder="Select District" [(ngModel)]="districtId" formControlName="fctrl_district" (selectionChange)="onDistrictChange($event)">
+                            <mat-option *ngFor='let row of districts' [value]="row.district_id">
+                                {{row.district}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <label>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CITY' | translate}}</label>
+                        <mat-select class="form-control" placeholder="Select CITY" [(ngModel)]="cityId" formControlName="fctrl_city">
+                            <mat-option *ngFor='let row of cities' [value]="row.city_id">
+                                {{row.city}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx">{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PINCODE' | translate}}</label>
+                        <input type="text" formControlName="fctrl_pincode" [(ngModel)]="pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Enter Pincode Number" maxlength="6" name="Pincode" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx">{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.AREA' | translate}}</label>
+                        <input type="text" formControlName="fctrl_area" [(ngModel)]="area" placeholder="Enter Area" name="Area" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx">{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.LANDMARK' | translate}}</label>
+                        <input type="text" formControlName="fctrl_landmark" [(ngModel)]="landmark" placeholder="Enter Land Mark" name="landMark" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx">{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ADDRESS' | translate}}</label>
+                        <textarea type="text" formControlName="fctrl_address" [(ngModel)]="address" placeholder="Enter Address" name="address" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" *ngIf="this.isSubmit" [disabled]="AddDriverRegistrationForm.invalid" class="btn btn-warning" (click)="addDriver()">{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.ADD_DRIVER' | translate}}</button>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" *ngIf="!this.isSubmit" [disabled]="AddDriverRegistrationForm.invalid" class="btn btn-warning" (click)="addDriver()">{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.EDIT_DRIVER' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ng-template #cropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size: 24px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}} </b> </p>
+                <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="ProfileImageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4" format="png" (imageCropped)="ProfileImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="croppedProfileImage" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="UploadProfileCroperImage()">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.UPDATE' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #cropperModalLincenceFront let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size:23px;"><b>  {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b> </p>
+                <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="lincenceFrontImageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png" (imageCropped)="lincenceFrontImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="lincenceFrontCroppedImage" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="lincenceFrontCroperImage()">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.UPDATE' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #cropperModalLincenceBack let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size:23px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b> </p>
+                <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="lincenceBackImageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png" (imageCropped)="lincenceBackImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>{{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="lincenceBackCroppedImage" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="lincenceBackCroperImage()">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.UPDATE' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #cropperModalPanCardFront let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size:23px;"><b>  {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b> </p>
+                <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;
+                min-width: auto;" class="btn btn-sm btn-info">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CROP_IMAGE' | translate}}</b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="PanCardFrontImageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png" (imageCropped)="PanCardFrontImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b> {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.PREVIEW' | translate}}</b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="PanCardFrontCroppedImage" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="PanCardFrontCroperImage()">
+                    {{'FLEET_MANAGEMENT.ADD_DRIVER_COMPONENT.UPDATE' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>

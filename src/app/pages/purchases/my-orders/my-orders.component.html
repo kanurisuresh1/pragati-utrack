@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<div class="col-md-12 card-body white-bg mt5">
+           <div class="row">
+                    <div class="col-md-6 mt10 mb10" *ngFor='let row of MyOrderListData' >
+                        <div class="buy-plans clearfix" (click)="orderDetails(row.order_id)">
+                            <h5 class="text-center"> {{row.order_code}} </h5>
+                            <div class="row">
+                                <div class="col-md-6 mb10 no-pad">
+                                    <div class="plans-data">
+                                        <p>Products Count</p>
+                                        <h6><b> {{row.product_count}} </b></h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb10 no-pad">
+                                    <div class="plans-data">
+                                        <p>Total Amount</p>
+                                        <h6><b><i class="fa fa-rupee-sign"></i> {{row.total_amount}} </b></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix bdr-btm1 mb10"></div>
+                            <div class="row">
+                                <div class="col-md-6 mb10 no-pad">
+                                    <div class="plans-data">
+                                        <p>Order Status</p>
+                                        <h6><b> {{row.order_status}} </b></h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb10 no-pad">
+                                    <div class="plans-data">
+                                        <p>Order Date</p>
+                                        <h6><b> {{row.order_date}} </b></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix bdr-btm1 mb10"></div>
+                            <div class="row">
+                                <div class="col-md-6 mb10 no-pad">
+                                    <div class="plans-data">
+                                        <p>Payment Status</p>
+                                        <h6><b> {{row.payment_status}} </b></h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb10 no-pad">
+                                    <div class="plans-data">
+                                        <p>Payment Date</p>
+                                        <h6><b> {{row.payment_date}} </b></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                </div>
+        </div>

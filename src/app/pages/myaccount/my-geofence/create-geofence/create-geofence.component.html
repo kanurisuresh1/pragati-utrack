@@ -1,0 +1,84 @@
+<div class="row clearfix mb10">
+    <div class="col-md-10">
+        <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+
+<div class="col-md-12 white-bg mt10">
+
+    <div class="row mt15" [formGroup]="CreateGeofenceForm">
+        <div class="col-md-6 mb20 mt40">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label> {{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.GEOFENCE_NAME' | translate}}</label>
+                        <input type="text" formControlName="geofencename" class="form-control"
+                            [(ngModel)]="geofence_name" placeholder="Geofence Name" />
+                        <mat-error
+                            *ngIf="CreateGeofenceForm.controls['geofencename'].errors && CreateGeofenceForm.controls['geofencename'].touched">
+                            <span *ngIf="CreateGeofenceForm.controls['geofencename'].errors.required">
+                                {{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.ENTER_GEOFENCE' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.RADIUS' | translate}}</label>
+                        <input type="text" formControlName="radius" maxlength="10000" [(ngModel)]="radius"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            class="form-control" placeholder="Radius" />
+                        <mat-error
+                            *ngIf="CreateGeofenceForm.controls['radius'].errors && CreateGeofenceForm.controls['radius'].touched">
+                            <span *ngIf="CreateGeofenceForm.controls['radius'].errors.required">
+                                {{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.ENTER_RADIUS' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>
+                            {{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.SEARCH_LOCATION' | translate}}
+                        </label>
+                        <input id="map_on_search" type="text" [(ngModel)]="location_name"
+                            formControlName="mapsearchname" placeholder="Search Location" class="form-control">
+                        <mat-error
+                            *ngIf="CreateGeofenceForm.controls['mapsearchname'].errors && CreateGeofenceForm.controls['mapsearchname'].touched">
+                            <span *ngIf="CreateGeofenceForm.controls['mapsearchname'].errors.required">
+                                {{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.ENTER_LOCATION' | translate}}
+                            </span>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-yellow-outline" [disabled]="CreateGeofenceForm.invalid"
+                            (click)="submit()" style="width: 100%">{{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.SAVE' |
+                            translate}}</button>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb20">
+            <div class="geofence-map  white-bg " id="map">
+            </div>
+            <div id="infowindow-content">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+        </div>
+    </div>
+</div>

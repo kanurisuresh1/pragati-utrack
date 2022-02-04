@@ -1,0 +1,52 @@
+<div class="col-md-12">
+    <i style="font-size: 30px;  right: 304px;  position: fixed;  top: 62px;" class="fa fa-times-circle"
+        mat-dialog-close="false" nbTooltip="Close" nbTooltipStatus="info"></i>
+</div>
+
+<div class="col-md-12 text-center">
+    <h4 style="color: blue;">{{toll_plaza_name}}</h4>
+</div>
+
+<div class="example-container mat-elevation-z8" id="content" #content>
+    <div class="table-responsive" style="height: 450px;overflow: auto !important;">
+        <table matTableExporter #exporter="matTableExporter" class="table-bordered table" mat-table
+            [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="type">
+                <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'DASH_BOARD.TOLLCHARGESDIALOG_COMPONENT.VEHICLE_TYPE' | translate}}
+                </th>
+                <td mat-cell *matCellDef="let element;"> {{element.vehicle_type}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="single">
+                <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'DASH_BOARD.TOLLCHARGESDIALOG_COMPONENT.SINGLE' | translate}}
+                </th>
+                <td mat-cell *matCellDef="let element;"> {{element.single}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="multi">
+                <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'DASH_BOARD.TOLLCHARGESDIALOG_COMPONENT.MULTI' | translate}}    
+                </th>
+                <td mat-cell *matCellDef="let element;"> {{element.multi}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="monthly">
+                <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'DASH_BOARD.TOLLCHARGESDIALOG_COMPONENT.MONTHLY' | translate}}
+                </th>
+                <td mat-cell *matCellDef="let element;"> {{element.monthly}}
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+a {
+    text-decoration: none;
+}
+
+.trbgColor {
+    background-color: #e2e2e2;
+}
+.industries {
+    background: #fff;
+    padding: 20px 15px;
+    text-align: center;
+    border: solid 1px #dee5f2;
+    min-height: 160px;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 0px 20px;
+}
+
+.industries i {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+h6{
+    font-size: 15px;
+}
+.industries h6 {
+    line-height: 24px;
+    font-weight: bold;
+    font-style: 20px !important;
+}
+
+.industries:hover {
+    border: solid 1px #cdcdcd;
+    box-shadow: 2px 2px 8px #cdcdcd;
+    border-radius: 20px 0px;
+    background: #ddd;
+    color: #000 !important;
+}
+
+.selected .industries {
+    border: solid 1px #cdcdcd;
+    box-shadow: 2px 2px 8px #cdcdcd;
+    border-radius: 20px 0px;
+    background: #ddd;
+    color: #000;
+}
+
+.selected h6,
+.industries:hover h6 {
+    color: #000;
+}
+
+.industriesdata {
+    padding: 15px 15px 15px 0px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+
+.mb10 {
+    margin-bottom: 10px;
+}
+.mt10{
+    margin-top: 20px;
+}
+
+.divfix{
+    height: 10%;
+    width: 100%;
+}
+
+p,b,h3,h4,h5,h6,label,ul,li{
+    color:black !important;
+  }

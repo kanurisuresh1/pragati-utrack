@@ -1,0 +1,23 @@
+{
+    "HOME": {
+        "Title": "French",
+        "WelcomeMessage": "French Message",
+        "ID": "ID",
+        "VehicleName": "French Vehicle",
+        "vehicle_type": "French Type"
+    },
+    "PAGES_MENU": {
+        "HOME_NAME": "Accueil",
+        "HOME_MENU": {
+            "DASHBOARD": "Tableau de bord",
+            "LIVETRACK": "Piste en direct",
+            "TRACKHISTORY": "Historique du suivi",
+            "SUMMARYREPORT": "Rapport sommaire"
+        },
+        "MY_ACCOUNT": "Mon compte",
+        "MY_ACCOUNT_MENU": {
+            "MYPROFILE": "Mon profil",
+            "MYWALLET": "Mon portefeuille"
+        }
+    }
+}

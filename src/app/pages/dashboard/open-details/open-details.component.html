@@ -1,0 +1,398 @@
+<div class="row headeBackgoundCol">
+    <div class="col-md-8 col-xs-8">
+        <h5>
+            {{ vehicle_number }}
+            <b [ngStyle]="{ color: vehicle_type_color }">({{ vehicle_type }})</b>
+        </h5>
+    </div>
+    <div class="col-md-4 col-xs-4">
+        <button mat-dialog-close="true" style="padding: 3px 8px 2px;
+    line-height: 17px;" class="btn btn-info right"><i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            <b>
+      {{ "DASH_BOARD.OPENDETAILSCOMPONENT.SHARE_LOCATION" | translate }} :</b>
+        </h4>
+
+        <button (click)="modal.dismiss('Cross click')" style="padding: 3px 9px 5px;font-size: 15px;line-height: 17px;min-width: auto;" class="btn btn-sm btn-info">
+     x
+  </button>
+    </div>
+    <div class="modal-body ">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button (change)="radioChange($event)" [checked]="true" value="1">
+                {{ "DASH_BOARD.OPENDETAILSCOMPONENT.CURRENT_LOCATION" | translate }}
+            </mat-radio-button>
+            <mat-radio-button (change)="radioChange($event)" value="2">
+                {{ "DASH_BOARD.OPENDETAILSCOMPONENT.LIVE_LOCATION" | translate }}
+            </mat-radio-button>
+            <mat-radio-button (change)="radioChange($event)" value="3">
+                {{ "DASH_BOARD.OPENDETAILSCOMPONENT.TRIP" | translate }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div *ngIf="isLive" class="col-md-6">
+        <label><b>{{
+        "DASH_BOARD.OPENDETAILSCOMPONENT.SELECT_LIVE_LOCATION_DURATION"
+          | translate
+      }}</b></label>
+        <select class="form-control" (change)="onChange($event.target.value)">
+    <option value="" disabled>
+      {{ "DASH_BOARD.OPENDETAILSCOMPONENT.SELECT_DURATION" | translate }} :
+    </option>
+    <option value="60">1 Hour</option>
+    <option value="120">2 Hours</option>
+    <option value="240">4 Hours</option>
+    <option value="720">12 Hours</option>
+    <option value="1440">1 Day</option>
+    <option value="2880">2 Days</option>
+  </select>
+    </div>
+
+    <div *ngIf="isTrip" class="col-md-6">
+        <div *ngIf="!isTrip_data" class="col-md-12">
+            <p>{{ "DASH_BOARD.OPENDETAILSCOMPONENT.NO_TRIPS_FOUND" | translate }}</p>
+        </div>
+
+        <div *ngIf="isTrip_data" class="col-md-12">
+            <label>
+      <b>{{ "DASH_BOARD.OPENDETAILSCOMPONENT.SELECT_TRIP" | translate }} :</b></label>
+            <select class="form-control" (change)="onTripChange($event.target.value)">
+      <option value="" disabled>Select Trip</option>
+      <option *ngFor="let item of trip" [value]="item.trip_id">
+        {{ item.trip_name }}
+      </option>
+    </select>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px" class="modal-footer">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" class="btn btn-primary">
+    {{ "DASH_BOARD.OPENDETAILSCOMPONENT.CANCEL" | translate }}
+  </button>
+        <button type="button" class="btn btn-warning" (click)="shareLocation()">
+    {{ "DASH_BOARD.OPENDETAILSCOMPONENT.SHARE" | translate }}
+  </button>
+    </div>
+</ng-template>
+<p class="line"></p>
+
+<div class="row">
+    <div class="col-md-12" style="margin:-3px -0px 13px -9px;padding-right: 0px;">
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="isHome" class="mb10 mt10 panel-color" (click)="home()">
+                <mat-expansion-panel-header>
+                    <mat-panel-title><b class="text-color">Home </b></mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col-md-12">
+                    <div class="row" style="margin-bottom: -8px;">
+                        <div class="col-md-2 col-xs-2 mb20 pointer mt-10">
+                            <a (click)="liveTrack()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/2_live_track.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.LIVE_TRACK" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 mb20 pointer mt-10 pointer mt-10">
+                            <a (click)="trackHistory()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/1_tracker_details.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.TRACK_HISTORY" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="summaryReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/3_summary_report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.SUMMARY_REPORT" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="open(content)">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/12_share_live_location.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.SHARE_LOCATION" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="col-md-12" style="margin:-15px -0px 13px -9px;padding-right: 0px;">
+        <mat-accordion>
+            <mat-expansion-panel class="mb10 mt10 panel-color" [expanded]="isReports" (click)="reports()">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> <b class="text-color">Reports</b></mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col-md-12">
+                    <div class="row" style="margin-bottom: -8px;">
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="stoppageReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\stop-page-report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.STOPPAG_REPORT" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="trackReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\track_report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.TRACK_REPORT" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="distanceReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\distance_report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.DISTANCE_REPORT" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="daywiseReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\daywise.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Daywise KM
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="dailySummaryKMReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\daily_summary_report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Daily Summary KM
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="twenty4HoursKMReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\24_hrs_report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        24 Hours KM
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="twenty4HoursAnalysisReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\24_hrs_report_analytics.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        24 Hours Analysis
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="geofenceKMReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\geofance_report.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Geofence
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="trackNearestvechicleKMReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\track-nearest.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Track Nearest
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="temperatureReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\temparature.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Temeperature
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="fuelReport()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets\images\reports_charts\fuel.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Fuel
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="col-md-12" style="margin:-15px -0px 0px -9px;padding-right: 0px;">
+        <mat-accordion>
+            <mat-expansion-panel class="mb10 mt10 panel-color" [expanded]="isFleet" (click)="fleet()">
+                <mat-expansion-panel-header>
+                    <mat-panel-title><b class="text-color"> Fleet Managemet</b></mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col-md-12">
+                    <div class="row" style="margin-bottom: -8px;">
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="vehicleDetails()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/4_vehicle_details.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.VEHICLE_DETAILS" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="vehicleServicing()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/5_servicing_history.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        Servicing History
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a>
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/6_service_reminders.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center" style="font-size: 12px;margin-top: 10px;">
+                                        Servicing Reminders
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="fuelManagement()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/7_fuel_reports.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.FUEL_MANAGEMENT" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div *ngIf="!isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a>
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/8_trips.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.MY_TRIPS" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <div *ngIf="isShowEmergency" class="col-md-2 mb20 pointer mt-10">
+                            <a (click)="emergencyContactDialog()">
+                                <div class="popup-icon">
+                                    <div class="icon-box mb10">
+                                        <img src="assets/images/dialog_icons/ic_emagency-contact.png" alt="" class="img-responsive" />
+                                    </div>
+                                    <p class="text-center">
+                                        {{ "DASH_BOARD.OPENDETAILSCOMPONENT.EMERGENCY_CONTACT" | translate }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

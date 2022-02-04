@@ -1,0 +1,220 @@
+.text-blue {
+    color: #0b46ae !important;
+    margin-bottom: 5px;
+}
+
+.ml15{
+    margin-left: 15px;
+}
+
+.btn-yellow-outline {
+    border-radius: 50px !important;
+    padding: 2px 11px !important;
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: solid 2px #febe40;
+}
+
+.btn-yellow-outline:hover {
+    border: solid 2px #febe40;
+    background: #0b46ae;
+    color: #fff !important
+}
+
+.btn-pink-outline {
+    border-radius: 50px !important;
+    padding: 5px 15px !important;
+    background: #FF69B4;
+    color: #fff !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: solid 2px #FF69B4;
+}
+
+.btn-pink-outline:hover {
+    border: solid 2px #FF69B4;
+    background: #0b46ae;
+    color: #fff !important
+}
+
+
+.btn-pink-outline i,
+.btn-pink i {
+    margin-right: 5px;
+}
+
+
+.textcenter{
+    margin-left: 75px;
+}
+
+
+.buy-plans {
+    margin: 0px 0px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.buy-plans h5 {
+    background: #e2e2e2;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.buy-plans:hover,
+.list-item:hover {
+    box-shadow: 0px 0px 10px #7c7c7c;
+}
+
+
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.plans-data {
+    padding: 0px 1px;
+    min-height: 34px;
+}
+
+.plans-data p,
+.plans-data h6 {
+    margin-bottom: 0px;
+    padding: 4px 15px;
+}
+
+.plans-data h6 {
+    font-size: 16px !important;
+}
+
+.plans-data h6 {
+    margin-bottom: 5px;
+    overflow: hidden;
+    padding: 0px 15px;
+}
+
+.plans-data i {
+    font-size: 16px;
+}
+
+
+.bg-gray {
+    background-color: #ccc !important;
+    padding: 15px;
+    border-radius: 6px 6px 0px 0px;
+}
+
+.mr15{
+    margin-left:15px;
+}
+
+.bdr-btm {
+    border-bottom: solid 1px #ccc
+}
+
+.height-80vh {
+    height: 45vh;
+    overflow: hidden;
+}
+
+.bdr-btm1 {
+    border-bottom: solid 1px #e2e2e2
+}
+
+  .example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+  }
+  
+  .example-container table td {
+    padding: 10px !important;
+  }
+  .example-container table {
+    overflow-x: scroll !important;
+  }
+  
+.mt10{
+  margin-top: 10px;
+}
+  
+  .mt20 {
+    margin-top: 20px;
+  }
+  .mt30{
+    margin-top: 30px;
+  }
+  .mb10{
+    margin-bottom: 10px;
+  }
+  .mb20 {
+    margin-bottom: 20px;
+  }
+  .my-custom-scrollbar {
+    overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+    display: block;
+  }
+  
+  .mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+  }
+  
+
+  .ml-20 {
+    margin-left: -20px !important;
+  }
+  
+
+  ::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+  
+  }
+  
+  ::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+  }
+  ::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+  }
+  
+
+  
+  ::ng-deep .mat-form-field {
+    width: 100% !important;
+  }
+  
+  ::ng-deep .mat-form-field .form-control {
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 13px;
+  }
+  
+  p,b,h5,h6{
+    color:black !important;
+  }
+
+  // table row hover effect 
+
+tr:hover {
+  background-color: #b3f0ff;
+}

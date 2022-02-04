@@ -1,0 +1,86 @@
+.address {
+    line-height: 26px;
+}
+
+.address h5 {
+    margin-bottom: 10px
+}
+
+.animation-examples {
+    width: 150px;
+    margin: auto;
+    vertical-align: middle;
+    padding: 5px 10px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.animation-examples.one {
+    color: #000;
+    outline: 6px dashed #febe40;
+    box-shadow: 0 0 0 6px #0b46ae;
+    animation: 1s animateBorderOne ease infinite;
+}
+
+.btn-round {
+    border-radius: 50px !important;
+    padding: 15px !important;
+    background: #0b46ae;
+    width: 100%;
+    color: #fff !important;
+    font-size: 14px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.btn-round:hover {
+    background: #febe40;
+    color: #242424 !important
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd
+}
+
+.no-pad {
+    padding: 0px 0px
+}
+
+
+.mb10 {
+    margin-bottom: 10px
+}
+
+
+
+.mb20 {
+    margin-bottom: 20px
+}
+
+.mb30 {
+    margin-bottom: 30px
+}
+
+
+.mt10 {
+    margin-top: 10px
+}
+
+
+.mt20 {
+    margin-top: 20px
+}
+
+
+.mt30 {
+    margin-top: 30px
+}
+
+p,b,h4,h5,h6,label{
+    color:black !important;
+  }

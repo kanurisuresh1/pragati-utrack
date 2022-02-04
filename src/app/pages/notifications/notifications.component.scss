@@ -1,0 +1,115 @@
+.height-80vh {
+    height: 500px;
+    overflow: hidden;
+}
+
+.height-80vh {
+    height: 80vh;
+    overflow: hidden;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    padding: 15px 0px;
+}
+
+
+h5{
+    padding: 6px 0px;
+    font-size: 19px;
+    color: #fff;
+}
+
+.no-pad {
+    padding: 0px 0px;
+}
+
+.no-pading {
+    padding: 5px 5px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.table-nw {
+    margin-bottom: 0 !important;
+}
+
+.date-time {
+    color: #0b46ae;
+}
+
+.date-time i {
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.date-time span {
+    margin-right: 10px;
+}
+
+.bg-gray {
+    background: #d2d0d0;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+
+}
+
+::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+}
+::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+}
+
+.example-tab-icon {
+    margin-right: 8px !important;
+}
+
+// table row hover effect 
+
+tr:hover {
+    background-color: #b3f0ff;
+  }
+
+.datanotfound{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+  }
+

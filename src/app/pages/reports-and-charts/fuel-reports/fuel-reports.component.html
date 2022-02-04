@@ -1,0 +1,158 @@
+<div [formGroup]="fuelSearchForm" class="widthifix">
+    <div class="row clearfix">
+        <div class="auto-width">
+            <label>&nbsp;</label><br>
+            <button class="btn btn-primary btnsize" nbTooltip="Back" nbTooltipStatus="primary"
+                [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label> {{'REPORTS_CHARTS.FUEL_REPORT.SELECT_VEHICLE_TITLE' | translate }}</label><br>
+                <mat-select class="form-control" formControlName="vechicleName" [(ngModel)]="deviceLinkId"
+                    placeholder="Select Vehicle" #singleSelect>
+                    <mat-option>
+                        <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholderLabel="Search Vehicle..."
+                            noEntriesFoundLabel="'no matching vehicle found'" placeholder="Search Vehicle">
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let row of filteredVehicleNumber | async" (click)="updateSelectedValue(row)"
+                        [value]="row.device_link_id">
+                        {{row.vehicle_number}} ({{row.vehicle_type}})
+                    </mat-option>
+                </mat-select>
+            </div>
+
+        </div>
+
+        <div class="auto-width">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.FUEL_REPORT.SELECT_START_DATE' | translate }}</label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" [max]="currentDate" [min]="minStartDate" matInput
+                        [matDatetimepicker]="stateDatepicker" formControlName="startDate">
+                    <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #stateDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="auto-width">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.FUEL_REPORT.SELECT_END_DATE' | translate }}</label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" [max]="currentDate" [(ngModel)]="endDate" matInput
+                        [matDatetimepicker]="endDatepicker" formControlName="endDate">
+                    <mat-datetimepicker-toggle matSuffix [for]="endDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #endDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="auto-width">
+            <button type="submit" style="margin-left: -5px;" (click)="viewReport()" class="btn btn-primary sub">
+                {{'REPORTS_CHARTS.FUEL_REPORT.VIEW_REPORT' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix" style="margin-bottom:20px;margin-top: -25px;">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp;{{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                class="fa fa-file-pdf"></i>
+            &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()"
+            nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                class="fa fa-sync"></i></button>
+    </div>
+</div>
+
+<mat-tab-group>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">art_track</mat-icon>
+            {{'REPORTS_CHARTS.FUEL_REPORT.FUEL_RAW_DATA_REPORT' | translate }}
+        </ng-template>
+        <div style="margin-top: 15px;">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table class="table-bordered table" mat-table [dataSource]="dataSource" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'REPORTS_CHARTS.FUEL_REPORT.DATE_TIME' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.dt}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fuel">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'REPORTS_CHARTS.FUEL_REPORT.FUEL' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.fuel_avg}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="latitude">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'REPORTS_CHARTS.FUEL_REPORT.LATITUDE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.la}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="longitude">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'REPORTS_CHARTS.FUEL_REPORT.LONGITUDE' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.lo}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="landmark">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'REPORTS_CHARTS.FUEL_REPORT.LANDMARK' | translate }}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.ld}} KM From {{element.ln}}</td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    </table>
+                    <div class="col-md-12" *ngIf="FuelTableDataNotshow">
+                        <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">multiline_chart</mat-icon>
+            {{'REPORTS_CHARTS.FUEL_REPORT.GRAPH_REPORT' | translate }}
+        </ng-template>
+
+        <div class="pad15-box">
+            <div class="clearfix"></div>
+            <div echarts [options]="options" class="echart"></div>
+            <div class="col-md-12" *ngIf="GraphDataNotshow">
+                <p class="Graphdatanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+            </div>
+        </div>
+
+   
+    </mat-tab>
+
+
+</mat-tab-group>

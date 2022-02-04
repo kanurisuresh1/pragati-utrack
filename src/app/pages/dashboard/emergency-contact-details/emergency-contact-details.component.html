@@ -1,0 +1,129 @@
+<div class="col-md-12">
+    <i style="font-size: 30px;  right: 338px;  position: fixed;  top: 78px;" class="fa fa-times-circle"
+        mat-dialog-close="false" nbTooltip="Close" nbTooltipStatus="info"></i>
+</div>
+<mat-dialog-actions>
+    <h4 style="color: red;"> Emergency Contact Details :</h4>
+    <hr>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card-body" [formGroup]="emergencyContactForm">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Emergency Name1
+                                    <span class="required">*</span></label>
+                                <input type="text" style="text-transform: capitalize;" formControlName="ecname1"
+                                    [(ngModel)]="ec_name_1" onkeypress="return /[a-z]/i.test(event.key)" maxlength="30"
+                                    class="form-control" placeholder="Enter Emergency Name1">
+                                <mat-error
+                                    *ngIf="emergencyContactForm.controls['ecname1'].errors && emergencyContactForm.controls['ecname1'].touched">
+                                    <span *ngIf="emergencyContactForm.controls['ecname1'].errors.required">
+                                        Enter Emergency Name 1
+                                    </span>
+                                    <span *ngIf="emergencyContactForm.controls['ecname1'].errors.minlength">
+                                        Enter Minimum 3 Letters
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Emergency Number1
+                                    <span class="required">*</span></label>
+                                <input type="text" name="mobilenumber" maxlength="10" formControlName="ecnum1"
+                                    [(ngModel)]="emergency_contact_1" pattern="^[6-9]\d{9}$"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    class="form-control" placeholder="Enter Mobile Number1">
+                                <mat-error
+                                    *ngIf="emergencyContactForm.controls['ecnum1'].errors && emergencyContactForm.controls['ecnum1'].touched">
+                                    <span *ngIf="emergencyContactForm.controls['ecnum1'].errors.required">
+                                        Enter Emergency Mobile Number 1
+                                    </span>
+                                    <span *ngIf="emergencyContactForm.controls['ecnum1'].errors.minlength"
+                                        style="color:red;">Mobile Number atleast 10
+                                        digits</span>
+                                    <span *ngIf="emergencyContactForm.controls['ecnum1'].errors.pattern">
+                                        Mobile Number Should Start With 6,7,8 or 9
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Emergency Name2
+                                    <span class="required"></span></label>
+                                <input type="text" name="fullname" style="text-transform: capitalize;"
+                                    formControlName="ecname2" [(ngModel)]="ec_name_2"
+                                    onkeypress="return /[a-z]/i.test(event.key)" maxlength="30" class="form-control"
+                                    placeholder="Enter Emergency Name2">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Emergency Number2
+                                    <span class="required"></span></label>
+                                <input type="text" name="mobilenumber" maxlength="10" formControlName="ecnum2"
+                                    [(ngModel)]="emergency_contact_2"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    class="form-control" placeholder="Enter Mobile Number2">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Emergency Name3
+                                    <span class="required"></span></label>
+                                <input type="text" name="fullname" style="text-transform: capitalize;"
+                                    formControlName="ecname3" [(ngModel)]="ec_name_3"
+                                    onkeypress="return /[a-z]/i.test(event.key)" maxlength="30" class="form-control"
+                                    placeholder="Enter Emergency Name3">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Emergency Number3
+                                    <span class="required"></span></label>
+                                <input type="text" name="mobilenumber" maxlength="10" formControlName="ecnum3"
+                                    [(ngModel)]="emergency_contact_3"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..)\./g, '$1');"
+                                    class="form-control" placeholder="Enter Mobile Number3">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Emergency Message
+                                    <span class="required"></span></label>
+                                <textarea type="text" style="text-transform: capitalize;" formControlName="ecmessage"
+                                    [(ngModel)]="ec_sms_num_1" onkeypress="return /[A-Za-z _]/i.test(event.key)"
+                                    class="form-control" placeholder="Enter Emergency Message"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-sm mrl5" mat-dialog-close="false">Cancel</button>
+                            <button class="btn btn-primary btn-sm mrl5" (click)="saveEmergency()">Save
+                                Emergency</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</mat-dialog-actions>

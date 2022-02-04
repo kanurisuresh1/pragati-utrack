@@ -1,0 +1,166 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<div class="col-md-12" style="margin-top: 20px;margin-bottom: 20px;">
+    <div class="row buy-plans">
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data bdr-btm">
+                <p> {{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.NAME' | translate}} </p>
+                <!-- <h5><b id="customer_name">{{customerDetails.full_name}}</b></h5> -->
+                <h6>{{customerName}}</h6>
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data bdr-btm">
+                <p> {{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.MOBILE_NUMBER' | translate}} </p>
+                <!-- <h5><b id="customer_mobile">{{customerDetails.mobile}}</b></h5> -->
+                <h6>{{customerMobile}}</h6>
+
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data bdr-btm">
+                <p>{{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.EMAIL' | translate}}</p>
+                <h6>{{customerEmail}}</h6>
+                <!-- <h5><b id="customer_email">{{customerDetails.email}}</b></h5> -->
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data bdr-btm">
+                <p>{{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.COMPANY_NAME' | translate}}</p>
+                <h6>{{companyName}}</h6>
+                <!-- <h5><b id="company_name">{{customerDetails.company_name}}</b></h5> -->
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.GST_NO' | translate}}</p>
+                <h6>{{gstNo}}</h6>
+                <!-- <h5><b id="customer_gst_number">{{customerDetails.gst_number}}</b></h5> -->
+            </div>
+        </div>
+
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.RIGISTERD_DATE' | translate}}</p>
+                <h6>{{registerdDate | date: 'dd/MMM/yyyy'}}</h6>
+
+                <!-- <h5><b id="customer_rigister_date">{{customerDetails.added_date | date: 'dd/MMM/yyyy'}}</b></h5> -->
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.STATE' | translate}}</p>
+                <h6>{{stateName}}</h6>
+
+                <!-- <h5><b id="customer_state">{{customerDetails.state}}</b></h5> -->
+            </div>
+        </div>
+        <div class="col-md-3 mb10 text-left">
+            <div class="plans-data">
+                <p>{{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.FULL_ADDRESS' | translate}}</p>
+                <h6>{{fullAddress}}</h6>
+                <!-- <h5><b id="customer_address">{{customerDetails.address1}}</b></h5> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<mat-tab-group animationDuration="1000ms">
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">remove_red_eye</mat-icon>
+            {{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.COMPLETED_TRIPS' | translate}}
+        </ng-template>
+        <table>
+            <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr>
+            <tr>
+                <td>Ernst Handel</td>
+                <td>Roland Mendel</td>
+                <td>Austria</td>
+            </tr>
+            <tr>
+                <td>Island Trading</td>
+                <td>Helen Bennett</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Laughing Bacchus Winecellars</td>
+                <td>Yoshi Tannamuri</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Giovanni Rovelli</td>
+                <td>Italy</td>
+            </tr>
+        </table>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+            {{'FLEET_MANAGEMENT.CUSTOMER_DETAILS_COMPONENT.ACTIVE_TRIPS' | translate}}
+        </ng-template>
+        <table>
+            <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr>
+            <tr>
+                <td>Ernst Handel</td>
+                <td>Roland Mendel</td>
+                <td>Austria</td>
+            </tr>
+            <tr>
+                <td>Island Trading</td>
+                <td>Helen Bennett</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Laughing Bacchus Winecellars</td>
+                <td>Yoshi Tannamuri</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Giovanni Rovelli</td>
+                <td>Italy</td>
+            </tr>
+        </table>
+    </mat-tab>
+
+</mat-tab-group>

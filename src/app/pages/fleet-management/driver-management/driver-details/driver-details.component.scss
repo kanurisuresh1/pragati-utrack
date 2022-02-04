@@ -1,0 +1,377 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+def,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #242424;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #242424;
+}
+
+.buy-plans {
+    margin: 0px 10px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.buy-plans h3 {
+    background: #e2e2e2;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.buy-plan {
+    margin: 0px 0px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+h4{
+    color:black !important;
+  }
+
+.buy-plan h4 {
+    background: #e2e2e2;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.buy-plans:hover,
+.list-item:hover {
+    box-shadow: 0px 0px 10px #7c7c7c;
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
+
+.mb40 {
+    margin-bottom: 40px;
+}
+
+.mb50 {
+    margin-bottom: 50px;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt25 {
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.mt35 {
+    margin-top: 35px;
+}
+
+.mt40 {
+    margin-top: 40px;
+}
+
+.mt50 {
+    margin-top: 50px;
+}
+
+.buy-plans:hover .img {
+    cursor: pointer;
+    animation-name: bounce;
+    -moz-animation-name: bounce;
+}
+
+.buy-plans .img {
+    left: 0%;
+    line-height: 180px;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    color: white;
+}
+
+@keyframes bounce {
+    0%,
+    100%,
+    20%,
+    50%,
+    80% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -webkit-transform: translateY(-30px);
+        -ms-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+
+    60% {
+        -webkit-transform: translateY(-15px);
+        -ms-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+}
+
+.imagebox {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+}
+
+.imagebox img,
+.img-responsive {
+    width: 100%;
+}
+
+.home-imagebox {
+    width: 97px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.home-imagebox img,
+.img-responsive {
+    width: 100%;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+// Dashboard CSS Ending
+
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+.example-container table {
+    overflow-x: scroll !important;
+}
+
+.mr15 {
+    margin-right: 15px !important;
+}
+.mr12 {
+    margin-left: -49px;
+    padding: 1px 1px 0px;
+}
+
+.mt50 {
+    margin-top: 76px;
+}
+.my-custom-scrollbar {
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.mat-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 6px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+}
+.ml-20 {
+    margin-left: -20px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    border-radius: 0.2rem;
+}
+
+.pad15-box {
+    padding: 15px !important;
+}
+
+.id-header {
+    padding: 15px;
+    background-color: #e1e1e1;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.id-header img {
+    height: 80px;
+    width: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0px 10px;
+}
+.bdr-btm {
+    border-bottom: solid 1px #ccc;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+
+
+
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-is-1, .col-is-2, .col-is-3, .col-is-4, .col-is-5, .col-is-6, .col-is-7, .col-is-8, .col-is-9, .col-is-10, .col-is-11, .col-is-12, .col-is, .col-is-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto, .col-xxl-1, .col-xxl-2, .col-xxl-3, .col-xxl-4, .col-xxl-5, .col-xxl-6, .col-xxl-7, .col-xxl-8, .col-xxl-9, .col-xxl-10, .col-xxl-11, .col-xxl-12, .col-xxl, .col-xxl-auto, .col-xxxl-1, .col-xxxl-2, .col-xxxl-3, .col-xxxl-4, .col-xxxl-5, .col-xxxl-6, .col-xxxl-7, .col-xxxl-8, .col-xxxl-9, .col-xxxl-10, .col-xxxl-11, .col-xxxl-12, .col-xxxl, .col-xxxl-auto{
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+}
+
+//MAT CARD CSS
+
+.example-card {
+    margin: 15px 0px;
+    /* padding: 0px; */
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s;
+    padding-top: 0px;
+}
+
+// MAT CARDS CSS
+
+.mat-card-header .mat-card-title {
+    font-size: 20px !important;
+    margin-left: 100px !important;
+    margin-top: 10px;
+}
+
+.mat-card-header {
+    flex-direction: unset;
+    background-color:#ccc;
+    margin: 8px -16px 25px;
+    display: flex;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+// table row hover effect 
+
+tr:hover {
+    background-color: #b3f0ff;
+  }

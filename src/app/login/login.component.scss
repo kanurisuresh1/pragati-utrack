@@ -1,0 +1,181 @@
+.md-form label {
+    font-size: 14px !important;
+}
+
+.md-form label.active {
+    font-size: 14px !important;
+    color: #757575;
+}
+
+.leftpannel {
+    width: 50% !important;
+    background: #eee;
+    height: 100vh;
+    background-image: url("assets/images/login/leftpannel-bg.jpg");
+    // background-image: url("../../assets/images/login/leftpannel-bg.jpg");
+    background-size: cover;
+    float: left;
+}
+
+.rightpannel {
+    width: 50% !important;
+    background: #fff;
+    height: 100vh;
+    float: right;
+}
+
+.main-logo {
+    width: 160px !important;
+    margin: auto;
+}
+
+.foot-logo {
+    width: 120px !important;
+    margin: auto;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.mb40 {
+    margin-bottom: 40px;
+}
+
+.login-section {
+    width: 450px;
+    background: #fff;
+    padding: 30px;
+    height: auto;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-section img {
+    width: 100%;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+span {
+    color: red;
+}
+
+//sigun up css
+.circle {
+    border-radius: 50% !important;
+    overflow: hidden;
+    width: 78px;
+    height: 78px;
+    border: 2px solid #0b46ae;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+.p-image {
+    position: relative;
+    left: 48.5%;
+    top: -40px;
+    font-size: 16px;
+    text-align: center;
+    color: #242424;
+    background: #febe40;
+    border-radius: 50%;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.p-image:hover {
+    transition: all 0.3s;
+    color: #0b46ae;
+}
+
+.img-row {
+    margin-bottom: -4.5rem !important;
+}
+.required {
+    color: red;
+}
+label {
+    font-weight: bold;
+}
+.mrleftright {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+.innersignup {
+    overflow-x: hidden !important;
+    overflow: scroll;
+    height: 95vh !important;
+}
+
+.profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+}
+
+.CheckBoxform {
+    display: flex; /* 2. display flex to the rescue */
+    flex-direction: row;
+}
+
+.imgcrop {
+    display: flex;
+    position: relative;
+    width: 80%;
+    max-width: 108%;
+    max-height: 138%;
+    overflow: hidden;
+    padding: 0px;
+    text-align: center;
+}
+
+.model-resize-outviwe {
+    margin-top: 70px;
+    max-width: 650px;
+}
+
+.model-resize {
+    height: 450px;
+    width: 650px;
+    margin-left: -110px;
+}
+
+.model-resize-outviwe-signup {
+    margin-top: 6px;
+}
+
+.model-resize-signup {
+    height: 620px;
+    width: 750px;
+}
+
+.signhight {
+    margin-top: -10px;
+}

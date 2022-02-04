@@ -1,0 +1,133 @@
+<div class="fix-part">
+    <div class="row clearfix">
+        <div class="col-md-9 text-left">
+            <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+                [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+            <label>
+                <input type="search" matInput id="searchMyrouteName" (keyup)="applyFilter($event)"
+                    class="form-control search-field pull-left" placeholder="Search Route">
+            </label>
+            <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                    class="fa fa-search"></i></button>
+       
+            <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="exportexcle()"><i
+                    class="fa fa-file-excel"></i> &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+            <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                    class="fa fa-file-pdf"></i>
+                &nbsp;{{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+            <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()"
+                nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                    class="fa fa-sync"></i></button>
+        </div>
+        <div class="col-md-3 text-right">
+            <div class="form-group">
+                <button class="btn btn-warning btn-sm" (click)="createMyRoute()"><b>
+                        {{'REPORTS_CHARTS.MY_ROUTE.CREATE_ROUTE' | translate }}</b></button>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div>
+                <div class="example-container mat-elevation-z8" id="content" #content>
+                    <div class="table-responsive" style="height: 500px; overflow: auto !important;">
+                        <table class="table-bordered table" mat-table [dataSource]="MyRouteListdataSource" matSort
+                            #TableOneSort="matSort">
+
+                            <ng-container matColumnDef="id">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                                </th>
+                                <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="route_name">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.ROUTE_NAME' | translate }}
+                                </th>
+                                <td class="cellSpace" mat-cell *matCellDef="let element"><a
+                                        (click)="myrouteDetails(element.route_name,element.start_location,element.end_location,element.distance,element.travel_time_mins)"
+                                        style="cursor: pointer;text-decoration: underline;color: blue;">{{element.route_name}}</a>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="start_location">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.SOURCE_LOCATION' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="end_location">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.DISTANCE_LOCATION' | translate }}
+                                </th>
+                                <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.end_location}} KMS
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="stops">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.STOPS' | translate }}
+                                </th>
+                                <td mat-cell class="cellSpace" *matCellDef="let element"> 3 </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="trips">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.TRIPS' | translate }}
+                                </th>
+                                <td mat-cell class="cellSpace" *matCellDef="let element"> 2
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="vehicles">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.VEHICLES' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element"> 6 </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="distance">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.DISTANCE' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="duretion">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.DURETION' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{element.travel_time_mins}} </td>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="Actions">
+                                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    {{'REPORTS_CHARTS.MY_ROUTE.ACTIONS' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element"><a nbTooltip="Edit Route"
+                                        nbTooltipStatus="primary"><i class="fa fa-edit text-blue "
+                                            (click)="edit(element)" style="cursor: pointer;color: blue;"></i></a>
+                                </td>
+
+                            </ng-container>
+
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumn;sticky:true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+
+                        </table>
+                        
+                        <div class="col-md-12" *ngIf="TableDataNotshow">
+                            <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

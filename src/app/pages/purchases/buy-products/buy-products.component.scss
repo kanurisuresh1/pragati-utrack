@@ -1,0 +1,109 @@
+.btn-yellow {
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin: 4px 0px;
+    border-radius: 25px;
+    padding: 10px !important;
+}
+
+.btn-yellow:hover {
+    background: #0b46ae !important;
+    color: #fff !important
+}
+
+.btn-theme {
+    border-radius: 50px !important;
+    padding: -1px 40px !important;
+    background: #0b46ae;
+    color: #fff !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 33px;
+    margin-left: 18px;
+}
+
+.btn-theme:hover {
+    background: #febe40;
+    color: #242424 !important
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  }
+
+  .white-bg {
+    background: #fff;
+    border: solid 1px #ddd
+}
+
+.buy-plan {
+    margin: 0px 0px;
+    padding: 0px;
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s
+}
+
+.buy-plan h6 {
+    background: #e2e2e2;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px
+}
+
+.plans-data {
+    padding: 0px 1px;
+    min-height: 34px;
+}
+
+.plans-data p {
+    margin-bottom: 0px;
+    padding: 0px 10px;
+    font-size: 16px !important;
+    margin-bottom: 5px;
+    overflow: hidden;
+    padding: 0px 15px
+}
+
+.plans-data i {
+    font-size: 16px
+}
+
+.mt5{
+    margin-top: 5px;
+}
+.mt10{
+    margin-top: 10px;
+}
+
+.mb10{
+    margin-bottom: 10px;
+}
+
+.mb15{
+    margin-bottom: 15px;
+}
+
+
+.responsive {
+    width: 80%;
+    height: 45%;
+    // border-radius: 50%;
+}
+.bdr-btm1 {
+    border-bottom: solid 1px #e2e2e2
+}
+
+
+
+

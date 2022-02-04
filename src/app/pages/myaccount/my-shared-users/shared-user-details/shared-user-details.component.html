@@ -1,0 +1,85 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+
+        <label>
+            <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+                class="form-control search-field pull-left" placeholder="Search Driver">
+        </label>
+        <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                class="fa fa-search"></i></button>
+        <button class="btn btn-success pull-left mr15 btn-sm"><i class="fa fa-filter"
+                aria-hidden="true"></i>{{'COMMON_BUTTON_ALL_COMPONENT.FILTTER' | translate}}</button>
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button
+            (click)="exporter.exportTable('xlsx', {fileName:'Shared Users List', sheet: 'SharedUsers', Props: {Author: 'Talha'}})"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                class="fa fa-file-pdf"></i>
+            &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+        <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+            [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refresh()"><i
+                class="fa fa-sync"></i></button>
+    </div>
+</div>
+
+
+<div>
+    <div class="example-container mat-elevation-z8" id="content" #content>
+        <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+            <table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[3]" class="table-bordered table"
+                mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="user_id">
+                    <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container style="border-radius: 50%;" matColumnDef="profile_image">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"><img src="{{element.profile_image}}"></td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="vehicle_number">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'MY_ACCOUNT.SHARED_USER_DETAILS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.vehicle_number}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicle_type">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'MY_ACCOUNT.SHARED_USER_DETAILS_COMPONANT.VEHICLE_TYPE' | translate}}
+                    </th>
+                    <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.vehicle_type}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Assigned">
+                    <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{'MY_ACCOUNT.SHARED_USER_DETAILS_COMPONANT.ASSIGNED' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <section class="example-section">
+                            <mat-slide-toggle class="example-margin" [color]="color" [checked]="element.checked"
+                                (change)="toggle($event, element.device_link_id)">
+
+                            </mat-slide-toggle>
+                        </section>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <div class="col-md-12"  *ngIf="TableDataNotshow">
+                <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+              </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,219 @@
+<div class="row">
+    <div class="col-md-10">
+
+        <h4 *ngIf="isAddFuel"> {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ADD_FUEL_FILLING' | translate}}: </h4>
+        <h4 *ngIf="!isAddFuel"> {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.EDIT_FUEL_FILLING' | translate}} : </h4>
+
+    </div>
+    <div class="col-md-2">
+        <button mat-dialog-close="true" style="padding: 3px 8px 2px;margin-left: 100px;
+line-height: 17px;
+min-width: auto;" class="btn btn-sm btn-info">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    </div>
+</div>
+<hr>
+<mat-dialog-actions [formGroup]="createFuelReportForm">
+
+    <!-- <mat-form-field appearance="fill">
+        <label>Select Vehicle</label>
+        <mat-select formControlName="vechicleName">
+            <mat-option *ngFor='let row of vehicles' [value]="row">{{ row.vehicle_number }}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+    <div style="border-radius:10px">
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card-body">
+                    <div class="row">
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> {{'FLEET_MANAGEMENT.Fuel_MANAGEMENT_COMPONENT.VEHICLE_NUMBER' | translate}}<span class="required">*</span></label>
+                                <select class="form-control" [(ngModel)]="deviceLinkId" formControlName="vechicleName">
+                                    <option *ngFor='let row of vehicles' [ngValue]="row.device_link_id">{{
+                                        row.vehicle_number }}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.FILLING_DATE' | translate}} <span
+                                        class="required">*</span></label>
+                                <mat-form-field class="no-line">
+                                    <!-- <mat-label>Choose Filling Date</mat-label> -->
+                                    <!-- #docregion toggle -->
+                                    <input style="margin-top: -17px;" matInput class="form-control datepicker" [matDatepicker]="picker" [max]="todayDate" [(ngModel)]="filling_date" formControlName="fillingDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <!-- #enddocregion toggle -->
+                                    <mat-error *ngIf="createFuelReportForm.controls['fillingDate'].errors && createFuelReportForm.controls['fillingDate'].touched">
+                                        <span *ngIf="createFuelReportForm.controls['fillingDate'].errors.required">
+                                            {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_FILLING_DATE' | translate}}
+                                        </span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ODOMETER_READING' | translate}}<span
+                                        class="required">*</span></label>
+                                <input type="text" name="odometerReading" [(ngModel)]="odometer_reading" formControlName="odometerReading" maxlength="7" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Enter Odometer Reading">
+                                <mat-error *ngIf="createFuelReportForm.controls['odometerReading'].errors && createFuelReportForm.controls['odometerReading'].touched">
+                                    <span *ngIf="createFuelReportForm.controls['odometerReading'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_ODOMETER_READING' | translate}}
+                                    </span>
+                                    <span *ngIf="createFuelReportForm.controls['odometerReading'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.TOTAL_PRICE' |
+                                    translate}} <span class="required">*</span></label>
+                                <input type="text" name="totalPrice" [(ngModel)]="total_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" formControlName="totalPrice" class="form-control" maxlength="7" placeholder="Enter Total Price">
+                                <mat-error *ngIf="createFuelReportForm.controls['totalPrice'].errors && createFuelReportForm.controls['totalPrice'].touched">
+                                    <span *ngIf="createFuelReportForm.controls['totalPrice'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_TOTAL_PRICE' | translate}}
+                                    </span>
+                                    <span *ngIf="createFuelReportForm.controls['totalPrice'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.PRICE_PER_LITER'
+                                    | translate}} <span class="required">*</span></label>
+                                <input type="text" name="pricePerLiter" [(ngModel)]="price_per_liter" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" formControlName="pricePerLiter" class="form-control" maxlength="5" placeholder="Enter Price Per Liter">
+                                <mat-error *ngIf="createFuelReportForm.controls['pricePerLiter'].errors && createFuelReportForm.controls['pricePerLiter'].touched">
+                                    <span *ngIf="createFuelReportForm.controls['pricePerLiter'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_PRICE_PER_LITERE' | translate}}
+                                    </span>
+                                    <span *ngIf="createFuelReportForm.controls['pricePerLiter'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.FUEL_QUANTIITY_IN_LITERS' | translate}} <span
+                                        class="required">*</span></label>
+                                <input type="text" name="fuelQuantity" [(ngModel)]="fuel_quantity_in_ltr" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" formControlName="fuelQuantity" maxlength="5" class="form-control" placeholder="Enter Fuel Quantiity">
+                                <mat-error *ngIf="createFuelReportForm.controls['fuelQuantity'].errors && createFuelReportForm.controls['fuelQuantity'].touched">
+                                    <span *ngIf="createFuelReportForm.controls['fuelQuantity'].errors.required">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_FUEL_QUANTIITY_IN_LITERS' |
+                                        translate}}
+                                    </span>
+                                    <span *ngIf="createFuelReportForm.controls['fuelQuantity'].errors.minlength">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.ENTER_MINIMUM_3_LETTERS' | translate}}
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.FILLING_STATION_NAME' | translate}} </label>
+                                <input type="text" name="address2" style="text-transform: capitalize;" onkeypress="return /[a-z]/i.test(event.key)" formControlName="fillingStationName" [(ngModel)]="filling_station_name" maxlength="30" class="form-control" placeholder="Enter Filling Station Name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.FILLING_STATION_NOTE' | translate}} </label>
+                                <textarea name="address2" style="text-transform: capitalize;" onkeypress="return /[a-z]/i.test(event.key)" formControlName="fillingStationNote" [(ngModel)]="filling_station_notes" maxlength="30" class="form-control" placeholder="Enter Filling Station Note"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <mat-card-actions>
+                                    <label for="myfile">
+                                        {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.UPLOAD_A_SERVICE_RECEIPT_IMAGE' |
+                                        translate}} :</label>
+                                    <input class="btn" formControlName="fileData" accept="image/*" (change)="handleFuelReceiptImage($event,cropperModal)" type="file" id="myfile" name="myfile">
+
+                                    <div class="image-preview mb-3 ng-star-inserted" style="margin-top: 10px;"><img height="105" width="184" src="{{fuel_image}}"></div>
+                                </mat-card-actions>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <button type="submit" *ngIf="this.isAddFuel" class="btn btn-primary mrleftright" (click)="submit()" [disabled]="createFuelReportForm.invalid">{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.SUBMIT'
+                                    | translate}}</button>
+                                <button type="submit" *ngIf="!this.isAddFuel" class="btn btn-primary mrleftright" (click)="submit()">{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.UPDATE' |
+                                    translate}}</button>
+                                <button type="submit" mat-dialog-close="false" class="btn btn-warning mrleftright">{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.CANCEL' |
+                                    translate}}</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <ng-template #cropperModal let-modal>
+            <div class="modal-content model-resize">
+                <div class="modal-header">
+                    <p style="font-size: 24px;"><b> {{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.CROP_IMAGE' | translate}}
+                        </b> </p>
+                    <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;
+                    min-width: auto;" class="btn btn-sm btn-info">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <!-- <div style=" border: 1px solid black;"></div> -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="text-center col-md-8">
+                            <h4 style="margin-left:-44px;"><b>{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.CROP_IMAGE' |
+                                    translate}}</b></h4>
+                            <div style="height:236px;width: 466px;">
+                                <image-cropper class="imgcrop" [imageChangedEvent]="fuelReceiptImageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png" (imageCropped)="FuelReceiptImageCropped($event)">
+                                </image-cropper>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4">
+                            <h4 style="margin-left:-50px;"><b>{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.PREVIEW' |
+                                    translate}}</b></h4>
+                            <img style="margin-left:-44px;" height="180" width="200" [src]="croppedFuelReceiptImage" />
+                        </div>
+                    </div>
+                </div>
+                <!-- <div style=" border: 1px solid black;"></div> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.CANCEL' |
+                        translate}}</button>
+                    <button type="button" class="btn btn-primary" (click)="UploadFuelReceiptcroperimage()">{{'FLEET_MANAGEMENT.ADD_Fuel_COMPONENT.UPDATE' |
+                        translate}}</button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+
+
+</mat-dialog-actions>

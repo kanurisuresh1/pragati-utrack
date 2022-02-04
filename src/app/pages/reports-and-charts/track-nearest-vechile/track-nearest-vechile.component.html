@@ -1,0 +1,147 @@
+<div class="row">
+
+    <div class="auto-width" style="margin-left: 10px;margin-top:-7px">
+        <label>&nbsp;</label><br>
+        <button class="btn btn-primary  btnsize" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+          aria-hidden="true"></i>
+      </button>
+    </div>
+
+
+    <div class="col-md-3" style="margin-top:-7px;">
+        <label style="font-weight: bold;">
+        {{'REPORTS_CHARTS.GEOFENCE_REPORT.SELECT_GEOFENCE' | translate}}</label>
+        <mat-select class="form-control" [(ngModel)]="geofenceId" placeholder="Select Geofence" #singleSelect>
+            <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholder="Search Vehicle">
+            </ngx-mat-select-search>
+            <mat-option *ngFor="let row of filteredVehicleNumber | async" (click)="mapSelectedValue(row)" [value]="row.geofence_id">
+                {{row.geofence_name}}
+            </mat-option>
+        </mat-select>
+    </div>
+    <p style="font-weight: bold;margin-top:30px;">OR</p>
+
+
+    <div class="col-md-3" style="margin-top:-7px;">
+        <div class="form-group">
+            <label style="font-weight: bold;">
+          {{'MY_ACCOUNT.CREATE_GEOFENCE_COMPONANT.SEARCH_LOCATION' | translate}}
+        </label>
+            <input id="map_on_search" type="text" [formControl]="mapsearchname" placeholder="Search Location" class="form-control">
+
+        </div>
+    </div>
+    <div class="col-md-3" style="margin-top:-7px;">
+        <div class="form-group">
+            <label style="font-weight: bold;"> {{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.Enter Radius (KM)' | translate }}</label>
+            <input type="number" [formControl]="radius" maxlength="10000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Radius" />
+
+        </div>
+    </div>
+    <div class="col-md-1" style="margin-top:21px;">
+        <div class="form-group">
+            <button class="btn btn-primary" (click)="submit()">{{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.Track' | translate }}</button>
+        </div>
+    </div>
+
+    <div class="col-md-4" style="margin-top:-12px;">
+        <label style="font-weight: bold;">
+        {{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.Geofence_Location_Name' | translate }} : </label><br>
+        <p style="color: blue;margin-top:-7px;margin-bottom:25px;">{{locationName}}</p>
+
+    </div>
+    <div class="auto-width" style="margin-top:-12px;">
+        <label style="font-weight: bold;">
+        {{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.Geofence_Radius' | translate }} : </label><br>
+        <p style="color:red;margin-top:-7px;margin-bottom:25px;">{{radiuscircle}}</p>
+    </div>
+    <div style="margin-top: -23px; margin-left: 15px;">
+        <button class="btn btn-yellow-outline" (click)="addMarkers()">{{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.Add Markers' | translate }}</button>
+        <button class="btn btn-yellow-outline" (click)="removeMarkers()">{{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.Remove All' | translate }}</button>
+    </div>
+</div>
+
+<div class="row" style="margin-top: -20px;">
+    <div class="col-md-8">
+        <!-- <div id="livemap" class="home-dashboard white-bg"></div> -->
+        <agm-map [latitude]="currentCenter.lat" [longitude]="currentCenter.lng" [zoom]="zoom" [disableDefaultUI]="false" (mapClick)="mapClicked($event)">
+
+            <agm-marker *ngFor="let m of markers;" [iconUrl]="m.icon" (markerClick)="clickedMarker(infowindow)" [latitude]="m.lat" [longitude]="m.lng" [markerDraggable]="m.draggable">
+
+                <agm-info-window #infowindow>
+                    <!-- <strong>{{m.label}}</strong> -->
+                    <div style="background:#f1f1f1; padding:0px;">
+                        <table border="5" style="font-size: 15px; line-hight:18px; width:100%;color:black;" cellspacing="0" cellpadding="3" width="100%; margin:0; padding:0;">
+                            <tr>
+                                <td><b>Vehicle Number :</b></td>
+                                <td><b>{{m.markerVehicleNum}}</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Date :</b></td>
+                                <td><b>{{m.markerDate}}</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Speed :</b></td>
+                                <td><b>{{m.markerSpeed}}</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Address :</b></td>
+                                <td><b>{{m.markerAddress}}</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Driver Name :</b></td>
+                                <td><b>{{m.markerDriverName}}</b></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </agm-info-window>
+
+            </agm-marker>
+
+            <agm-circle [latitude]="lat" [longitude]="lng" [radius]="radius_val" [fillColor]="'red'" [circleDraggable]="false" [editable]="false">
+            </agm-circle>
+
+        </agm-map>
+    </div>
+    <div class="col-md-4" style="padding-left: 7px;">
+
+        <div class="example-container mat-elevation-z8">
+            <div class="table-responsive" style="height: 463px;overflow: auto !important;">
+                <table style="cursor: pointer;" class="table-bordered table" mat-table [dataSource]="mapdataSource">
+
+                    <ng-container matColumnDef="id">
+                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef> Id </th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="vehicle_number">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef>
+                            {{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.VEHICLE_NUMBER'| translate }}
+                        </th>
+                        <td mat-cell *matCellDef="let element"><a (click)="openDetails(element)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.vehicle_number}}</a>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="vehicle_type">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef>
+                            {{'REPORTS_CHARTS.TRACK_NEAREST_VECHILE_COMPONENT.VEHICLE_TYPE' | translate }}
+                        </th>
+                        <td class="cellSpace" mat-cell *matCellDef="let element">
+                            {{element.vehicle_type}}<img src="{{element.table_listimage}}" class="dataimg2">
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="mapdisplayedColumns;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: mapdisplayedColumns;"></tr>
+
+                </table>
+                <div class="col-md-12" *ngIf="TableDataNotshow">
+                    <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- [src]="element.imageUrl" -->
+    </div>
+</div>

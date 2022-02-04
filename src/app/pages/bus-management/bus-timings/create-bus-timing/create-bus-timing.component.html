@@ -1,0 +1,91 @@
+<mat-dialog-actions>
+    <div class="col-md-12">
+        <h4 *ngIf="isCreateRoute" style="color: blue;"> Create Bus Timing :</h4>
+        <h4 *ngIf="!isCreateRoute" style="color: blue;"> Edit Bus Timing :</h4>
+        <hr>
+    </div>
+    <hr>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card-body">
+                <div class="col-md-12" [formGroup]="busTimingRouteForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Bus Route
+                                    <span class="required">*</span></label>
+                                <mat-select class="form-control" [(ngModel)]="bus_route_id"
+                                    formControlName="bus_route_id" placeholder="Select To Route">
+                                    <mat-option *ngFor='let row of route_list' [value]="row.bus_route_id"
+                                        (click)="routeChange(row)">
+                                        {{row.route_name}}</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Start Time
+                                </label><br>
+                                <mat-form-field class="no-line">
+                                    <input class="form-control datepicker" formControlName="trip_start_time"
+                                        [(ngModel)]="startDate" [max]="currentDate" matInput
+                                        [matDatetimepicker]="stateDatepicker">
+                                    <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker">
+                                    </mat-datetimepicker-toggle>
+                                    <mat-datetimepicker #stateDatepicker type="time" openOnFocus="true"
+                                        timeInterval="1">
+                                    </mat-datetimepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>End Time
+                                </label><br>
+                                <mat-form-field class="no-line">
+                                    <input class="form-control datepicker" formControlName="trip_end_time"
+                                        [(ngModel)]="endtDate" [max]="currentDate" matInput
+                                        [matDatetimepicker]="endDatepicker">
+                                    <mat-datetimepicker-toggle matSuffix [for]="endDatepicker">
+                                    </mat-datetimepicker-toggle>
+                                    <mat-datetimepicker #endDatepicker type="time" openOnFocus="true" timeInterval="1">
+                                    </mat-datetimepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Trip Type
+                                    <span class="required">*</span></label>
+                                <mat-select formControlName="trip_type" [(ngModel)]="trip_type" class="form-control">
+                                    <mat-option value="Drop">Drop</mat-option>
+                                    <mat-option value="Pickup">Pick Up</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-sm mrl5" mat-dialog-close="false">Cancel</button>
+                            <button *ngIf="isCreateRoute" (click)="createTimingRoute()"
+                                class="btn btn-primary btn-sm mrl5">Create
+                                Timing Route</button>
+                            <button *ngIf="!isCreateRoute" (click)="createTimingRoute()"
+                                class="btn btn-primary btn-sm mrl5">Update
+                                Timing Route</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</mat-dialog-actions>

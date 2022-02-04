@@ -1,0 +1,80 @@
+.mr15{
+    margin-right: 15px;
+}
+
+.mt20{
+margin-top: 20px;
+}
+
+.echart{
+  background-color: #fff;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+::ng-deep .no-line1 .mat-form-field-underline {
+  display: none;
+}
+
+
+.mat-label {
+  font-weight: 5px;
+}
+
+::ng-deep .mat-form-field {
+  width: 100% !important;
+}
+
+// ::ng-deep .mat-form-field .form-control {
+//   border: solid 1px #ccc;
+//   background-color: #fff;
+//   padding: 13px;
+// }
+
+::ng-deep .mat-form-field-infix {
+  width: 135px !important;
+}
+
+::ng-deep .mat-form-field .form-control {
+  // border: solid 1px #ccc;
+  // background-color: #fff;
+  padding: 10px !important;
+}
+
+::ng-deep .mat-datepicker-toggle{
+  color:#fff !important;
+}
+
+::ng-deep .mat-form-field-suffix .mat-icon-button {
+  height: 32px;
+  width: 30px;
+  margin-bottom: 2px;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+  white-space: nowrap;
+  flex: none;
+  position: relative;
+  background: #007bff !important;
+  padding: 0px 2px 2px 0px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.mat-input-element {
+    line-height: auto;
+    padding: 6px;
+    height: auto;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #0779e4;
+    background: white;
+}
+
+// datapickcer font show 
+
+::ng-deep  .mat-form-field{
+  color:#464646 !important
+}

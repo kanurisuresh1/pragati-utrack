@@ -1,0 +1,32 @@
+<div class="col-md-12 text-left" style="margin-left: -14px;">
+    <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+            aria-hidden="true"></i>
+    </button>
+</div>
+
+<div class="tab-content">
+    <div class="white-bg height-80vh" style="overflow:scroll;overflow-x: hidden; padding-top: 20px;" (scroll)="onTableScroll($event)">
+
+        <div *ngFor='let row of NotificationList'>
+            <div class="clearfix mb10">
+                <div class="bg-primary col-md-12" style="margin-top:-20px">
+                    <h5>{{row.notificatindate}}</h5>
+                </div>
+                <div class="col-md-12 mt10">
+                    <h6 class=" text-success "><b>{{row.notify_type}}</b></h6>
+                    <p class="date-time">{{row.message}}</p>
+                    <p class="date-time mt5">
+                        <span><i class="fa fa-calendar-alt"></i>{{row.notificatindate}}</span>
+                        <span><i class="fa fa-clock"></i>{{row.notificationTime}}</span>
+                    </p>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <div class="col-md-12" *ngIf="NotificationListDataNotshow">
+            <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+        </div>
+
+    </div>
+</div>

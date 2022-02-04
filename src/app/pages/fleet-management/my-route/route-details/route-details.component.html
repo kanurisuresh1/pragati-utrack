@@ -1,0 +1,90 @@
+<div class="row clearfix mb10">
+    <div class="col-md-10">
+        <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<div class="col-md-12 white-bg">
+    <div class="row mt10">
+        <div class="col-md-6 mb20 ">
+            <div class="buy-plans mb30 clearfix">
+
+                <h5 class="text-left"><b> {{route_name}} </b></h5>
+                <div class="row">
+                    <div class="col-md-12 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.SOURCE_LOCATION' | translate }}</p>
+                            <h6><b> {{start_location}} </b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-12 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.DESTINATION_LOCATION' | translate }}</p>
+                            <h6><b> {{end_location}} </b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-4 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.STOPS' | translate }} :</p>
+                            <h6><b>5</b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-4 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.TRIPS' | translate }} :</p>
+                            <h6><b> 2 </b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-4 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.VEHICLES' | translate }} :</p>
+                            <h6><b> 5 </b></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix bdr-btm1"></div>
+                <div class="row">
+                    <div class="col-md-6 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.DISTANCE' | translate }} :</p>
+                            <h6><b> {{distance}} </b></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6 no-pad">
+                        <div class="plans-data">
+                            <p>{{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.DURATIONS' | translate }} :</p>
+                            <h6><b> {{travel_time_mins}} </b></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb15">
+                    <div class="col-md-6 col-xs-6  no-pad mb10 mt20 ">
+                        <h6 style="color: blue;"> {{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.VEHICLE_LIST' | translate }} :</h6>
+                    </div>
+
+                </div>
+                <div class="col-md-12 mb15">
+                    <div class="col-md-6 col-xs-6  no-pad mb10 mt20">
+                        <h6 style="color: blue;"> {{'REPORTS_CHARTS.ROUTE_DETAILS_COMPONENT.TRIPS_LIST' | translate }} :</h6>
+                    </div>
+                    <!-- <div class="col-md-12 col-xs-12  no-pad mb10" id="trip_stop_location_viwe"></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="home-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3336545735137!2d78.47146891418836!3d17.443737405770474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90a73f289009%3A0xe9d673a5532c85b2!2sDhanush%20InfoTech%20Pvt%20Ltd.!5e0!3m2!1sen!2sin!4v1573121259193!5m2!1sen!2sin"
+                    width="100%" height="100%" frameborder="0" style="border:solid 1px #e2e2e2;" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+</div>

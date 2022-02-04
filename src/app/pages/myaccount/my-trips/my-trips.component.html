@@ -1,0 +1,1266 @@
+<div class="row clearfix">
+    <div class="col-md-8 text-left">
+
+        <div class="row">
+
+            <div class="sample-div" style="margin-left: 10px; margin-top: 25px;">
+                <button class="btn btn-primary  btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+                    [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i
+                        class="fa fa-arrow-left" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label >
+                    {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.SELECT_VEHICLE' | translate}} :
+                </label>
+                <mat-select class="form-control"  [(ngModel)]="selectall"
+                    placeholder="Select Vehicle" (ngModelChange)="updateSelectedValue($event)" #singleSelect>
+                    <ngx-mat-select-search [formControl]="searchvehiclenumber">
+                    </ngx-mat-select-search>
+                    <mat-option (click)="selectAllDropDownBtn()" value="">Select All</mat-option>
+                    <mat-option *ngFor="let row of filteredVehicleNumber | async" [value]="row.device_link_id">
+                        {{row.vehicle_number}} ({{row.vehicle_type}})
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4 ml-auto text-right" >
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm" style="margin-top: 25px;" (click)="createTrip()"><b>  {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_TRIP' | translate}}</b></button>
+        </div>
+    </div>
+</div>
+
+<mat-tab-group animationDuration="1000ms">
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list-ul"></i>&nbsp;&nbsp;
+            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ALL' | translate}}
+        </ng-template>
+        <div class="row clearfix">
+            <div class="col-md-10 text-left">
+                <label>
+                    <input type="search" matInput id="search_All_TripList" (keyup)="FillterAllTripList($event)"
+                        class="form-control search-field pull-left" placeholder="Search Trip Name">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="searchAllTriplist()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="AllTripListExportexcle()">
+                    <i class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="AllTripListPdf()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshAllTripList()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+        </div>
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableOneSort="matSort" [dataSource]="AllTripListdataSource"
+                        class="table-bordered table" *ngIf="ShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                             </th>
+                            <td mat-cell *matCellDef="let element;"> <a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;"
+                                    (click)="tripDetails(element.trip_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.trip_name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                                 </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                01 sep 2020 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                350 KMS </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 1500 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 3 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"><a (click)="tripDetails(element.trip_id)"
+                                    nbTooltip="Trip Detailes" nbTooltipStatus="primary">
+                                    <i class="fa fa-edit text-blue " style="cursor: pointer;color: blue;"></i></a>
+                            </td>
+                        </ng-container>
+
+
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <table mat-table matSort #TableOneSort="matSort" class="table-bordered table"
+                        *ngIf="NotShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}  
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Create
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                             </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>Expences
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list-ul"></i>&nbsp;&nbsp;
+            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ON_GOING' | translate}}
+        </ng-template>
+        <div class="row clearfix">
+            <div class="col-md-10 text-left">
+                <label>
+                    <input type="search" matInput id="search_Ongoing_Triplist" (keyup)="FillterOngoingTripList($event)"
+                        class="form-control search-field pull-left" placeholder="Search Vehicle">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="searchOngoingTriplist()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button
+                    (click)=" OngoingTripListExportexcle() ">
+                    <i class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="OngoingTripListPdf()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshOngoingTripListList()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+        </div>
+
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableOneSort="matSort" [dataSource]="inprogressdataSource"
+                        class="table-bordered table" *ngIf="ShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                             </th>
+                            <td mat-cell *matCellDef="let element;"> <a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;"
+                                    (click)="tripDetails(element.trip_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.trip_name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                                 </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                01 sep 2020 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                350 KMS </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 1500 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 3 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"><a (click)="tripDetails(element.trip_id)"
+                                    nbTooltip="Trip Detailes" nbTooltipStatus="primary">
+                                    <i class="fa fa-edit text-blue " style="cursor: pointer;color: blue;"></i></a>
+                            </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableInprogressDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_STARTED_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                    <table mat-table matSort #TableOneSort="matSort" class="table-bordered table"
+                    *ngIf="NotShowVehicleData">
+                    <ng-container matColumnDef="trip_id">
+                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="vehicle_number">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}  
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="trip_name">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_date_time">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Create
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                         </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="distance">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="expences_Cost">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>Expences
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="stops">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_location">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Actions">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                </table>
+
+                    <div class="col-md-12" *ngIf="TableDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list-ul"></i>&nbsp;&nbsp;
+            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.UP_COMING' | translate}}
+        </ng-template>
+        <div class="row clearfix">
+            <div class="col-md-10 text-left">
+                <label>
+                    <input type="search" matInput id="search_Upcominglist" (keyup)="FillterUpcomingTripList($event)"
+                        class="form-control search-field pull-left" placeholder="Search Trip Name">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="searchUpcomingTriplist()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button
+                    (click)=" UpcomingTripListExportexcle()">
+                    <i class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="UpcoimgTripListPdf()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshUpcomingTripList()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+        </div>
+
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableOneSort="matSort" [dataSource]="upcomingdataSource"
+                        class="table-bordered table" *ngIf="ShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                             </th>
+                            <td mat-cell *matCellDef="let element;"> <a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;"
+                                    (click)="tripDetails(element.trip_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.trip_name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                                 </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                01 sep 2020 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                350 KMS </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 1500 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 3 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"><a (click)="tripDetails(element.trip_id)"
+                                    nbTooltip="Trip Detailes" nbTooltipStatus="primary">
+                                    <i class="fa fa-edit text-blue " style="cursor: pointer;color: blue;"></i></a>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableUpcomingDataNotshow">
+                        <p class="datanotfound">{{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_UPCOMING_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                    <table mat-table matSort #TableOneSort="matSort" class="table-bordered table"
+                    *ngIf="NotShowVehicleData">
+
+                    <ng-container matColumnDef="trip_id">
+                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="vehicle_number">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}  
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="trip_name">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_date_time">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Create
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                         </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="distance">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="expences_Cost">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>Expences
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="stops">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_location">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Actions">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                </table>
+
+                    <div class="col-md-12" *ngIf="TableDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list-ul"></i>&nbsp;&nbsp;
+            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.OVERDUE' | translate}}
+        </ng-template>
+        <div class="row clearfix">
+            <div class="col-md-10 text-left">
+                <label>
+                    <input type="search" matInput id="search_Overdue_TripList" (keyup)="FillterOverdueTripList($event)"
+                        class="form-control search-field pull-left" placeholder="Search Trip Name">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="searchOverdueTriplist()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="OverdueTripListExportexcle()">
+                    <i class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="OverdueTripListPdf()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refresOverdueTripListList()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+        </div>
+
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableOneSort="matSort" [dataSource]="overdueingdataSource"
+                        class="table-bordered table" *ngIf="ShowVehicleData">
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                             </th>
+                            <td mat-cell *matCellDef="let element;"> <a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;"
+                                    (click)="tripDetails(element.trip_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.trip_name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                                 </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                01 sep 2020 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                350 KMS </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 1500 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 3 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"><a (click)="tripDetails(element.trip_id)"
+                                    nbTooltip="Trip Detailes" nbTooltipStatus="primary">
+                                    <i class="fa fa-edit text-blue " style="cursor: pointer;color: blue;"></i></a>
+                            </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableOverdueDataNotshow">
+                        <p class="datanotfound">{{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_OVERDUE_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                    <table mat-table matSort #TableOneSort="matSort" class="table-bordered table"
+                    *ngIf="NotShowVehicleData">
+
+                    <ng-container matColumnDef="trip_id">
+                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="vehicle_number">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}  
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="trip_name">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_date_time">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Create
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                         </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="distance">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="expences_Cost">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>Expences
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="stops">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_location">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Actions">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                </table>
+
+                    <div class="col-md-12" *ngIf="TableDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list-ul"></i>&nbsp;&nbsp;
+            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.COMPLETED' | translate}}
+        </ng-template>
+        <div class="row clearfix">
+            <div class="col-md-10 text-left">
+                <label>
+                    <input type="search" matInput id="search_CompetedTripList" (keyup)="FillterCompetedTripList($event)"
+                        class="form-control search-field pull-left" placeholder="Search Trip Name">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="searchCompetedTriplist()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button
+                    (click)="CompletedTripListExportexcle()">
+                    <i class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="CompetedTripListPdf()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refreshCompleteTripList()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+        </div>
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableFiveSort="matSort" [dataSource]="endeddataSource"
+                        class="table-bordered table" *ngIf="ShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                             </th>
+                            <td mat-cell *matCellDef="let element;"> <a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;"
+                                    (click)="tripDetails(element.trip_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.trip_name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                                 </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                01 sep 2020 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                350 KMS </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 1500 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 3 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"><a (click)="tripDetails(element.trip_id)"
+                                    nbTooltip="Trip Detailes" nbTooltipStatus="primary">
+                                    <i class="fa fa-edit text-blue " style="cursor: pointer;color: blue;"></i></a>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableCompletedDataNotshow">
+                        <p class="datanotfound">{{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_COMPLETED_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                    <table mat-table matSort #TableOneSort="matSort" class="table-bordered table"
+                    *ngIf="NotShowVehicleData">
+
+                    <ng-container matColumnDef="trip_id">
+                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="vehicle_number">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}  
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="trip_name">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_date_time">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Create
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                         </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="distance">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="expences_Cost">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>Expences
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="stops">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="start_location">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Actions">
+                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                        </th>
+
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                </table>
+
+                    <div class="col-md-12" *ngIf="TableDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list-ul"></i>&nbsp;&nbsp;
+            {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CANCELLED' | translate}}
+        </ng-template>
+        <div class="row clearfix">
+            <div class="col-md-10 text-left">
+                <label>
+                    <input type="search" matInput id="search_CancelledTripList"
+                        (keyup)="FillterCancelledTripList($event)" class="form-control search-field pull-left"
+                        placeholder="Search Trip Name">
+                </label>
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="searchCancelledTriplist()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button
+                    (click)="CancelledTripListExportexcle()">
+                    <i class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="CancelledTripListPdf()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp;{{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+                    [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refrescanclledTripListList()"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+        </div>
+        <div class="tdata mt5">
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table mat-table matSort #TableSixSort="matSort" [dataSource]="cancelleddataSource"
+                        class="table-bordered table" *ngIf="ShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}
+                             </th>
+                            <td mat-cell *matCellDef="let element;"> <a
+                                    style="cursor: pointer;text-decoration: underline;color: blue;"
+                                    (click)="tripDetails(element.trip_id)">{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.trip_name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                                 </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                01 sep 2020 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                350 KMS </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 1500 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"> 3 </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.start_location}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+                            <td mat-cell *matCellDef="let element"><a (click)="tripDetails(element.trip_id)"
+                                    nbTooltip="Trip Detailes" nbTooltipStatus="primary">
+                                    <i class="fa fa-edit text-blue " style="cursor: pointer;color: blue;"></i></a>
+                            </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableCancelledDataNotshow">
+                        <p class="datanotfound">{{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_CANCELED_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                    <table mat-table matSort #TableOneSort="matSort" class="table-bordered table"
+                        *ngIf="NotShowVehicleData">
+
+                        <ng-container matColumnDef="trip_id">
+                            <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.VEHICLE_NUMBER' | translate}}  
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="trip_name">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.TRIP_NAME' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STATUS' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_date_time">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Create
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.CREATE_DATE' | translate}}
+                             </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.DISTANCE' | translate}}
+                            </th>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="expences_Cost">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>Expences
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.EXPENCES_COST' | translate}}
+                            </th>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stops">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STOPS' | translate}}
+                            </th>
+                        </ng-container>
+
+                        <ng-container matColumnDef="start_location">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.STARTS_LOCATIONS' | translate}}
+                            </th>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Actions">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.ACTIONS' | translate}}
+                            </th>
+
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="TableDataNotshow">
+                        <p class="datanotfound"> {{'MY_ACCOUNT.MY_TRIPS_COMPONANT.NO_TRIPS_FOUND' | translate}}.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

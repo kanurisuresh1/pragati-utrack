@@ -1,0 +1,171 @@
+.mrleftright {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.example-container table th {
+  color: #fff !important;
+  vertical-align: middle !important;
+  padding: 10px !important;
+}
+
+.example-container table td {
+  padding: 10px !important;
+}
+.example-container table {
+  overflow-x: scroll !important;
+}
+
+.mb15 {
+  margin-bottom: 15px;
+}
+.mr15 {
+  margin-right: 15px !important;
+}
+.mr12 {
+  margin-left: -49px;
+  padding: 1px 1px 0px;
+}
+
+.mt50 {
+  margin-top: 76px;
+}
+.my-custom-scrollbar {
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+.mat-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border-radius: 0.2rem;
+}
+
+.auto-width {
+  margin: 0;
+  padding: 0px 0px 0px 0px;
+  float: left;
+}
+
+.mat-input-element {
+  line-height: auto;
+  padding: 6px;
+  height: auto;
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #0779e4;
+  background: white;
+}
+.ml-20 {
+  margin-left: -20px !important;
+}
+
+.ml20 {
+  margin-left: 20px !important;
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border-radius: 0.2rem;
+}
+
+// input#mat-input-1 {
+//   margin-top: 11px;
+//   height: 36px;
+//   border: 1px solid #ced4da;
+// }
+
+// input#mat-input-2{
+// margin-top: 11px;
+// height: 36px;
+// border: 1px solid #ced4da;
+// }
+
+::ng-deep .mat-form-field {
+  color: #464646 !important;
+}
+
+button.btn.btn-primary.sub {
+  margin-top: 27px;
+  font-size: 15px;
+  padding-left: 10px;
+  /* margin: auto; */
+  padding: 6px;
+  margin-left: 10px;
+}
+
+::ng-deep .mat-form-field-suffix .mat-icon-button {
+  height: 32px;
+  width: 30px;
+  margin-bottom: 1px;
+}
+
+.btnsize{
+  margin-top: 1px;
+  padding: 5px 9px 5px 9px;
+}
+
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+::ng-deep .no-line1 .mat-form-field-underline {
+  display: none;
+}
+
+label {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.mat-label {
+  font-weight: 5px;
+}
+
+::ng-deep .mat-form-field {
+  width: 100% !important;
+}
+
+::ng-deep .mat-form-field .form-control {
+  border: solid 1px #ccc;
+  background-color: #fff;
+  padding: 13px;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-form-field-suffix {
+  white-space: nowrap;
+  flex: none;
+  position: relative;
+  background: #007bff !important;
+  padding: 2px 2px 4px 3px;
+  color: #fff;
+  font-size: 20px;
+  margin-left: -30px;
+}
+
+::ng-deep .mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  margin-top: -19px;
+}
+
+// table row hover effect 
+
+tr:hover {
+  background-color: #b3f0ff;
+}
+
+.datanotfound{
+  font-size: 25px;
+  text-align: center;
+  margin-top: 180px;
+  margin-bottom: 180px;
+  font-weight: bold;
+}

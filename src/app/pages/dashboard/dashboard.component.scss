@@ -1,0 +1,696 @@
+@import "../../@theme/styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .solar-card nb-card-header {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    ngx-traffic {
+      display: none;
+    }
+  }
+}
+
+// Dashboard CSS Starting
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+def,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #242424;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #242424;
+}
+
+.buy-plans {
+  margin: 0px 10px;
+  padding: 0px;
+  border: solid 1px #e2e2e2;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.buy-plans h3 {
+  background: #e2e2e2;
+  padding: 15px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.buy-plan {
+  margin: 0px 0px;
+  padding: 0px;
+  border: solid 1px #e2e2e2;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.buy-plan h4 {
+  background: #e2e2e2;
+  padding: 10px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.buy-plans:hover,
+.list-item:hover {
+  box-shadow: 0px 0px 10px #7c7c7c;
+}
+
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mb15 {
+  margin-bottom: 15px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.mb30 {
+  margin-bottom: 30px;
+}
+
+.mb40 {
+  margin-bottom: 40px;
+}
+
+.mb50 {
+  margin-bottom: 50px;
+}
+
+.mt5 {
+  margin-top: 5px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.mt25 {
+  margin-top: 25px;
+  cursor: pointer;
+}
+
+.mt30 {
+  margin-top: 30px;
+}
+
+.mt35 {
+  margin-top: 35px;
+}
+
+.mt40 {
+  margin-top: 40px;
+}
+
+.mt50 {
+  margin-top: 50px;
+}
+
+.text-blue {
+  color: #0b46ae;
+  font-size: 15px;
+}
+
+.img-circle {
+  border-radius: 50% !important;
+  overflow: hidden;
+  width: 65px;
+  height: 65px;
+  border: 2px solid #1654c0;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.buy-plans:hover .img {
+  cursor: pointer;
+  animation-name: bounce;
+  -moz-animation-name: bounce;
+}
+
+.buy-plans .img {
+  left: 0%;
+  line-height: 180px;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  color: white;
+}
+
+@keyframes bounce {
+  0%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    -webkit-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+
+  60% {
+    -webkit-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+
+.imagebox {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.imagebox img,
+.img-responsive {
+  width: 100%;
+}
+
+.home-imagebox {
+  width: 70px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.home-imagebox img,
+.img-responsive {
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+// Dashboard CSS Ending
+
+.mrleftright {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.example-container table th {
+  color: #fff !important;
+  vertical-align: middle !important;
+  padding: 10px !important;
+}
+
+::ng-deep td.mat-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border: 1px solid #e1e1e1 !important;
+  border-bottom-style: none !important;
+}
+td {
+  border: 1px solid #e1e1e1 !important;
+}
+
+th {
+  border: 1px solid #e1e1e1 !important;
+}
+.example-container table td {
+  padding: 10px !important;
+}
+.example-container table {
+  overflow-x: scroll !important;
+}
+
+table th,
+table td {
+  // padding-left: 15px !important;
+  font-size: 12.5px !important;
+}
+
+.mr15 {
+  margin-right: 15px !important;
+}
+.mr12 {
+  margin-left: -49px;
+  padding: 1px 1px 0px;
+}
+
+.mt50 {
+  margin-top: 76px;
+}
+.my-custom-scrollbar {
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+.mat-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border-radius: 0.2rem;
+}
+
+.mat-input-element {
+  line-height: auto;
+  padding: 6px;
+  height: auto;
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #0779e4;
+  background: white;
+}
+.ml-20 {
+  margin-left: -20px !important;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border-radius: 0.2rem;
+}
+
+.pad10-box {
+  padding: 10px !important;
+}
+
+::ng-deep .mat-tab-label {
+  background-color: #ccc !important;
+  opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+  background-color: #0b46ae !important;
+  color: #fff;
+}
+::ng-deep .mat-tab-label:hover {
+  background-color: #febe40 !important;
+}
+
+.example-tab-icon {
+  margin-right: 8px !important;
+}
+
+.white-bg {
+  background: #fff;
+  border: solid 1px #ddd;
+}
+
+.mapselectoption {
+  position: absolute;
+  margin: 10px;
+  right: 30px;
+  top: 0;
+  width: 200px;
+}
+
+.mapselectoption-nw {
+  position: absolute;
+  margin: 10px;
+  right: 45px;
+  top: 0;
+  width: 200px;
+}
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0.15rem;
+}
+
+.no-pad {
+  padding: 0px 0px;
+}
+
+.pull-right {
+  float: right !important;
+}
+.btnzoomAll {
+  position: absolute;
+  padding: 6px;
+  border: solid 1px #ccc;
+  margin: 10px;
+  top: 95px;
+  cursor: pointer;
+}
+
+.btnFullScreen {
+  position: absolute;
+  padding: 6px;
+  border: solid 1px #ccc;
+  margin: 10px;
+  top: 137px;
+  cursor: pointer;
+}
+
+.btnCheckBox {
+  top: 185px;
+  position: absolute;
+  padding: 6px;
+  border: solid 1px #ccc;
+  margin: 10px;
+  background-color: #d7a132;
+}
+
+::ng-deep .mat-slide-toggle {
+  display: inline-block;
+  /* height: 24px; */
+  max-width: 100%;
+  line-height: 24px;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: red;
+}
+.vehicle-types-model {
+  position: absolute;
+  padding: 6px 10px 2px;
+  background: #fff;
+  border: solid 1px #ccc;
+  margin: 10px;
+  top: 0;
+}
+
+.vehicle-types-model p {
+  font-size: 12px !important;
+  margin-bottom: 6px !important;
+}
+
+.fa-square-full:before {
+  content: "\f45c";
+}
+
+.text-move {
+  color: #26b206;
+}
+
+.text-stop {
+  color: #eb272f;
+}
+
+.text-datanotfound {
+  color: #d7a132;
+}
+
+.speedometer {
+  position: absolute;
+  bottom: 0px;
+}
+
+.height-80vh {
+  height: 81vh;
+  overflow: hidden;
+}
+
+.height-80vh {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.test-width {
+  // width: 10.6%;
+  float: left;
+  padding: 0px;
+  margin: 0px 10px 15px !important;
+}
+
+// Marker Close
+::ng-deep .gm-ui-hover-effect {
+  display: none !important;
+}
+
+::ng-deep button.gm-ui-hover-effect {
+  visibility: hidden;
+}
+
+// CHarts DATE PICKERS
+
+::ng-deep .no-line .mat-form-field-underline {
+  display: none;
+}
+::ng-deep .no-line1 .mat-form-field-underline {
+  display: none;
+}
+
+input#mat-input-1 {
+  // margin-top: -18px !important;
+  height: 36px;
+  background-color: #fff !important;
+  border: 1px solid #ced4da;
+}
+
+input#mat-input-2 {
+  // margin-top: -18px;
+  height: 36px;
+  border: 1px solid #ced4da;
+  background-color: #fff !important;
+}
+.mat-label {
+  font-weight: 5px;
+}
+
+::ng-deep .mat-form-field {
+  width: 100% !important;
+  color: #464646 !important;
+}
+
+::ng-deep .mat-form-field .form-control {
+  border: solid 1px #ccc;
+  background-color: #fff;
+  padding: 10px;
+}
+
+::ng-deep .mat-form-field-prefix,
+::ng-deep .mat-icon-button,
+::ng-deep .mat-form-field-suffix {
+  white-space: nowrap;
+  flex: none;
+  position: relative;
+  background: #007bff !important;
+  padding: 0px 2px 2px 0px;
+  color: #fff;
+  font-size: 20px;
+  font: caption;
+  vertical-align: revert;
+}
+
+.dropbox {
+  width: 20%;
+}
+
+h6 {
+  color: #464646 !important;
+  font-size: 13px;
+}
+
+.white-bg {
+  background: #fff;
+}
+.mejenta-bg {
+  background: #43c8ff;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  // margin: 0px 15px;
+}
+
+.yellow-bg {
+  background: #ffc107;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
+  border-radius: 10px;
+  padding: 15px;
+  // margin: 0px 15px;
+}
+
+.pink-bg {
+  background: #6155a6;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
+  border-radius: 10px;
+  padding: 15px;
+  // margin: 0px 15px;
+}
+
+.green-bg {
+  background: #4ca814;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
+  border-radius: 10px;
+  padding: 15px;
+  // margin: 0px 15px;
+}
+
+.red-bg {
+  background: #ff2729;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
+  border-radius: 10px;
+  padding: 15px;
+  // margin: 0px 15px;
+}
+
+.icon {
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+  height: 64px;
+  width: 60px;
+}
+
+.mejenta-bg p,
+.yellow-bg p,
+.pink-bg p,
+.green-bg p,
+.red-bg p {
+  font-size: 16px;
+}
+
+.mejenta-bg h2,
+.yellow-bg h2,
+.pink-bg h2 .green-bg h2,
+.red-bg h2 {
+  padding: 0;
+}
+
+// State MAP Image CSS
+
+.MapExplorer .svg-parent {
+  display: block;
+  margin: 2rem auto auto;
+  overflow: visible;
+  position: relative;
+  width: 90%;
+}
+
+.card_width {
+  width: 20%;
+  padding: 0px;
+  margin: 0px 10px;
+}
+
+// table row hover effect
+tr:hover {
+  background-color: #b3f0ff;
+}
+
+.datanotfound {
+  font-size: 25px;
+  text-align: center;
+  margin-top: 180px;
+  margin-bottom: 180px;
+  font-weight: bold;
+}
+.custom_row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.dataNotFound_font_custome {
+  margin-right: -20px;
+  margin-left: -5px;
+  color: white;
+}
+
+.batterDisCon_font_custome {
+  margin-right: -31px;
+  margin-left: -10px;
+  color: white;
+}

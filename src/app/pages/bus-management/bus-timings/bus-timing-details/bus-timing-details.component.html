@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+
+<div style="margin-bottom: 10px;margin-top: 10px;" class="container">
+    <!--     <div class="row pt-5 m-auto">
+        <div class="col-md-6 col-lg-4 pb-3"> -->
+    <div class="">
+        <div class="">
+            <div class="card card-custom bg-white border-white border-0">
+
+                <div class="card-body" style="overflow-y: auto">
+                    <h4 class="card-title">Organisation Name :<b>{{org_name}}</b></h4>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <p>
+                                    Branch Name<br><b>{{branch_name}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Route Name<br><b>{{route_name}}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Trip Type<br><b>{{trip_type}}</b>
+                                </p>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <p>
+                                    Trip Start Time : <br><b>{{trip_start_time }}</b>
+                                </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>
+                                    Trip End Time : <br><b>{{trip_end_time }}</b>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

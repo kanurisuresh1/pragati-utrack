@@ -1,0 +1,538 @@
+<div fxLayout="column" fxFlexFill ngxSplit="column">
+
+    <div fxFlex="20%" ngxSplitArea class="mt10" [formGroup]="trackHistoryReportForm">
+        <div class="row clearfix">
+
+            <div class="auto-width" style="margin-left: 5px;margin-top: 2px;">
+                <label>&nbsp;</label><br>
+                <button class="btn btn-primary btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i
+                        class="fa fa-arrow-left" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="col-md-3" style="margin-left: -10px;">
+                <div class="form-group">
+                    <label>{{'SUMMARY_REPORT_COMPONANT.SELECT_VEHICLE' | translate }} </label>
+                    <mat-select class="form-control" (selectionChange)="vehicleChange()" formControlName="vechicleName" [(ngModel)]="deviceLinkId" placeholder="Select Vehicle" #singleSelect>
+                        <mat-option>
+                            <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholderLabel="Search Vehicle..." noEntriesFoundLabel="'no vehicle found'">
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option *ngFor="let row of filteredVehicleNumber | async" (click)="updateSelectedValue(row)" [value]="row.device_link_id">
+                            {{row.vehicle_number}} ({{row.vehicle_type}})
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="auto-width" style="margin-left: -10px;">
+                <div class="form-group">
+                    <label>{{'SUMMARY_REPORT_COMPONANT.SELECT_START_DATE' | translate }} </label><br>
+                    <mat-form-field class="no-line">
+                        <input class="form-control datepicker" matInput [max]="currentDate" [min]="minStartDate" [matDatetimepicker]="stateDatepicker" formControlName="startDate" readonly>
+                        <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker"></mat-datetimepicker-toggle>
+                        <mat-datetimepicker #stateDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                        </mat-datetimepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="auto-width" style="margin-left: -10px;">
+                <div class="form-group">
+                    <label>{{'SUMMARY_REPORT_COMPONANT.SELECT_END_DATE' | translate }} </label><br>
+                    <mat-form-field class="no-line">
+                        <input class="form-control datepicker" matInput [max]="currentDate" [matDatetimepicker]="endDatepicker" formControlName="endDate" readonly>
+                        <mat-datetimepicker-toggle matSuffix [for]="endDatepicker"></mat-datetimepicker-toggle>
+                        <mat-datetimepicker #endDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                        </mat-datetimepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex="15px" class="auto-width handle-area">
+                <button ngxSplitHandle type="submit" style="margin-left: 0px;" (click)="viewReport()" class="btn btn-primary sub handle-column">{{'SUMMARY_REPORT_COMPONANT.VIEW_REPORT' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div fxFlex="80%" ngxSplitArea>
+
+        <mat-tab-group>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">outlined_flag</mat-icon>
+                    {{'SUMMARY_REPORT_COMPONANT.SUMMARY_REPORT' | translate }}
+                </ng-template>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <mat-card-header class="bg-blue">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>&nbsp;&nbsp;&nbsp;&nbsp; {{'SUMMARY_REPORT_COMPONANT.TODAY' | translate }} <br>
+                                    <h6 class="card_date_today"><small>
+                                            ({{today_report_date}})
+                                        </small></h6>
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_DISTANCE' | translate }}
+                                            <br><b>{{todayTotalDistance}}
+                                                KMS</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="traveltitlewidth">
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_TRAVEL_TIME' | translate }}<br><b class="traveltimeleft">{{todayTotalTravelledTime}}</b>
+                                            <b style="font-size: 12px;"> (HH:MM:SS)</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.MAX_SPEED' | translate }}
+                                            <br><b>{{todayMaxSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.AVG_SPEED' | translate }}
+                                            <br><b>{{todayAvgSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <mat-card-header class="bg-red">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>&nbsp; {{'SUMMARY_REPORT_COMPONANT.THIS_WEEK' | translate }} <br>
+                                    <h6 class="card_date_week "><small>
+                                            ({{week_report_date}})
+                                        </small></h6>
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_DISTANCE' | translate }}
+                                            <br><b>{{weekTotalDistance}}
+                                                KMS</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="traveltitlewidth">
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_TRAVEL_TIME' | translate }}<br><b class="traveltimeleft">{{weekTotalTravelledTime}}</b>
+                                            <b style="font-size: 12px;"> (HH:MM:SS)</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.MAX_SPEED' | translate }}
+                                            <br><b>{{weekMaxSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.AVG_SPEED' | translate }}
+                                            <br><b>{{weekAvgSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <mat-card-header class="bg-purple">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>{{'SUMMARY_REPORT_COMPONANT.LAST_7DAYS' | translate }}<br>
+                                    <h6 class="card_date_last7 "><small>
+                                            ({{last7Days_report_date}})
+                                        </small></h6>
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_DISTANCE' | translate }}
+                                            <br><b>{{last7DaysTotalDistance}}
+                                                KMS</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="traveltitlewidth">
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_TRAVEL_TIME' | translate }}<br><b class="traveltimeleft">{{last7DaysTotalTravelledTime}}</b>
+                                            <b style="font-size: 12px;"> (HH:MM:SS)</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.MAX_SPEED' | translate }}
+                                            <br><b>{{last7DaysMaxSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.AVG_SPEED' | translate }}
+                                            <br><b>{{last7DaysAvgSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <mat-card-header class="bg-green">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>&nbsp;{{'SUMMARY_REPORT_COMPONANT.THIS_MONTH' | translate }}
+                                    <br>
+                                    <h6 class="card_date_month"><small>({{month_report_date}})</small></h6>
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_DISTANCE' | translate }}
+                                            <br><b>{{monthTotalDistance}}
+                                                KMS</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="traveltitlewidth">
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_TRAVEL_TIME' | translate }}<br><b class="traveltimeleft">{{monthTotalTravelledTime}}</b>
+                                            <b style="font-size: 12px;"> (HH:MM:SS)</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.MAX_SPEED' | translate }}
+                                            <br><b>{{monthMaxSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.AVG_SPEED' | translate }}
+                                            <br><b>{{monthAvgSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <mat-card-header class="bg-pink">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title> &nbsp; {{'SUMMARY_REPORT_COMPONANT.START_DATE' | translate }}
+                                    <br>
+                                    <h6 class="card_date_today"><small>
+                                            ({{start_report_date}})
+                                        </small></h6>
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_DISTANCE' | translate }}
+                                            <br><b>{{startTotalDistance}}
+                                                KMS</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="traveltitlewidth">
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_TRAVEL_TIME' | translate }}<br><b class="traveltimeleft">{{startTotalTravelledTime}}</b>
+                                            <b style="font-size: 12px;"> (HH:MM:SS)</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.MAX_SPEED' | translate }}
+                                            <br><b>{{startMaxSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.AVG_SPEED' | translate }}
+                                            <br><b>{{startAvgSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-card class="example-card">
+                            <mat-card-header class="bg-wilete">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>
+                                    &nbsp;&nbsp;&nbsp;{{'SUMMARY_REPORT_COMPONANT.CUSTOM' | translate }}<br>
+                                    <h6 class="card_date_custome"><small>
+                                            ({{customedate}})
+                                        </small></h6>
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_DISTANCE' | translate }}
+                                            <br><b>{{customeTotalDistance}}
+                                                KMS</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="traveltitlewidth">
+                                            {{'SUMMARY_REPORT_COMPONANT.TOTAL_TRAVEL_TIME' | translate }}<br><b class="traveltimeleft">{{customeTotalTravelledTime}}</b>
+                                            <b style="font-size: 12px;"> (HH:MM:SS)</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.MAX_SPEED' | translate }}
+                                            <br><b>{{customeMaxSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p>
+                                            {{'SUMMARY_REPORT_COMPONANT.AVG_SPEED' | translate }}
+                                            <br><b>{{customeAvgSpeed}}
+                                                KMPH</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">flag</mat-icon>
+                    {{'SUMMARY_REPORT_COMPONANT.KILOMETER_REPORT' | translate }}
+                </ng-template>
+                <div class="mt10" fxLayout="column" fxFlexFill ngxSplit="column">
+
+                    <div fxFlex="20%" ngxSplitArea class="row clearfix">
+                        <div class="col-md-10 text-left">
+
+                            <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="exportexcleTodayKM()">
+                                <i class="fa fa-file-excel"></i> &nbsp;
+                                {{'SUMMARY_REPORT_COMPONANT.DOWNLOAD_EXCEL' | translate }} </button>
+                            <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadTodayKMPdf()"><i class="fa fa-file-pdf"></i>
+                                &nbsp; {{'SUMMARY_REPORT_COMPONANT.DOWNLOAD_PDF' | translate }} </button>
+
+                        </div>
+                        <div class="col-md-2">
+                            <mat-select class="form-control" [(value)]="selectedKmReport" (selectionChange)="changeKMThisWeekThisMonthDropdown($event.value)">
+                                <mat-option value="0">{{'SUMMARY_REPORT_COMPONANT.THIS_MONTH' | translate }}
+                                </mat-option>
+                                <mat-option value="1">{{'SUMMARY_REPORT_COMPONANT.THIS_WEEK' | translate }}
+                                </mat-option>
+                                <mat-option value="2">{{'SUMMARY_REPORT_COMPONANT.LAST_7DAYS' | translate }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                    </div>
+                    <div fxFlex="80%" ngxSplitArea class="tdata mt10">
+                        <div class="example-container mat-elevation-z8" id="content" #content>
+                            <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+                                <table mat-table matSort #TableOneSort="matSort" [dataSource]="todaydataSource" class="table-bordered table" *ngIf="KilometerReportTableDataShow">
+
+                                    <ng-container matColumnDef="device_id">
+                                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                                        <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="report_date">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>{{'SUMMARY_REPORT_COMPONANT.REPORT_DATE' | translate }}
+                                        </th>
+                                        <td class="cellSpace" mat-cell *matCellDef="let element">
+                                            <a style="text-decoration: underline;color:blue;cursor: pointer;" (click)="trackHistory(element.report_date)">
+                                                {{element.rd}} </a>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="weekDayName">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.WEEKDAY' | translate }}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{element.day}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="total_distance">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_TOTAL_DISTANCE' | translate }}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.td}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="total_travelled_time">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_TOTAL_TRAVEL_TIME' | translate }}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.ttt}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="max_speed">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_MAX_SPEED' | translate }}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.ms}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="avg_speed">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_AVG_SPEED' | translate }}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.as}}</td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                                </table>
+                                <table mat-table matSort #TableOneSort="matSort" class="table-bordered table" *ngIf="KilometerReportTableDataNotshow">
+
+                                    <ng-container matColumnDef="device_id">
+                                        <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                                    </ng-container>
+
+
+
+                                    <ng-container matColumnDef="report_date">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>{{'SUMMARY_REPORT_COMPONANT.REPORT_DATE' | translate }}
+                                        </th>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="weekDayName">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.WEEKDAY' | translate }}
+                                        </th>
+
+                                    </ng-container>
+                                    <ng-container matColumnDef="total_distance">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_TOTAL_DISTANCE' | translate }}
+                                        </th>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="total_travelled_time">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_TOTAL_TRAVEL_TIME' | translate }}
+                                        </th>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="max_speed">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_MAX_SPEED' | translate }}
+                                        </th>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="avg_speed">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'SUMMARY_REPORT_COMPONANT.KM_AVG_SPEED' | translate }}
+                                        </th>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="todatDisplayedColumn;sticky:true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: todatDisplayedColumn;"></tr>
+
+                                </table>
+                                <div class="col-md-12" *ngIf="KilometerReportTableDataNotshow">
+                                    <h6 class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">analytics</mat-icon>
+                    {{'SUMMARY_REPORT_COMPONANT.CHARTS' | translate }}
+                </ng-template>
+                <div fxLayout="column" fxFlexFill ngxSplit="column">
+                    <div fxFlex="20%" ngxSplitArea class="col-md-12 clearfix mt10">
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <mat-select class="form-control" [(value)]="selectedChart" (selectionChange)="changeReportThisWeekThisMonthDropdown($event.value)">
+                                    <mat-option value="0">{{'SUMMARY_REPORT_COMPONANT.THIS_MONTH' | translate }}
+                                    </mat-option>
+                                    <mat-option value="1">{{'SUMMARY_REPORT_COMPONANT.THIS_WEEK' | translate }}
+                                    </mat-option>
+                                    <mat-option value="2">{{'SUMMARY_REPORT_COMPONANT.LAST_7DAYS' | translate }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="80%" ngxSplitArea class="mt10">
+                        <div echarts [options]="summaryReportBarChartoptions" class="echart"></div>
+                    </div>
+                    <div class="col-md-12" *ngIf="GraphDataNotshow">
+                        <h6 class="Graphdatanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</h6>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+</div>

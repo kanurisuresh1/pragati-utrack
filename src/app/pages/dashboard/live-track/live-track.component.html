@@ -1,0 +1,530 @@
+<!-- Share Location Popup -->
+
+<ng-template #shareLocationPopUp let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"><b>
+            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SHARE_LOCATION' | translate}} :</b></h4>
+            <button (click)="modal.dismiss('Cross click')" style="padding: 3px 9px 5px;font-size: 15px;
+            line-height: 17px;
+            min-width: auto;" class="btn btn-sm btn-info">
+                    x
+                </button>
+    </div>
+    <div class="modal-body">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button (change)="radioChange($event)" [checked]="true" value="1">
+                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.CURRENT_LOCATION' | translate}}
+            </mat-radio-button>
+            <mat-radio-button (change)="radioChange($event)" value="2">
+                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LIVE_LOCATION' | translate}}
+            </mat-radio-button>
+            <mat-radio-button (change)="radioChange($event)" value="3">
+                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TRIP' | translate}}
+            </mat-radio-button>
+        </mat-radio-group>
+
+    </div>
+
+    <div *ngIf="isLive" class="col-md-6">
+        <label><b>
+            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SELECT_LIVE_LOCATION_DURATION' | translate}}
+        </b></label>
+        <select class="form-control" (change)="onChange($event.target.value)">
+            <option value="" disabled>
+                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SELECT_DURATION' | translate}} :</option>
+            <option value="60">1 Hour</option>
+            <option value="120">2 Hours</option>
+            <option value="240">4 Hours</option>
+            <option value="720">12 Hours</option>
+            <option value="1440">1 Day</option>
+            <option value="2880">2 Days</option>
+        </select>
+    </div>
+
+    <div *ngIf="isTrip" class="col-md-6">
+
+        <div *ngIf="!isTrip_data" class="col-md-12">
+            <p>{{'DASH_BOARD.LIVE_TRACK_COMPONENT.NO_TRIPS_FOUND' | translate}}</p>
+        </div>
+
+        <div *ngIf="isTrip_data" class="col-md-12">
+            <label> <b>{{'DASH_BOARD.LIVE_TRACK_COMPONENT.SELECT_TRIP' | translate}} :</b></label>
+            <select class="form-control" (change)="onTripChange($event.target.value)">
+                <option value="" disabled>Select Trip</option>
+                <option *ngFor="let item of trip" [value]="item.trip_id">
+                    {{item.trip_name}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;" class="modal-footer">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"
+            class="btn btn-primary">{{'DASH_BOARD.LIVE_TRACK_COMPONENT.CANCEL' | translate}}</button>
+        <button type="button" class="btn btn-warning" (click)="shareLocation()">
+            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SHARE' | translate}}
+        </button>
+    </div>
+
+
+
+</ng-template>
+
+<div fxLayout="column" fxFlexFill ngxSplit="column" class="col-md-12 card-body">
+    <div class="row">
+        <div class="head_section">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="auto-width" style="margin-left: 4px;">
+                        <label>&nbsp;</label><br>
+                        <button class="btn btn-primary btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+                            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i
+                                class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="col-md-3" style="margin-left: -10px;">
+                        <label style="font-weight: bold;">
+                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SELECT_VEHICLE' | translate}} : </label>
+                        <mat-select class="form-control" [(ngModel)]="deviceLinkId" placeholder="Select Vehicle"
+                            #singleSelect>
+                            <mat-option>
+                                <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholder="Search Vehicle">
+                                </ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let row of filteredVehicleNumber | async"
+                                (click)="updateSelectedValue(row)" [value]="row.device_link_id">
+                                {{row.vehicle_number}} ({{row.vehicle_type}})
+                            </mat-option>
+                        </mat-select>
+                    </div>
+
+                    <div class="col-md-3" style="margin-left: -13px;">
+                        <label style="font-weight: bold;">
+                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SELECT_MAP_TYPE' | translate}} :</label>
+                        <mat-select [(value)]="selected" class="form-control"
+                            (selectionChange)="changeMapType($event.value)">
+                            <mat-option disabled value="0" selected>
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SELECT_MAP_TYPE' | translate}}
+                            </mat-option>
+                            <mat-option value="satellite"> 
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SATELLITE' | translate}}
+                            </mat-option>
+                            <mat-option value="hybrid"> 
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.HYBRID' | translate}}
+                            </mat-option>
+                            <mat-option value="roadmap"> 
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.ROADMAP' | translate}}
+                            </mat-option>
+                            <mat-option value="terrain"> 
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TERRAIN' | translate}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="auto-width" style="margin-left: -10px;">
+                        <button *ngIf="!isStatisticsData" style=" margin-top: 25px;" class="btn btn-sm btn-warning"
+                            (click)="isStatisticsData = !isStatisticsData">
+                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SHOW_STATISTICS' | translate}}
+                        </button>
+                        <button *ngIf="isStatisticsData" style=" margin-top: 25px;" class="btn btn-sm btn-warning"
+                            (click)="isStatisticsData = !isStatisticsData">
+                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.HIDE_STATISTICS' | translate}}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="row">
+                <div *ngIf="isStatisticsData" class="col-md-11" style="top: 75px;">
+
+                    <mat-tab-group>
+                        <mat-tab >
+                            <ng-template mat-tab-label>
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TODAY' | translate}}
+                              </ng-template>
+                            <div class="row">
+                                <div class="col-md-3  clearfix" style="margin-left: -10px;">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('AVG_SPEED')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/avg_speed.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.AVG_SPEED' | translate}}
+                                                    </b></small>
+                                                    <p> {{today_avg_speed}} <b>KMPH</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('MAX_SPEED')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/speed_meter.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.MAX_SPEED' | translate}}
+                                                    </b></small>
+                                                    <p> {{today_max_speed}} <b>KMPH</b> </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('TRAVEL_TIME')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/car.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TRAVEL_TIME' | translate}}
+                                                    </b></small>
+                                                    <p style="font-size: 12px;">(HH:MM:SS)</p>
+                                                    <p style="margin-top: -14px;">{{today_travelled_time}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('DISTANCE')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/locationj_pin.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TOTAL_DISTANCE' | translate}}
+                                                    </b></small>
+                                                    <p> {{today_total_distance}} <b>KM</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.YESTERDAY' | translate}}
+                              </ng-template>
+                            <div class="row">
+                                <div class="col-md-3  clearfix" style="margin-left: -10px;">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('AVG_SPEED')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/avg_speed.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>{{'DASH_BOARD.LIVE_TRACK_COMPONENT.AVG_SPEED' | translate}}</b></small>
+                                                    <p> {{yesterday_avg_speed}} <b>KMPH</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('MAX_SPEED')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/speed_meter.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.MAX_SPEED' | translate}}
+                                                    </b></small>
+                                                    <p style="font-size: 14px;"> {{yesterday_max_speed}} <b>KMPH</b>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('TRAVEL_TIME')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/car.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TRAVEL_TIME' | translate}}
+                                                    </b></small>
+                                                    <p style="font-size: 12px;">(HH:MM:SS)</p>
+                                                    <p style="margin-top: -14px;">{{yesterday_travelled_time}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('DISTANCE')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/locationj_pin.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TOTAL_DISTANCE' | translate}}
+                                                    </b></small>
+                                                    <p> {{yesterday_total_distance}} <b>KM</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LAST_7_DAYS' | translate}}
+                              </ng-template>
+                            <div class="row">
+                                <div class="col-md-3  clearfix" style="margin-left: -10px;">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('AVG_SPEED')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/avg_speed.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.AVG_SPEED' | translate}}
+                                                    </b></small>
+                                                    <p> {{last7days_avg_speed}} <b>KMPH</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('MAX_SPEED')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/speed_meter.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.MAX_SPEED' | translate}}
+                                                    </b></small>
+                                                    <p style="font-size: 14px;"> {{last7days_max_speed}} <b>KMPH</b>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('TRAVEL_TIME')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/car.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TRAVEL_TIME' | translate}}
+                                                    </b></small>
+                                                    <p style="font-size: 12px;">(HH:MM:SS)</p>
+                                                    <p style="margin-top: -14px;">{{last7days_travelled_time}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a style="cursor: pointer;" (click)="showChartDetails('DISTANCE')">
+                                        <div class="bdr-box clearfix">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="assets/images/statistics/locationj_pin.png"
+                                                        class="responsive text-center" />
+                                                </div>
+                                                <div class="col-md-6 mt10 no-pad text-left">
+                                                    <small><b>
+                                                        {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TOTAL_DISTANCE' | translate}}
+                                                    </b></small>
+                                                    <p> {{last7days_total_distance}} <b>KM</b></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="map_section">
+                        <div #fullScreen fxFlex="80%" ngxSplitArea class="col-md-12 no-pad">
+                            <div style="height:500px;width: 96%;" class="height-80vh  white-bg" id="livemap">
+                            </div>
+
+
+                            <div class="vehicle-types-model">
+                                <p><i class="fa fa-square-full text-move"></i> {{'DASH_BOARD.LIVE_TRACK_COMPONENT.MOVING' | translate}}</p>
+                                <p><i class="fa fa-square-full text-datanotfound"></i> 
+                                    {{'DASH_BOARD.LIVE_TRACK_COMPONENT.STOPPED' | translate}}
+                                </p>
+                                <p><i class="fa fa-square-full text-stop"></i> 
+                                    {{'DASH_BOARD.LIVE_TRACK_COMPONENT.DATA_NOT_RECEIVED' | translate}}
+                                </p>
+                            </div>
+                            <mat-card>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="">
+                                            <p class="mb10 font-size"><b>
+                                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LAST_RECORD_RECEIVED_ON' | translate}} :</b><br>
+                                                {{device_time}}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt_card">
+                                    <div class="col-md-6">
+                                        <p class="mb10 font-size"><b> 
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TEMPERATURE' | translate}} :</b>
+                                            <b class="font-size" [ngStyle]="{'color': temperature_data_color}">
+                                                {{temperature_data}}
+                                            </b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <p class="mb10 font-size"><b> 
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.FUEL' | translate}}
+                                        </b> :
+                                            <b class="font-size" [ngStyle]="{'color': fuel_data_color}"> {{fuel_data}}
+                                            </b>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6 mt_card">
+                                        <p class="mb10 font-size"> <b>
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LATITUDE' | translate}} :</b>
+                                            {{latitudedata}}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6 mt_card">
+                                        <p class="mb10 font-size"><b>{{'DASH_BOARD.LIVE_TRACK_COMPONENT.LONGITUDE' | translate}} :</b>
+                                            {{longitudedata}}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-12 mt_card">
+                                        <p class="mb10 font-size"> <b>
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LOCATION' | translate}} :</b>
+                                            {{Location}}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-12 mt_card">
+                                        <p class="mb10 font-size"> <b>
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LAST_STATE' | translate}} :</b>
+                                            {{last_state_name}}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-12 mt_card">
+                                        <p class="mb10 font-size"><b>
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LAST_DISTRICT' | translate}} :</b>
+                                            {{last_district_name}}
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6 mt_card">
+                                        <p class="mb10 font-size"> <b>
+                                            {{'DASH_BOARD.LIVE_TRACK_COMPONENT.SPEED' | translate}} :</b>
+                                            <!-- <ngx-gauge [type]="gaugeType" size=98 [value]="gaugeValue"
+                                    [thresholds]="gaugethresholds" [append]="gaugeAppendText">
+                                </ngx-gauge> -->
+                                            <google-chart [type]="chart.type" [data]="chart.data"
+                                                [options]="chart.options">
+                                            </google-chart>
+
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </mat-card>
+
+                            <button class="btn btn-warning btnFullScreen" id="fullScreen" style="display: block;"
+                                (click)="openFullscreen()">
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.FULL_SCREEN' | translate}} </button>
+                            <button class="btn btn-warning btnFullScreen" id="ExitFullScreen" style="display: none;"
+                                (click)="exitFullscreen()">
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.EXIT_FULL_SCREEN' | translate}} </button>
+                            <button class="btn btn-primary btnCenterScreen" style="left: 90px;" id="btn_center"
+                                (click)="openCenterscreen()">
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.CENTER' | translate}} </button>
+
+                            <button style="display: block;" (click)="trackHistory()" id="btn_btn_track_history"
+                                class="btn btn-secondary btnTrackHistory">
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TRACK_HISTORY' | translate}} </button>
+                            <button class="btn btn-success btnTripDetails" id="btn_trip_details"
+                                (click)="vehicleTripDetails()" style="display: block;">
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.TRIP_DETAILS' | translate}} </button>
+                            <button (click)="open(shareLocationPopUp)" id="btn_share_location" style="display: block;"
+                                class="btn btn-info btnShareLocation">
+                                {{'DASH_BOARD.LIVE_TRACK_COMPONENT.LIVE_SHARE_LOCATION' | translate}} </button>
+
+                                <mat-checkbox class="example-margin btnCheckBox" [checked]="isShowAutoZoomMap" (change)="showAutoZoom($event)">
+                                    {{'DASH_BOARD.LIVE_TRACK_COMPONENT.AUTO_ZOOM' | translate}}
+                                </mat-checkbox>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

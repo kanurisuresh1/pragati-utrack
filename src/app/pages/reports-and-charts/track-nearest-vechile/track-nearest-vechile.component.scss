@@ -1,0 +1,115 @@
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+.home-dashboard {
+    height: 70vh;
+    overflow: hidden;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.example-card {
+    margin: 15px 0px;
+    /* padding: 0px; */
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    transition: 0.5s;
+    padding-top: 0px;
+}
+
+.btnsize {
+    margin-top: 1px;
+    padding: 5px 9px 5px 9px;
+}
+
+.example-container table th {
+    color: #fff !important;
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+ ::ng-deep td.mat-cell {
+    padding: 0;
+    border-bottom-width: 1px;
+    border: 1px solid #e1e1e1 !important;
+    border-bottom-style: none !important;
+}
+
+td {
+    border: 1px solid #e1e1e1 !important;
+}
+
+th {
+    border: 1px solid #e1e1e1 !important;
+}
+
+.example-container table td {
+    padding: 10px !important;
+}
+
+.example-container table {
+    overflow-x: scroll !important;
+}
+
+.bg-blue {
+    background-color: #5236f0;
+    color: #fff;
+}
+
+.auto-width {
+    margin: -7px;
+    padding: 0px 4px;
+    float: left;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.dataimg2 {
+    margin: 0;
+    padding: 0;
+    margin-top: 0px;
+    margin-left: 10px;
+    width: 30%;
+    height: 20px;
+}
+
+// table row hover effect 
+tr:hover {
+    background-color: #b3f0ff;
+}
+
+.datanotfound {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 180px;
+    font-weight: bold;
+}
+
+.btn-yellow-outline {
+    border-radius: 50px !important;
+    padding: 5px 15px !important;
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: solid 2px #febe40;
+}
+
+.btn-yellow-outline:hover {
+    border: solid 2px #febe40;
+    background: #0b46ae;
+    color: #fff !important
+}
+
+agm-map {
+    height: 400px;
+}

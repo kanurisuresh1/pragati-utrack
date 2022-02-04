@@ -1,0 +1,364 @@
+<div style="margin-bottom: 5px;" class="row clearfix">
+    <div class="col-md-9 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+
+</div>
+
+
+<mat-tab-group (selectedTabChange)="mapTab($event)" [(selectedIndex)]="selectedIndex" #tabGroup>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">art_track</mat-icon>
+            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.MY_GEOFENCE' | translate}}
+        </ng-template>
+        <div class="fix-part" style="margin-top: 10px;">
+            <div class="row clearfix">
+                <div class="col-md-8 text-left">
+
+                    <label>
+                        <input type="search" matInput id="searchMyrouteName" (keyup)="applyFilter($event)"
+                            class="form-control search-field pull-left" placeholder="Search Geofence">
+                    </label>
+
+                    <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i
+                            class="fa fa-search"></i></button>
+
+
+                    <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="exportexcle()"><i
+                            class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' |
+                        translate}}</button>
+                    <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+                            class="fa fa-file-pdf"></i>
+                        &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                    <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                            class="fa fa-sync"></i></button>
+                </div>
+                <div class="col-md-4 ml-auto text-right">
+                    <div class="form-group">
+                        <button class="btn btn-warning btn-sm" (click)="createGeofence()"><b>
+                                {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.CREATE_GEOFENCE' | translate}}
+                            </b></button>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div>
+                        <div class="example-container mat-elevation-z8" id="content" #content>
+                            <div class="table-responsive" style="height: 500px; overflow: auto !important;">
+                                <table class="table-bordered table" mat-table [dataSource]="MyGeofenceListdataSource" matSort #TableOneSort="matSort">
+
+                                    <ng-container matColumnDef="id">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                                        </th>
+                                        <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="geofence_name">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.GEOFENCE_NAME' | translate}}
+                                        </th>
+                                        <td class="cellSpace" mat-cell *matCellDef="let element"><a (click)="GeofenceDetails(element.latitude,element.longitude,element.radius,element.location_name,element.geofence_name)" style="cursor: pointer;text-decoration: underline;color: blue;">{{element.geofence_name}}</a>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="location_name">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.LOCATION' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{element.location_name}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="radius">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.RADIUS' | translate}}
+                                        </th>
+                                        <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.radius}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="latitude">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.LATITUDE' | translate}}
+                                        </th>
+                                        <td mat-cell class="cellSpace" *matCellDef="let row of MyGeofenceData">
+                                            {{row.latitude}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="longitude">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.LONGITUDE' | translate}}
+                                        </th>
+                                        <td mat-cell class="cellSpace" *matCellDef="let row of MyGeofenceData">
+                                            {{row.longitude}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Actions">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.ACTIONS' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element"><a nbTooltip="Edit Geofence" nbTooltipStatus="primary"><i class="fa fa-edit text-blue "
+                                                    (click)="editGeofence(element.device_geofence_trans_id,element.latitude,element.longitude,element.radius,element.location_name,element.geofence_name)"
+                                                    style="cursor: pointer;color: blue;"></i></a> <b> | </b>
+                                            <a><i class="fa fa-trash-alt"
+                                                    (click)="deleteGeofenceModel(element.device_geofence_trans_id)"
+                                                    style="cursor: pointer;color: red;"></i></a>
+                                        </td>
+
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumn;sticky:true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+
+                                </table>
+
+                                <div class="col-md-12" *ngIf="TableDataNotshow">
+                                    <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">notification_important</mat-icon>
+            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.GEOFENCE_ALERT' | translate}}
+        </ng-template>
+
+        <div class="fix-part" style="margin-top: 10px;">
+            <div class="row clearfix">
+                <div class="col-md-8 text-left">
+
+                    <label>
+                        <input type="search" matInput class="form-control search-field pull-left"
+                            id="searchGeofenceAlert" (keyup)="applyGeofenceAletrFilter($event)"
+                            placeholder="Search Geofence">
+                    </label>
+
+                    <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="geofenceAletrsearch()"><i
+                            class="fa fa-search"></i></button>
+
+
+                    <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="geofenceAletrexportexcle()"><i class="fa fa-file-excel"></i>
+                        &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}</button>
+                    <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="geofenceAletrDownloadPDF()"><i class="fa fa-file-pdf"></i>
+                        &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                    <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="geofencealetrRefresh()"><i
+                            class="fa fa-sync"></i></button>
+                </div>
+                <div class="col-md-4 ml-auto text-right">
+                    <div class="form-group">
+                        <button class="btn btn-warning btn-sm" (click)="addGeofenceAlert()"><b>
+                                {{'MY_ACCOUNT.CREATE_GEOFENCE_ALERT_COMPONANT.CREATE_GEOFENCE_ALERT' | translate}}
+                            </b></button>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div>
+                        <div class="example-container mat-elevation-z8" id="content" #content>
+                            <div class="table-responsive" style="height: 500px; overflow: auto !important;">
+                                <table class="table-bordered table" mat-table [dataSource]="AlertGeofenceCustomeListdataSource" matSort #TableTwoSort="matSort">
+
+                                    <ng-container matColumnDef="id">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> ID
+                                        </th>
+                                        <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="geofence_name">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.GEOFENCE_NAME' | translate}}
+                                        </th>
+                                        <td class="cellSpace" mat-cell *matCellDef="let element">
+                                            <a style="cursor: pointer;text-decoration: underline;color: blue;" (click)="edit(element)">
+                                                {{element.geofence_name}} </a>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="vehicle_numbers">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.VEHICLE_NUMBER' | translate}}
+                                        </th>
+                                        <td class="cellSpace" mat-cell *matCellDef="let element">
+                                            {{element.vehicle_numbers}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="from_date_time">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.FROM_DATE_TIME' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{element.from_date_time | date: 'dd MMM yyyy hh:mm:ss a'}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="to_date_time">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.TO_DATE_TIME' | translate}}
+                                        </th>
+                                        <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.to_date_time | date: 'dd MMM yyyy hh:mm:ss a'}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="mobile_numbers">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.MOBILE_NUMBERS' | translate}}
+                                        </th>
+                                        <td mat-cell class="cellSpace" *matCellDef="let element">
+                                            {{element.mobile_numbers}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="email_ids">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.EMAIL_ID' | translate}}
+                                        </th>
+                                        <td mat-cell class="cellSpace" *matCellDef="let element">
+                                            {{element.email_ids}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="status">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.STATUS' | translate}}
+                                        </th>
+                                        <td mat-cell class="cellSpace" *matCellDef="let element" [ngStyle]="{'color':element.status_type_button_color}">
+                                            {{element.status}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Actions">
+                                        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            {{'MY_ACCOUNT.MY_GEOFENCE_COMPONANT.ACTIONS' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element"><a nbTooltip="Edit Geofence Alert" nbTooltipStatus="primary" (click)="edit(element)"><i
+                                                    class="fa fa-edit text-blue "
+                                                    style="cursor: pointer;color: blue;"></i></a><b> | </b>
+                                            <a><i class="fa fa-trash-alt"
+                                                    (click)="deleteModel(element.geofence_custom_alert_id)"
+                                                    style="cursor: pointer;color: red;"></i></a>
+                                        </td>
+
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="AlertGeofenceCustomeDisplayedColumn;sticky:true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: AlertGeofenceCustomeDisplayedColumn;">
+                                    </tr>
+
+                                </table>
+
+                                <div class="col-md-12" *ngIf="alertTableDataNotshow">
+                                    <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">notifications_active</mat-icon>
+            {{'DASH_BOARD.MYTEMPERATURE_ALERTS_COMPONENT.Notifications' | translate}}
+        </ng-template>
+        <div class="row clearfix" style="margin-top: 5px;">
+            <div class="col-md-9 text-left">
+
+                <label>
+                    <input type="search" matInput id="hist_alert_search_element" (keyup)="hist_applyFilter($event)"
+                        class="form-control search-field pull-left" placeholder="Search Vehicle">
+                </label>
+
+                <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="hist_search()"><i
+                        class="fa fa-search"></i></button>
+
+                <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="hist_epxportexcle()"><i
+                        class="fa fa-file-excel"></i> &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' |
+                    translate}}</button>
+                <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="hist_downloadPDF()"><i
+                        class="fa fa-file-pdf"></i>
+                    &nbsp; {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}</button>
+                <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" (click)="hist_refresh()" nbTooltipStatus="success" [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="example-container mat-elevation-z8" id="content" #content>
+                <div (scroll)="onTableScroll($event)" class="table-responsive" style="height: 500px;overflow: auto !important;">
+                    <table class="table-bordered table" mat-table [dataSource]="alertDataSource" matSort>
+
+                        <ng-container matColumnDef="id">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                ID
+                            </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="vehicle_number">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'DASH_BOARD.MYTEMPERATURE_ALERTS_COMPONENT.VEHICLE_NUMBER' | translate}}
+                            </th>
+                            <td class="cellSpace" mat-cell *matCellDef="let element">
+                                <a>{{element.vehicle_number}}</a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="alert_sub_type">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'DASH_BOARD.MYTEMPERATURE_ALERTS_COMPONENT.Sub Type' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.alert_sub_type}}
+                            </td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="message">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'DASH_BOARD.MYTEMPERATURE_ALERTS_COMPONENT.Message' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.message}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="added_date">
+                            <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{'DASH_BOARD.MYTEMPERATURE_ALERTS_COMPONENT.Date Time' | translate}}
+                            </th>
+                            <td mat-cell class="cellSpace" *matCellDef="let element">
+                                {{element.added_date | date:'dd MMM yyyy hh:mm:ss a'}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="alertDisplayCols;sticky:true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: alertDisplayCols;"></tr>
+
+                    </table>
+
+                    <div class="col-md-12" *ngIf="alertHistoryTableDataNotshow">
+                        <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

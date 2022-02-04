@@ -1,0 +1,75 @@
+
+<div class="row">
+    <div class="col-md-11">
+        <h4 class="text-center">
+            {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.COPY_THE_LINK_AND_SHARE' | translate}}
+        </h4>
+    </div>
+    <div class="col-md-1">
+        <button  mat-dialog-close="false" style="padding: 3px 9px 5px;font-size: 15px;
+        line-height: 17px;
+        min-width: auto;" class="btn btn-sm btn-info">
+            x
+        </button>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-12 bor">
+        <div class="text-center" style="padding: 20px;">
+            <a href="" target="_blank" id="inputId" (click)="openNewtab()"> {{sharelinkid}} </a>
+        </div>
+    </div>
+    <div class="col-md-12 text-center mt10">
+        <button type="submit" (click)="copyToClipboard()" class="btn btn-primary mr10">
+            {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.COPY' | translate}}
+        </button>
+        <button type="submit" mat-dialog-close="false" class="btn btn-warning mr10">
+            {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.CANCEL' | translate}}
+        </button>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row" style="margin-top: 15px;">
+            <div [formGroup]="mobileNotificationForm" class="col-md-5">
+                <label><b>
+                    {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.MOBILE_NUMBER' | translate}} : </b></label>
+                <input width="235px" type="text" maxlength="10" class="form-control"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="number"
+                    placeholder="Enter Mobile Number" formControlName="mobileNumber"
+                    [ngClass]="{ 'is-invalid': num_submitted && f.mobileNumber.errors }">
+
+                <button class="btn btn-sm btn-success send_button" (click)="mobile_notification()"><i
+                        class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                <div style="margin-top: -20px;" *ngIf="num_submitted && f.mobileNumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.mobileNumber.errors.required">
+                        {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.MOBILE_NUMBER_REQUIRED' | translate}}
+                    </div>
+                </div>
+
+            </div>
+
+            <div [formGroup]="emailNotificationForm" class="col-md-5">
+                <label><b> 
+                    {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.EMAIL_ADDRESS' | translate}} :</b></label>
+                <input width="235px" type="text" maxlength="45" class="form-control" formControlName="email"
+                    [ngClass]="{ 'is-invalid': email_submitted && e.email.errors }" placeholder="Enter Email Address">
+
+                <button class="btn btn-sm btn-success send_button" (click)="email_notification()"><i
+                        class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                <div style="margin-top: -20px;" *ngIf="email_submitted && e.email.errors" class="invalid-feedback">
+                    <div *ngIf="e.email.errors.required">
+                        {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.EMAIL_REQUIRED' | translate}}
+                    </div>
+                    <div *ngIf="e.email.errors.email">
+                        {{'DASH_BOARD.SHARE_TRIP_LINK_COMPONENT.EMAIL_VALID' | translate}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+<div class="col-md-12">
+    <i style="font-size: 30px;  right: 338px;  position: fixed;  top: 30px;" class="fa fa-times-circle"
+        mat-dialog-close="false" nbTooltip="Close" nbTooltipStatus="info"></i>
+</div>
+<mat-dialog-actions>
+    <h4 *ngIf="isCreateOrganisation" style="color: blue;"> Create Organisation :</h4>
+    <h4 *ngIf="!isCreateOrganisation" style="color: blue;"> Edit Organisation :</h4>
+    <hr>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card-body">
+                <div class="col-md-12" [formGroup]="organisationForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Organisation Name
+                                    <span class="required">*</span></label>
+                                <input type="text" style="text-transform: capitalize;" formControlName="org_name"
+                                    [(ngModel)]="orgName" onkeypress="return /[a-z]/i.test(event.key)" maxlength="30"
+                                    class="form-control" placeholder="Enter Organisation Name">
+                                <mat-error
+                                    *ngIf="organisationForm.controls['org_name'].errors && organisationForm.controls['org_name'].touched">
+                                    <span *ngIf="organisationForm.controls['org_name'].errors.required">
+                                        Enter Organisation Name
+                                    </span>
+                                    <span *ngIf="organisationForm.controls['org_name'].errors.minlength">
+                                        Enter Minimum 3 Letters
+                                    </span>
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Organisation Type
+                                    <span class="required">*</span></label>
+                                <mat-select class="form-control" [(ngModel)]="orgType" formControlName="org_type">
+                                    <mat-option value="School">School</mat-option>
+                                    <mat-option value="College">College</mat-option>
+                                    <mat-option value="Company">Company</mat-option>
+                                    <mat-option value="Other">Other</mat-option>
+                                </mat-select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Bus Visibility
+                                    <span class="required">*</span></label>
+                                <mat-select class="form-control" [(ngModel)]="busVisibility"
+                                    formControlName="bus_visibility">
+                                    <mat-option value="Only_Assigned">Only Assigned</mat-option>
+                                    <mat-option value="All">All</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Track History Visibility
+                                    <span class="required">*</span></label>
+                                <mat-select class="form-control" [(ngModel)]="trackHistVisibility"
+                                    formControlName="trh_visibility">
+                                    <mat-option value="All_Time">All Time</mat-option>
+                                    <mat-option value="Specific_Time">Specific Time</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Status
+                                    <span class="required">*</span></label>
+                                <mat-select class="form-control" [(ngModel)]="statusType" formControlName="status">
+                                    <mat-option value="Active">Active</mat-option>
+                                    <mat-option value="Inactive">Inactive</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Logo
+                                    <span class="required">*</span></label>
+                                <input class="btn" formControlName="fileData" accept="image/*"
+                                    (change)="uploadServiceImage($event,cropperModal)" type="file" id="myfile"
+                                    name="myfile">
+
+                                <div class="image-preview mb-3 ng-star-inserted" style="margin-top: 10px;"><img
+                                        height="105" width="105" src="{{org_logo_image}}"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-sm mrl5" mat-dialog-close="false">Cancel</button>
+                            <button *ngIf="isCreateOrganisation" class="btn btn-primary btn-sm mrl5"
+                                (click)="createOrg()">Create
+                                Organisation</button>
+                            <button *ngIf="!isCreateOrganisation" class="btn btn-primary btn-sm mrl5"
+                                (click)="createOrg()">Update
+                                Organisation</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="container">
+        <ng-template #cropperModal let-modal>
+            <div class="modal-content model-resize">
+                <div class="modal-header">
+                    <p style="font-size: 24px;"><b> Crop Image</b> </p>
+                    <button type="button" x (click)="modal.dismiss('Cross click')">&times;</button>
+                </div>
+                <!-- <div style=" border: 1px solid black;"></div> -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="text-center col-md-8">
+                            <h4 style="margin-left:-44px;"><b> Crop Image</b></h4>
+                            <div style="height:236px;width: 466px;">
+                                <image-cropper class="imgcrop" [imageChangedEvent]="imageChangedEvent"
+                                    [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png"
+                                    (imageCropped)="imageCropped($event)">
+                                </image-cropper>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4">
+                            <h4 style="margin-left:-50px;"><b> Preview Image</b></h4>
+                            <img style="margin-left:-44px;" height="180" width="200" [src]="croppedImage" />
+                        </div>
+                    </div>
+                </div>
+                <!-- <div style=" border: 1px solid black;"></div> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="croperimage()">Update</button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</mat-dialog-actions>

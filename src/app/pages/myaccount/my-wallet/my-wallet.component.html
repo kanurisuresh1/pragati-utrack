@@ -1,0 +1,93 @@
+<div class="col-md-12 white-bg mb10">
+    <div class="row">
+        <div class="col-md-8 wallet">
+            <p class="text-muted text-center">{{'MY_ACCOUNT.MY_WALLET_COMPONANT.AVAILABLE_BALANCE' | translate}}</p>
+            <h5 class="text-center"><i class="fa fa-rupee-sign"></i> 0.00</h5>
+        </div>
+        <div class="col-md-3 wallet ">
+            <button type="button" class="btn btn-round-yellow mt15" (click)="redeem()">
+                {{'MY_ACCOUNT.MY_WALLET_COMPONANT.REDEEM' | translate}}</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6  clearfix">
+        <div class="white-bg">
+            <h5 class="text-center mt5">{{'MY_ACCOUNT.MY_WALLET_COMPONANT.REFERRAL_LIST' | translate}}</h5>
+            <div class="bdr-btm1"></div>
+            <div *ngFor='let row of referralList'>
+                <div class="wallet-item clearfix">
+                    <div class="row  mb10">
+                        <div class="col-md-4 col-xs-3 mt10 mb10">
+                            <div class="wallet-pic ">
+                                <img src="assets/images/MyWallet/defaultpic.png" alt="" class="responsive " />
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-xs-7 mt30 clearfix">
+                            <p><b>{{row.first_name}}</b></p>
+                            <p>{{row.last_name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" *ngIf="referralDataNotshow">
+            <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+          </div>
+    </div>
+
+    <div class="col-md-6  clearfix">
+        <div class="white-bg clearfix">
+            <h5 class="text-center mt5 ">{{'MY_ACCOUNT.MY_WALLET_COMPONANT.TRANSACTIONS_LIST' | translate}}</h5>
+            <div class="bdr-btm1"></div>
+            <div *ngFor='let row of CreditList'>
+                <div class="col-md-12 bg-info">
+                    <p class="date">{{row.Creditdate}}</p>
+                </div>
+                <div class="wallet-data clearfix">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 mt10 mb10">
+                            <div class="wallet-pic">
+                                <img src="assets/images/MyWallet/bank-default.jpg" alt="" class="responsive" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 mt20">
+                            <p><b>{{'MY_ACCOUNT.MY_WALLET_COMPONANT.REFERRAL_AMOUNT_RECEIVED' | translate}}</b></p>
+                            <p>{{row.referee_name}}</p>
+                            <p>{{row.Creditdate}}</p>
+                        </div>
+                        <div class="col-md-3 col-xs-2 mt30">
+                            <h5 class="text-center text-move"><i class="fa fa-rupee-sign"></i>{{row.amount}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngFor='let row of DebitList'>
+                <div class="col-md-12 bg-info">
+                    <p class="date">{{row.Debitdate}}</p>
+                </div>
+                <div class="wallet-data clearfix">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 mt10 mb10">
+                            <div class="wallet-pic">
+                                <img src="assets/images/MyWallet/bank-default.jpg" alt="" class="responsive" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 mt20">
+                            <p><b>{{'MY_ACCOUNT.MY_WALLET_COMPONANT.AMOUNT_REDEEMDED' | translate}}</b></p>
+                            <p>{{row.description}}</p>
+                            <p>{{row.Debitdate}}</p>
+                        </div>
+                        <div class="col-md-3 col-xs-2 mt30">
+                            <h5 class="text-center text-stop"><i class="fa fa-rupee-sign"></i>{{row.amount}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12"  *ngIf="transactionsDataNotshow">
+            <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+          </div>
+    </div>
+</div>

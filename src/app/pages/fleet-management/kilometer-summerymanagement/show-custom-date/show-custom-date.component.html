@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-11">
+    <h5>{{vehicle_number}} : <b>{{vehicle_type}}</b> &nbsp; &nbsp;
+      <img src="{{MonthDatelistimage}}">
+    </h5>
+  </div>
+  <div class="col-md-1">
+    <button mat-dialog-close="true" style="padding: 3px 8px 2px;margin-left: 15px;
+line-height: 17px;
+min-width: auto;" class="btn btn-sm btn-info">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<hr>
+
+<div>
+  <div class="example-container mat-elevation-z8" id="content" #content>
+    <div class="table-responsive" style="height: 550px;overflow: auto !important;">
+      <table matTableExporter #exporter="matTableExporter" class="table-bordered table" mat-table
+        [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="id">
+          <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Date">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.DATE' | translate }} </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element">
+            <a style="text-decoration: underline;color:blue;cursor: pointer;"
+              (click)="trackHistory(element.report_date)"> {{element.report_date}} </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="weekDayName">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.WEEKDAY' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element">{{element.report_day}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Distance">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.DISTANCE' | translate }} </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.total_distance}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Travel_Time">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.TRAVEL_TIME' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.total_travelled_time}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Max_Speed">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.MAX_SPEED' | translate }} </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.max_speed}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Avg_Speed">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{'KILOMETER_SUMMARY_MANAGEMENT.AVG_SPEED' | translate }}
+          </th>
+          <td mat-cell class="cellSpace" *matCellDef="let element">
+            {{element.avg_speed}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+    </div>
+  </div>
+</div>

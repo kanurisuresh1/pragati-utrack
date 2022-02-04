@@ -1,0 +1,941 @@
+<div class="row clearfix">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+            [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-12 no-pad">
+
+        <div [formGroup]="vechicleNumDetailsForm">
+
+            <div class="col-sm-12 col-md-offset-6">
+                <div class="circle">
+                    <div class="image-preview mb-3 ng-star-inserted"><img height="76" width="74"
+                            src="{{vehicle_image}}"></div>
+                </div>
+                <div class="p-image"><i type="button" (click)="fileInput.click()"
+                        class="fa fa-camera upload-button"></i><input accept="image/*" hidden=""
+                        (change)="handleProfileImage($event,cropperModal)" type="file" #fileInput
+                        formControlName="fctrl_image" id="file" ng-reflect-name="image"
+                        class="ng-untouched ng-pristine ng-valid"></div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.VEHICLE_NUMBER' | translate }}
+                        </label>
+                        <input type="text" [(ngModel)]="vehicle_number" formControlName="fctrl_vehiclenumber"
+                            class="form-control" style="background-color: #f6f7f8;" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.DEVICE_IMEI' | translate }}
+                        </label>
+                        <input type="text" [(ngModel)]="Imei_Number" formControlName="fctrl_deviceImei" id="IMEI"
+                            class="form-control" style="background-color: #f6f7f8;" readonly>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.HUB_NAME' | translate }}
+                        </label>
+                        <mat-select class="form-control" [(ngModel)]="hub_name" formControlName="fctrl_hub_name">
+                            <mat-option *ngFor='let row of hubListNames' [value]="row.hub_id">
+                                {{row.hub_name}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.DRIVER_NAME' | translate }}
+                        </label>
+                        <input type="text" id="driver_name" formControlName="fctrl_driver_name"
+                            [(ngModel)]="driver_name" style="background-color: #f6f7f8;" readonly name="driver_name" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.ENGINE_NUMBER' | translate }}
+                        </label>
+                        <input type="text" id="engine_number" formControlName="fctrl_engine_number"
+                            [(ngModel)]="engine_number" name="engine_number" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CHASSIS_NUMBER' | translate }}
+                        </label>
+                        <input type="text" id="chassis_number" [(ngModel)]="chassis_number" name="chassis_number"
+                            formControlName="fctrl_chassis_number" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.MAKE' | translate }}
+                        </label>
+                        <input type="text" id="make" formControlName="fctrl_make" [(ngModel)]="make" name="make"
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.MODEL' | translate }}
+                        </label>
+                        <input type="text" id="model" formControlName="fctrl_model" [(ngModel)]="model" name="model"
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.MIN_TEMP' | translate }}
+                        </label>
+                        <input type="text" id="minTemp" formControlName="fctrl_min_temp" [(ngModel)]="minTemp"
+                            name="minTemp" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.MAX_TEMP' | translate }}
+                        </label>
+                        <input type="text" id="maxTemp" formControlName="fctrl_max_temp" [(ngModel)]="maxTemp"
+                            name="maxTemp" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.OVER_SPEED_LIMIT' | translate }}
+                        </label>
+                        <input type="text" id="over_speed"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4" formControlName="fctrl_over_speed" name="over_speed" [(ngModel)]="over_speed"
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+                        <label>
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FUEL_TYPE' | translate }}
+                        </label>
+                        <mat-select class="form-control" [(ngModel)]="fuel_type" formControlName="fctrl_vechicleName">
+                            <mat-option value="Petrol"> Petrol</mat-option>
+                            <mat-option value="Diesel"> Diesel</mat-option>
+                            <mat-option value="CNG"> CNG</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.BUY_DATE' | translate }}
+                        </label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Buy Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate" [(ngModel)]="buy_date"
+                                [matDatepicker]="buyDatePicker" formControlName="fctrl_buyDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="buyDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #buyDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FUEL_TANK_SIZE_IN_LITERS' | translate }}
+                        </label>
+                        <input type="text" id="fuel_tank_size" maxlength="5"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            formControlName="fctrl_fuel_tank_size" name="fuel_tank_size" [(ngModel)]="fuel_tank_size"
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.AVERAGE_MILAGE_PER_LITER' | translate }}
+                        </label>
+                        <input type="text" id="mileage_per_litre" maxlength="5"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            formControlName="fctrl_mileage_per_litre" [(ngModel)]="mileage_per_litre"
+                            name="mileage_per_litre" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="margin-top:-17px;">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.AVERAGE_MILAGE_PER_LITER_EMPTY_TRUCK' | translate }}
+                        </label>
+                        <input type="text" id="mileage_per_litre_empty_truck" maxlength="5"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            formControlName="fctrl_mileage_per_litre_empty_truck"
+                            [(ngModel)]="mileage_per_litre_empty_truck" name="mileage_per_litre_empty_truck"
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-md-12 mb20">
+                    <label for="inputMDEx">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.VEHICLE_IMAGE' | translate }}
+                    </label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" accept="image/*"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'VEHICLE')"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isVehicleImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of vehicleImages">
+                                    <li>
+                                        <img [src]="item.image_file" nbTooltip="Open Image" (click)="onImageOpen(item)"
+                                            nbTooltipStatus="info">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" nbTooltip="Delete" nbTooltipStatus="danger"
+                                                (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isVehicleImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+
+
+                <div class="col-md-12 text-primary">
+                    <h4>
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.REGISTRATION_DETAILS' | translate }} : </h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.VEHICLE_REGISTRATION_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Registration Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input style="margin-top:-17px;background-color: #f6f7f8;" matInput class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="vehicle_registration_date" [matDatepicker]="vehicleRegistrationDatePicker"
+                                formControlName="fctrl_vehicleRegistrationDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="vehicleRegistrationDatePicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #vehicleRegistrationDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.REGISTRED_OWNER_NAME' | translate }}</label>
+                        <input type="text" id="registered_owner_name" formControlName="fctrl_registered_owner_name"
+                            [(ngModel)]="registered_owner_name" name="registered_owner_name" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.REGISTRATION_IMAGES' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file" accept="image/*"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'REGISTRATION')"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isRegistraionImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of registrationImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isRegistraionImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="col-md-12 text-primary">
+                    <h4> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_DETIALS' | translate }} :</h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active"> 
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_VENDOR_NAME' | translate }}</label>
+                        <input type="text" id="insurance_vender_name" name="insurance_vender_name"
+                            [(ngModel)]="insurance_vender_name" formControlName="fctrl_insurance_vender_name"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_DETAILS' | translate }}</label>
+                        <input type="text" id="Engine" class="form-control" name="insurance_number"
+                            [(ngModel)]="insurance_number" formControlName="fctrl_insurance_number">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_COST' | translate }}</label>
+                        <input type="text" id="insurance_cost" name="insurance_cost" [(ngModel)]="insurance_cost"
+                            formControlName="fctrl_insurance_cost" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Insurance Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="insurance_date" [matDatepicker]="insuranceDatepicker"
+                                formControlName="fctrl_insuranceDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="insuranceDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #insuranceDatepicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_RENEWAL_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Insurance Renewal Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="background-color: #f6f7f8;" class="form-control datepicker" [(ngModel)]="insurance_renewal_date"
+                                [matDatepicker]="insuranceRenewalDatepicker"
+                                formControlName="fctrl_insuranceRenewalDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="insuranceRenewalDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #insuranceRenewalDatepicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.INSURANCE_IMAGES' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file" accept="image/*"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'INSURANCE')"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isInsuranceImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of insuranceImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isInsuranceImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+
+                <hr>
+                <div class="col-md-12 text-primary">
+                    <h4> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.POLLUTION_CERTIFICATE' | translate }} :</h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.POLLUTION_COST' | translate }}</label>
+                        <input type="text" id="pollution_check_cost" name="pollution_check_cost"
+                            [(ngModel)]="pollution_check_cost" formControlName="fctrl_pollution_check_cost"
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.POLLUTION_CHECK_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Pollution Check Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="pollution_check_date" [matDatepicker]="pollutionCheckDatepicker"
+                                formControlName="fctrl_pollutionCheckDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="pollutionCheckDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #pollutionCheckDatepicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.POLLUTION_CHECK_RENEWAL_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Pollution Check Renewal Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [(ngModel)]="pollution_renewal_date"
+                                [matDatepicker]="pollutionRenewalDatepicker"
+                                formControlName="fctrl_pollutionRenewalDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="pollutionRenewalDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #pollutionRenewalDatepicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.POLLUTION_CERTIFICATE_IMAGES' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file" accept="image/*"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'POLLUTION')"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isPollutionImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of pollutionImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isPollutionImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="col-md-12 text-primary">
+                    <h4> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NATIONAL_PERMIT_DETAILS' | translate }} :</h4>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NATIONAL_PERMIT_ID' | translate }}</label>
+                        <input type="text" id="national_permit_id" [(ngModel)]="national_permit_id"
+                            name="national_permit_id" formControlName="fctrl_national_permit_id" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NATIONAL_PERMIT_ISSUE_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="national_permit_issue_date" [matDatepicker]="nationalPermitDatePicker"
+                                formControlName="fctrl_nationalPermitDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="nationalPermitDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #nationalPermitDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NATIONAL_PERMIT_RENEWAL_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [(ngModel)]="national_permit_renewal_date"
+                                [matDatepicker]="nationalPermitRenewalDatePicker"
+                                formControlName="fctrl_nationalPermitRenewalDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="nationalPermitRenewalDatePicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #nationalPermitRenewalDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NATIONAL_PERMIT_IMAGES' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'NATIONAL_PERMIT')" accept="image/*"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isNationalPermitImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of nationalPermitImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isNationalPermitImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+
+                <div class="col-md-12 text-primary">
+                    <h4> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.STATE_PERMIT_DETAILS' | translate }} :</h4>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active"> {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.STATE_NAME' | translate }}</label>
+                        <mat-select class="form-control" placeholder="Select State" [(ngModel)]="state_name"
+                            formControlName="fctrl_state_name">
+                            <mat-option *ngFor='let row of states' [value]="row.state">
+                                {{row.state}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.STATE_PERMIT_ID' | translate }}</label>
+                        <input type="text" id="state_permit_id" [(ngModel)]="state_permit_id" name="state_permit_id"
+                            formControlName="fctrl_state_permit_id" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.STATE_PERMIT_ISSUE_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="state_permit_issue_date" [matDatepicker]="statePermitDatePicker"
+                                formControlName="fctrl_state_permit_Issue_Date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="statePermitDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #statePermitDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="margin-top:-17px;">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.STATE_PERMIT_RENEWAL_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input style="margin-top:-17px;background-color: #f6f7f8;" matInput class="form-control datepicker" [(ngModel)]="state_permit_renewal_date"
+                                [matDatepicker]="statePermitRenewalDatePicker"
+                                formControlName="fctrl_state_permit_RenewalDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="statePermitRenewalDatePicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #statePermitRenewalDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.STATE_PERMIT_IMAGES' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'STATE_PERMIT_CERTIFICATE')"
+                            accept="image/*" style="display: block" />
+                    </a>
+
+                    <div *ngIf="isStatePermitImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of statePermitImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isStatePermitImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+
+                <div class="col-md-12 text-primary">
+                    <h4>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FITNESS_CERTIFICATE_DETAILS' | translate }} :</h4>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FITNESS_CERTIFICATE_ID' | translate }}</label>
+                        <input type="text" id="fitness_permit_id" [(ngModel)]="fitness_permit_id"
+                            name="fitness_permit_id" formControlName="fctrl_fitness_certificate_id"
+                            class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FITNESS_CERTIFICATE_ISSUE_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="fitness_permit_issue_date" [matDatepicker]="fitnessIssueDatePicker"
+                                formControlName="fctrl_fitness_certificate_IssueDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="fitnessIssueDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fitnessIssueDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FITNESS_CERTIFICATE_RENEWAL_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [(ngModel)]="fitness_permit_renewal_date"
+                                [matDatepicker]="fitnessRenewalDatePicker"
+                                formControlName="fctrl_fitness_certificate_RenewalDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="fitnessRenewalDatePicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #fitnessRenewalDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.FITNESS_CERTIFICATE_IMAGES' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'FITNESS_CERTIFICATE')"
+                            accept="image/*" style="display: block" />
+                    </a>
+
+                    <div *ngIf="isFitnessPermitImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of fitnessImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isFitnessPermitImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+
+
+                <div class="col-md-12 text-primary">
+                    <h4>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.TAX_DETAILS' | translate }} :</h4>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMDEx" class="active">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.TAX_INVOICE_ID' | translate }}</label>
+                        <input type="text" id="tax_invoice_id" [(ngModel)]="tax_invoice_id" name="tax_invoice_id"
+                            formControlName="fctrl_tax_invoice_id" class="form-control"> 
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.TAX_INVOICE_ISSUE_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker" [max]="todayDate"
+                                [(ngModel)]="tax_invoice_permit_issue_date" [matDatepicker]="taxInvoiceIssueDatePicker"
+                                formControlName="fctrl_taxInvoiceIssueDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="taxInvoiceIssueDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #taxInvoiceIssueDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.TAX_INVOICE_RENEWAL_DATE' | translate }}</label>
+                        <mat-form-field class="no-line">
+                            <!-- <mat-label>Enter Permit Date</mat-label> -->
+                            <!-- #docregion toggle -->
+                            <input matInput style="margin-top:-17px;background-color: #f6f7f8;" class="form-control datepicker"
+                                [(ngModel)]="tax_invoice_permit_renewal_date"
+                                [matDatepicker]="taxInvoiceRenewalDatePicker"
+                                formControlName="fctrl_taxInvoiceRenewalDate" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="taxInvoiceRenewalDatePicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #taxInvoiceRenewalDatePicker></mat-datepicker>
+                            <!-- #enddocregion toggle -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.TAX_INVOICE_IMAGE' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'TAX_DETAILS')" accept="image/*"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isTaxInvoiceImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of taxInvoiceImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isTaxInvoiceImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+
+
+                <div class="col-md-12 mb20" style="margin-top:-17px;">
+                    <label for="inputMDEx">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.OTHER_IMAGE' | translate }}</label>
+                    <a method="post" enctype="multipart/form-data">
+                        <input type="file" id="upload_file"
+                            (change)="handleFileInput($event,FileUploadcropperModal,'OTHER')" accept="image/*"
+                            style="display: block" />
+                    </a>
+
+                    <div *ngIf="isOtherImagesAvailable" class="row">
+                        <div class="col-md-12">
+                            <div class="gallery-box clearfix">
+                                <div class="img-gallery" *ngFor="let item of otherImages">
+                                    <li>
+                                        <img [src]="item.image_file" (click)="onImageOpen(item)">
+                                        <div class="img-delete">
+                                            <i class="fa fa-trash-alt" (click)="deleteModel(item)"></i>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="no-image" *ngIf="!isOtherImagesAvailable">
+                        {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.NO_IMAGES_TO_DISPLAY' | translate }}
+                    </div>
+
+                    <div id="image_preview"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="col-md-12 text-center">
+                    <!-- <button class="btn btn-round waves-effect waves-light">Save</button> -->
+                    <button type="submit" class="btn btn-warning" (click)="vehicleDetailSubmit()">{{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.SUBMIT' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ng-template #cropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size: 24px;"><b> 
+                    {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CROP_IMAGE' | translate }}
+                </b> </p>
+                <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;
+                min-width: auto;" class="btn btn-sm btn-info">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b>
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CROP_IMAGE' | translate }}
+                        </b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="ProfileImageChangedEvent"
+                                [maintainAspectRatio]="true" [aspectRatio]="4 / 4" format="png"
+                                (imageCropped)="ProfileImageCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.PREVIEW' | translate }}
+                        </b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="croppedProfileImage" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CANCEL' | translate }}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="UploadProfileCroperImage()">
+                    {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.UPLOAD' | translate }}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+<div class="container">
+    <ng-template #FileUploadcropperModal let-modal>
+        <div class="modal-content model-resize">
+            <div class="modal-header">
+                <p style="font-size: 24px;"><b> 
+                    {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CROP_IMAGE' | translate }}
+                </b> </p>
+                <button (click)="modal.dismiss('Cross click')" style="padding: 3px 8px 2px; line-height: 17px;
+                min-width: auto;" class="btn btn-sm btn-info">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center col-md-8">
+                        <h4 style="margin-left:-44px;"><b>
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CROP_IMAGE' | translate }}
+                        </b></h4>
+                        <div style="height:236px;width: 466px;">
+                            <image-cropper class="imgcrop" [imageChangedEvent]="FileimageChangedEvent"
+                                [maintainAspectRatio]="false" [aspectRatio]="4 / 4" format="png"
+                                (imageCropped)="imageFileCropped($event)">
+                            </image-cropper>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-4">
+                        <h4 style="margin-left:-50px;"><b>
+                            {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.PREVIEW' | translate }}
+                        </b></h4>
+                        <img style="margin-left:-44px;" height="180" width="200" [src]="croppedFileImage" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div style=" border: 1px solid black;"></div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">
+                    {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.CANCEL' | translate }}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="uploadcroperImage()">
+                    {{'REPORTS_CHARTS.VEHICLE_NUMBER_DETAILS_COMPONENT.UPLOAD' | translate }}
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>

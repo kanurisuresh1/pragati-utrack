@@ -1,0 +1,332 @@
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.15rem;
+}
+
+.white-bg {
+    background: #fff;
+    border: solid 1px #ddd;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+.mt10 {
+    margin-top: 10px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.text-right {
+    text-align: right !important;
+}
+.pull-right {
+    float: right !important;
+}
+.pull-left {
+    float: left;
+}
+
+.auto-width {
+    margin: 0;
+    padding: 0px 10px;
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.mapselectoption {
+    position: absolute;
+    margin: 10px;
+    right: 30px;
+    top: 0;
+    width: 200px;
+}
+
+.mapselectoption-nw {
+    position: absolute;
+    margin: 10px;
+    right: 45px;
+    top: 0;
+    width: 200px;
+}
+
+.btnFullScreen {
+    position: absolute;
+    padding: 6px;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btnTrackHistory {
+    margin-right: 10px;
+    position: absolute;
+    padding: 6px;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0px;
+    font-size: 13px;
+    left: 155px;
+}
+
+.btnTripDetails {
+    margin-right: 10px;
+    position: absolute;
+    padding: 6px;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0px;
+    font-size: 13px;
+    left: 260px;
+}
+
+.btnShareLocation {
+    margin-right: 10px;
+    position: absolute;
+    padding: 6px;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0px;
+    font-size: 13px;
+    left: 353px;
+}
+.btnCenterScreen {
+    position: absolute;
+    padding: 6px;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0px;
+    font-size: 13px;
+    cursor: pointer;
+    left: 90px;
+}
+
+.vehicle-types-model {
+    position: absolute;
+    padding: 6px 10px 2px;
+    background: #fff;
+    border: solid 1px #ccc;
+    margin: 10px;
+    top: 0px;
+    padding-bottom: 0px;
+    right: 45px;
+}
+
+.btnCheckBox {
+    border-radius: 4px;
+    color: #f5eded !important;
+    background-color: #b926f3;
+    position: absolute;
+    padding: 0px 5px 0px 3px;
+    border: solid 1px #ccc;
+    margin: 10px 9px 0px 0px;
+    top: 0px;
+    left: 480px;
+  }
+
+  
+
+.vehicle-types-model p {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+}
+
+.fa-square-full:before {
+    content: "\f45c";
+}
+
+.text-move {
+    color: #26b206;
+}
+
+.text-stop {
+    color: #eb272f;
+}
+
+.text-datanotfound {
+    color: #d7a132;
+}
+
+.speedometer {
+    position: absolute;
+    bottom: 0px;
+}
+
+.height-80vh {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.btn-theme-yellow {
+    border-radius: 50px !important;
+    padding: 6px 16px !important;
+    background: #febe40;
+    color: #242424 !important;
+    font-size: 12px !important;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    transition: 0.5s;
+    margin-top: 0px;
+}
+
+.btn-theme-yellow:hover {
+    background: #0b46ae;
+    color: #fff !important;
+}
+
+.text-blue {
+    color: #0b46ae;
+    margin-bottom: 1px;
+    margin-top: -4px;
+}
+
+.statistics {
+    margin: 0;
+    padding: 0;
+    clear: both;
+    width: 100%;
+}
+
+.statistics li {
+    list-style: none;
+    float: left;
+    padding: 5px 25px;
+    margin: 0px 10px;
+    border-radius: 25px;
+    background: #f1f1f1;
+}
+
+.statistics li.active {
+    background: #febe40;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+.pt20 {
+    padding-top: 20px;
+}
+
+.pb20 {
+    padding-bottom: 20px;
+}
+
+.bdr-box {
+    border: solid 1px #e2e2e2;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    margin: 5px 6px;
+    margin-right: 0px;
+    background: #fff;
+}
+
+.no-pad {
+    padding: 0px 0px;
+}
+
+.responsive {
+    width: 100%;
+    // margin-left: 15px;
+    //height: 85%;
+    // border-radius: 50%;
+}
+
+::ng-deep .mat-tab-label {
+    background-color: #ccc !important;
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+    background-color: #0b46ae !important;
+    color: #fff;
+}
+::ng-deep .mat-tab-label:hover {
+    background-color: #febe40 !important;
+}
+
+::ng-deep .mat-tab-body-content {
+    height: 100% !important;
+    overflow: hidden !important;
+}
+.example-tab-icon {
+    margin-right: 8px !important;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.mat-card {
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    padding: 6px;
+    border-radius: 04px;
+    margin-top: 10px;
+    width: 264px;
+    right: 54px;
+    top: 100px;
+}
+
+
+.map_section {
+    position: absolute;
+    width: 103% !important;
+    top: 75px;
+}
+
+.head_section {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    opacity: 1;
+}
+
+.font-size {
+    font-size: 10.5px;
+}
+
+.mt_card {
+    margin-top: -8px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.zoom-in {
+    transform: scale(0) !important;
+    opacity: 0;
+    -webkit-transition: 1.5s all 0s;
+    -moz-transition: 1.5s all 0s;
+    -ms-transition: 1.5s all 0s;
+    -o-transition: 1.5s all 0s;
+    transition: 1.5s all 0s;
+    display: block !important;
+}
+
+.zoom-in.show {
+    opacity: 1;
+    transform: scale(1) !important;
+    transform: none;
+}
+
+p,b {
+    color: #464646 !important;
+  }

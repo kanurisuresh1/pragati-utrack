@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-9 text-left">
+        <button class="btn btn-primary mr15 btn-sm" (click)="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-md-3 ml-auto text-right">
+        <div class="form-group">
+            <button class="btn btn-warning btn-sm"><b>Order Now</b></button>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 card-body white-bg">
+    <div class="row">
+        <div class="col-md-4 mt10 mb10 clearfix" *ngFor='let row of AllProductList'>
+            <div class="buy-plan clearfix">
+                <h6 class="text-center"> {{row.product_name}} </h6>
+                <div class="row">
+
+                    <div class="col-md-5 col-xs-4 mt20">
+                        <img src="assets/images/buy_products/box.png" alt="" class="responsive"
+                            style="margin-left: 30px;" />
+
+                        <div class="col-md-6 col-xs-6 text-center mb20">
+                            <p><a class="btn btn-theme" (click)="productDetails()">More&nbsp;Details</a></p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-7 col-xs-8 clearfix">
+                        <div class="plans-data">
+                            <p>Product Model</p>
+                            <p><b> {{row.model}} </b></p>
+                        </div>
+
+                        <div class="plans-data mb10">
+                            <p>Product Cost</p>
+                            <p><b><i class="fa fa-rupee-sign"></i> {{row.price}} </b></p>
+                        </div>
+                        <div class="col-md-12 text-center mb20">
+                            <p style="margin-right:64px;"> <a class="btn btn-yellow" (click)="plus()">+</a> {{num}} <a class="btn btn-yellow" (click)="minus()">-</a></p>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

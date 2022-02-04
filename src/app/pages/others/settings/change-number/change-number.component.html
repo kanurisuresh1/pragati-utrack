@@ -1,0 +1,94 @@
+<ng-template #resetcode let-modal>
+    <div class="modal-header">
+        <h5>{{'CHANGE_NUMBER.CHANGE_MOBILE_NUMBER_OTP' | translate}} :</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div>
+
+                <div class="col-md-12">
+                    <p>{{mobile_number}}</p>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <!-- <label><b>OTP Code :</b><span style="color: red;">&nbsp; *</span></label>
+                        <input type="text" name="reset_code" maxlength="6" formControlName="otp_code"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            class="form-control" placeholder="Enter OTP "> -->
+                        <label><b>{{'CHANGE_NUMBER.ENTER_VERIFICATION_CODE' | translate}} :</b><span style="color: red;">&nbsp; *</span></label>
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config">
+                        </ng-otp-input>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 text-center" style="margin-bottom: 30px;">
+        <button type="button" aria-label="Close" (click)="modal.dismiss('Cross click')"
+            class="btn btn-warning mrleftright">
+            {{'CHANGE_NUMBER.CHANGE' | translate}}
+        </button>
+        <button type="button" class="btn btn-primary mrleftright" (click)="changephoneNumber()">
+            {{'CHANGE_NUMBER.CANCEL' | translate}}
+        </button>
+    </div>
+</ng-template>
+
+<div *ngIf="!changeNumber">
+    <div class="col-md-12">
+        <p>{{mobile_number}}</p>
+    </div>
+    <label><b>{{'CHANGE_NUMBER.ENTER_VERIFICATION_CODE' | translate}} :</b><span style="color: red;">&nbsp; *</span></label>
+    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config">
+    </ng-otp-input>
+    <div style="margin-top: 10px;margin-left: 100px;">
+        <button type="button" class="btn btn-primary mrleftright" (click)="changephoneNumber()">
+            {{'CHANGE_NUMBER.CHANGE' | translate}}
+        </button>
+        <button type="submit" mat-dialog-close="false" class="btn btn-warning mrleftright">
+            {{'CHANGE_NUMBER.CANCEL' | translate}}
+        </button>
+    </div>
+
+
+</div>
+
+<div [formGroup]="changenumber" *ngIf="changeNumber">
+    <div class="row">
+        <div class="col-md-12 text-left">
+            <h6>{{'CHANGE_NUMBER.CHANGE_MOBILE_NUMBER' | translate}} :</h6>
+        </div>
+        <hr>
+        <div class="col-md-12">
+            <div class="example-full-width">
+                <label><b>{{'CHANGE_NUMBER.ENTER_NEW_NUMBER' | translate}} : </b><span style="color: red;">&nbsp; *</span></label><br>
+                <input type="text" maxlength="10" formControlName="phonenumber" class="form-control"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    placeholder="Enter Mobile Number">
+                <mat-error
+                    *ngIf="changenumber.controls['phonenumber'].errors && changenumber.controls['phonenumber'].touched">
+                    <span *ngIf="changenumber.controls['phonenumber'].errors.required">{{'CHANGE_NUMBER.ENTER_NEW_NUMBER' | translate}}</span>
+                    <span *ngIf="changenumber.controls['phonenumber'].errors.minlength">{{'CHANGE_NUMBER.PLEASE_ENTER_10_DIGITS' | translate}}</span>
+                </mat-error>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <div class="form-group mt20">
+                <button type="submit" class="btn btn-primary mrleftright" (click)="submit()"
+                    [disabled]="changenumber.invalid">{{'CHANGE_NUMBER.CHANGE' | translate}}</button>
+                &nbsp;&nbsp;
+                <button type="submit" mat-dialog-close="false" class="btn btn-warning mrleftright">
+                    {{'CHANGE_NUMBER.CANCEL' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

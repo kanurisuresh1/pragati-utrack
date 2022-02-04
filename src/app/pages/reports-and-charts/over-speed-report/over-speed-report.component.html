@@ -1,0 +1,148 @@
+<div [formGroup]="overSpeedReportForm" class="widthifix" style="margin-bottom:-15px ;">
+    <div class="row clearfix">
+        <div class="auto-width">
+            <label>&nbsp;</label><br>
+            <button class="btn btn-primary btnsize" nbTooltip="Back" nbTooltipStatus="primary" [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group" style="margin-left:-2px;">
+                <label>{{'REPORTS_CHARTS.STOPPAGE_REPORT_COMPONENT.SELECT_VEHICLE_TITLE' | translate}} </label>
+                <mat-select class="form-control" style="width:85%;" formControlName="vechicleName" [(ngModel)]="deviceLinkId" placeholder="Select Vehicle" #singleSelect>
+                    <ngx-mat-select-search [formControl]="searchvehiclenumber" placeholder="Search Vehicle">
+                    </ngx-mat-select-search>
+                    <mat-option *ngFor="let row of filteredVehicleNumber | async" (click)="updateSelectedValue(row)" [value]="row.device_link_id">
+                        {{row.vehicle_number}} ({{row.vehicle_type}})
+                    </mat-option>
+                </mat-select>
+            </div>
+
+        </div>
+        <div class="auto-width" style="margin-left:-50px">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.over_speed_report.Over_Speed_Limit_(KMPH)' | translate }} : </label>
+                <mat-select class="form-control" formControlName="speedLimit" style="width: 100%;" [(ngModel)]="selectTimeInterval" placeholder="Select Time Interval">
+                    <mat-option [value]="20">40 KMPH </mat-option>
+                    <mat-option [value]="25">50 KMPH </mat-option>
+                    <mat-option [value]="30">60 KMPH </mat-option>
+                    <mat-option [value]="35">70 KMPH </mat-option>
+                    <mat-option [value]="40">80 KMPH </mat-option>
+                    <mat-option [value]="45">90 KMPH </mat-option>
+                    <mat-option [value]="50">100 KMPH </mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <div class="auto-width" style="margin-left:-4px;margin-top: 1px;">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.STOPPAGE_REPORT_COMPONENT.SELECT_START_DATE' | translate}} </label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [max]="currentDate" [min]="minStartDate" [matDatetimepicker]="stateDatepicker" formControlName="startDate" readonly>
+                    <mat-datetimepicker-toggle matSuffix [for]="stateDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #stateDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="auto-width" style="margin-top: 1px;">
+            <div class="form-group">
+                <label>{{'REPORTS_CHARTS.STOPPAGE_REPORT_COMPONENT.SELECT_END_DATE' | translate}} </label><br>
+                <mat-form-field class="no-line">
+                    <input class="form-control datepicker" matInput [max]="currentDate" [matDatetimepicker]="endDatepicker" formControlName="endDate" readonly>
+                    <mat-datetimepicker-toggle matSuffix [for]="endDatepicker"></mat-datetimepicker-toggle>
+                    <mat-datetimepicker #endDatepicker type="datetime" openOnFocus="true" timeInterval="1">
+                    </mat-datetimepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="auto-width">
+            <button type="submit" style="margin-left: -5px;margin-top:27px;" (click)="viewReport()" class="btn btn-primary sub">{{'REPORTS_CHARTS.STOPPAGE_REPORT_COMPONENT.VIEW_REPORT' |
+                translate}}</button>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix mb10">
+    <div class="col-md-10 text-left">
+        <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)="epxportexcle()"><i
+                class="fa fa-file-excel"></i> &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_EXCEL' | translate }}</button>
+        <button class="btn btn-primary pull-left mr15 btn-sm" (click)="downloadPDF()" mat-button><i
+                class="fa fa-file-pdf"></i>
+            &nbsp; {{'REPORTS_CHARTS.DOWNLOAD_PDF' | translate }}</button>
+    </div>
+</div>
+
+<div class="example-container mat-elevation-z8" id="content" #content>
+    <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+        <table class="table-bordered table" mat-table [dataSource]="overSpeedReportdataSource" matSort>
+
+            <ng-container matColumnDef="id">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="from_date_time">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.FROM_DATE_TIME' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.fdt}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="to_date_time">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.TO_DATE_TIME' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.tdt}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="max_speed">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.MAX_SPEED' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.ms}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="avg_speed">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.AVG_SPEED' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.as}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="durations">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.DURATION' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.d}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total_distance">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.TOTAL_DISTANCE' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.td}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="location">
+                <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{'REPORTS_CHARTS.over_speed_report.LANDMARK' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.l}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="overSpeedReportDisplayedColumns;sticky:true"></tr>
+            <tr mat-row *matRowDef="let row; columns: overSpeedReportDisplayedColumns;"></tr>
+
+        </table>
+        <div class="col-md-12" *ngIf="overSpeedReportTableDataNotshow">
+            <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+        </div>
+    </div>
+</div>

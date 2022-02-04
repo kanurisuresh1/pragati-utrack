@@ -1,0 +1,249 @@
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+
+// @import 'themes';
+
+// @import '~@nebular/theme/styles/globals';
+// @import '~@nebular/auth/styles/all';
+
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~bootstrap/scss/grid';
+
+// @import './pace.theme';
+
+// @import './layout';
+// @import './overrides';
+
+// @include nb-install() {
+
+//   @include nb-theme-global();
+//   @include nb-auth-global();
+
+//   @include ngx-layout();
+//   @include ngx-pace-theme();
+
+//   @include nb-overrides();
+// };
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Raleway Font
+
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+// @import '~@angular/material/theming';
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Raleway'
+// );
+
+// @include angular-material-typography($custom-typography);
+// @import 'themes';
+
+// @import '~@nebular/theme/styles/globals';
+// @import '~@nebular/auth/styles/all';
+
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~bootstrap/scss/grid';
+
+// @import './pace.theme';
+
+// @import './layout';
+// @import './overrides';
+
+// @include nb-install() {
+
+//   @include nb-theme-global();
+//   @include nb-auth-global();
+
+//   @include ngx-layout();
+//   @include ngx-pace-theme();
+
+//   @include nb-overrides();
+// };
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Raleway, "Helvetica Neue", sans-serif; }
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Raleway, "Helvetica Neue", sans-serif; }
+// @font-face {
+//   font-family: Raleway;
+//   src: url('../fonts/Raleway-Regular.ttf') format('truetype');
+//   font-style: normal;
+//   font-weight: 100;
+//   text-rendering: optimizeLegibility;
+// }
+
+// typeface-titillium-web
+
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+// @import '~@angular/material/theming';
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Titillium Web'
+// );
+
+// @include angular-material-typography($custom-typography);
+// @import 'themes';
+
+// @import '~@nebular/theme/styles/globals';
+// @import '~@nebular/auth/styles/all';
+
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~bootstrap/scss/grid';
+
+// @import './pace.theme';
+
+// @import './layout';
+// @import './overrides';
+
+// @include nb-install() {
+//   @include nb-theme-global();
+//   @include nb-auth-global();
+
+//   @include ngx-layout();
+//   @include ngx-pace-theme();
+
+//   @include nb-overrides();
+// };
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Titillium Web, "Helvetica Neue", sans-serif; }
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Titillium Web, "Helvetica Neue", sans-serif; }
+// @font-face {
+//   font-family: Raleway;
+//   src: url('../Titillium_Web_Font/TitilliumWeb-Semibold.ttf') format('truetype');
+//   font-style: normal;
+//   font-weight: 100;
+//   text-rendering: optimizeLegibility;
+// }
+
+// Quick SAND
+
+// @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+// @import "~@angular/material/theming";
+// $custom-typography: mat-typography-config(
+//   $font-family: "Raleway",
+// );
+
+// @include angular-material-typography($custom-typography);
+// @import "themes";
+
+// @import "~@nebular/theme/styles/globals";
+// @import "~@nebular/auth/styles/all";
+
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/grid";
+
+// @import "./pace.theme";
+
+// @import "./layout";
+// @import "./overrides";
+
+// @include nb-install() {
+//   @include nb-theme-global();
+//   @include nb-auth-global();
+
+//   @include ngx-layout();
+//   @include ngx-pace-theme();
+
+//   @include nb-overrides();
+// }
+
+// html,
+// body {
+//   height: 100%;
+// }
+// body {
+//   margin: 0;
+//   font-family: Quicksand, "Quicksand", sans-serif;
+// }
+
+// html,
+// body {
+//   height: 100%;
+// }
+// body {
+//   margin: 0;
+//   font-family: Quicksand, "Quicksand", sans-serif;
+// }
+// @font-face {
+//   font-family: Quicksand;
+//   src: url("../Quick_Sand_Fonts/Quicksand-Light.ttf") format("truetype");
+//   font-style: normal;
+//   font-weight: 100;
+//   text-rendering: optimizeLegibility;
+// }
+
+// ROBOTO
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import "~@angular/material/theming";
+$custom-typography: mat-typography-config(
+  $font-family: "Roboto",
+);
+
+@include angular-material-typography($custom-typography);
+@import "themes";
+
+@import "~@nebular/theme/styles/globals";
+@import "~@nebular/auth/styles/all";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/grid";
+
+@import "./pace.theme";
+
+@import "./layout";
+@import "./overrides";
+
+@include nb-install() {
+  @include nb-theme-global();
+  @include nb-auth-global();
+
+  @include ngx-layout();
+  @include ngx-pace-theme();
+
+  @include nb-overrides();
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Roboto", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Roboto", sans-serif;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("../Roboto_Font/Roboto-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100;
+  text-rendering: optimizeLegibility;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

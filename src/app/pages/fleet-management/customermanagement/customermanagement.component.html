@@ -1,0 +1,125 @@
+<div class="row clearfix">
+  <div class="col-md-8 text-left">
+    <button class="btn btn-primary mr15 btn-sm" nbTooltip="Back" nbTooltipStatus="primary"
+      [nbTooltipIcon]="{icon: 'arrow-back-outline', pack: 'eva'}" (click)="back()"><i class="fa fa-arrow-left"
+        aria-hidden="true"></i>
+    </button>
+
+    <label>
+      <input type="search" matInput id="search_element" (keyup)="applyFilter($event)"
+        class="form-control search-field pull-left" placeholder="Search Customer">
+    </label>
+    <button class="btn btn-primary pull-left ml-20 mr15 btn-sm" (click)="search()"><i class="fa fa-search"></i></button>
+ 
+    <button class="btn btn-danger pull-left mr15 btn-sm" mat-button (click)=" Exportexcle()"><i
+        class="fa fa-file-excel"></i> &nbsp;
+        {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_EXCEL' | translate}}
+      </button>
+    <button class="btn btn-primary pull-left mr15 btn-sm" mat-button (click)="downloadPDF()"><i
+        class="fa fa-file-pdf"></i> &nbsp;
+      {{'COMMON_BUTTON_ALL_COMPONENT.DOWNLOAD_PDF' | translate}}
+    </button>
+    <button class="btn btn-success pull-left mr1 btn-sm" nbTooltip="Refresh" nbTooltipStatus="success"
+      [nbTooltipIcon]="{icon: 'refresh-outline', pack: 'eva'}" (click)="refresh()"><i class="fa fa-sync"></i></button>
+  </div>
+  <div class="col-md-4 ml-auto text-right">
+    <div class="form-group">
+      <button class="btn btn-warning btn-sm" (click)="add()"><b>+ {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.ADD_CUSTOMER' | translate}}</b></button>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div class="example-container mat-elevation-z8" id="content" #content>
+    <div class="table-responsive" style="height: 500px;overflow: auto !important;">
+      <table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[10]" class="table-bordered table" mat-table
+        [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="customer_id">
+          <th class="bg-primary !important ml15" mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{(i+1)}}
+          </td>
+        </ng-container>
+
+        <!-- <ng-container style="border-radius: 50%;" matColumnDef="profile_image">
+        <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+        <td class="cellSpace" mat-cell *matCellDef="let element"><img src="{{element.profile_image}}"></td>
+      </ng-container> -->
+
+        <ng-container matColumnDef="full_name">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.FULL_NAME' | translate}} </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"><a
+              style="cursor: pointer;text-decoration: underline;color: blue;"
+              (click)="editCustomer(element.customer_id)">
+              {{element.full_name}}</a></td>
+        </ng-container>
+
+        <ng-container matColumnDef="mobile">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.MOBILE_NUMBER' | translate}} </th>
+          <td class="cellSpace" mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.EMAIL' | translate}} </th>
+          <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="company_name">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.COMPANY_NAME' | translate}} </th>
+          <td mat-cell class="cellSpace" *matCellDef="let element"> {{element.company_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gst_number">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+             {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.GST_NO' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.gst_number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.STATE' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="added_date">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header>
+             {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.REGISTER_DATE' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.added_date | date: 'dd/MMM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address1">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.NO_OF_TRIPS' | translate}} </th>
+          <td mat-cell *matCellDef="let element"></td>
+        </ng-container>
+
+        <ng-container matColumnDef="address2">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.NO_OF_TRIPS_PROCESS' | translate}} </th>
+          <td mat-cell *matCellDef="let element"></td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th class="bg-primary !important" mat-header-cell *matHeaderCellDef mat-sort-header> 
+            {{'FLEET_MANAGEMENT.CUSTOMER_MANAGEMENT_COMPONENT.EDIT' | translate}} </th>
+          <td mat-cell *matCellDef="let element"><a><i class="fa fa-edit text-blue " (click)="edit(element)"
+                style="cursor: pointer;color: blue;"></i></a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <div class="col-md-12" *ngIf="TableDataNotshow">
+        <p class="datanotfound">{{'DATA_NOT_FOUND_TITLE' | translate}}</p>
+      </div>
+    </div>
+  </div>
+</div>

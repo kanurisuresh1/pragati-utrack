@@ -1,0 +1,208 @@
+<div class="clearfix row">
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/basic_notifications']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_basic_notifications.png" alt="" class="img-responsive mt20 img" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Basic Notifications' | translate}}</b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/less_km_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_less_KM_travel.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>
+                        {{'Alert_Notifications.Less KM Travel' | translate}}
+                    </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/stopped_time_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_stopped_more_then.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>
+                        {{'Alert_Notifications.Stopped More Then 3 Hours' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/data_not_received_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_no_data.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>
+                        {{'Alert_Notifications.Data Not Received' | translate}}
+                    </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/temperature_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_temparature_alert.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>
+                        {{'Alert_Notifications.Temperature Alerts' | translate}}
+                    </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/geofence_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_geofence_alert.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p style="font-size: 13px;"><b>
+                        {{'Alert_Notifications.Geofence Alerts' | translate}}
+                    </b>
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/fuel_alerts']">
+            <div class="buy-plans clearfix">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_low_fuel_alert.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>  {{'Alert_Notifications.Fuel Alerts' | translate}}
+                     </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/ignition_change_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_ignetion_alert.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Ignition Change Alerts' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/low_battery_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_low_battery.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Low Battery Alerts' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div style="cursor: pointer;" class="col-md-3 mb10 clearfix">
+        <a (click)="comingsoon()">
+            <!-- <a [routerLink]="['/web/alert_notifications/service_reminder_alerts']"> -->
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_services.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Service Reminder Alerts' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div style="cursor: pointer;" class="col-md-3 mb10 clearfix">
+        <a (click)="comingsoon()">
+            <!-- <a [routerLink]="['/web/alert_notifications/trip_management_alerts']"> -->
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_trip_managenemt.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Trip Management Alerts' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div style="cursor: pointer;" class="col-md-3 mb10 clearfix">
+        <a (click)="comingsoon()">
+            <!-- <a [routerLink]="['/web/alert_notifications/driver_change_alerts']"> -->
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/ic_driver.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Driver Change Alerts' | translate}}
+                       </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div style="cursor: pointer;" class="col-md-3 mb10 clearfix">
+        <a [routerLink]="['/web/alert_notifications/vehicle_certificate_renewal_alerts']">
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/vehicle_alert.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Vehicle Certificate Renewal Alerts' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div style="cursor: pointer;" class="col-md-3 mb10 clearfix">
+        <a (click)="comingsoon()">
+            <!-- <a [routerLink]="['/web/alert_notifications/driver_change_alerts']"> -->
+            <div class="buy-plans clearfix ">
+                <div class="imagebox">
+                    <img src="assets/images/alert_images/gps_alert.png" alt="" class="img-responsive img mt20" />
+                </div>
+                <div class="col-md-12 text-center mt20 mb20">
+                    <p><b>{{'Alert_Notifications.Gps Lock Alerts' | translate}}
+                        </b></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
