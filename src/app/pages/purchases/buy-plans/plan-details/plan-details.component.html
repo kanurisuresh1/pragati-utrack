@@ -8,21 +8,21 @@
     <div class="row">
         <div class="col-md-6 mb20">
             <div class="buy-plans clearfix">
-                <h5 class="text-left">Platinum Plan 3 Years</h5>
+                <h5 class="text-left">Platinum Plan 3 Years its good</h5>
                 <div class="row">
-                <div class="col-md-6  mb10">
-                    <div class="plans-data">
-                        <p>Plan Validity</p>
-                        <h6><b>1095 Days</b> <small>(3 Years)</small></h6>
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <p>Plan Validity</p>
+                            <h6><b>1095 Days</b> <small>(3 Years)</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-md-6  mb10">
+                        <div class="plans-data">
+                            <p>Plan Cost</p>
+                            <h6><b><i class="fa fa-rupee-sign"></i> 3600.00</b> <small>( ₹100.00 Per Month)</small></h6>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6  mb10">
-                    <div class="plans-data">
-                        <p>Plan Cost</p>
-                        <h6><b><i class="fa fa-rupee-sign"></i> 3600.00</b> <small>( ₹100.00 Per Month)</small></h6>
-                    </div>
-                </div>
-            </div>
                 <div class="clearfix bdr-btm1 mb10"></div>
                 <div class="col-md-12 mb20">
                     <p>Plan Discription</p>
@@ -73,25 +73,24 @@
                         <div class="col-md-12 bg-gray">
                             <h6>{{vehiclesListData.vehicle_number}}
                                 <div class="boxes">
-                                    <input type="checkbox" [checked]="checks" name="getcheckboxvalues"
-                                        value="{{vehiclesListData.device_link_id}}">
+                                    <input type="checkbox" [checked]="checks" name="getcheckboxvalues" value="{{vehiclesListData.device_link_id}}">
                                 </div>
                             </h6>
                         </div>
 
                         <div class="plans-data mb10">
                             <p>Device IMEI</p>
-                             <h6><b> {{vehiclesListData.device_imei}}</b></h6>
-                            </div>
-                             <div class="clearfix bdr-btm1"></div>
-                             <div class="plans-data mb10">
-                           <p>Current Plan Expired on</p>
-                             <h6><b> {{vehiclesListData.devicetime}} </b></h6>
-                            </div>
-                            <div class="clearfix bdr-btm1"></div>
-                           <div class="col-md-12 mb10">
+                            <h6><b> {{vehiclesListData.device_imei}}</b></h6>
+                        </div>
+                        <div class="clearfix bdr-btm1"></div>
+                        <div class="plans-data mb10">
+                            <p>Current Plan Expired on</p>
+                            <h6><b> {{vehiclesListData.devicetime}} </b></h6>
+                        </div>
+                        <div class="clearfix bdr-btm1"></div>
+                        <div class="col-md-12 mb10">
                             <a class="btn btn-yellow-outline btn-lg" (click)="PurchasedPlansDetails()"><b>Purchased Plans</b></a>
-                         </div>
+                        </div>
 
                     </div>
                 </div>
